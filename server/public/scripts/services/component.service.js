@@ -57,6 +57,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       $http.delete(`/api/component/deleteComponent/${componentId}`)
         .then( function(response) {
           console.log('Component deleted from library', response);
+          self.getComponents();
         })
         .catch( function(error) {
           console.log('Error deleting component', error);
