@@ -15,5 +15,10 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       ComponentService.addComponentToLib(component);
     }; // end addComponentToLib()
 
+    // begin deleteComponent()
+    self.deleteComponent = function(componentId) {
+      console.log(componentId);
+      ComponentService.deleteComponent(componentId);
+    }; // end deleteComponent()
 
 }]);

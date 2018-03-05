@@ -32,11 +32,11 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       $http.post('/api/component', component)
         .then( function(response) {
-          console.log(`Component added to library:`, response);
+          console.log('Component added to library:', response);
           self.getComponents();
         })
         .catch( function(error) {
-          console.log(`Error on POST:`, error);
+          console.log('Error on POST:', error);
         });
 
     }; // end addComponentToLib()
@@ -51,6 +51,18 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*            DELETE REQUESTS             */
     /******************************************/
 
+    // begin deleteComponent()
+    self.deleteComponent = function(componentId) {
+
+      $http.delete(`/deleteComponent/${componentId}`)
+        .then( function(response) {
+          console.log('Component deleted from library', response);
+        })
+        .catch( function(error) {
+          console.log('Error deleting component', error);
+        });
+
+    }; // end deleteComponent()
 
 
     /******************************************/
