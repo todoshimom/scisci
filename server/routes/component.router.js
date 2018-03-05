@@ -8,6 +8,19 @@ const router = express.Router();
 /*              GET REQUESTS              */
 /******************************************/
 
+router.get('/', (req, res) => {
+
+  let queryText = `SELECT * FROM components`;
+
+  pool.query(queryText)
+      .then((results) => {
+        console.log('GET components', results);
+        res.send(results.rows);
+      })
+      .catch((error) => {
+        console.log('Error on GET components request', error);
+      });
+});
 
 
 /******************************************/
