@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
       })
       .catch((error) => {
         console.log('Error on GET components request', error);
+        res.sendStatus(500);
       });
 });
 
@@ -68,6 +69,24 @@ router.post('/', (req, res) => {
 /******************************************/
 /*            DELETE REQUESTS             */
 /******************************************/
+
+router.delete('/deleteComponent/:id', (req, res) => {
+
+  let id = req.params.id;
+
+  let queryText = `DELETE FROM components WHERE id = $1`;
+
+  pool.query(queryText, [id])
+      .then((results) => {
+        console.log('Component delelted', results);
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('Error deleting component');
+        res.sendStatus(500);
+      });
+});
+
 
 
 
