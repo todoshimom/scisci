@@ -1,4 +1,4 @@
-let myApp = angular.module('myApp', ['ngRoute']);
+let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
 
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
@@ -32,11 +32,11 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         .when('/component', {
             templateUrl: '/views/templates/component.html',
             controller: 'ComponentController as vm',
-            resolve: {
-                getuser: function (UserService) {
-                    return UserService.getuser();
-                }
-            }
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
         })
         .otherwise({
             template: '<h1>404</h1>'
