@@ -31,7 +31,52 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         })
         .when('/component', {
             templateUrl: '/views/templates/component.html',
-            controller: 'ComponentController as vm',
+            controller: 'ComponentController as vm'
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
+        .when('/module', {
+            templateUrl: '/views/templates/module.html',
+            controller: 'ModuleController as vm'
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
+        .when('/module-list', {
+            templateUrl: '/views/templates/module-list.html',
+            controller: 'ModuleListController as vm'
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
+        .when('/report', {
+            templateUrl: '/views/templates/report.html',
+            controller: 'ReportController as vm'
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
+        .when('/shopping-list', {
+            templateUrl: '/views/templates/shopping-list.html',
+            controller: 'ShoppingListController as vm'
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
+        .when('/shopping-list-creation', {
+            templateUrl: '/views/templates/shopping-list-creation.html',
+            controller: 'ShoppingListCreationService as vm'
             // resolve: {
             //     getuser: function (UserService) {
             //         return UserService.getuser();
@@ -39,6 +84,6 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             // }
         })
         .otherwise({
-            template: '<h1>404</h1>'
+            templateUrl: '/views/templates/404.html'
         });
 }]);
