@@ -1,6 +1,110 @@
-<div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
-    <p>
-        In Info
-    </p>
+<h2>Add Components</h2>
+<div >
+  <md-input-container>
+    <label>Name</label>
+    <input ng-model="vm.componentItem.name">
+  </md-input-container>
+
+  <md-input-container>
+    <label>Type</label>
+    <input ng-model="vm.componentItem.type">
+  </md-input-container>
+
+  <md-input-container>
+    <label>Price Per Unit</label>
+    <input ng-model="vm.componentItem.price_per_unit">
+  </md-input-container>
+
+  <md-input-container>
+    <label>Pieces Per Unit</label>
+    <input ng-model="vm.componentItem.pieces_per_unit">
+  </md-input-container>
 </div>
+
+<div >
+  <md-input-container>
+    <label>Description</label>
+    <textarea ng-model="vm.componentItem.description" rows="1"></textarea>
+  </md-input-container>
+</div>
+
+<div>
+  <md-input-container>
+    <label>Vendor 1 Name</label>
+    <input ng-model="vm.componentItem.vendor_name_primary">
+  </md-input-container>
+
+  <md-input-container>
+    <label>Vendor 1 Link</label>
+    <input ng-model="vm.componentItem.vendor_url_primary">
+  </md-input-container>
+
+  <md-input-container>
+    <label>Vendor 2 Name</label>
+    <input ng-model="vm.componentItem.vendor_name_secondary">
+  </md-input-container>
+
+  <md-input-container>
+    <label>Vendor 2 Link</label>
+    <input ng-model="vm.componentItem.vendor_url_secondary">
+  </md-input-container>
+</div>
+<div>
+  <md-input-container>
+    <label>Notes/Purpose</label>
+    <textarea ng-model="vm.componentItem.notes" rows="1"></textarea>
+  </md-input-container>
+</div>
+
+<div>
+  <md-checkbox ng-model="vm.componentItem.general_stock_item" aria-label="General Stock Checkbox">
+    General Stock Item
+  </md-checkbox>
+  <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
+    Consumable
+  </md-checkbox>
+  <button type="button" name="button" ng-click="vm.addComponentToLib(vm.componentItem)">Add Component</button>
+</div>
+
+<br>
+<br>
+<br>
+
+<!-- Table mock up for the time being, will be changed out later for accordion divs  -->
+<h2>Manage Components</h2>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Price Per Unit</th>
+    <th>Pieces Per Unit</th>
+    <th>General Stock</th>
+    <th>Consumable</th>
+    <th>Modules Used In</th>
+    <th>Vendor 1 Name</th>
+    <th>Vendor 1 Link</th>
+    <th>Vendor 2 Name</th>
+    <th>Vendor 2 Link</th>
+    <th>Notes</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <td>3 Ring Binder</td>
+    <td>Binder</td>
+    <td>Binder to hold notes</td>
+    <td>3.00</td>
+    <td>1</td>
+    <td>True</td>
+    <td>False</td>
+    <td>5</td>
+    <td>Amazon</td>
+    <td>www.amazon.com/binder</td>
+    <td></td>
+    <td></td>
+    <td>Use this to hold the notes</td>
+    <td><button>Edit</button></td>
+    <td><button>Delete</button></td>
+  </tbody>
+</table>
