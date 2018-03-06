@@ -1,4 +1,4 @@
-myApp.controller('ModuleController', ['ModuleService', function (ModuleService) {
+myApp.controller('ModuleController', ['ModuleService', '$http', function (ModuleService, $http) {
     console.log('ModuleController created');
     let self = this;
 
@@ -48,5 +48,6 @@ myApp.controller('ModuleController', ['ModuleService', function (ModuleService) 
                 console.log('error in post', error);
             });
     };
+    self.getModule();
 
 }]);
