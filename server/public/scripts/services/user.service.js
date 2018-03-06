@@ -2,7 +2,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     console.log('UserService Loaded');
     let self = this;
     self.userObject = {};
-    self.userLibrary = {list:[]};
+    self.userLibrary = { list: [] };
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -34,11 +34,34 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         });
     }
 
+    // This is for the manage users view
+    self.getAllUsers = function () {// Start of getAllUsers function.
+        $http.get('/api/user/all')
+            .then(function (response) {
+                console.log('Get response for all users: ', response.data);
+                self.userLibrary.list = response.data;
+            })
+            .catch(function (error) {
+                console.log('Get response failed: ', error);
+            });
+    }; // End of getAllUsers function.
+
+    self.getAllUsers();
+
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
 
-
+    self.addUser = function (newUser) {// Start of addUser function.
+        $http.post('/api/user/register', newUser)
+            .then(function (response) {
+                console.log('Response from add new user: ', response);
+                self.getAllUsers();
+            })
+            .catch(function (error) {
+                console.log('Error on new user POST request: ', error);
+            });
+    }; // End of addUser function.
 
     /******************************************/
     /*              PUT REQUESTS              */
