@@ -110,11 +110,21 @@
       <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></td>
 
       <td ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</td>
-      <td ng-if="vm.edit[component.id]"><input type="text"  ng-value="component.general_stock_item" ng-model="component.general_stock_item"></td>
+      <td ng-if="vm.edit[component.id]">
+        <select ng-model="component.general_stock_item">
+          <option ng-value="true">True</option>
+          <option ng-value="false">False</option>
+        </select>
+      </td>
 
       <td ng-if="!vm.edit[component.id]">{{component.consumable}}</td>
-      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.consumable" ng-model="component.consumable"></td>
-      
+      <td ng-if="vm.edit[component.id]">
+        <select ng-model="component.consumable">
+          <option ng-value="true">True</option>
+          <option ng-value="false">False</option>
+        </select>
+      </td>
+
       <td> Left Blank </td>
       <td ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</td>
       <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></td>
