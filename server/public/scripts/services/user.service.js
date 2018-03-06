@@ -36,7 +36,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     // This is for the manage users view
     self.getAllUsers = function () {// Start of getAllUsers function.
-        $http.get('/api/user/all')
+        $http.get('/api/user/users')
             .then(function (response) {
                 console.log('Get response for all users: ', response.data);
                 self.userLibrary.list = response.data;

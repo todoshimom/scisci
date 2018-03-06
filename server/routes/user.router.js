@@ -29,14 +29,50 @@ router.get('/logout', (req, res) => {
     res.sendStatus(200);
 });
 
+
+router.get('/users', (req, res) => {
+
+    let queryText = `SELECT * FROM users`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('GET all users: ', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET user request', error);
+            res.sendStatus(500);
+        });
+
+});
+
 /******************************************/
 /*             POST ROUTES                */
 /******************************************/
 
+router.post('/', (req, res) => {
+
+    let user = req.body;
+
+    let queryText = `
+    INSERT INTO users (first_name, last_name, username, user_type)
+    VALUES ('$1', '$2', '$3', $4);`;
+
+    pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type])
+        .then((results) => {
+            console.log('Registered user successfully: ', results);
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error registering user: ', error);
+            res.sendStatus(500);
+        });
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+router.post('/password', (req, res, next) => {
     const username = req.body.username;
     const password = encryptLib.encryptPassword(req.body.password);
 
@@ -44,6 +80,7 @@ router.post('/register', (req, res, next) => {
         username: req.body.username,
         password: encryptLib.encryptPassword(req.body.password)
     };
+
     console.log('new user:', saveUser);
     pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
         [saveUser.username, saveUser.password], (err, result) => {
