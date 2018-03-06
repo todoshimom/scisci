@@ -69,10 +69,11 @@ router.get('/types', (req, res) => {//Start of get user_types function
 router.post('/', (req, res) => {//Start of post new user function
 
     let user = req.body;
-
+    console.log(user);
+    
     let queryText = `
     INSERT INTO users (first_name, last_name, username, user_type)
-    VALUES ('$1', '$2', '$3', $4);`;
+    VALUES ($1, $2, $3, $4);`;
 
     pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type])
         .then((results) => {
@@ -83,6 +84,7 @@ router.post('/', (req, res) => {//Start of post new user function
             console.log('Error registering user: ', error);
             res.sendStatus(500);
         });
+
 });//End of post new user function
 
 // Handles POST request with new user data
@@ -128,7 +130,21 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 /*            DELETE ROUTES               */
 /******************************************/
 
+router.delete('/:id', (req, res) => {
 
+    let queryText = `DELETE FROM users WHERE id = ${req.params.id}`;
+  
+    pool.query(queryText)
+        .then((results) => {
+          console.log('Successfully removed user: ', results);
+          res.sendStatus(200);
+        })
+        .catch((error) => {
+          console.log('Error removing user: ', error);
+          res.sendStatus(500);
+        });
+
+  });
 
 /******************************************/
 /*                OTHERS                  */

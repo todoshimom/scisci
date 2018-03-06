@@ -7,6 +7,14 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     self.userTypes = UserService.userTypes;
 
     self.addUser = function (newUser) {    // Start of addUser function
-        UserService.addUser(newUser);
+        if (confirm(`Are you sure you want to add an account for ${newUser.first_name} ${newUser.last_name}?`)) {
+            UserService.addUser(newUser);
+        }
     }; // End of addUser function
+
+    self.deleteUser = function(user) {    // Start of deleteUser function
+        if (confirm(`Are you sure you want to delete the account of ${user.first_name} ${user.last_name}?`)) {
+            UserService.deleteUser(user.id);
+        }
+      }; // End of deleteUser function
 }]);
