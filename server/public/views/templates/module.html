@@ -1,93 +1,74 @@
 
+
+{{vm.data}}
+
 <h1>Module Creator</h1>
 
-<h3>Material Cost</h3>
-$0.00
-
-<h3>Materials in Kit Cost</h3>
-$0.00
-
-<h3>Estimated Labor Cost</h3>
-$0.00
-
-<h3>Materials Ordered + Labor</h3>
-$0.00
-
-<h3>Materials in Kit + Labor</h3>
-$0.00
-
+<ul>
+    <li>Material Cost: {{vm.calculations.material_cost}}</li>
+    <li>Material in Kit Cost: {{vm.calculations.material_in_kit_cost}}</li>
+    <li>Estimated Labor Cost: {{vm.calculations.estimated_labor_cost}}</li>
+    <li>Materials Ordered + Labor: {{vm.calculations.materials_ordered_labor}}</li>
+    <li>Materials in Kit + Labor: {{vm.calculations.materials_in_kit_labor}}</li>
+</ul>
 
 
 <h2>Components</h2>
+<input type="text" placeholder="Module Name" ng-model="vm.data.name" />
+<input type="text" placeholder="Code" ng-model="vm.data.code" />
+<input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.data.estimated_assembly_time" />
 
-<input type="text" placeholder="Module Name" />
-<input type="text" placeholder="Code" />
+<h3>Version</h3>
+<input type="text" placeholder="Version Number" ng-model="vm.data.version_number" />
+<textarea type="text" placeholder="Version Notes" ng-model="vm.data.version_notes" /></textarea>
+<input type="text" placeholder="DATEPICKER" ng-model="vm.data.version_date" />
 
 <br>
 
 <button>Add New Component</button>
 
-<input type="text" placeholder="Live-search Components" />
 
-
-
-<h2>Add New Component</h2>
-
-<form>
-    <label>Name <input placeholder="Name" /></label>
-    <label>Description <textarea placeholder="Description" /></textarea></label>
-    <label>Price Per Unit <input type="text" placeholder="Name" /></label>
-    <label>Pieces Per Unit <input type="number" placeholder="Name" /></label>
-    <label>Vendor 1 Name <input type="text" placeholder="Name" /></label>
-    <label>Vendor 1 Link <input type="text" placeholder="Name" /></label>
-    <label>Vendor 2 Name <input type="text" placeholder="Name" /></label>
-    <label>Vendor 2 Link <input type="text" placeholder="Name" /></label>
-    <label><input type="checkbox"> General Stock Item</label>
-    <label><input type="checkbox"> Consumable</label>
-    <button>Add Component</button>
-</form>
-
+<!-- <input type="text" placeholder="Live-search Components" /> -->
 
 
 <h2>Resources</h2>
 <ul>
     <li>
         <h4>Google Drive</h4>
-        <input placeholder="URL" />
+        <input placeholder="URL" ng-model="vm.data.module_drive_link" />
     </li>
     <li>
         <h4>To Be Printed</h4>
-        <input placeholder="URL" />
+        <input placeholder="URL" ng-model="vm.data.to_be_printed_link" />
     </li>
     <li>
         <h4>Assembly Video</h4>
-        <input placeholder="URL" />
+        <input placeholder="URL" ng-model="vm.data.assembly_video_link" />
     </li>
     <li>
         <h4>Activity Video</h4>
-        <input placeholder="URL" />
+        <input placeholder="URL" ng-model="vm.data.activity_video_link" />
     </li>
     <li>
         <h4>Kit Content Sheet</h4>
-        <input placeholder="URL" />
+        <input placeholder="URL" ng-model="vm.data.kit_content_link" />
     </li>
     <li>
         <h4>Custom Link 1</h4>
-        <input placeholder="Description" />
-        <input placeholder="URL" />
+        <input placeholder="Title" ng-model="vm.data.other1_title" />
+        <input placeholder="URL" ng-model="vm.data.other1_link" />
     </li>
     <li>
         <h4>Custom Link 2</h4>
-        <input placeholder="Description" />
-        <input placeholder="URL" />
+        <input placeholder="Title" ng-model="vm.data.other2_title" />
+        <input placeholder="URL" ng-model="vm.data.other2_link" />
     </li>
 </ul>
 
 
 <h2>Assembly Instructions</h2>
 
-<textarea>
-</textarea>
+<textarea ng-model="vm.data.assembly_notes"></textarea>
 
 <h2>Components in Module</h2>
 
