@@ -1,17 +1,22 @@
--- Commented out parts are ideas of what may be changes to add 
-CREATE TABLE users (
-"id" SERIAL PRIMARY KEY, 
-"first_name" VARCHAR(25), 
-"last_name" VARCHAR(25), 
-"email" VARCHAR(255), 
-"password" VARCHAR(255), 
-"user_type" INT REFERENCES "user_type"
-);
 
 CREATE TABLE user_type (
 "id" SERIAL PRIMARY KEY, 
-"name" VARCHAR(25)
+"name" VARCHAR(25) NOT NULL
 );
+
+CREATE TABLE users (
+"id" SERIAL PRIMARY KEY, 
+"first_name" VARCHAR(25) NOT NULL, 
+"username" VARCHAR(255) NOT NULL, 
+"password" VARCHAR(255) DEFAULT ‘$2a$10$hHqRWK07ePfHgr6xZN526u/g5.ch.YgGJa1DBFF9IkR70DEBhng5e’, --The default is Welcome1 encrypted., 
+"user_type" INT REFERENCES "user_type" NOT NULL
+);
+
+INSERT INTO user_type (name)
+VALUES (‘Admin’),(‘Editor’),(‘Shopper’);
+-- This will be the very first admin.
+INSERT INTO users (first_name, last_name, username, user_type)
+VALUES (‘Renee’, ‘Piersa’, ‘test@email.com’, 1);
 
 CREATE TABLE components (
 "id" SERIAL PRIMARY KEY, 
@@ -24,58 +29,50 @@ CREATE TABLE components (
 "notes" TEXT, 
 "price_per_unit" DECIMAL(5, 2), 
 "pieces_per_unit" INT,
--- "materials_in_kit_cost" DECIMAL(5, 2) REFERENCES "modules", 
--- "labor_cost" DECIMAL (5, 2) REFERENCES "modules",
 "consumable" BOOLEAN, 
--- "type" VARCHAR(50), 
--- "general_stock_item" BOOLEAN,
--- "modules_used_in" INT 
-);
+"type" VARCHAR(50), 
+"general_stock_item" BOOLEAN,
 
-CREATE TABLE modules_categories (
-"id" SERIAL PRIMARY KEY, 
-"code" VARCHAR(25)
 );
 
 CREATE TABLE modules (
 "id" SERIAL PRIMARY KEY, 
 "name" VARCHAR(100), 
-"code" INT REFERENCES "modules_categories",
--- "price_per_unit" DECIMAL(2, 5),
--- "materials_in_kit_cost" DECIMAL(5, 2), 
--- "labor_cost" DECIMAL (5, 2),   
-"version_number" INT, 
-"version_date" TIMESTAMP, 
-"assembly_time" INT, 
-"document_url" VARCHAR(255), 
-"notes" TEXT 
+"code" VARCHAR(15),  
+"version_number" VARCHAR(15), 
+"version_date" DATE,
+"version_notes" TEXT,   
+"estimated_assembly_time" INT, 
+"assembly_notes" TEXT, 
+"module_drive_link" VARCHAR(255), 
+"module_drive_title" VARCHAR(50), 
+"to_be_printed_link" VARCHAR(255), 
+"to_be_printed_title" VARCHAR(50), 
+"assembly_video_link" VARCHAR(255), 
+"assembly_video_title" VARCHAR(50), 
+"activity_video_link" VARCHAR(255), 
+"activity_video_title" VARCHAR(50),
+"kit_content_link" VARCHAR(255), 
+"kit_content_title" VARCHAR(50),
+"other1_link" VARCHAR(255), 
+"other1_title" VARCHAR(50),
+"other2_link" VARCHAR(255), 
+"other2_title" VARCHAR(50)  
 );
 
 CREATE TABLE components_modules (
 "id" SERIAL PRIMARY KEY, 
 "module_id" INT REFERENCES "modules", 
-"component_id" INT REFERENCES "components", 
-"quantity" INT
-);
-
-CREATE TABLE regions (
-"id" SERIAL PRIMARY KEY, 
-"name" VARCHAR(25)
+"component_id" INT REFERENCES "components",
+"pieces_per_kit" INT
 );
 
 CREATE TABLE shopping_list (
 "id" SERIAL PRIMARY KEY, 
-"region" INT REFERENCES "regions",
 "name" VARCHAR(100), 
 "date" TIMESTAMP, 
-"price_per_unit" decimal(5, 2) REFERENCES "components", 
-"pieces_per_unit" INT REFERENCES "components",
--- "materials_in_kit_cost" DECIMAL(5, 2) REFERENCES "modules", 
--- "labor_cost" DECIMAL (5, 2) REFERENCES "modules",
-"ordered" BOOLEAN, 
-"in_house" BOOLEAN, 
--- "user_created_by" VARCHAR(50)
--- "modules_used_in" INT REFERENCES "components"
+"user_created_by" VARCHAR(50)
+
 );
 
 CREATE TABLE modules_shopping (
@@ -83,4 +80,11 @@ CREATE TABLE modules_shopping (
 "quantity" INT, 
 "shopping_id" INT REFERENCES "shopping_list", 
 "module_id" INT REFERENCES "modules"
+"ordered" BOOLEAN, 
+"in_house" BOOLEAN
+);
+
+CREATE TABLE app_settings (
+"id" SERIAL PRIMARY KEY, 
+"labor_rate" DECIMAL (5, 2)
 );
