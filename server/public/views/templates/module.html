@@ -46,43 +46,83 @@ Add Component
 
 -----
 
-Resources:
-- Module Drive Link
-- Module Drive Title
-- To BE Printed
-- To Be Printed Title
-- Assembly Video
-- Assembly Video Title
-- Activity Video
-- Activity Video Title
-- Kit Content Sheet
-- Kit Content Sheet Title
-- Other Link1
-- Other Link1 Title
-- Other Link2
-- Other Link2 Title
+<h2>Resources</h2>
+<ul>
+    <li>
+        <h4>Google Drive</h4>
+        <input placeholder="URL" />
+    </li>
+    <li>
+        <h4>To Be Printed</h4>
+        <input placeholder="URL" />
+    </li>
+    <li>
+        <h4>Assembly Video</h4>
+        <input placeholder="URL" />
+    </li>
+    <li>
+        <h4>Activity Video</h4>
+        <input placeholder="URL" />
+    </li>
+    <li>
+        <h4>Kit Content Sheet</h4>
+        <input placeholder="URL" />
+    </li>
+    <li>
+        <h4>Custom Link 1</h4>
+        <input placeholder="Description" />
+        <input placeholder="URL" />
+    </li>
+    <li>
+        <h4>Custom Link 2</h4>
+        <input placeholder="Description" />
+        <input placeholder="URL" />
+    </li>
+</ul>
 
------
 
-Assembly Instructions
+<h2>Assembly Instructions</h2>
 
+<textarea>
+</textarea>
 
------
+<h2>Components in Module</h2>
 
-TABLE:
-pieces per kit
-name
-type
-description
-price per unit
-pieces per unit
-cost per kit
-general stock
-consumable
-modules ised in
-vendor name 1
-vendor link 1
-vendor name 2
-vendor link 2
-purpose/notes
-delete
+<table>
+    <tr>
+        <th>Pieces Per Kit</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Price Per Unit</th>
+        <th>Pieces Per Unit</th>
+        <th>Cost Per Unit</th>
+        <th>General Stock</th>
+        <th>Consumable</th>
+        <th>Modules Used In</th>
+        <th>Vendor Name 1</th>
+        <th>Vendor Link 1</th>
+        <th>Vendor Name 2</th>
+        <th>Vendor Link 2</th>
+        <th>Purpose/Notes</th>
+        <th>Delete</th>
+    </tr>
+    <tr ng-repeat="">
+        <td><input type="number" /></td>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>{{description}}</td>
+        <td>{{price_per_unit}}</td>
+        <td>{{pieces_per_unit}}</td>
+        <td>{{cost_per_unit}}</td>
+        <td>{{general_stock}}</td>
+        <td>{{consumable}}</td>
+        <td>{{modules_used_in}}</td>
+        <td>{{vendor_name_1}}</td>
+        <td>{{vendor_link_1}}</td>
+        <td>{{vendor_name_2}}</td>
+        <td>{{vendor_link_2}}</td>
+        <td>{{purpose_notes}}</td>
+        <td><button>Delete</button></td>
+    </tr>
+</table>
