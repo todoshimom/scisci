@@ -17,20 +17,23 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       ComponentService.addComponentToLib(component);
     }; // end addComponentToLib()
 
+    // begin modifyComponent()
     self.modifyComponent = function(component) {
       self.edit[component.id] = true;
-    };
+    }; // end modifyComponent()
 
+    // begin cancelEdit()
     self.cancelEdit = function(component) {
       self.edit[component.id] = false;
       ComponentService.getComponents();
-    };
+    }; // end cancelEdit()
 
+    // beign updateComponent()
     self.updateComponent = function(component) {
       self.edit[component.id] = false;
       console.log(component);
       ComponentService.updateComponent(component);
-    };
+    }; // updateComponent()
 
     // begin deleteComponent()
     self.deleteComponent = function(componentId) {
