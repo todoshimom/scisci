@@ -74,37 +74,41 @@
 <h2>Manage Components</h2>
 <table>
   <thead>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Price Per Unit</th>
-    <th>Pieces Per Unit</th>
-    <th>General Stock</th>
-    <th>Consumable</th>
-    <th>Modules Used In</th>
-    <th>Vendor 1 Name</th>
-    <th>Vendor 1 Link</th>
-    <th>Vendor 2 Name</th>
-    <th>Vendor 2 Link</th>
-    <th>Notes</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Price Per Unit</th>
+      <th>Pieces Per Unit</th>
+      <th>General Stock</th>
+      <th>Consumable</th>
+      <th>Modules Used In</th>
+      <th>Vendor 1 Name</th>
+      <th>Vendor 1 Link</th>
+      <th>Vendor 2 Name</th>
+      <th>Vendor 2 Link</th>
+      <th>Notes</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
   </thead>
   <tbody>
-    <td>3 Ring Binder</td>
-    <td>Binder</td>
-    <td>Binder to hold notes</td>
-    <td>3.00</td>
-    <td>1</td>
-    <td>True</td>
-    <td>False</td>
-    <td>5</td>
-    <td>Amazon</td>
-    <td>www.amazon.com/binder</td>
-    <td></td>
-    <td></td>
-    <td>Use this to hold the notes</td>
-    <td><button>Edit</button></td>
-    <td><button>Delete</button></td>
+    <tr ng-repeat="component in vm.componentLibrary.list">
+      <td>{{component.name}}</td>
+      <td>{{component.type}}</td>
+      <td>{{component.description}}</td>
+      <td>{{component.price_per_unit}}</td>
+      <td>{{component.pieces_per_unit}}</td>
+      <td>{{component.general_stock_item}}</td>
+      <td>{{component.consumable}}</td>
+      <td> Left Blank </td>
+      <td>{{component.vendor_name_primary}}</td>
+      <td>{{component.vendor_url_primary}}</td>
+      <td>{{component.vendor_name_secondary}}</td>
+      <td>{{component.vendor_url_secondary}}</td>
+      <td>{{component.notes}}</td>
+      <td><button>Edit</button></</td>
+      <td><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+    </tr>
   </tbody>
 </table>
