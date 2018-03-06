@@ -30,7 +30,7 @@ router.get('/logout', (req, res) => {
 });
 
 
-router.get('/users', (req, res) => {
+router.get('/users', (req, res) => { //Start of get all users function
 
     let queryText = `SELECT * FROM users`;
 
@@ -44,13 +44,29 @@ router.get('/users', (req, res) => {
             res.sendStatus(500);
         });
 
-});
+}); //End of get all users function
+
+router.get('/types', (req, res) => {//Start of get user_types function
+
+    let queryText = `SELECT * FROM user_type`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('GET user_types: ', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET user_type ', error);
+            res.sendStatus(500);
+        });
+
+});//End of get user_types function
 
 /******************************************/
 /*             POST ROUTES                */
 /******************************************/
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => {//Start of post new user function
 
     let user = req.body;
 
@@ -67,7 +83,7 @@ router.post('/', (req, res) => {
             console.log('Error registering user: ', error);
             res.sendStatus(500);
         });
-});
+});//End of post new user function
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen

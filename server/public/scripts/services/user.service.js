@@ -3,6 +3,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     let self = this;
     self.userObject = {};
     self.userLibrary = { list: [] };
+    self.userTypes = { list: [] };
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -42,11 +43,24 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
                 self.userLibrary.list = response.data;
             })
             .catch(function (error) {
-                console.log('Get response failed: ', error);
+                console.log('Get response for all users failed: ', error);
             });
     }; // End of getAllUsers function.
 
     self.getAllUsers();
+
+    self.getUserTypes = function () {// Start of getUserTypes function.
+        $http.get('/api/user/types')
+            .then(function (response) {
+                console.log('Get response for user types: ', response.data);
+                self.userTypes.list = response.data;
+            })
+            .catch(function (error) {
+                console.log('Get response for user types failed: ', error);
+            });
+    }; // End of getUserTypes function.
+
+    self.getUserTypes();
 
     /******************************************/
     /*             POST REQUESTS              */

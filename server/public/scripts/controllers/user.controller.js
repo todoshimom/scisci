@@ -4,6 +4,7 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     self.userService = UserService;
     self.userObject = UserService.userObject;
     self.userLibrary = UserService.userLibrary;
+    self.userTypes = UserService.userTypes;
 
     self.addUser = function (newUser) {    // Start of addUser function
         UserService.addUser(newUser);
