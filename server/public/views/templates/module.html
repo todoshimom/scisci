@@ -1,6 +1,6 @@
 
 
-{{vm.data}}
+{{vm.module}}
 
 <h1>Module Creator</h1>
 
@@ -14,14 +14,14 @@
 
 
 <h2>Components</h2>
-<input type="text" placeholder="Module Name" ng-model="vm.data.name" />
-<input type="text" placeholder="Code" ng-model="vm.data.code" />
-<input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.data.estimated_assembly_time" />
+<input type="text" placeholder="Module Name" ng-model="vm.module.name" />
+<input type="text" placeholder="Code" ng-model="vm.module.code" />
+<input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.estimated_assembly_time" />
 
 <h3>Version</h3>
-<input type="text" placeholder="Version Number" ng-model="vm.data.version_number" />
-<textarea type="text" placeholder="Version Notes" ng-model="vm.data.version_notes" /></textarea>
-<input type="text" placeholder="DATEPICKER" ng-model="vm.data.version_date" />
+<input type="text" placeholder="Version Number" ng-model="vm.module.version_number" />
+<textarea type="text" placeholder="Version Notes" ng-model="vm.module.version_notes" /></textarea>
+<input type="text" placeholder="DATEPICKER" ng-model="vm.module.version_date" />
 
 <br>
 
@@ -35,40 +35,40 @@
 <ul>
     <li>
         <h4>Google Drive</h4>
-        <input placeholder="URL" ng-model="vm.data.module_drive_link" />
+        <input placeholder="URL" ng-model="vm.module.module_drive_link" />
     </li>
     <li>
         <h4>To Be Printed</h4>
-        <input placeholder="URL" ng-model="vm.data.to_be_printed_link" />
+        <input placeholder="URL" ng-model="vm.module.to_be_printed_link" />
     </li>
     <li>
         <h4>Assembly Video</h4>
-        <input placeholder="URL" ng-model="vm.data.assembly_video_link" />
+        <input placeholder="URL" ng-model="vm.module.assembly_video_link" />
     </li>
     <li>
         <h4>Activity Video</h4>
-        <input placeholder="URL" ng-model="vm.data.activity_video_link" />
+        <input placeholder="URL" ng-model="vm.module.activity_video_link" />
     </li>
     <li>
         <h4>Kit Content Sheet</h4>
-        <input placeholder="URL" ng-model="vm.data.kit_content_link" />
+        <input placeholder="URL" ng-model="vm.module.kit_content_link" />
     </li>
     <li>
         <h4>Custom Link 1</h4>
-        <input placeholder="Title" ng-model="vm.data.other1_title" />
-        <input placeholder="URL" ng-model="vm.data.other1_link" />
+        <input placeholder="Title" ng-model="vm.module.other1_title" />
+        <input placeholder="URL" ng-model="vm.module.other1_link" />
     </li>
     <li>
         <h4>Custom Link 2</h4>
-        <input placeholder="Title" ng-model="vm.data.other2_title" />
-        <input placeholder="URL" ng-model="vm.data.other2_link" />
+        <input placeholder="Title" ng-model="vm.module.other2_title" />
+        <input placeholder="URL" ng-model="vm.module.other2_link" />
     </li>
 </ul>
 
 
 <h2>Assembly Instructions</h2>
 
-<textarea ng-model="vm.data.assembly_notes"></textarea>
+<textarea ng-model="vm.module.assembly_notes"></textarea>
 
 <h2>Components in Module</h2>
 

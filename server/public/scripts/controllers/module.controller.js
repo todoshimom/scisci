@@ -3,23 +3,23 @@ myApp.controller('ModuleController', ['ModuleService', function (ModuleService) 
     let self = this;
 
     // DUMMY DATA
-    self.data = {};
-    self.data.name = '';
-    self.data.code = '';
-    self.data.estimated_assembly_time = '';
-    self.data.version_number = '';
-    self.data.version_notes = 'asdf';
-    self.data.version_date = '';
-    self.data.module_drive_link = 'asdf';
-    self.data.to_be_printed_link = '';
-    self.data.assembly_video_link = '';
-    self.data.activity_video_link = '';
-    self.data.kit_content_link = '';
-    self.data.other1_title = '';
-    self.data.other1_link = '';
-    self.data.other2_title = '';
-    self.data.other2_link = '';
-    self.data.assembly_notes = '';
+    self.module = {};
+    self.module.name = '';
+    self.module.code = '';
+    self.module.estimated_assembly_time = '';
+    self.module.version_number = '';
+    self.module.version_notes = '';
+    self.module.version_date = '';
+    self.module.module_drive_link = '';
+    self.module.to_be_printed_link = '';
+    self.module.assembly_video_link = '';
+    self.module.activity_video_link = '';
+    self.module.kit_content_link = '';
+    self.module.other1_title = '';
+    self.module.other1_link = '';
+    self.module.other2_title = '';
+    self.module.other2_link = '';
+    self.module.assembly_notes = '';
 
     // CALCULATIONS
     self.calculations = {};
@@ -29,4 +29,24 @@ myApp.controller('ModuleController', ['ModuleService', function (ModuleService) 
     self.calculations.materials_ordered_labor = 0;
     self.calculations.materials_in_kit_labor = 0;
     
+    self.getModule = function() {
+        $http.get('/api/module')
+            .then(response => {
+                console.log('get response', response);
+                self.module = response.data;
+            })
+            .catch(error => {
+                console.log('error in post', error);
+            });
+    };
+    self.updateModule = function() {
+        $http.put('/api/module', self.data)
+            .then(response => {
+                console.log('put response', response);
+            })
+            .catch(error => {
+                console.log('error in post', error);
+            });
+    };
+
 }]);
