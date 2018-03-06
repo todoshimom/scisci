@@ -93,22 +93,50 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="component in vm.componentLibrary.list">
-      <td>{{component.name}}</td>
-      <td>{{component.type}}</td>
-      <td>{{component.description}}</td>
-      <td>{{component.price_per_unit}}</td>
-      <td>{{component.pieces_per_unit}}</td>
-      <td>{{component.general_stock_item}}</td>
-      <td>{{component.consumable}}</td>
+    <tr ng-repeat="component in vm.componentLibrary.list track by $index">
+      <td ng-if="!vm.edit[component.id]">{{component.name}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.type}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.description}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.price_per_unit}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.price_per_unit" ng-model="component.price_per_unit"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text"  ng-value="component.general_stock_item" ng-model="component.general_stock_item"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.consumable}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.consumable" ng-model="component.consumable"></td>
+      
       <td> Left Blank </td>
-      <td>{{component.vendor_name_primary}}</td>
-      <td>{{component.vendor_url_primary}}</td>
-      <td>{{component.vendor_name_secondary}}</td>
-      <td>{{component.vendor_url_secondary}}</td>
-      <td>{{component.notes}}</td>
-      <td><button>Edit</button></</td>
-      <td><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_url_primary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_primary" ng-model="component.vendor_url_primary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_name_secondary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_secondary" ng-model="component.vendor_name_secondary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_url_secondary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_secondary" ng-model="component.vendor_url_secondary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.notes}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></td>
+
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)">Edit</button></</td>
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)">Update</button></</td>
+
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)">Cancel</button></td>
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+
     </tr>
   </tbody>
 </table>
