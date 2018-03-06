@@ -14,7 +14,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO user_type (name)
-VALUES ("Admin"),("Editor"),("Shopper");
+VALUES ('Admin'),('Editor'),('Shopper');
 -- This will be the very first admin.
 
 INSERT INTO users (first_name, last_name, username, user_type)

@@ -14,6 +14,16 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       $http.get('/api/component')
         .then( function(response) {
           console.log(response.data);
+
+          for (let component of response.data) {
+            if(component.vendor_name_secondary == null) {
+              component.vendor_name_secondary = '';
+            }
+            if(component.vendor_url_secondary == null) {
+              component.vendor_url_secondary = '';
+            }
+          }
+
           self.componentLibrary.list = response.data;
         })
         .catch( function(error) {
@@ -45,6 +55,16 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*              PUT REQUESTS              */
     /******************************************/
 
+    self.updateComponent = function(component) {
+      $http.put(`/api/component/updateComponent/`, component)
+        .then( function(response) {
+          console.log('Component updated', response);
+          self.getComponents();
+        })
+        .catch( function(error) {
+          console.log('Error updating component', error);
+        });
+    };
 
 
     /******************************************/
