@@ -3,6 +3,14 @@ body, html {
   font-size: 14px;
   font-weight: 300; }
 
+h2 {
+  margin-top: 0;
+  color: #828381; }
+
+.md-title {
+  text-align: center;
+  text-transform: uppercase; }
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -36,6 +44,9 @@ body, html {
   list-style: none;
   padding: 0;
   margin: 0; }
+  .nav-list svg,
+  .sub-nav-list svg {
+    font-size: 28px; }
 
 .nav-list {
   position: absolute;
@@ -63,10 +74,29 @@ body, html {
   text-decoration: none; }
   .nav-list-item-link > * {
     flex: 1 0 100%; }
-  .nav-list-item-link svg {
-    font-size: 28px; }
+
+.sub-nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; }
+
+.sub-nav-item-link {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #828381;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none; }
+  .sub-nav-item-link > * {
+    flex: 1 0 100%; }
+  .sub-nav-item-link svg {
+    margin-bottom: 20px;
+    color: #55AC56; }
 
 .main {
   position: relative;
-  padding-left: 100px;
+  padding: 20px 10px 20px 120px;
   box-sizing: border-box; }

@@ -38,6 +38,14 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             //     }
             // }
         })
+        .when('/module-nav', {
+            templateUrl: '/views/templates/module-nav.html'
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
         .when('/component', {
             templateUrl: '/views/templates/component.html',
             controller: 'ComponentController as vm',
