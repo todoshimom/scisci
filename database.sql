@@ -1,17 +1,27 @@
 -- Commented out parts are ideas of what may be changes to add 
-CREATE TABLE users (
-"id" SERIAL PRIMARY KEY, 
-"first_name" VARCHAR(25), 
-"last_name" VARCHAR(25), 
-"email" VARCHAR(255), 
-"password" VARCHAR(255), 
-"user_type" INT REFERENCES "user_type"
-);
 
 CREATE TABLE user_type (
 "id" SERIAL PRIMARY KEY, 
 "name" VARCHAR(25)
 );
+
+-- The 3 standard user types used in the application.
+INSERT INTO user_type (name)
+VALUES ('Admin'),('Editor'),('Shopper');
+
+CREATE TABLE users (
+"id" SERIAL PRIMARY KEY, 
+"first_name" VARCHAR(25), 
+"last_name" VARCHAR(25), 
+"username" VARCHAR(255), 
+"password" VARCHAR(255) DEFAULT '$2a$10$hHqRWK07ePfHgr6xZN526u/g5.ch.YgGJa1DBFF9IkR70DEBhng5e', --The default is Welcome1 encrypted.
+"user_type" INT REFERENCES "user_type"
+);
+
+-- This will be the very first admin.
+INSERT INTO users (first_name, last_name, username, user_type)
+VALUES ('Renee', 'Piersa', 'test@email.com', 1);
+
 
 CREATE TABLE components (
 "id" SERIAL PRIMARY KEY, 
