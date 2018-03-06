@@ -4,6 +4,8 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.componentLibrary = ComponentService.componentLibrary;
 
+    self.edit = {};
+
     self.componentItem = {
       consumable: false,
       general_stock_item: false
@@ -15,10 +17,27 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       ComponentService.addComponentToLib(component);
     }; // end addComponentToLib()
 
+    self.modifyComponent = function(component) {
+      self.edit[component.id] = true;
+    };
+
+    self.cancelEdit = function(component) {
+      self.edit[component.id] = false;
+      ComponentService.getComponents();
+    };
+
+    self.updateComponent = function(component) {
+      self.edit[component.id] = false;
+      console.log(component);
+      ComponentService.updateComponent(component);
+    };
+
     // begin deleteComponent()
     self.deleteComponent = function(componentId) {
       console.log(componentId);
       ComponentService.deleteComponent(componentId);
     }; // end deleteComponent()
+
+
 
 }]);
