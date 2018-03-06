@@ -4,8 +4,32 @@ body, html {
   font-weight: 300; }
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 20px;
   border-top: 6px solid #55AC56;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2); }
   .header h1 {
     margin: 0; }
+
+.icon-lightbulb {
+  font-size: 28px;
+  color: #55AC56; }
+  .icon-lightbulb:hover {
+    cursor: pointer; }
+    .icon-lightbulb:hover .header-profile-list {
+      display: block; }
+
+.header-profile-list {
+  position: absolute;
+  right: 20px;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+  font-size: 16px; }
+
+.header-profile-list-link:hover {
+  color: #55ac56; }
