@@ -2,7 +2,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     console.log('UserService Loaded');
     let self = this;
     self.userObject = {};
-
+    self.userLibrary = {list:[]};
 
     /******************************************/
     /*              GET REQUESTS              */

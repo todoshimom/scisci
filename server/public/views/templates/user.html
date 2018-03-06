@@ -1,6 +1,107 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
+<md-button class="md-raised" ng-click="vm.userService.logout()">Log Out</md-button>
 
-    <h1 id="welcome" class="lead">Welcome, {{vm.userObject.userName}}!</h1>
-    <button class="btn btn-default" ng-click="vm.userService.logout()">Log Out</button>
+<h3>Filter:
+    <md-input-container>
+        <label>First/Last/User Name</label>
+        <input ng-model="userFilter">
+    </md-input-container>
+</h3>
+
+<h2>Manage Users</h2>
+
+<h2>Add User
+    <md-button class="md-raised" ng-click="showNew=!showNew"> + </md-button>
+</h2>
+
+<!-- Manage user Table -->
+<table>
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Account-Type</th>
+            <th>Username</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in vm.userLibrary.list | filter:userFilter">
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.user_type}}</td>
+            <td>{{user.username}}</td>
+            <td>
+                <md-button class="md-raised" ng-click="vm.editUser(user)">Edit</md-button>
+            </td>
+            <td>
+                <md-button class="md-raised" ng-click="vm.deleteUser(user)">Delete</md-button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- This is the Add User Div for "Modal" -->
+<div ng-if="showNew">
+    <h2>Add User</h2>
+    <md-input-container>
+        <label>First Name</label>
+        <input ng-model="vm.newUser.first_name">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Last Name</label>
+        <input ng-model="vm.newUser.last_name">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Username (email)</label>
+        <input ng-model="vm.newUser.username">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Account-Type</label>
+        <md-select ng-model="vm.newUser.user_type">
+            <md-option>
+                <em>None</em>
+            </md-option>
+            <md-option ng-repeat="types in vm.userTypes.list" ng-value="types.name">
+                {{types.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="vm.addUser(vm.newUser)">Create</md-button>
+    <md-button class="md-raised" ng-click="showNew=!showNew">Cancel</md-button>
+</div>
+
+<!-- This is the Edit User Div for "Modal" -->
+<div ng-if="showEdit">
+    <h2>Edit User</h2>
+    <md-input-container>
+        <label>First Name</label>
+        <input ng-model="vm.editUser.first_name">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Last Name</label>
+        <input ng-model="vm.editUser.last_name">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Username (email)</label>
+        <input ng-model="vm.editUser.username">
+    </md-input-container>
+
+    <md-input-container>
+        <label>Account-Type</label>
+        <md-select ng-model="vm.editUser.user_type">
+            <md-option ng-repeat="types in vm.userTypes.list" ng-value="types.name">
+                {{types.name}}
+            </md-option>
+        </md-select>
+    </md-input-container>
+    <md-button class="md-raised" ng-click="ReplacewithFunctiontoPromtReset">Reset Password</md-button>
+    <md-button class="md-raised" ng-click="vm.submitEdit(vm.editUser)">Submit</md-button>
+    <md-button class="md-raised" ng-click="showNew=!showNew">Cancel</md-button>
 </div>

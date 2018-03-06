@@ -29,20 +29,20 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
                 });
         }
     };
-
-    self.registerUser = function () {
-        if (self.user.username === '' || self.user.password === '') {
-            self.message = "Choose a username and password!";
-        } else {
-            console.log('sending to server...', self.user);
-            $http.post('/api/user/register', self.user).then(function (response) {
-                console.log('success');
-                $location.path('/home');
-            },
-                function (response) {
-                    console.log('error');
-                    self.message = "Something went wrong. Please try again."
-                });
-        }
-    }
+    // Commented out for now. This will most likely be moved to user controller.
+    // self.registerUser = function () {
+    //     if (self.user.username === '' || self.user.password === '') {
+    //         self.message = "Choose a username and password!";
+    //     } else {
+    //         console.log('sending to server...', self.user);
+    //         $http.post('/api/user/register', self.user).then(function (response) {
+    //             console.log('success');
+    //             $location.path('/home');
+    //         },
+    //             function (response) {
+    //                 console.log('error');
+    //                 self.message = "Something went wrong. Please try again."
+    //             });
+    //     }
+    // }
 }]);
