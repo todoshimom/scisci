@@ -1,7 +1,7 @@
 myApp.service('UserService', ['$http', '$location', function ($http, $location) {
     console.log('UserService Loaded');
     let self = this;
-    self.userObject = {};
+    self.userObject = { list: [] };
     self.userLibrary = { list: [] };
     self.userTypes = { list: [] };
 
@@ -48,6 +48,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('Response from add new user: ', response);
                 self.getAllUsers();
+                alert(`The account for ${newUser.first_name} ${newUser.last_name} has been created.`)
             })
             .catch(function (error) {
                 console.log('Error on new user POST request: ', error);
@@ -59,6 +60,19 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     /*              PUT REQUESTS              */
     /******************************************/
 
+    self.submitEdit = function (userEdit) {
+
+        $http.put('/api/user', userEdit)
+            .then(function (response) {
+                console.log('Response from edit a user (PUT request): ', response);
+                self.getAllUsers();
+                alert(`The account has been edited.`)
+            })
+            .catch(function (error) {
+                console.log('Error on edit user PUT request: ', error);
+            });
+
+    }
 
 
     /******************************************/
@@ -71,6 +85,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('User successfully removed: ', response);
                 self.getAllUsers();
+                alert(`The account has been deleted.`)
             })
             .catch(function (error) {
                 console.log('Error removing user: ', error);
@@ -87,8 +102,8 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         $http.get('/api/user').then(function (response) {
             if (response.data.username) {
                 // user has a curret session on the server
-                self.userObject.userName = response.data.username;
-                console.log('UserService -- getuser -- User Data: ', self.userObject.userName);
+                self.userObject.list = response.data;
+                console.log('UserService -- getuser -- User Data: ', self.userObject);
             } else {
                 console.log('UserService -- getuser -- failure');
                 // user has no session, bounce them back to the login page
@@ -99,6 +114,8 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             $location.path("/home");
         });
     }
+
+    self.getuser()
 
     self.logout = function () {
         console.log('UserService -- logout');

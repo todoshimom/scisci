@@ -1,49 +1,52 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <md-button class="md-raised" ng-click="vm.userService.logout()">Log Out</md-button>
 
-<h3>Filter:
-    <md-input-container>
-        <label>First/Last/User Name</label>
-        <input ng-model="userFilter">
-    </md-input-container>
-</h3>
 
-<h2>Manage Users</h2>
+<div ng-if="!vm.showEdit && !vm.showNew">
+<!-- The && here is an or statement, not an "and". || was functioning as an "and" not an "or". -->
+    <h3>Filter:
+        <md-input-container>
+            <label>First/Last/User Name</label>
+            <input ng-model="userFilter">
+        </md-input-container>
+    </h3>
 
-<h2>Add User
-    <md-button class="md-raised" ng-click="showNew=!showNew"> + </md-button>
-</h2>
+    <h2>Manage Users</h2>
 
-<!-- Manage user Table -->
-<table>
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Account-Type</th>
-            <th>Username</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="user in vm.userLibrary.list | filter:userFilter">
-            <td>{{user.first_name}}</td>
-            <td>{{user.last_name}}</td>
-            <td>{{user.user_type}}</td>
-            <td>{{user.username}}</td>
-            <td>
-                <md-button class="md-raised" ng-click="vm.editUser(user)">Edit</md-button>
-            </td>
-            <td>
-                <md-button class="md-raised" ng-click="vm.deleteUser(user)">Delete</md-button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <h2>Add User
+        <md-button class="md-raised" ng-click="vm.showNew=!vm.showNew"> + </md-button>
+    </h2>
 
+    <!-- Manage user Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Account-Type</th>
+                <th>Username</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in vm.userLibrary.list | filter:userFilter">
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.username}}</td>
+                <td>
+                    <md-button class="md-raised" ng-click="vm.showEdit=!vm.showEdit; vm.editUser=user">Edit</md-button>
+                </td>
+                <td>
+                    <md-button class="md-raised" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">Delete</md-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <!-- This is the Add User Div for "Modal" -->
-<div ng-if="showNew">
+<div ng-if="vm.showNew">
     <h2>Add User</h2>
     <md-input-container>
         <label>First Name</label>
@@ -69,11 +72,11 @@
         </md-select>
     </md-input-container>
     <md-button class="md-raised" ng-click="vm.addUser(vm.newUser)">Create</md-button>
-    <md-button class="md-raised" ng-click="showNew=!showNew">Cancel</md-button>
+    <md-button class="md-raised" ng-click="vm.showNew=!vm.showNew">Cancel</md-button>
 </div>
 
 <!-- This is the Edit User Div for "Modal" -->
-<div ng-if="showEdit">
+<div ng-if="vm.showEdit">
     <h2>Edit User</h2>
     <md-input-container>
         <label>First Name</label>
@@ -100,5 +103,5 @@
     </md-input-container>
     <md-button class="md-raised" ng-click="ReplacewithFunctiontoPromtReset">Reset Password</md-button>
     <md-button class="md-raised" ng-click="vm.submitEdit(vm.editUser)">Submit</md-button>
-    <md-button class="md-raised" ng-click="showNew=!showNew">Cancel</md-button>
+    <md-button class="md-raised" ng-click="vm.showEdit=!vm.showEdit">Cancel</md-button>
 </div>

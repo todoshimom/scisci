@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     // check if logged in
     if (req.isAuthenticated()) {
-        // send back user object from database
+        // send back user object from database        
         res.send(req.user);
     } else {
         // failure best handled on the server. do redirect here.
@@ -32,7 +32,10 @@ router.get('/logout', (req, res) => {
 
 router.get('/users', (req, res) => { //Start of get all users function
 
-    let queryText = `SELECT * FROM users`;
+    let queryText = `
+    SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+    FROM users
+    JOIN user_type ON users.user_type = user_type.id;`;
 
     pool.query(queryText)
         .then((results) => {
@@ -124,7 +127,31 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 /*              PUT ROUTES                */
 /******************************************/
 
+router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
 
+    let user = req.body;
+    console.log(user);
+    
+    let queryText = `
+    UPDATE users 
+    SET 
+    first_name = $1,
+    last_name = $2,
+    username = $3,
+    user_type = $4
+    WHERE "id" = $5;`;
+
+    pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type, user.id])
+        .then((results) => {
+            console.log('Edited user successfully: ', results);
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error Editing user: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of edit user function PUT REQUEST
 
 /******************************************/
 /*            DELETE ROUTES               */
