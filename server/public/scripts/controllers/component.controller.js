@@ -4,6 +4,8 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.componentLibrary = ComponentService.componentLibrary;
 
+    self.edit = {};
+
     self.componentItem = {
       consumable: false,
       general_stock_item: false
@@ -14,6 +16,16 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       console.log(component);
       ComponentService.addComponentToLib(component);
     }; // end addComponentToLib()
+
+    self.modifyComponent = function(component) {
+      self.edit[component.id] = true;
+      console.log(self.edit);
+    };
+
+    self.updateComponent = function(component) {
+      self.edit[component.id] = false;
+      console.log(self.edit);
+    };
 
     // begin deleteComponent()
     self.deleteComponent = function(componentId) {
