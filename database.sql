@@ -24,7 +24,8 @@ CREATE TABLE components (
 "notes" TEXT, 
 "price_per_unit" DECIMAL(5, 2), 
 "pieces_per_unit" INT,
--- add other costs here too? referencing modules table
+-- "materials_in_kit_cost" DECIMAL(5, 2) REFERENCES "modules", 
+-- "labor_cost" DECIMAL (5, 2) REFERENCES "modules",
 "consumable" BOOLEAN, 
 -- "type" VARCHAR(50), 
 -- "general_stock_item" BOOLEAN,
@@ -40,7 +41,7 @@ CREATE TABLE modules (
 "id" SERIAL PRIMARY KEY, 
 "name" VARCHAR(100), 
 "code" INT REFERENCES "modules_categories",
--- "unit_cost" DECIMAL(2, 5),
+-- "price_per_unit" DECIMAL(2, 5),
 -- "materials_in_kit_cost" DECIMAL(5, 2), 
 -- "labor_cost" DECIMAL (5, 2),   
 "version_number" INT, 
@@ -69,7 +70,8 @@ CREATE TABLE shopping_list (
 "date" TIMESTAMP, 
 "price_per_unit" decimal(5, 2) REFERENCES "components", 
 "pieces_per_unit" INT REFERENCES "components",
--- add other costs here too? referencing the modules table 
+-- "materials_in_kit_cost" DECIMAL(5, 2) REFERENCES "modules", 
+-- "labor_cost" DECIMAL (5, 2) REFERENCES "modules",
 "ordered" BOOLEAN, 
 "in_house" BOOLEAN, 
 -- "user_created_by" VARCHAR(50)
