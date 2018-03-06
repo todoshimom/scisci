@@ -1,4 +1,5 @@
-<h2>Add Components</h2>
+<div ng-include="'views/partials/nav.html'"></div>
+<h2 class="md-title">Add Components</h2>
 <div >
   <md-input-container>
     <label>Name</label>
@@ -74,37 +75,69 @@
 <h2>Manage Components</h2>
 <table>
   <thead>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Price Per Unit</th>
-    <th>Pieces Per Unit</th>
-    <th>General Stock</th>
-    <th>Consumable</th>
-    <th>Modules Used In</th>
-    <th>Vendor 1 Name</th>
-    <th>Vendor 1 Link</th>
-    <th>Vendor 2 Name</th>
-    <th>Vendor 2 Link</th>
-    <th>Notes</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Price Per Unit</th>
+      <th>Pieces Per Unit</th>
+      <th>General Stock</th>
+      <th>Consumable</th>
+      <th>Modules Used In</th>
+      <th>Vendor 1 Name</th>
+      <th>Vendor 1 Link</th>
+      <th>Vendor 2 Name</th>
+      <th>Vendor 2 Link</th>
+      <th>Notes</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
   </thead>
   <tbody>
-    <td>3 Ring Binder</td>
-    <td>Binder</td>
-    <td>Binder to hold notes</td>
-    <td>3.00</td>
-    <td>1</td>
-    <td>True</td>
-    <td>False</td>
-    <td>5</td>
-    <td>Amazon</td>
-    <td>www.amazon.com/binder</td>
-    <td></td>
-    <td></td>
-    <td>Use this to hold the notes</td>
-    <td><button>Edit</button></td>
-    <td><button>Delete</button></td>
+    <tr ng-repeat="component in vm.componentLibrary.list track by $index">
+      <td ng-if="!vm.edit[component.id]">{{component.name}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.type}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.description}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.price_per_unit}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.price_per_unit" ng-model="component.price_per_unit"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text"  ng-value="component.general_stock_item" ng-model="component.general_stock_item"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.consumable}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.consumable" ng-model="component.consumable"></td>
+      
+      <td> Left Blank </td>
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_url_primary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_primary" ng-model="component.vendor_url_primary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_name_secondary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_secondary" ng-model="component.vendor_name_secondary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_url_secondary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_secondary" ng-model="component.vendor_url_secondary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.notes}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></td>
+
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)">Edit</button></</td>
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)">Update</button></</td>
+
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)">Cancel</button></td>
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+
+    </tr>
   </tbody>
 </table>
