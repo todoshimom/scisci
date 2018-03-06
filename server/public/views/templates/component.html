@@ -76,11 +76,11 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
+      <th>Name <span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></th>
+      <th>Type <span ng-click="vm.sortColumns('typeAsc')">&#9650;</span><span ng-click="vm.sortColumns('typeDesc')">&#9660;</span></th>
       <th>Description</th>
-      <th>Price Per Unit</th>
-      <th>Pieces Per Unit</th>
+      <th>Price Per Unit <span ng-click="vm.sortColumns('pricePUAsc')">&#9650;</span><span ng-click="vm.sortColumns('pricePUDesc')">&#9660;</span></th>
+      <th>Pieces Per Unit <span ng-click="vm.sortColumns('piecesPUAsc')">&#9650;</span><span ng-click="vm.sortColumns('piecesPUDesc')">&#9660;</span></th>
       <th>General Stock</th>
       <th>Consumable</th>
       <th>Modules Used In</th>

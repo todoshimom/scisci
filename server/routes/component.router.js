@@ -10,17 +10,76 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-  let queryText = `SELECT * FROM components`;
+  let queryText = `SELECT * FROM components ORDER BY "name"`;
 
   pool.query(queryText)
-      .then((results) => {
-        console.log('GET components', results);
-        res.send(results.rows);
-      })
-      .catch((error) => {
-        console.log('Error on GET components request', error);
-        res.sendStatus(500);
-      });
+    .then((results) => {
+      console.log('GET components', results);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log('Error on GET components request', error);
+      res.sendStatus(500);
+  });
+});
+
+router.get('/sorting/:method', (req, res) => {
+
+  let sort = req.params.method;
+
+  console.log(sort);
+
+  let queryText;
+
+  switch (sort) {
+    case 'nameAsc':
+      queryText = `SELECT * FROM components ORDER BY "name"`;
+      break;
+    case 'nameDesc':
+      queryText = `SELECT * FROM components ORDER BY "name" DESC`;
+      break;
+    case 'typeAsc':
+      queryText = `SELECT * FROM components ORDER BY "type"`;
+      break;
+    case 'typeDesc':
+      queryText = `SELECT * FROM components ORDER BY "type" DESC`;
+      break;
+    case 'pricePUAsc':
+      queryText = `SELECT * FROM components ORDER BY "price_per_unit"`;
+      break;
+    case 'pricePUDesc':
+      queryText = `SELECT * FROM components ORDER BY "price_per_unit" DESC`;
+      break;
+    case 'piecesPUAsc':
+      queryText = `SELECT * FROM components ORDER BY "pieces_per_unit"`;
+      break;
+    case 'piecesPUDesc':
+      queryText = `SELECT * FROM components ORDER BY "pieces_per_unit" DESC`;
+      break;
+    case 'consumableAsc':
+      queryText = `SELECT * FROM components ORDER BY "consumable"`;
+      break;
+    case 'consumableDesc':
+      queryText = `SELECT * FROM components ORDER BY "consumable" DESC`;
+      break;
+    case 'genStockAsc':
+      queryText = `SELECT * FROM components ORDER BY "general_stock_item"`;
+      break;
+    case 'genStockDesc':
+      queryText = `SELECT * FROM components ORDER BY "general_stock_item" DESC`;
+      break;
+  }
+
+  console.log(queryText);
+  pool.query(queryText)
+    .then((results) => {
+      console.log('GET components sorted', results);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log('Error on components sorted request', error);
+      res.sendStatus(500);
+  });
 });
 
 
