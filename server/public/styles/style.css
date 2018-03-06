@@ -31,5 +31,42 @@ body, html {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
   font-size: 16px; }
 
-.header-profile-list-link:hover {
-  color: #55ac56; }
+.nav-list,
+.sub-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.nav-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 100px;
+  height: 100vh;
+  background-color: #D5D6D5; }
+
+.nav-list-item-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+  height: 100px;
+  box-sizing: border-box;
+  background-color: #D5D6D5;
+  color: #828381;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none; }
+  .nav-list-item-link > * {
+    flex: 1 0 100%; }
+  .nav-list-item-link svg {
+    font-size: 28px; }
+
+.main {
+  position: relative;
+  padding-left: 100px;
+  box-sizing: border-box; }

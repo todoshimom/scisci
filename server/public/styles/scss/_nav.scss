@@ -1,0 +1,40 @@
+.nav-list,
+.sub-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list {
+    position: absolute; // to position navigation around views
+    top: 0;
+    left: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100px;
+    height: 100vh;
+    background-color: $light-gray;
+}
+
+.nav-list-item-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    height: 100px;
+    box-sizing: border-box;
+    background-color: $light-gray;
+    color: $med-gray;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    & > * {
+        flex: 1 0 100%;
+    }
+    // fontawesome icons
+    svg {
+        font-size: 28px;
+    }
+}

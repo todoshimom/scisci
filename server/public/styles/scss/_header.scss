@@ -31,9 +31,3 @@
     box-shadow: $box-shadow;
     font-size: 16px;
 }
-
-.header-profile-list-link {
-    &:hover {
-        color: darken($green, 0.1);
-    }
-}
