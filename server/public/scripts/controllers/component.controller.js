@@ -19,12 +19,17 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.modifyComponent = function(component) {
       self.edit[component.id] = true;
-      console.log(self.edit);
+    };
+
+    self.cancelEdit = function(component) {
+      self.edit[component.id] = false;
+      ComponentService.getComponents();
     };
 
     self.updateComponent = function(component) {
       self.edit[component.id] = false;
-      console.log(self.edit);
+      console.log(component);
+      ComponentService.updateComponent(component);
     };
 
     // begin deleteComponent()
@@ -32,5 +37,7 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       console.log(componentId);
       ComponentService.deleteComponent(componentId);
     }; // end deleteComponent()
+
+
 
 }]);
