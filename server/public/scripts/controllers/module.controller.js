@@ -23,6 +23,4 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
                 self.createModule();
             }
         };
-
-
 }]);

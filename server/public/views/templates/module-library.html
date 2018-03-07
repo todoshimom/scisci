@@ -13,12 +13,12 @@
 <!-- Module library table-->
 <table>
     <thead>
-        <th>Name</th>
-        <th>Code</th>
-        <th>Version Number</th>
-        <th>Version Date</th>
+        <th>Name<span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></th>
+        <th>Code<span ng-click="vm.sortColumns('codeAsc')">&#9650;</span><span ng-click="vm.sortColumns('codeDesc')">&#9660;</span></th>
+        <th>Version Number <span ng-click="vm.sortColumns('versionNumAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionNumDesc')">&#9660;</span></th>
+        <th>Version Date <span ng-click="vm.sortColumns('versionDateAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionDateDesc')">&#9660;</span></th>
         <th>Version Notes</th>
-        <th>Est. Assembly Time</th>
+        <th>Est. Assembly Time <span ng-click="vm.sortColumns('estimatedAssemblyTimeAscAsc')">&#9650;</span><span ng-click="vm.sortColumns('estimatedAssemblyTimeAscDesc')">&#9660;</span></th>
         <th>Module Drive Link</th>
         <th>To Be Printed Link</th>
         <th>Assembly Video Link</th>
@@ -26,23 +26,62 @@
         <th>Kit Content Sheet Link</th>
         <th>Custom Link 1</th>
         <th>Custom Link 2</th>
+        <th>Delete</th>
     </thead>
     <tbody>
         <tr ng-repeat="module in vm.moduleLibrary.list track by $index">
-            <td>{{module.name}}</td>
+            <td><a ng-href="#!module/{{module.id}}">{{module.name}}</a></td>
             <td>{{module.code}}</td>
             <td>{{module.version_number}}</td>
             <td>{{module.version_date}}</td>
             <td>{{module.version_notes}}</td>
             <td>{{module.estimated_assembly_time}}</td>
             <td>{{module.assembly_notes}}</td>
-            <td>{{module.module_drive_link}}</td>
-            <td>{{module.to_be_printed_link}}</td>
-            <td>{{module.assembly_video_link}}</td>
-            <td>{{module.activity_video_link}}</td>
-            <td>{{module.kit_content_link}}</td>
-            <td>{{module.other1_link}}</td>
-            <td>{{module.other2_link}}</td>
+            <td>
+                <a href="{{module.module_drive_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.module_drive_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{module.to_be_printed_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.to_be_printed_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{module.assembly_video_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.assembly_video_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{module.activity_video_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.activity_video_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{module.kit_content_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.kit_content_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{{module.other1_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other1_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+                </td>
+            <td>
+                <a href="{{module.other2_link}}">
+                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other2_title}}</md-tooltip>
+                    <i class="far fa-folder"></i>
+                </a>
+                </td>
+            <td><button ng-click="vm.deleteModule(module.id)"><i class="fas fa-trash-alt"></i></button></td>
         </tr>
     </tbody>
 </table>
+
+    
