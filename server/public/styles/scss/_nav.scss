@@ -37,6 +37,9 @@
     & > * {
         flex: 1 0 100%;
     }
+    &.active {
+        background-color: $white;
+    }
 }
 
 .sub-nav-list {
