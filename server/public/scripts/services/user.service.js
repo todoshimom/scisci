@@ -89,7 +89,8 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     }
 
     self.setNewPassword = function (newPass) {
-
+        console.log('sending new password: ', newPass);
+        
         $http.put(`/api/user/newPassword`, newPass)
             .then(function (response) {
                 console.log('Response from set new Password PUT request: ', response);

@@ -51,12 +51,17 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
                 alert('You can\'t use the default password as your new password, please choose something else. ')
             }
             else {
-                UserService.setNewPassword(newPass.password)
                 console.log('New password is good to go!');
+                UserService.setNewPassword(newPass)
             }
         }
         else {
             alert('Please make sure that both password fields match eachother.')
         }
+    }
+
+    self.cancelNewPassword = ()=> {
+        self.passwordStatus = true;
+        self.user = null; //clearing input fields after canceling change password.  
     }
 }]);
