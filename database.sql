@@ -13,10 +13,11 @@ CREATE TABLE users (
 "user_type" INT REFERENCES "user_type" NOT NULL
 );
 
+-- The 3 standard user types used in the application.
 INSERT INTO user_type (name)
 VALUES ('Admin'),('Editor'),('Shopper');
--- This will be the very first admin.
 
+-- This will be the very first admin.
 INSERT INTO users (first_name, last_name, username, user_type)
 VALUES ('Renee', 'Piersa', 'test@email.com', 1);
 
@@ -46,13 +47,9 @@ CREATE TABLE modules (
 "estimated_assembly_time" INT, 
 "assembly_notes" TEXT, 
 "module_drive_link" VARCHAR(255), 
-"module_drive_title" VARCHAR(50), 
 "to_be_printed_link" VARCHAR(255), 
-"to_be_printed_title" VARCHAR(50), 
-"assembly_video_link" VARCHAR(255), 
-"assembly_video_title" VARCHAR(50), 
+"assembly_video_link" VARCHAR(255),  
 "activity_video_link" VARCHAR(255), 
-"activity_video_title" VARCHAR(50),
 "kit_content_link" VARCHAR(255), 
 "kit_content_title" VARCHAR(50),
 "other1_link" VARCHAR(255), 

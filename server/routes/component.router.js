@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
+const sorting = require('../modules/sorting.js');
 const router = express.Router();
 
 
@@ -10,17 +11,37 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 
-  let queryText = `SELECT * FROM components`;
+  let queryText = `SELECT * FROM components ORDER BY "name"`;
 
   pool.query(queryText)
-      .then((results) => {
-        console.log('GET components', results);
-        res.send(results.rows);
-      })
-      .catch((error) => {
-        console.log('Error on GET components request', error);
-        res.sendStatus(500);
-      });
+    .then((results) => {
+      console.log('GET components', results);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log('Error on GET components request', error);
+      res.sendStatus(500);
+  });
+});
+
+router.get('/sorting/:method', (req, res) => {
+
+  let sortMethod = req.params.method;
+
+  console.log(sortMethod);
+
+  let queryText = sorting.sortComponents(sortMethod);
+
+  console.log(queryText);
+  pool.query(queryText)
+    .then((results) => {
+      console.log('GET components sorted', results);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log('Error on components sorted request', error);
+      res.sendStatus(500);
+  });
 });
 
 

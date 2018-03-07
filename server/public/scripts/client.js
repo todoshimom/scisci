@@ -64,6 +64,15 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             //     }
             // }
         })
+        .when('/module/:id', {
+            templateUrl: '/views/templates/module.html',
+            controller: 'ModuleController as vm',
+            // resolve: {
+            //     getuser: function (UserService) {
+            //         return UserService.getuser();
+            //     }
+            // }
+        })
         .when('/module-list', {
             templateUrl: '/views/templates/module-list.html',
             controller: 'ModuleListController as vm',
