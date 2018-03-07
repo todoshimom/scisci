@@ -23,11 +23,11 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         .when('/user', {
             templateUrl: '/views/templates/user.html',
             controller: 'UserController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/app-settings', {
             templateUrl: '/views/templates/app-settings.html',
