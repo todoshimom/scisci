@@ -21,7 +21,7 @@ router.get('/all', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    const queryText = 'SELECT * FROM modules WHERE id = $1';
+    const queryText = `SELECT * FROM modules WHERE modules.id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
             res.send(result.rows);
@@ -45,6 +45,9 @@ router.get('/sorting/:method', (req, res) => {
       console.log('Error on modules sorted request', error);
       res.sendStatus(500);
   });
+  
+router.get('/:id/components', (req, res) => {
+    // get the components in a separate route
 });
  
 /******************************************/
@@ -69,7 +72,7 @@ router.post('/', (req, res) => {
         other2_title,
         other2_link,
         assembly_notes 
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)`;
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
     pool.query(queryText, [
         req.body.name,
         req.body.code,
@@ -101,42 +104,48 @@ router.post('/', (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 router.put('/', (req, res) => {
+    console.log(req.body);
+    // ,
+    //     code = $2,
+    //     estimated_assembly_time = $3,
+    //     version_number = $4,
+    //     version_notes = $5,
+    //     version_date = $6,
+    //     module_drive_link = $7,
+    //     to_be_printed_link = $8,
+    //     assembly_video_link = $9,
+    //     activity_video_link = $10,
+    //     kit_content_link = $11,
+    //     other1_title = $12,
+    //     other1_link = $13,
+    //     other2_title = $14,
+    //     other2_link = $15,
+    //     assembly_notes = $16
+
+        // ,
+        // req.body.code,
+        // req.body.estimated_assembly_time,
+        // req.body.version_number,
+        // req.body.version_notes,
+        // req.body.version_date,
+        // req.body.module_drive_link,
+        // req.body.to_be_printed_link,
+        // req.body.assembly_video_link,
+        // req.body.activity_video_link,
+        // req.body.kit_content_link,
+        // req.body.other1_title,
+        // req.body.other1_link,
+        // req.body.other2_title,
+        // req.body.other2_link,
+        // req.body.assembly_notes,
+
     const queryText = `UPDATE modules SET
-        name = $1,
-        code = $2,
-        estimated_assembly_time = $3,
-        version_number = $4,
-        version_notes = $5,
-        version_date = $6,
-        module_drive_link = $7,
-        to_be_printed_link = $8,
-        assembly_video_link = $9,
-        activity_video_link = $10,
-        kit_content_link = $11,
-        other1_title = $12,
-        other1_link = $13,
-        other2_title = $14,
-        other2_link = $15,
-        assembly_notes = $16
-    WHERE id = $17`;
+        name = $2
+    WHERE id = $1`;
+    console.log('HERE', req.body.name, req.body.id);
     pool.query(queryText, [
-        req.body.name,
-        req.body.code,
-        req.body.estimated_assembly_time,
-        req.body.version_number,
-        req.body.version_notes,
-        req.body.version_date,
-        req.body.module_drive_link,
-        req.body.to_be_printed_link,
-        req.body.assembly_video_link,
-        req.body.activity_video_link,
-        req.body.kit_content_link,
-        req.body.other1_title,
-        req.body.other1_link,
-        req.body.other2_title,
-        req.body.other2_link,
-        req.body.assembly_notes,
-        req.body.id
+        req.body.id,
+        req.body.name
     ])
         .then(result => {
             console.log('result.rows', result.rows);

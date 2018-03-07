@@ -2,11 +2,9 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
     console.log('ModuleController created');
     let self = this;
 
-    // module
-
-    // import from service
     self.calculations = ModuleService.calculations;
 
+    self.module = ModuleService.module;
     self.getModule = ModuleService.getModule;
     self.deleteModule = ModuleService.deleteModule;
     self.updateModule = ModuleService.updateModule;
@@ -23,4 +21,9 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
                 self.createModule();
             }
         };
+        
+    self.initializeData = ModuleService.initializeData;
+    self.saveModule = ModuleService.saveModule;
+    self.initializeData();
+
 }]);
