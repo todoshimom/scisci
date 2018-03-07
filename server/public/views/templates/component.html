@@ -1,4 +1,5 @@
-<h2>Add Components</h2>
+<div ng-include="'views/partials/nav.html'"></div>
+<h2 class="md-title">Add Components</h2>
 <div >
   <md-input-container>
     <label>Name</label>
@@ -75,17 +76,17 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
+      <th>Name <span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></th>
+      <th>Type <span ng-click="vm.sortColumns('typeAsc')">&#9650;</span><span ng-click="vm.sortColumns('typeDesc')">&#9660;</span></th>
       <th>Description</th>
-      <th>Price Per Unit</th>
+      <th>Price Per Unit <span ng-click="vm.sortColumns('pricePUAsc')">&#9650;</span><span ng-click="vm.sortColumns('pricePUDesc')">&#9660;</span></th>
       <th>Pieces Per Unit</th>
-      <th>General Stock</th>
-      <th>Consumable</th>
+      <th>General Stock <span ng-click="vm.sortColumns('genStockAsc')">&#9650;</span><span ng-click="vm.sortColumns('genStockDesc')">&#9660;</span></th>
+      <th>Consumable <span ng-click="vm.sortColumns('consumableAsc')">&#9650;</span><span ng-click="vm.sortColumns('consumableDesc')">&#9660;</span></th>
       <th>Modules Used In</th>
-      <th>Vendor 1 Name</th>
+      <th>Vendor 1 Name <span ng-click="vm.sortColumns('vendor1Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor1Desc')">&#9660;</span></th>
       <th>Vendor 1 Link</th>
-      <th>Vendor 2 Name</th>
+      <th>Vendor 2 Name <span ng-click="vm.sortColumns('vendor2Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor2Desc')">&#9660;</span></th>
       <th>Vendor 2 Link</th>
       <th>Notes</th>
       <th>Edit</th>
@@ -93,22 +94,60 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="component in vm.componentLibrary.list">
-      <td>{{component.name}}</td>
-      <td>{{component.type}}</td>
-      <td>{{component.description}}</td>
-      <td>{{component.price_per_unit}}</td>
-      <td>{{component.pieces_per_unit}}</td>
-      <td>{{component.general_stock_item}}</td>
-      <td>{{component.consumable}}</td>
+    <tr ng-repeat="component in vm.componentLibrary.list track by $index">
+      <td ng-if="!vm.edit[component.id]">{{component.name}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.type}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.description}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.price_per_unit}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.price_per_unit" ng-model="component.price_per_unit"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</td>
+      <td ng-if="vm.edit[component.id]">
+        <select ng-model="component.general_stock_item">
+          <option ng-value="true">True</option>
+          <option ng-value="false">False</option>
+        </select>
+      </td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.consumable}}</td>
+      <td ng-if="vm.edit[component.id]">
+        <select ng-model="component.consumable">
+          <option ng-value="true">True</option>
+          <option ng-value="false">False</option>
+        </select>
+      </td>
+
       <td> Left Blank </td>
-      <td>{{component.vendor_name_primary}}</td>
-      <td>{{component.vendor_url_primary}}</td>
-      <td>{{component.vendor_name_secondary}}</td>
-      <td>{{component.vendor_url_secondary}}</td>
-      <td>{{component.notes}}</td>
-      <td><button>Edit</button></</td>
-      <td><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_url_primary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_primary" ng-model="component.vendor_url_primary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_name_secondary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_secondary" ng-model="component.vendor_name_secondary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.vendor_url_secondary}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_secondary" ng-model="component.vendor_url_secondary"></td>
+
+      <td ng-if="!vm.edit[component.id]">{{component.notes}}</td>
+      <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></td>
+
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)">Edit</button></</td>
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)">Update</button></</td>
+
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)">Cancel</button></td>
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+
     </tr>
   </tbody>
 </table>

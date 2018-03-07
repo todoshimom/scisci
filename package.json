@@ -2,11 +2,15 @@
   "name": "prime-solo-base-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "build-css": "node-sass --include-path scss server/public/styles/scss/style.scss server/public/styles/style.css",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
+
+
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.9",
@@ -25,5 +29,9 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.1.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.17.1"
   }
 }
