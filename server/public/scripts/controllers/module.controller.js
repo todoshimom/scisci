@@ -24,14 +24,5 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
             }
         };
 
-    // TODO: Check if the $routeParams is a valid ID (integer)
-    if ($routeParams.id) {
-        self.module = ModuleService.module;
-        self.getModule();
-    } else {
-        self.module = {};
-        self.module.data = {};
-    }
-    // TODO: Show 404 if no results come back
 
 }]);

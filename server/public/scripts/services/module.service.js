@@ -19,7 +19,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
-
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
@@ -79,7 +78,16 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.calculations.materials_ordered_labor = 0;
     self.calculations.materials_in_kit_labor = 0;
     
-    
+    // Initialize page: blank item if old, get item if new
+    // TODO: Check if the $routeParams is a valid ID (integer)
+    self.initializeData = function() {
+        if ($routeParams.id) {
+            self.getModule();
+        } else {
+            self.module.data = {};
+        }
+    }
+    // TODO: Show 404 if no results come back
 
 
 }]);
