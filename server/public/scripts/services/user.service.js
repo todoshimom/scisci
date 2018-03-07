@@ -79,11 +79,26 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         $http.put(`/api/user/resetPassword/${id}`)
             .then(function (response) {
                 console.log('Response from reset Password PUT request: ', response);
-                self.getAllUsers();
+                // self.getAllUsers();
                 alert(`The password has been reset.`)
             })
             .catch(function (error) {
-                console.log('Error on new password PUT request: ', error);
+                console.log('Error on reset password PUT request: ', error);
+            });
+
+    }
+
+    self.setNewPassword = function (newPass) {
+
+        $http.put(`/api/user/newPassword`, newPass)
+            .then(function (response) {
+                console.log('Response from set new Password PUT request: ', response);
+                // self.getAllUsers();
+                alert(`Your password has been updated!`)
+                $location.path('/user');
+            })
+            .catch(function (error) {
+                console.log('Error on set new password PUT request: ', error);
             });
 
     }
