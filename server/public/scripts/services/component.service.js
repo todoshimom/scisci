@@ -55,8 +55,9 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*              PUT REQUESTS              */
     /******************************************/
 
+    // begin updateComponent()
     self.updateComponent = function(component) {
-      $http.put(`/api/component/updateComponent/`, component)
+      $http.put(`/api/component/updateComponent`, component)
         .then( function(response) {
           console.log('Component updated', response);
           self.getComponents();
@@ -64,7 +65,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
         .catch( function(error) {
           console.log('Error updating component', error);
         });
-    };
+    }; // end updateComponent()
 
 
     /******************************************/
