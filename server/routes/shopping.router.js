@@ -13,7 +13,19 @@ const router = express.Router();
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
-
+router.post('/', (req, res) => {
+    let queryString = 'INSERT INTO shopping_list (name) VALUES ($1)';
+    console.log(req.body.name);
+    pool.query(queryString, [req.body.name])
+        .then(result => {
+            console.log('query results', result);
+            res.sendStatus(201);
+        })
+        .catch(err => {
+            console.log('hit error on posting of new Item', err);
+            res.sendStatus(500);
+        });
+});
 
 
 /******************************************/

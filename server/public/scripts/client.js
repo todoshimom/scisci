@@ -101,7 +101,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         })
         .when('/shopping-list-creation', {
             templateUrl: '/views/templates/shopping-list-creation.html',
-            controller: 'ShoppingListCreationService as vm',
+            controller: 'ShoppingListCreationController as vm',
             // resolve: {
             //     getuser: function (UserService) {
             //         return UserService.getuser();

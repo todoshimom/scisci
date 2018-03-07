@@ -2,8 +2,8 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', funct
     console.log('ShoppingListCreationController created');
     let self = this;
 //function for start list button 
-    self.createShoppingList = function() {
-        ShoppingListService.createShoppingList();
+    self.createShoppingList = function(name) {
+        ShoppingListService.createShoppingList(name);
     }
     
 //function to save Shopping List (button)
