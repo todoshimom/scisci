@@ -1,27 +1,9 @@
-myApp.controller('ModuleController', ['ModuleService', '$http', function (ModuleService, $http) {
+myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', function (ModuleService, $http, $routeParams) {
     console.log('ModuleController created');
     let self = this;
 
-
-
-    // DUMMY DATA
+    // MODULE OBJECT
     self.module = {};
-    self.module.name = '';
-    self.module.code = '';
-    self.module.estimated_assembly_time = '';
-    self.module.version_number = '';
-    self.module.version_notes = '';
-    self.module.version_date = '';
-    self.module.module_drive_link = '';
-    self.module.to_be_printed_link = '';
-    self.module.assembly_video_link = '';
-    self.module.activity_video_link = '';
-    self.module.kit_content_link = '';
-    self.module.other1_title = '';
-    self.module.other1_link = '';
-    self.module.other2_title = '';
-    self.module.other2_link = '';
-    self.module.assembly_notes = '';
 
     // CALCULATIONS
     self.calculations = {};
@@ -31,44 +13,71 @@ myApp.controller('ModuleController', ['ModuleService', '$http', function (Module
     self.calculations.materials_ordered_labor = 0;
     self.calculations.materials_in_kit_labor = 0;
     
-    self.getModule = function() {
-        $http.get('/api/module')
-            .then(response => {
-                console.log('get response', response);
-                self.module = response.data;
-            })
-            .catch(error => {
-                console.log('error in post', error);
-            });
-    };
-    self.updateModule = function() {
-        $http.put('/api/module', self.data)
-            .then(response => {
-                console.log('put response', response);
-            })
-            .catch(error => {
-                console.log('error in post', error);
-            });
-    };
-    self.deleteModule = function() {
-        $http.delete('/api/module/' + self.data.id)
-            .then(response => {
-                console.log('put response', response);
-            })
-            .catch(error => {
-                console.log('error in post', error);
-            });
-    };
-    self.createModule = function() {
-        $http.post('/api/module', self.data)
-            .then(response => {
-                console.log('put response', response);
-            })
-            .catch(error => {
-                console.log('error in post', error);
-            });
-    };
+    // CRUD REQUESTS
 
-    self.getModule();
+        // Read module
+        self.getModule = function() {
+            $http.get('/api/module/' + $routeParams.id)
+                .then(response => {
+                    console.log('get response', response);
+                    self.module = response.data[0];
+                })
+                .catch(error => {
+                    console.log('error in get', error);
+                });
+        };
+
+        // Delete module
+        self.deleteModule = function() {
+            $http.delete('/api/module/' + self.module.id)
+                .then(response => {
+                    console.log('delete response', response);
+                })
+                .catch(error => {
+                    console.log('error in delete', error);
+                });
+        };
+
+        // Update module
+        self.updateModule = function() {
+            $http.put('/api/module', self.module)
+                .then(response => {
+                    console.log(self.module);
+                    console.log('put response', response);
+                })
+                .catch(error => {
+                    console.log('error in put', error);
+                });
+        };
+
+        // Create module
+        self.createModule = function() {
+            $http.post('/api/module', self.module)
+                .then(response => {
+                    console.log('post response', response);
+                })
+                .catch(error => {
+                    console.log('error in post', error);
+                });
+        };
+
+    // OTHER FUNCTIONS
+
+        // Save module: intelligently updates or creates an entry
+        self.saveModule = function() {
+            console.log('MODULE', self.module);
+            if ($routeParams.id) {
+                self.updateModule();
+            } else {
+                self.createModule();
+            }
+        };
+
+    // ON PAGE LOAD
+
+    // Check if the $routeParams is a valid ID (integer)
+    if ($routeParams.id) {
+        self.getModule();
+    }
 
 }]);
