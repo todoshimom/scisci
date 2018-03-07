@@ -71,22 +71,27 @@
 <br>
 <br>
 
+<md-input-container>
+  <label>Filter Components</label>
+  <input ng-model="filterString.name"/>
+</md-input-container>
+
 <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
 <h2>Manage Components</h2>
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
+      <th>Name <span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></th>
+      <th>Type <span ng-click="vm.sortColumns('typeAsc')">&#9650;</span><span ng-click="vm.sortColumns('typeDesc')">&#9660;</span></th>
       <th>Description</th>
-      <th>Price Per Unit</th>
+      <th>Price Per Unit <span ng-click="vm.sortColumns('pricePUAsc')">&#9650;</span><span ng-click="vm.sortColumns('pricePUDesc')">&#9660;</span></th>
       <th>Pieces Per Unit</th>
-      <th>General Stock</th>
-      <th>Consumable</th>
+      <th>General Stock <span ng-click="vm.sortColumns('genStockAsc')">&#9650;</span><span ng-click="vm.sortColumns('genStockDesc')">&#9660;</span></th>
+      <th>Consumable <span ng-click="vm.sortColumns('consumableAsc')">&#9650;</span><span ng-click="vm.sortColumns('consumableDesc')">&#9660;</span></th>
       <th>Modules Used In</th>
-      <th>Vendor 1 Name</th>
+      <th>Vendor 1 Name <span ng-click="vm.sortColumns('vendor1Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor1Desc')">&#9660;</span></th>
       <th>Vendor 1 Link</th>
-      <th>Vendor 2 Name</th>
+      <th>Vendor 2 Name <span ng-click="vm.sortColumns('vendor2Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor2Desc')">&#9660;</span></th>
       <th>Vendor 2 Link</th>
       <th>Notes</th>
       <th>Edit</th>
@@ -94,7 +99,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="component in vm.componentLibrary.list track by $index">
+    <tr ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
       <td ng-if="!vm.edit[component.id]">{{component.name}}</td>
       <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></td>
 

@@ -6,6 +6,10 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.edit = {};
 
+    self.sort = {
+      sortName: true
+    };
+
     self.componentItem = {
       consumable: false,
       general_stock_item: false
@@ -40,6 +44,11 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       console.log(componentId);
       ComponentService.deleteComponent(componentId);
     }; // end deleteComponent()
+
+    self.sortColumns = function(sortMethod) {
+      console.log(sortMethod);
+      ComponentService.sortComponents(sortMethod);
+    };
 
 
 
