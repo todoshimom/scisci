@@ -18,7 +18,19 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/:id/components', (req, res) => {
+    console.log('req.params.id', req.params.id);
     // get the components in a separate route
+    const queryText = `SELECT * FROM components_modules
+        JOIN components ON components_modules.component_id = components.id
+        WHERE components_modules.module_id = $1`;
+    pool.query(queryText, [req.params.id])
+        .then(result => {
+            console.log('result.rows', result.rows);
+            res.send(result.rows);
+        }).catch(err => {
+            console.log('err', err);
+            res.sendStatus(500);
+        });
 });
  
 /******************************************/

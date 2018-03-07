@@ -67,22 +67,22 @@
         <th>Purpose/Notes</th>
         <th>Delete</th>
     </tr>
-    <tr ng-repeat="">
+    <tr ng-repeat="row in vm.components.data">
         <td><input type="number" /></td>
-        <td>{{name}}</td>
-        <td>{{type}}</td>
-        <td>{{description}}</td>
-        <td>{{price_per_unit}}</td>
-        <td>{{pieces_per_unit}}</td>
-        <td>{{cost_per_unit}}</td>
-        <td>{{general_stock}}</td>
-        <td>{{consumable}}</td>
-        <td>{{modules_used_in}}</td>
-        <td>{{vendor_name_1}}</td>
-        <td>{{vendor_link_1}}</td>
-        <td>{{vendor_name_2}}</td>
-        <td>{{vendor_link_2}}</td>
-        <td>{{purpose_notes}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.type}}</td>
+        <td>{{row.description}}</td>
+        <td>{{row.price_per_unit}}</td>
+        <td>{{row.pieces_per_unit}}</td>
+        <td>{{row.cost_per_unit}}</td>
+        <td>{{row.general_stock_item}}</td>
+        <td>{{row.consumable}}</td>
+        <td>{{row.modules_used_in}}</td>
+        <td>{{row.vendor_name_primary}}</td>
+        <td>{{row.vendor_url_primary}}</td>
+        <td>{{row.vendor_name_secondary}}</td>
+        <td>{{row.vendor_url_secondary}}</td>
+        <td>{{row.notes}}</td>
         <td><button>Delete</button></td>
     </tr>
 </table>

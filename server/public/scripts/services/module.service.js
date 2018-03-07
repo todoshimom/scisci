@@ -3,6 +3,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     let self = this;
 
     self.module = {};
+    self.components = {};
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -13,6 +14,19 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .then(response => {
                 console.log('get response', response.data[0]);
                 self.module.data = response.data[0];
+                
+                // get this module's components
+                self.getModuleComponents();
+            })
+            .catch(error => {
+                console.log('error in get', error);
+            });
+    };
+    self.getModuleComponents = function() {
+        $http.get('/api/module/' + $routeParams.id + '/components')
+            .then(response => {
+                console.log('get response', response.data);
+                self.components.data = response.data;
             })
             .catch(error => {
                 console.log('error in get', error);
