@@ -1,0 +1,48 @@
+<div ng-include="'views/partials/nav.html'"></div>
+
+
+<h2 class="md-title">Module Library</h2>
+<div>
+    <a href="#!module">Create New Module</a>
+</div>
+<md-input-container>
+    <label>Filter Module list</label>
+    <input ng-model="moduleFilter">
+</md-input-container>
+
+<!-- Module library table-->
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Version Number</th>
+        <th>Version Date</th>
+        <th>Version Notes</th>
+        <th>Est. Assembly Time</th>
+        <th>Module Drive Link</th>
+        <th>To Be Printed Link</th>
+        <th>Assembly Video Link</th>
+        <th>Activity Video Link</th>
+        <th>Kit Content Sheet Link</th>
+        <th>Custom Link 1</th>
+        <th>Custom Link 2</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="module in vm.moduleLibrary.list track by $index">
+            <td>{{module.name}}</td>
+            <td>{{module.code}}</td>
+            <td>{{module.version_number}}</td>
+            <td>{{module.version_date}}</td>
+            <td>{{module.version_notes}}</td>
+            <td>{{module.estimated_assembly_time}}</td>
+            <td>{{module.assembly_notes}}</td>
+            <td>{{module.module_drive_link}}</td>
+            <td>{{module.to_be_printed_link}}</td>
+            <td>{{module.assembly_video_link}}</td>
+            <td>{{module.activity_video_link}}</td>
+            <td>{{module.kit_content_link}}</td>
+            <td>{{module.other1_link}}</td>
+            <td>{{module.other2_link}}</td>
+        </tr>
+    </tbody>
+</table>
