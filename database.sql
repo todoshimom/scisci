@@ -13,10 +13,11 @@ CREATE TABLE users (
 "user_type" INT REFERENCES "user_type" NOT NULL
 );
 
+-- The 3 standard user types used in the application.
 INSERT INTO user_type (name)
 VALUES ('Admin'),('Editor'),('Shopper');
--- This will be the very first admin.
 
+-- This will be the very first admin.
 INSERT INTO users (first_name, last_name, username, user_type)
 VALUES ('Renee', 'Piersa', 'test@email.com', 1);
 
