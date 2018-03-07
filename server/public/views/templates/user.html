@@ -101,7 +101,7 @@
             </md-option>
         </md-select>
     </md-input-container>
-    <md-button class="md-raised" ng-click="ReplacewithFunctiontoPromtReset">Reset Password</md-button>
+    <md-button class="md-raised" ng-click="vm.resetPassword(vm.editUser.id)">Reset Password</md-button>
     <md-button class="md-raised" ng-click="vm.submitEdit(vm.editUser)">Submit</md-button>
     <md-button class="md-raised" ng-click="vm.showEdit=!vm.showEdit">Cancel</md-button>
 </div>

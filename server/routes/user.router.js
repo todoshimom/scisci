@@ -35,7 +35,8 @@ router.get('/users', (req, res) => { //Start of get all users function
     let queryText = `
     SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
     FROM users
-    JOIN user_type ON users.user_type = user_type.id;`;
+    JOIN user_type ON users.user_type = user_type.id
+    ORDER BY first_name;`;
 
     pool.query(queryText)
         .then((results) => {
@@ -90,30 +91,6 @@ router.post('/', (req, res) => {//Start of post new user function
 
 });//End of post new user function
 
-// Handles POST request with new user data
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
-router.post('/password', (req, res, next) => {
-    const username = req.body.username;
-    const password = encryptLib.encryptPassword(req.body.password);
-
-    let saveUser = {
-        username: req.body.username,
-        password: encryptLib.encryptPassword(req.body.password)
-    };
-
-    console.log('new user:', saveUser);
-    pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
-        [saveUser.username, saveUser.password], (err, result) => {
-            if (err) {
-                console.log("Error inserting data: ", err);
-                res.sendStatus(500);
-            } else {
-                res.sendStatus(201);
-            }
-        });
-});
-
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
@@ -152,6 +129,34 @@ router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
         });
 
 });//End of edit user function PUT REQUEST
+
+router.put('/resetPassword/:id', (req, res) => {//Start of resetPassword route
+
+    //Mental note, this area and resetPassword can be refactored.
+    console.log(process.env.DEFAULTPASSWORD);
+    
+    //This way the .env password can be set on heroku for easy management. 
+    let resetPassword = encryptLib.encryptPassword(process.env.DEFAULTPASSWORD);
+    
+    console.log(resetPassword);
+
+    let queryText = `
+    UPDATE users 
+    SET 
+    password = '${resetPassword}'
+    WHERE "id" = ${req.params.id};`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('Password has been Reset!: ', results);
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error resetting password!: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of resetPassword route 
 
 /******************************************/
 /*            DELETE ROUTES               */

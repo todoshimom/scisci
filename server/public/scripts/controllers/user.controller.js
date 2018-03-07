@@ -20,7 +20,7 @@ myApp.controller('UserController', ['UserService', function (UserService) {
 
             UserService.addUser(newUser);
 
-            self.showNew=!self.showNew
+            self.showNew = !self.showNew
 
             self.newUser = null; //clearing input fields after adding a user. 
         }
@@ -35,17 +35,23 @@ myApp.controller('UserController', ['UserService', function (UserService) {
         }
     }; // End of deleteUser function
 
-    self.submitEdit = function (userEdit) {
+    self.submitEdit = function (userEdit) {    // Start of submitEdit function
         if (userEdit.first_name == '' || userEdit.last_name == '' || userEdit.username == '' || typeof userEdit.first_name == 'undefined' || typeof userEdit.last_name == 'undefined' || typeof userEdit.username == 'undefined') {
             alert('First Name / Last Name / Username cannot be blank.')
         }
         else {
             UserService.submitEdit(userEdit);
 
-            self.showEdit=!self.showEdit
+            self.showEdit = !self.showEdit
 
             self.userEdit = null; //clearing input fields after editing a user.     
         }
+    }    // Start of submitEdit function
+
+    self.resetPassword = function (id) {        // Start of resetPassword function    
+        if (confirm(`Are you sure you want to reset this accounts password?`)) {
+            UserService.resetPassword(id);
+        }
     }
 
-}]);
+    }]);    // Start of resetPassword function

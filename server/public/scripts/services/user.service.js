@@ -74,13 +74,27 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     }
 
+    self.resetPassword = function (id) {
+
+        $http.put(`/api/user/resetPassword/${id}`)
+            .then(function (response) {
+                console.log('Response from reset Password PUT request: ', response);
+                self.getAllUsers();
+                alert(`The password has been reset.`)
+            })
+            .catch(function (error) {
+                console.log('Error on new password PUT request: ', error);
+            });
+
+    }
+
 
     /******************************************/
     /*            DELETE REQUESTS             */
     /******************************************/
 
     self.deleteUser = function (userId) {    // Start of deleteUser function
-        
+
         $http.delete(`/api/user/${userId}`)
             .then(function (response) {
                 console.log('User successfully removed: ', response);
@@ -90,7 +104,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .catch(function (error) {
                 console.log('Error removing user: ', error);
             });
-            
+
     }; // End of deleteUser function
 
     /******************************************/
