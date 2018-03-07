@@ -147,11 +147,11 @@
       <td ng-if="!vm.edit[component.id]">{{component.notes}}</td>
       <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></td>
 
-      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)">Edit</button></</td>
-      <td ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)">Update</button></</td>
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)">Edit</button></td>
+      <td ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)">Update</button></td>
 
       <td ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)">Cancel</button></td>
-      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)">Delete</button></</td>
+      <td ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)">Delete</button></td>
 
     </tr>
   </tbody>
