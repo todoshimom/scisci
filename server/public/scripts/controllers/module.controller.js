@@ -2,9 +2,6 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
     console.log('ModuleController created');
     let self = this;
 
-    // module
-
-    // import from service
     self.calculations = ModuleService.calculations;
 
     self.module = ModuleService.module;
@@ -15,9 +12,6 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
 
     self.initializeData = ModuleService.initializeData;
     self.saveModule = ModuleService.saveModule;
-    // OTHER FUNCTIONS
-
-        // Save module: intelligently updates or creates an entry
-
+    self.initializeData();
 
 }]);

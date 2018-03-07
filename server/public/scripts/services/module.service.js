@@ -11,7 +11,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.getModule = function() {
         $http.get('/api/module/' + $routeParams.id)
             .then(response => {
-                console.log('get response', response);
+                console.log('get response', response.data[0]);
                 self.module.data = response.data[0];
             })
             .catch(error => {
@@ -86,6 +86,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         } else {
             self.module.data = {};
         }
+        console.log('intiializedata');
     }
 
     // Save Module
