@@ -6,7 +6,10 @@ const router = express.Router();
 /*              GET REQUESTS              */
 /******************************************/
 router.get('/:id', (req, res) => {
-    const queryText = 'SELECT * FROM modules WHERE id = $1';
+    const queryText = `SELECT * FROM modules
+	JOIN components_modules ON components_modules.module_id = modules.id
+	JOIN components ON components_modules.component_id = components.id
+	WHERE modules.id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
             console.log('result.rows', result.rows);
@@ -39,7 +42,7 @@ router.post('/', (req, res) => {
         other2_title,
         other2_link,
         assembly_notes 
-    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)`;
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
     pool.query(queryText, [
         req.body.name,
         req.body.code,
