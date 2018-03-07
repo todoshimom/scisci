@@ -11,7 +11,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.getModule = function() {
         $http.get('/api/module/' + $routeParams.id)
             .then(response => {
-                console.log('get response', response);
+                console.log('get response', response.data[0]);
                 self.module.data = response.data[0];
             })
             .catch(error => {
@@ -28,6 +28,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .then(response => {
                 console.log('self.module.data', self.module.data);
                 console.log('post response', response);
+                $location.path('/module/' + response.data[0].id);
             })
             .catch(error => {
                 console.log('error in post', error);
@@ -79,15 +80,23 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.calculations.materials_in_kit_labor = 0;
     
     // Initialize page: blank item if old, get item if new
-    // TODO: Check if the $routeParams is a valid ID (integer)
     self.initializeData = function() {
         if ($routeParams.id) {
             self.getModule();
         } else {
             self.module.data = {};
         }
+        console.log('intiializedata');
     }
-    // TODO: Show 404 if no results come back
 
+    // Save Module
+    self.saveModule = function() {
+        console.log('MODULE', self.module);
+        if ($routeParams.id) {
+            self.updateModule();
+        } else {
+            self.createModule();
+        }
+    };
 
 }]);
