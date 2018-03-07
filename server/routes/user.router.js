@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     // check if logged in
     if (req.isAuthenticated()) {
-        // send back user object from database
+        // send back user object from database        
         res.send(req.user);
     } else {
         // failure best handled on the server. do redirect here.
@@ -29,32 +29,67 @@ router.get('/logout', (req, res) => {
     res.sendStatus(200);
 });
 
+
+router.get('/users', (req, res) => { //Start of get all users function
+
+    let queryText = `
+    SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+    FROM users
+    JOIN user_type ON users.user_type = user_type.id
+    ORDER BY first_name;`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('GET all users: ', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET user request', error);
+            res.sendStatus(500);
+        });
+
+}); //End of get all users function
+
+router.get('/types', (req, res) => {//Start of get user_types function
+
+    let queryText = `SELECT * FROM user_type`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('GET user_types: ', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET user_type ', error);
+            res.sendStatus(500);
+        });
+
+});//End of get user_types function
+
 /******************************************/
 /*             POST ROUTES                */
 /******************************************/
 
-// Handles POST request with new user data
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
-    const username = req.body.username;
-    const password = encryptLib.encryptPassword(req.body.password);
+router.post('/', (req, res) => {//Start of post new user function
 
-    let saveUser = {
-        username: req.body.username,
-        password: encryptLib.encryptPassword(req.body.password)
-    };
-    console.log('new user:', saveUser);
-    pool.query('INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id',
-        [saveUser.username, saveUser.password], (err, result) => {
-            if (err) {
-                console.log("Error inserting data: ", err);
-                res.sendStatus(500);
-            } else {
-                res.sendStatus(201);
-            }
+    let user = req.body;
+    console.log(user);
+    
+    let queryText = `
+    INSERT INTO users (first_name, last_name, username, user_type)
+    VALUES ($1, $2, $3, $4);`;
+
+    pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type])
+        .then((results) => {
+            console.log('Registered user successfully: ', results);
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error registering user: ', error);
+            res.sendStatus(500);
         });
-});
+
+});//End of post new user function
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
@@ -69,13 +104,79 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 /*              PUT ROUTES                */
 /******************************************/
 
+router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
 
+    let user = req.body;
+    console.log(user);
+    
+    let queryText = `
+    UPDATE users 
+    SET 
+    first_name = $1,
+    last_name = $2,
+    username = $3,
+    user_type = $4
+    WHERE "id" = $5;`;
+
+    pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type, user.id])
+        .then((results) => {
+            console.log('Edited user successfully: ', results);
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error Editing user: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of edit user function PUT REQUEST
+
+router.put('/resetPassword/:id', (req, res) => {//Start of resetPassword route
+
+    //Mental note, this area and resetPassword can be refactored.
+    console.log(process.env.DEFAULTPASSWORD);
+    
+    //This way the .env password can be set on heroku for easy management. 
+    let resetPassword = encryptLib.encryptPassword(process.env.DEFAULTPASSWORD);
+    
+    console.log(resetPassword);
+
+    let queryText = `
+    UPDATE users 
+    SET 
+    password = '${resetPassword}'
+    WHERE "id" = ${req.params.id};`;
+
+    pool.query(queryText)
+        .then((results) => {
+            console.log('Password has been Reset!: ', results);
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error resetting password!: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of resetPassword route 
 
 /******************************************/
 /*            DELETE ROUTES               */
 /******************************************/
 
+router.delete('/:id', (req, res) => {
 
+    let queryText = `DELETE FROM users WHERE id = ${req.params.id}`;
+  
+    pool.query(queryText)
+        .then((results) => {
+          console.log('Successfully removed user: ', results);
+          res.sendStatus(200);
+        })
+        .catch((error) => {
+          console.log('Error removing user: ', error);
+          res.sendStatus(500);
+        });
+
+  });
 
 /******************************************/
 /*                OTHERS                  */

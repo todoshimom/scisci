@@ -1,31 +1,31 @@
-<div class="navbar">
+<div class="navbar" ng-controller="NavController as vm"> 
     <ul class="nav-list">
         <li class="nav-list-item">
-            <a class="nav-list-item-link" href="#!user">
+            <a class="nav-list-item-link" ng-class="vm.getClass('/user')" href="#!user">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Manage Users</span>
             </a>
         </li>
         <li class="nav-list-item">
-            <a class="nav-list-item-link" href="#!module-nav">
+            <a class="nav-list-item-link" ng-class="vm.getClass('/module-nav')" href="#!module-nav">
                 <i class="fas fa-fw fa-archive"></i>
                 <span>Module Creation</span>
             </a>
         </li>
         <li class="nav-list-item">
-            <a class="nav-list-item-link" href="#!shopping-nav">
+            <a class="nav-list-item-link" ng-class="vm.getClass('/shopping-nav')" href="#!shopping-nav">
                 <i class="fas fa-fw fa-shopping-cart"></i>
                 <span>Shopping</span>
             </a>
         </li>
         <li class="nav-list-item">
-            <a class="nav-list-item-link" href="#!report">
+            <a class="nav-list-item-link" ng-class="vm.getClass('/report')" href="#!report">
                 <i class="fas fa-fw fa-chart-pie"></i>
                 <span>Reporting</span>
             </a>
         </li>
         <li class="nav-list-item">
-            <a class="nav-list-item-link" href="#!app-settings">
+            <a class="nav-list-item-link" ng-class="vm.getClass('/app-settings')" href="#!app-settings">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Application Settings</span>
             </a>

@@ -16,14 +16,14 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  border-top: 6px solid #55AC56;
+  border-top: 6px solid #55ac56;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2); }
   .header h1 {
     margin: 0; }
 
 .icon-lightbulb {
   font-size: 28px;
-  color: #55AC56; }
+  color: #55ac56; }
   .icon-lightbulb:hover {
     cursor: pointer; }
     .icon-lightbulb:hover .header-profile-list {
@@ -57,7 +57,7 @@ h2 {
   margin: 0;
   max-width: 100px;
   height: 100vh;
-  background-color: #D5D6D5; }
+  background-color: #d5d6d5; }
 
 .nav-list-item-link {
   display: flex;
@@ -67,13 +67,15 @@ h2 {
   padding: 20px 10px;
   height: 100px;
   box-sizing: border-box;
-  background-color: #D5D6D5;
+  background-color: #d5d6d5;
   color: #828381;
   font-weight: 400;
   text-align: center;
   text-decoration: none; }
   .nav-list-item-link > * {
     flex: 1 0 100%; }
+  .nav-list-item-link.active {
+    background-color: #fafafa; }
 
 .sub-nav-list {
   display: flex;
@@ -94,7 +96,7 @@ h2 {
     flex: 1 0 100%; }
   .sub-nav-item-link svg {
     margin-bottom: 20px;
-    color: #55AC56; }
+    color: #55ac56; }
 
 .main {
   position: relative;
