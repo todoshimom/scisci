@@ -15,14 +15,14 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
         .then( function(response) {
           console.log(response.data);
 
-          for (let component of response.data) {
-            if(component.vendor_name_secondary == null) {
-              component.vendor_name_secondary = '';
-            }
-            if(component.vendor_url_secondary == null) {
-              component.vendor_url_secondary = '';
-            }
-          }
+          // for (let component of response.data) {
+          //   if(component.vendor_name_secondary == null) {
+          //     component.vendor_name_secondary = '';
+          //   }
+          //   if(component.vendor_url_secondary == null) {
+          //     component.vendor_url_secondary = '';
+          //   }
+          // }
 
           self.componentLibrary.list = response.data;
         })
@@ -32,6 +32,18 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     }; // end getComponents()
 
     self.getComponents();
+
+
+    self.sortComponents = function(sortMethod) {
+      $http.get(`/api/component/sorting/${sortMethod}`)
+        .then( function(response) {
+          console.log(response.data);
+          self.componentLibrary.list = response.data;
+        })
+        .catch( function(error) {
+          console.log(error);
+        });
+    };
 
     /******************************************/
     /*             POST REQUESTS              */
