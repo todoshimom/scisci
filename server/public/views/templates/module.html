@@ -14,56 +14,32 @@
 
 
 <h2>Components</h2>
-<input type="text" placeholder="Module Name" ng-model="vm.module.name" />
-<input type="text" placeholder="Code" ng-model="vm.module.code" />
-<input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.estimated_assembly_time" />
+<label>Name <input placeholder="Module Name" ng-model="vm.module.name" /></label><br />
+<label>Code <input placeholder="Code" ng-model="vm.module.code" /></label><br />
+<label>Estimated Assembly Time <input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.estimated_assembly_time" /></label><br />
+
 
 <h3>Version</h3>
-<input type="text" placeholder="Version Number" ng-model="vm.module.version_number" />
-<textarea type="text" placeholder="Version Notes" ng-model="vm.module.version_notes" /></textarea>
-<input type="text" placeholder="DATEPICKER" ng-model="vm.module.version_date" />
+<label>Version Number <input type="text" placeholder="Version Number" ng-model="vm.module.version_number" /></label><br />
+<label>Version Notes <textarea type="text" placeholder="Version Notes" ng-model="vm.module.version_notes" /></textarea></label>
 
-<br>
-
-<button>Add New Component</button>
-
-
+<!-- <input type="text" placeholder="DATEPICKER" ng-model="vm.module.version_date" /> -->
 <!-- <input type="text" placeholder="Live-search Components" /> -->
 
 
 <h2>Resources</h2>
-<ul>
-    <li>
-        <h4>Google Drive</h4>
-        <input placeholder="URL" ng-model="vm.module.module_drive_link" />
-    </li>
-    <li>
-        <h4>To Be Printed</h4>
-        <input placeholder="URL" ng-model="vm.module.to_be_printed_link" />
-    </li>
-    <li>
-        <h4>Assembly Video</h4>
-        <input placeholder="URL" ng-model="vm.module.assembly_video_link" />
-    </li>
-    <li>
-        <h4>Activity Video</h4>
-        <input placeholder="URL" ng-model="vm.module.activity_video_link" />
-    </li>
-    <li>
-        <h4>Kit Content Sheet</h4>
-        <input placeholder="URL" ng-model="vm.module.kit_content_link" />
-    </li>
-    <li>
-        <h4>Custom Link 1</h4>
+    <label>Google Drive <input placeholder="URL" ng-model="vm.module.module_drive_link" /></label><br />
+    <label>To Be Printed <input placeholder="URL" ng-model="vm.module.to_be_printed_link" /></label><br />
+    <label>Assembly Video <input placeholder="URL" ng-model="vm.module.assembly_video_link" /></label><br />
+    <label>Activity Video <input placeholder="URL" ng-model="vm.module.activity_video_link" /></label><br />
+    <label>Kit Content Sheet <input placeholder="URL" ng-model="vm.module.kit_content_link" /></label><br />
+    <label>Custom Link 1
         <input placeholder="Title" ng-model="vm.module.other1_title" />
-        <input placeholder="URL" ng-model="vm.module.other1_link" />
-    </li>
-    <li>
-        <h4>Custom Link 2</h4>
+        <input placeholder="URL" ng-model="vm.module.other1_link" /></label><br />
+    <label>Custom Link 2
         <input placeholder="Title" ng-model="vm.module.other2_title" />
         <input placeholder="URL" ng-model="vm.module.other2_link" />
-    </li>
-</ul>
+    </label><br />
 
 
 <h2>Assembly Instructions</h2>

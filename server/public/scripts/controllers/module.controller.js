@@ -2,6 +2,8 @@ myApp.controller('ModuleController', ['ModuleService', '$http', function (Module
     console.log('ModuleController created');
     let self = this;
 
+
+
     // DUMMY DATA
     self.module = {};
     self.module.name = '';
@@ -48,6 +50,25 @@ myApp.controller('ModuleController', ['ModuleService', '$http', function (Module
                 console.log('error in post', error);
             });
     };
+    self.deleteModule = function() {
+        $http.delete('/api/module/' + self.data.id)
+            .then(response => {
+                console.log('put response', response);
+            })
+            .catch(error => {
+                console.log('error in post', error);
+            });
+    };
+    self.createModule = function() {
+        $http.post('/api/module', self.data)
+            .then(response => {
+                console.log('put response', response);
+            })
+            .catch(error => {
+                console.log('error in post', error);
+            });
+    };
+
     self.getModule();
 
 }]);
