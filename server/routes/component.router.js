@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
+const sorting = require('../modules/sorting.js');
 const router = express.Router();
 
 
@@ -25,50 +26,11 @@ router.get('/', (req, res) => {
 
 router.get('/sorting/:method', (req, res) => {
 
-  let sort = req.params.method;
+  let sortMethod = req.params.method;
 
-  console.log(sort);
+  console.log(sortMethod);
 
-  let queryText;
-
-  switch (sort) {
-    case 'nameAsc':
-      queryText = `SELECT * FROM components ORDER BY "name"`;
-      break;
-    case 'nameDesc':
-      queryText = `SELECT * FROM components ORDER BY "name" DESC`;
-      break;
-    case 'typeAsc':
-      queryText = `SELECT * FROM components ORDER BY "type"`;
-      break;
-    case 'typeDesc':
-      queryText = `SELECT * FROM components ORDER BY "type" DESC`;
-      break;
-    case 'pricePUAsc':
-      queryText = `SELECT * FROM components ORDER BY "price_per_unit"`;
-      break;
-    case 'pricePUDesc':
-      queryText = `SELECT * FROM components ORDER BY "price_per_unit" DESC`;
-      break;
-    case 'piecesPUAsc':
-      queryText = `SELECT * FROM components ORDER BY "pieces_per_unit"`;
-      break;
-    case 'piecesPUDesc':
-      queryText = `SELECT * FROM components ORDER BY "pieces_per_unit" DESC`;
-      break;
-    case 'consumableAsc':
-      queryText = `SELECT * FROM components ORDER BY "consumable"`;
-      break;
-    case 'consumableDesc':
-      queryText = `SELECT * FROM components ORDER BY "consumable" DESC`;
-      break;
-    case 'genStockAsc':
-      queryText = `SELECT * FROM components ORDER BY "general_stock_item"`;
-      break;
-    case 'genStockDesc':
-      queryText = `SELECT * FROM components ORDER BY "general_stock_item" DESC`;
-      break;
-  }
+  let queryText = sorting.sortComponents(sortMethod);
 
   console.log(queryText);
   pool.query(queryText)
