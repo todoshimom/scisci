@@ -1,1 +1,45 @@
-shopping list creation view
+<h1>New Shopping List</h1>
+<input type="text" name="name" placeholder="Enter Shopping List Name (name, date, region, module code)" ng-model="vm.createShoppingList">
+<button ng-click="vm.createShoppingList(listItem)">Start List</button><br>
+<input type="text" name="search" placeholder="Search Module List">
+
+<h2>Search Results</h2>
+
+<thead>
+    <tr>
+        <th>Add</th>
+        <th>Module Name</th>
+        <th>Code</th>
+        <th>Unit Cost</th>
+        <th>Total Cost</th>
+    </tr>
+</thead><br>
+<tbody>
+    <tr ng-repeat="item in vm.ModuleLibrary.list">
+        <td><md-checkbox aria-label="Add Checkbox"></md-checkbox></td>
+        <td>{{item.name}}</td>
+        <td>{{item.code}}</td>
+        <td>{{item.unit_cost}}</td>
+        <td>{{otem.total_cost}}</td>
+</tbody><br>
+
+<h2>Added Modules</h2>
+<thead>
+    <tr>
+        <th>Quantity</th>
+        <th>Module Name</th>
+        <th>Code</th>
+        <th>Unit Cost</th>
+        <th>Total Cost</th>
+    </tr>
+</thead><br>
+
+<tbody>
+    <tr ng-repeat="item in vm.ModuleLibrary.list">
+        <td><input type="number" name="quantity"></td>
+        <td>{{item.name}}</td>
+        <td>{{item.code}}</td>
+        <td>{{item.unit_cost}}</td>
+        <td>{{otem.total_cost}}</td>
+</tbody><br>
+<button>Save Shopping List</button>
