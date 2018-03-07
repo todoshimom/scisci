@@ -71,6 +71,11 @@
 <br>
 <br>
 
+<md-input-container>
+  <label>Filter Components</label>
+  <input ng-model="filterString.name"/>
+</md-input-container>
+
 <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
 <h2>Manage Components</h2>
 <table>
@@ -94,7 +99,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="component in vm.componentLibrary.list track by $index">
+    <tr ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
       <td ng-if="!vm.edit[component.id]">{{component.name}}</td>
       <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></td>
 
