@@ -1,7 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-{{vm.module}}
-
 <button ng-click="vm.saveModule()">Save Module</button>
 
 <h1>Module Creator</h1>
@@ -16,37 +14,37 @@
 
 
 <h2>Components</h2>
-<label>Name <input placeholder="Module Name" ng-model="vm.module.name" /></label><br />
-<label>Code <input placeholder="Code" ng-model="vm.module.code" /></label><br />
-<label>Estimated Assembly Time <input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.estimated_assembly_time" /></label><br />
+<label>Name <input placeholder="Module Name" ng-model="vm.module.data.name" /></label><br />
+<label>Code <input placeholder="Code" ng-model="vm.module.data.code" /></label><br />
+<label>Estimated Assembly Time <input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.data.estimated_assembly_time" /></label><br />
 
 
 <h3>Version</h3>
-<label>Version Number <input type="text" placeholder="Version Number" ng-model="vm.module.version_number" /></label><br />
-<label>Version Notes <textarea type="text" placeholder="Version Notes" ng-model="vm.module.version_notes" /></textarea></label>
+<label>Version Number <input type="text" placeholder="Version Number" ng-model="vm.module.data.version_number" /></label><br />
+<label>Version Notes <textarea type="text" placeholder="Version Notes" ng-model="vm.module.data.version_notes" /></textarea></label>
 
-<!-- <input type="text" placeholder="DATEPICKER" ng-model="vm.module.version_date" /> -->
+<!-- <input type="text" placeholder="DATEPICKER" ng-model="vm.module.data.version_date" /> -->
 <!-- <input type="text" placeholder="Live-search Components" /> -->
 
 
 <h2>Resources</h2>
-    <label>Google Drive <input placeholder="URL" ng-model="vm.module.module_drive_link" /></label><br />
-    <label>To Be Printed <input placeholder="URL" ng-model="vm.module.to_be_printed_link" /></label><br />
-    <label>Assembly Video <input placeholder="URL" ng-model="vm.module.assembly_video_link" /></label><br />
-    <label>Activity Video <input placeholder="URL" ng-model="vm.module.activity_video_link" /></label><br />
-    <label>Kit Content Sheet <input placeholder="URL" ng-model="vm.module.kit_content_link" /></label><br />
+    <label>Google Drive <input placeholder="URL" ng-model="vm.module.data.module_drive_link" /></label><br />
+    <label>To Be Printed <input placeholder="URL" ng-model="vm.module.data.to_be_printed_link" /></label><br />
+    <label>Assembly Video <input placeholder="URL" ng-model="vm.module.data.assembly_video_link" /></label><br />
+    <label>Activity Video <input placeholder="URL" ng-model="vm.module.data.activity_video_link" /></label><br />
+    <label>Kit Content Sheet <input placeholder="URL" ng-model="vm.module.data.kit_content_link" /></label><br />
     <label>Custom Link 1
-        <input placeholder="Title" ng-model="vm.module.other1_title" />
-        <input placeholder="URL" ng-model="vm.module.other1_link" /></label><br />
+        <input placeholder="Title" ng-model="vm.module.data.other1_title" />
+        <input placeholder="URL" ng-model="vm.module.data.other1_link" /></label><br />
     <label>Custom Link 2
-        <input placeholder="Title" ng-model="vm.module.other2_title" />
-        <input placeholder="URL" ng-model="vm.module.other2_link" />
+        <input placeholder="Title" ng-model="vm.module.data.other2_title" />
+        <input placeholder="URL" ng-model="vm.module.data.other2_link" />
     </label><br />
 
 
 <h2>Assembly Instructions</h2>
 
-<textarea ng-model="vm.module.assembly_notes"></textarea>
+<textarea ng-model="vm.module.data.assembly_notes"></textarea>
 
 <h2>Components in Module</h2>
 
