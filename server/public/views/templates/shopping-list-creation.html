@@ -24,8 +24,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="module in vm.ModuleLibrary.list | filter: search">
-            <td><button>Add Module</button></td>
+        <tr ng-repeat="module in vm.moduleLibrary.list | filter: search">
+            <td><button ng-click="vm.addModule(module)">Add Module</button></td>
             <td>{{module.name}}</td>
             <td>{{module.code}}</td>
             <td>{{module.unit_cost}}</td>
@@ -45,12 +45,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="module in vm.ModuleLibrary.list">
-            <td><input type="number" name="quantity"></td>
+        <tr ng-repeat="module in vm.addedModuleLibrary">
+            <td><input type="number" name="quantity" ng-model="module.quantity"></td>
             <td>{{module.name}}</td>
             <td>{{module.code}}</td>
             <td>{{module.unit_cost}}</td>
             <td>{{module.total_cost}}</td>
     </tbody>
 </table>
-<button>Save Shopping List</button>
+<button ng-click="vm.saveShoppingList(vm.addedModuleLibrary)">Save Shopping List</button>
