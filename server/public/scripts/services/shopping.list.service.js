@@ -1,19 +1,14 @@
 myApp.service('ShoppingListService', ['$http', '$location', function ($http, $location) {
-    console.log('ShoppingListService Loaded');
-    let self = this;
+	console.log('ShoppingListService Loaded');
+	let self = this;
 
 
-    /******************************************/
-    /*              GET REQUESTS              */
-    /******************************************/
-    self.getModules = function(keyword) {
-      
-    }
-    
-    self.getSelectedLists = function() {
+	/******************************************/
+	/*              GET REQUESTS              */
+	/******************************************/
+	self.getModules = function (keyword) {
 
-    };//function to get selected lists 
-   
+	}
 
     /******************************************/
     /*             POST REQUESTS              */
@@ -46,21 +41,21 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
   } //function to create a shopping list
 
 
-    /******************************************/
-    /*              PUT REQUESTS              */
-    /******************************************/
+	/******************************************/
+	/*              PUT REQUESTS              */
+	/******************************************/
 
 
 
-    /******************************************/
-    /*            DELETE REQUESTS             */
-    /******************************************/
+	/******************************************/
+	/*            DELETE REQUESTS             */
+	/******************************************/
 
 
 
-    /******************************************/
-    /*            OTHER FUNCTIONS             */
-    /******************************************/
+	/******************************************/
+	/*            OTHER FUNCTIONS             */
+	/******************************************/
 
 
 
