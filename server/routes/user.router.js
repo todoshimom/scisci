@@ -3,6 +3,7 @@ const encryptLib = require('../modules/encryption');
 const userStrategy = require('../strategies/sql.localstrategy');
 const pool = require('../modules/pool.js');
 const router = express.Router();
+const sorting = require('../modules/sorting.js');
 
 
 /******************************************/
@@ -66,6 +67,21 @@ router.get('/types', (req, res) => {//Start of get user_types function
 
 });//End of get user_types function
 
+router.get('/sorting/:method', (req, res) => {//Start of sort users function
+
+    let queryText = sorting.sortUsers(req.params.method);
+
+    pool.query(queryText)
+        .then((results) => {
+            // console.log('GET users sorted', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET request to sort users ', error);
+            res.sendStatus(500);
+        });
+});//End of sort users function
+
 /******************************************/
 /*             POST ROUTES                */
 /******************************************/
@@ -74,7 +90,7 @@ router.post('/', (req, res) => {//Start of post new user function
 
     let user = req.body;
     console.log(user);
-    
+
     let queryText = `
     INSERT INTO users (first_name, last_name, username, user_type)
     VALUES ($1, $2, $3, $4);`;
@@ -108,7 +124,7 @@ router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
 
     let user = req.body;
     console.log(user);
-    
+
     let queryText = `
     UPDATE users 
     SET 
@@ -134,7 +150,7 @@ router.put('/newPassword', (req, res) => {//Start of resetPassword route
 
     console.log(req.body.password);
     let newPassword = encryptLib.encryptPassword(req.body.password);
-    
+
     let queryText = `
     UPDATE users 
     SET 
@@ -156,10 +172,10 @@ router.put('/newPassword', (req, res) => {//Start of resetPassword route
 router.put('/resetPassword/:id', (req, res) => {//Start of resetPassword route
 
     //Mental note, this area and resetPassword can be refactored.
-    
+
     //This way the .env password can be set on heroku for easy management. 
     let resetPassword = encryptLib.encryptPassword(process.env.DEFAULTPASSWORD);
-    
+
     let queryText = `
     UPDATE users 
     SET 
@@ -185,18 +201,18 @@ router.put('/resetPassword/:id', (req, res) => {//Start of resetPassword route
 router.delete('/:id', (req, res) => {
 
     let queryText = `DELETE FROM users WHERE id = ${req.params.id}`;
-  
+
     pool.query(queryText)
         .then((results) => {
-        //   console.log('Successfully removed user: ', results);
-          res.sendStatus(200);
+            //   console.log('Successfully removed user: ', results);
+            res.sendStatus(200);
         })
         .catch((error) => {
-          console.log('Error removing user: ', error);
-          res.sendStatus(500);
+            console.log('Error removing user: ', error);
+            res.sendStatus(500);
         });
 
-  });
+});
 
 /******************************************/
 /*                OTHERS                  */

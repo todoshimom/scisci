@@ -1,2 +1,56 @@
 <div ng-include="'views/partials/nav.html'"></div>
-shopping list creation view
+
+<h2 class="md-title">New Shopping List</h2>
+<md-input-container class="input">
+    <label>Shopping List Name</label>
+    <input ng-model="vm.name">
+  </md-input-container>
+<button ng-click="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name)">Start List</button><br>
+
+<md-input-container class="input">
+    <label>Search Modules</label>
+    <input ng-model="vm.search">
+  </md-input-container>
+
+<h2 class="md-title md-subtitle">Search Results</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Add</th>
+            <th>Module Name</th>
+            <th>Code</th>
+            <th>Unit Cost</th>
+            <th>Total Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="module in vm.ModuleLibrary.list | filter: search">
+            <td><button>Add Module</button></td>
+            <td>{{module.name}}</td>
+            <td>{{module.code}}</td>
+            <td>{{module.unit_cost}}</td>
+            <td>{{otem.total_cost}}</td>
+    </tbody>
+</table>
+
+<h2 class="md-title md-subtitle">Added Modules</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Module Name</th>
+            <th>Code</th>
+            <th>Unit Cost</th>
+            <th>Total Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="module in vm.ModuleLibrary.list">
+            <td><input type="number" name="quantity"></td>
+            <td>{{module.name}}</td>
+            <td>{{module.code}}</td>
+            <td>{{module.unit_cost}}</td>
+            <td>{{module.total_cost}}</td>
+    </tbody>
+</table>
+<button>Save Shopping List</button>

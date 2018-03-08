@@ -9,8 +9,6 @@
     "build-css": "node-sass --include-path scss server/public/styles/scss/style.scss server/public/styles/style.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
-
-
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.9",
