@@ -10,6 +10,7 @@ const router = express.Router();
 /******************************************/
 
 router.get('/', (req, res) => {
+
   let queryText = `SELECT * FROM components ORDER BY "name"`;
 
   pool.query(queryText)
@@ -41,6 +42,7 @@ router.get('/sorting/:method', (req, res) => {
 });
 
 router.get('/modulesCount/:id', (req, res) => {
+
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
 
   pool.query(queryText, [req.params.id])
@@ -50,6 +52,25 @@ router.get('/modulesCount/:id', (req, res) => {
     })
     .catch((error) => {
       console.log(error);
+    });
+});
+
+
+router.get('/getModules/:id', (req, res) => {
+  
+  let queryText = `
+  SELECT modules.id, modules.name, components_modules.component_id
+  FROM components_modules
+  JOIN modules ON components_modules.module_id = modules.id
+  WHERE components_modules.component_id = $1`;
+
+  pool.query(queryText,[req.params.id])
+    .then((results) => {
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log('Error getting component modules', error);
+      res.sendStatus(500);
     });
 });
 
