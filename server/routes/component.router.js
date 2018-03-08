@@ -62,10 +62,10 @@ router.post('/', (req, res) => {
 
   let queryText = `
   INSERT INTO components ("name", "description", "vendor_name_primary",
-  "vendor_url_primary", "vendor_name_secondary", "vendor_url_secondary",
-  "notes", "price_per_unit", "pieces_per_unit", "consumable", "type",
-  "general_stock_item")
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12); `;
+    "vendor_url_primary", "vendor_name_secondary", "vendor_url_secondary",
+    "notes", "price_per_unit", "pieces_per_unit", "consumable", "type",
+    "general_stock_item")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
 
   pool.query(queryText, [item.name, item.description, item.vendor_name_primary, item.vendor_url_primary,
   item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,

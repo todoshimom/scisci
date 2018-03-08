@@ -23,7 +23,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
     self.getModuleComponents = function() {
-        $http.get('/api/module/' + $routeParams.id + '/components')
+        $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 console.log('get response', response.data);
                 self.components.data = response.data;
@@ -48,6 +48,22 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in post', error);
             });
     };
+    self.addModuleComponent = function(componentId, piecesPerKit) {
+        const dataToSend = {
+            module_id: $routeParams.id,
+            component_id: componentId,
+            pieces_per_kit: piecesPerKit
+        };
+        $http.post('/api/module/components', dataToSend)
+            .then(response => {
+                console.log(dataToSend);
+                console.log('response', response);
+                self.getModule();
+            })
+            .catch(error => {
+                console.log('error in add module component', error);
+            })
+    }
 
 
     /******************************************/

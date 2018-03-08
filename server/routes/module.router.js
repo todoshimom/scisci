@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.get('/:id/components', (req, res) => {
+router.get('/components/:id', (req, res) => {
     console.log('req.params.id', req.params.id);
     // get the components in a separate route
     const queryText = `SELECT * FROM components_modules
@@ -73,6 +73,27 @@ router.post('/', (req, res) => {
         req.body.other2_title,
         req.body.other2_link,
         req.body.assembly_notes
+    ])
+        .then(result => {
+            console.log('result.rows', result.rows);
+            res.send(result.rows);
+        }).catch(err => {
+            console.log('err', err);
+            res.sendStatus(500);
+        });
+});
+
+router.post('/components', (req, res) => {
+    console.log('req.body', req.body);
+    const queryText = `INSERT INTO components_modules (
+        module_id,
+        component_id,
+        pieces_per_kit
+    ) VALUES ($1, $2, $3) RETURNING id`;
+    pool.query(queryText, [
+        req.body.module_id,
+        req.body.component_id,
+        req.body.pieces_per_kit
     ])
         .then(result => {
             console.log('result.rows', result.rows);
