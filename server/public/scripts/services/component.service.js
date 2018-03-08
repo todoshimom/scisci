@@ -11,27 +11,29 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     // begin getComponents()
     self.getComponents = function() {
-      $http.get('/api/component')
+      return $http.get('/api/component')
         .then( function(response) {
-          console.log(response.data);
-
-          // for (let component of response.data) {
-          //   if(component.vendor_name_secondary == null) {
-          //     component.vendor_name_secondary = '';
-          //   }
-          //   if(component.vendor_url_secondary == null) {
-          //     component.vendor_url_secondary = '';
-          //   }
-          // }
-
-          self.componentLibrary.list = response.data;
+          return response.data;
         })
         .catch( function(error) {
           console.log(error);
         });
     }; // end getComponents()
 
-    self.getComponents();
+    self.getComponents()
+      .then( function(componentData) {
+
+        for (let component of componentData) {
+          $http.get(`/api/component/modulesCount/${component.id}`)
+            .then( function(response) {
+              component.modules_used_in = response.data[0].count;
+            })
+            .catch( function(error) {
+              console.log(error);
+            });
+        }
+        self.componentLibrary.list = componentData;
+    });
 
 
     self.sortComponents = function(sortMethod) {
@@ -44,6 +46,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
           console.log(error);
         });
     };
+
 
     /******************************************/
     /*             POST REQUESTS              */
