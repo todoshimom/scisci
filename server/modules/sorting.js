@@ -92,7 +92,75 @@ const sortModules = function (sortMethod) {
   
 };
 
+const sortUsers = function (sortMethod) {
+    
+    let queryText;
+  
+    switch (sortMethod) {
+      case 'fnameAsc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY first_name;`;
+        break;
+      case 'fnameDesc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY first_name DESC;`
+        break;
+      case 'lnameAsc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY last_name;`
+        break;
+      case 'lnameDesc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY last_name DESC;`
+        break;
+      case 'accountAsc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY user_type;`
+        break;
+      case 'accountDesc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY user_type DESC;`;
+        break;
+      case 'usernameAsc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY username;`
+        break;
+      case 'usernameDesc':
+        queryText = `
+            SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+            FROM users
+            JOIN user_type ON users.user_type = user_type.id
+            ORDER BY username DESC;`;
+        break;
+    }
+  
+    return queryText;
+    
+  };
+
 module.exports = {
   sortComponents,
-  sortModules
+  sortModules,
+  sortUsers
 };

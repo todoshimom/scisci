@@ -10,8 +10,6 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     self.createShoppingList = function(name, first_name, last_name) {
         ShoppingListService.createShoppingList(name, first_name, last_name);
     };//end function for start list button to database/service 
-
-    //get request to get modules for search with filter that adds them to the first table automatically after an update
     self.getModules = function(keyword) {
         ShoppingListService.getModules(keyword);
     }
