@@ -13,8 +13,9 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     self.getShoppingLists = function() {
         $http.get('/api/shopping/all')
           .then( function(response) {
-            console.log(response.data);
             self.shoppingLists.list = response.data;
+            console.log('self.shoppingLists.list', self.shoppingLists.list);
+            
           })
           .catch( function(error) {
             console.log(error);
