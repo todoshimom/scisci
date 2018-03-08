@@ -14,11 +14,11 @@ const router = express.Router();
 /*             POST REQUESTS              */
 /******************************************/
 router.post('/', (req, res) => {
-    let queryString = 'INSERT INTO shopping_list (name) VALUES ($1)';
+    let queryString = 'INSERT INTO shopping_list (name, date, user_created_by) VALUES ($1, $2, $3)';
     console.log(req.body.name);
-    pool.query(queryString, [req.body.name])
+    pool.query(queryString, [req.body.name, req.body.date, req.body.user_created_by])
         .then(result => {
-            console.log('query results', result);
+            // console.log('query results', result);
             res.sendStatus(201);
         })
         .catch(err => {
