@@ -30,7 +30,7 @@
         <th>Delete</th>
     </thead>
     <tbody>
-        <tr ng-repeat="module in vm.moduleLibrary.list track by $index">
+        <tr ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
             <td><a ng-href="#!module/{{module.id}}">{{module.name}}</a></td>
             <td>{{module.code}}</td>
             <td>{{module.version_number}}</td>
