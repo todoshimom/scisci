@@ -12,4 +12,11 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     self.getuser = function () {
         UserService.getuser();
     }
+
+    // begin getShoppingLists()
+    self.getShoppingLists = function() {
+        ShoppingListService.getShoppingLists();
+      }; // end getShoppingLists()
+
+    self.getShoppingLists();
 }]);

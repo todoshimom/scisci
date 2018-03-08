@@ -20,6 +20,19 @@ router.get('/:id', (req, res) => {
         });
 })//end get
 
+router.get('/all', (req, res) => {
+    const queryText = 'SELECT * FROM shopping_list ORDER BY "name"';
+    
+    pool.query(queryText)
+        .then((results) => {
+        res.send(results.rows);
+    })
+    .catch((error) => {
+        console.log('Error on GET shopping_list request', error);
+        res.sendStatus(500);
+    });
+
+});
 
 /******************************************/
 /*             POST REQUESTS              */
