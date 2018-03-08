@@ -71,15 +71,29 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             component_id: componentId,
             pieces_per_kit: piecesPerKit
         };
-        $http.post('/api/module/components', dataToSend)
+        
+        // confirm that the component is not already attached to the module before adding
+        let componentIsInModule = false;
+        for (let i = 0; i < self.components.data.length; i++) {
+            if (self.components.data[i].component_id == componentId) {
+                componentIsInModule = true;
+            }
+        }
+
+        // if it isn't already here, then add it.
+        if (!componentIsInModule) {
+            $http.post('/api/module/components', dataToSend)
             .then(response => {
-                console.log(dataToSend);
                 console.log('response', response);
                 self.getModule();
             })
             .catch(error => {
                 console.log('error in add module component', error);
             })
+        } else {
+            console.log('true');
+        }
+
     }
 
 
@@ -97,7 +111,32 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in put', error);
             });
     };
+    self.updateModuleComponent = function(component) {
 
+        // reduce the row data to the junction table row's data
+        let moduleComponentToSave = {
+            id: component.id,
+            module_id: component.module_id,
+            component_id: component.component_id,
+            pieces_per_kit: component.pieces_per_kit
+        }
+        console.log(moduleComponentToSave);
+
+        $http.put('/api/module/components', moduleComponentToSave)
+            .then(response => {
+                console.log('sent in put:', moduleComponentToSave);
+                console.log('put response', response);
+            })
+            .catch(error => {
+                console.log('error in put', error);
+            });
+    };
+
+    self.updateModuleComponents = function() {
+        for (let i = 0; i < self.components.data.length; i++) {
+            self.updateModuleComponent(self.components.data[i]);
+        }
+    };
 
     /******************************************/
     /*            DELETE REQUESTS             */
@@ -117,7 +156,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in delete', error);
             });
     };
-
+    self.deleteModuleComponent = function(moduleId, componentId) {
+        console.log('in delete module');
+        
+        $http.delete('/api/module/components/' + moduleId + '/' + componentId)
+            .then(response => {
+                console.log('delete response', response);
+                self.getModuleComponents();
+            })
+            .catch(error => {
+                console.log('error in delete', error);
+            });
+    };
 
     /******************************************/
     /*            OTHER FUNCTIONS             */
@@ -146,6 +196,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         console.log('MODULE', self.module);
         if ($routeParams.id) {
             self.updateModule();
+            self.updateModuleComponents();
         } else {
             self.createModule();
         }
