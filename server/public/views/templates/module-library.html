@@ -3,7 +3,7 @@
 
 <h2 class="md-title">Module Library</h2>
 <div>
-    <a href="#!module">Create New Module</a>
+    <a ng-href="#!module">Create New Module</a>
 </div>
 <md-input-container>
     <label>Filter Module list</label>
@@ -19,6 +19,7 @@
         <th>Version Date <span ng-click="vm.sortColumns('versionDateAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionDateDesc')">&#9660;</span></th>
         <th>Version Notes</th>
         <th>Est. Assembly Time <span ng-click="vm.sortColumns('estimatedAssemblyTimeAscAsc')">&#9650;</span><span ng-click="vm.sortColumns('estimatedAssemblyTimeAscDesc')">&#9660;</span></th>
+        <th>Assembly Notes</th>
         <th>Module Drive Link</th>
         <th>To Be Printed Link</th>
         <th>Assembly Video Link</th>
@@ -38,45 +39,59 @@
             <td>{{module.estimated_assembly_time}}</td>
             <td>{{module.assembly_notes}}</td>
             <td>
-                <a href="{{module.module_drive_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.module_drive_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.module_drive_link}}">
+                    <span ng-if="module.module_drive_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.module_drive_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
             </td>
             <td>
-                <a href="{{module.to_be_printed_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.to_be_printed_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.to_be_printed_link}}">
+                    <span ng-if="module.to_be_printed_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.to_be_printed_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
             </td>
             <td>
-                <a href="{{module.assembly_video_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.assembly_video_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.assembly_video_link}}">
+                    <span ng-if="module.assembly_video_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.assembly_video_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
             </td>
             <td>
-                <a href="{{module.activity_video_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.activity_video_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.activity_video_link}}">
+                    <span ng-if="module.activity_video_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.activity_video_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
             </td>
             <td>
-                <a href="{{module.kit_content_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.kit_content_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.kit_content_link}}">
+                    <span ng-if="module.kit_content_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.kit_content_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
             </td>
             <td>
-                <a href="{{module.other1_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other1_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.other1_link}}">
+                    <span ng-if="module.other1_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other1_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
                 </td>
             <td>
-                <a href="{{module.other2_link}}">
-                    <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other2_title}}</md-tooltip>
-                    <i class="far fa-folder"></i>
+                <a ng-href="{{module.other2_link}}">
+                    <span ng-if="module.other2_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other2_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
                 </a>
                 </td>
             <td><button ng-click="vm.deleteModule(module.id)"><i class="fas fa-trash-alt"></i></button></td>

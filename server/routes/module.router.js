@@ -32,20 +32,21 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/sorting/:method', (req, res) => {
-  let sortMethod = req.params.method;
-  console.log(sortMethod);
-  let queryText = sorting.sortModules(sortMethod);
-  console.log(queryText);
-  pool.query(queryText)
-    .then((results) => {
-      console.log('GET modules sorted', results);
-      res.send(results.rows);
-    })
-    .catch((error) => {
-      console.log('Error on modules sorted request', error);
-      res.sendStatus(500);
-  });
-  
+    let sortMethod = req.params.method;
+    console.log(sortMethod);
+    let queryText = sorting.sortModules(sortMethod);
+    console.log(queryText);
+    pool.query(queryText)
+        .then((results) => {
+            console.log('GET modules sorted', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on modules sorted request', error);
+            res.sendStatus(500);
+        });
+});
+
 router.get('/:id/components', (req, res) => {
     // get the components in a separate route
 });
