@@ -156,7 +156,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in delete', error);
             });
     };
-
+    self.deleteModuleComponent = function(moduleId, componentId) {
+        console.log('in delete module');
+        
+        $http.delete('/api/module/components/' + moduleId + '/' + componentId)
+            .then(response => {
+                console.log('delete response', response);
+                self.getModuleComponents();
+            })
+            .catch(error => {
+                console.log('error in delete', error);
+            });
+    };
 
     /******************************************/
     /*            OTHER FUNCTIONS             */

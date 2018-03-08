@@ -9,7 +9,8 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
 
     self.addModuleComponent = ModuleService.addModuleComponent;
     self.updateModuleComponent = ModuleService.updateModuleComponent;
-
+    self.deleteModuleComponent = ModuleService.deleteModuleComponent;
+    
     // OTHER FUNCTIONS
 
         // Save module: intelligently updates or creates an entry
