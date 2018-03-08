@@ -79,6 +79,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.delete('/api/module/' + moduleId)
             .then(response => {
                 console.log('delete response', response);
+                self.getModules();
             })
             .catch(error => {
                 console.log('error in delete', error);
