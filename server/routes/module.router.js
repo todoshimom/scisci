@@ -141,47 +141,44 @@ router.post('/components', (req, res) => {
 /******************************************/
 router.put('/', (req, res) => {
     console.log(req.body);
-    // ,
-    //     code = $2,
-    //     estimated_assembly_time = $3,
-    //     version_number = $4,
-    //     version_notes = $5,
-    //     version_date = $6,
-    //     module_drive_link = $7,
-    //     to_be_printed_link = $8,
-    //     assembly_video_link = $9,
-    //     activity_video_link = $10,
-    //     kit_content_link = $11,
-    //     other1_title = $12,
-    //     other1_link = $13,
-    //     other2_title = $14,
-    //     other2_link = $15,
-    //     assembly_notes = $16
-
-        // ,
-        // req.body.code,
-        // req.body.estimated_assembly_time,
-        // req.body.version_number,
-        // req.body.version_notes,
-        // req.body.version_date,
-        // req.body.module_drive_link,
-        // req.body.to_be_printed_link,
-        // req.body.assembly_video_link,
-        // req.body.activity_video_link,
-        // req.body.kit_content_link,
-        // req.body.other1_title,
-        // req.body.other1_link,
-        // req.body.other2_title,
-        // req.body.other2_link,
-        // req.body.assembly_notes,
 
     const queryText = `UPDATE modules SET
-        name = $2
+        name = $2,
+        code = $3,
+        estimated_assembly_time = $4,
+        version_number = $5,
+        version_notes = $6,
+        version_date = $7,
+        module_drive_link = $8,
+        to_be_printed_link = $9,
+        assembly_video_link = $10,
+        activity_video_link = $11,
+        kit_content_link = $12,
+        other1_title = $13,
+        other1_link = $14,
+        other2_title = $15,
+        other2_link = $16,
+        assembly_notes = $17
     WHERE id = $1`;
     console.log('HERE', req.body.name, req.body.id);
     pool.query(queryText, [
         req.body.id,
-        req.body.name
+        req.body.name,
+        req.body.code,
+        req.body.estimated_assembly_time,
+        req.body.version_number,
+        req.body.version_notes,
+        req.body.version_date,
+        req.body.module_drive_link,
+        req.body.to_be_printed_link,
+        req.body.assembly_video_link,
+        req.body.activity_video_link,
+        req.body.kit_content_link,
+        req.body.other1_title,
+        req.body.other1_link,
+        req.body.other2_title,
+        req.body.other2_link,
+        req.body.assembly_notes
     ])
         .then(result => {
             console.log('result.rows', result.rows);
