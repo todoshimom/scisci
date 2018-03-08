@@ -1,0 +1,102 @@
+<div ng-include="'views/partials/nav.html'"></div>
+
+
+<h2 class="md-title">Module Library</h2>
+<div>
+    <a ng-href="#!module">Create New Module</a>
+</div>
+<md-input-container>
+    <label>Filter Module list</label>
+    <input ng-model="moduleFilter">
+</md-input-container>
+
+<!-- Module library table-->
+<table>
+    <thead>
+        <th>Name<span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></th>
+        <th>Code<span ng-click="vm.sortColumns('codeAsc')">&#9650;</span><span ng-click="vm.sortColumns('codeDesc')">&#9660;</span></th>
+        <th>Version Number <span ng-click="vm.sortColumns('versionNumAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionNumDesc')">&#9660;</span></th>
+        <th>Version Date <span ng-click="vm.sortColumns('versionDateAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionDateDesc')">&#9660;</span></th>
+        <th>Version Notes</th>
+        <th>Est. Assembly Time <span ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">&#9650;</span><span ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">&#9660;</span></th>
+        <th>Assembly Notes</th>
+        <th>Module Drive Link</th>
+        <th>To Be Printed Link</th>
+        <th>Assembly Video Link</th>
+        <th>Activity Video Link</th>
+        <th>Kit Content Sheet Link</th>
+        <th>Custom Link 1</th>
+        <th>Custom Link 2</th>
+        <th>Delete</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
+            <td><a ng-href="#!module/{{module.id}}">{{module.name}}</a></td>
+            <td>{{module.code}}</td>
+            <td>{{module.version_number}}</td>
+            <td>{{module.version_date | date: "MMM. d, yyyy"}}</td>
+            <td>{{module.version_notes}}</td>
+            <td>{{module.estimated_assembly_time}}</td>
+            <td>{{module.assembly_notes}}</td>
+            <td>
+                <a ng-href="{{module.module_drive_link}}">
+                    <span ng-if="module.module_drive_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.module_drive_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="{{module.to_be_printed_link}}">
+                    <span ng-if="module.to_be_printed_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.to_be_printed_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="{{module.assembly_video_link}}">
+                    <span ng-if="module.assembly_video_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.assembly_video_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="{{module.activity_video_link}}">
+                    <span ng-if="module.activity_video_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.activity_video_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="{{module.kit_content_link}}">
+                    <span ng-if="module.kit_content_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.kit_content_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+            </td>
+            <td>
+                <a ng-href="{{module.other1_link}}">
+                    <span ng-if="module.other1_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other1_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+                </td>
+            <td>
+                <a ng-href="{{module.other2_link}}">
+                    <span ng-if="module.other2_link">
+                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other2_title}}</md-tooltip>
+                        <i class="far fa-folder"></i>
+                    </span>
+                </a>
+                </td>
+            <td><button ng-click="vm.deleteModule(module.id)"><i class="fas fa-trash-alt"></i></button></td>
+        </tr>
+    </tbody>
+</table>
+
+    

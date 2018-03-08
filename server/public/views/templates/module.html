@@ -1,2 +1,88 @@
 <div ng-include="'views/partials/nav.html'"></div>
-module view
+
+<button ng-click="vm.saveModule()">Save Module</button>
+
+<h1>Module Creator</h1>
+
+<ul>
+    <li>Material Cost: {{vm.calculations.material_cost}}</li>
+    <li>Material in Kit Cost: {{vm.calculations.material_in_kit_cost}}</li>
+    <li>Estimated Labor Cost: {{vm.calculations.estimated_labor_cost}}</li>
+    <li>Materials Ordered + Labor: {{vm.calculations.materials_ordered_labor}}</li>
+    <li>Materials in Kit + Labor: {{vm.calculations.materials_in_kit_labor}}</li>
+</ul>
+
+
+<h2>Components</h2>
+<label>Name <input placeholder="Module Name" ng-model="vm.module.data.name" /></label><br />
+<label>Code <input placeholder="Code" ng-model="vm.module.data.code" /></label><br />
+<label>Estimated Assembly Time <input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.data.estimated_assembly_time" /></label><br />
+
+
+<h3>Version</h3>
+<label>Version Number <input type="text" placeholder="Version Number" ng-model="vm.module.data.version_number" /></label><br />
+<label>Version Notes <textarea type="text" placeholder="Version Notes" ng-model="vm.module.data.version_notes" /></textarea></label>
+
+<!-- <input type="text" placeholder="DATEPICKER" ng-model="vm.module.data.version_date" /> -->
+<!-- <input type="text" placeholder="Live-search Components" /> -->
+
+
+<h2>Resources</h2>
+    <label>Google Drive <input placeholder="URL" ng-model="vm.module.data.module_drive_link" /></label><br />
+    <label>To Be Printed <input placeholder="URL" ng-model="vm.module.data.to_be_printed_link" /></label><br />
+    <label>Assembly Video <input placeholder="URL" ng-model="vm.module.data.assembly_video_link" /></label><br />
+    <label>Activity Video <input placeholder="URL" ng-model="vm.module.data.activity_video_link" /></label><br />
+    <label>Kit Content Sheet <input placeholder="URL" ng-model="vm.module.data.kit_content_link" /></label><br />
+    <label>Custom Link 1
+        <input placeholder="Title" ng-model="vm.module.data.other1_title" />
+        <input placeholder="URL" ng-model="vm.module.data.other1_link" /></label><br />
+    <label>Custom Link 2
+        <input placeholder="Title" ng-model="vm.module.data.other2_title" />
+        <input placeholder="URL" ng-model="vm.module.data.other2_link" />
+    </label><br />
+
+
+<h2>Assembly Instructions</h2>
+
+<textarea ng-model="vm.module.data.assembly_notes"></textarea>
+
+<h2>Components in Module</h2>
+
+<table>
+    <tr>
+        <th>Pieces Per Kit</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Price Per Unit</th>
+        <th>Pieces Per Unit</th>
+        <th>Cost Per Unit</th>
+        <th>General Stock</th>
+        <th>Consumable</th>
+        <th>Modules Used In</th>
+        <th>Vendor Name 1</th>
+        <th>Vendor Link 1</th>
+        <th>Vendor Name 2</th>
+        <th>Vendor Link 2</th>
+        <th>Purpose/Notes</th>
+        <th>Delete</th>
+    </tr>
+    <tr ng-repeat="">
+        <td><input type="number" /></td>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>{{description}}</td>
+        <td>{{price_per_unit}}</td>
+        <td>{{pieces_per_unit}}</td>
+        <td>{{cost_per_unit}}</td>
+        <td>{{general_stock}}</td>
+        <td>{{consumable}}</td>
+        <td>{{modules_used_in}}</td>
+        <td>{{vendor_name_1}}</td>
+        <td>{{vendor_link_1}}</td>
+        <td>{{vendor_name_2}}</td>
+        <td>{{vendor_link_2}}</td>
+        <td>{{purpose_notes}}</td>
+        <td><button>Delete</button></td>
+    </tr>
+</table>

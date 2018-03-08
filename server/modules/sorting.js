@@ -51,6 +51,48 @@ const sortComponents = function (sortMethod) {
   
 };
 
+const sortModules = function (sortMethod) {
+
+  let queryText;
+
+  switch (sortMethod) {
+    case 'nameAsc':
+      queryText = `SELECT * FROM modules ORDER BY "name"`;
+      break;
+    case 'nameDesc':
+      queryText = `SELECT * FROM modules ORDER BY "name" DESC`;
+      break;
+    case 'codeAsc':
+      queryText = `SELECT * FROM modules ORDER BY "code"`;
+      break;
+    case 'codeDesc':
+      queryText = `SELECT * FROM modules ORDER BY "code" DESC`;
+      break;
+    case 'versionNumAsc':
+      queryText = `SELECT * FROM modules ORDER BY "version_number"`;
+      break;
+    case 'versionNumDesc':
+      queryText = `SELECT * FROM modules ORDER BY "version_number" DESC`;
+      break;
+    case 'versionDateAsc':
+      queryText = `SELECT * FROM modules ORDER BY "version_date"`;
+      break;
+    case 'versionDateDesc':
+      queryText = `SELECT * FROM modules ORDER BY "version_date" DESC`;
+      break;
+    case 'estimatedAssemblyTimeAsc':
+      queryText = `SELECT * FROM modules ORDER BY "estimated_assembly_time"`;
+      break;
+    case 'estimatedAssemblyTimeDesc':
+      queryText = `SELECT * FROM modules ORDER BY "estimated_assembly_time" DESC`;
+      break;
+  }
+
+  return queryText;
+  
+};
+
 module.exports = {
   sortComponents,
+  sortModules
 };

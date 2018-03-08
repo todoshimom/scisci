@@ -10,38 +10,47 @@ const router = express.Router();
 /******************************************/
 
 router.get('/', (req, res) => {
-
   let queryText = `SELECT * FROM components ORDER BY "name"`;
 
   pool.query(queryText)
-    .then((results) => {
-      console.log('GET components', results);
-      res.send(results.rows);
-    })
-    .catch((error) => {
-      console.log('Error on GET components request', error);
-      res.sendStatus(500);
-  });
+      .then((results) => {
+        // console.log('GET components', results.rows);
+        res.send(results.rows);
+      })
+      .catch((error) => {
+        console.log('Error on GET components request', error);
+        res.sendStatus(500);
+    });
 });
 
 router.get('/sorting/:method', (req, res) => {
 
   let sortMethod = req.params.method;
 
-  console.log(sortMethod);
-
   let queryText = sorting.sortComponents(sortMethod);
 
-  console.log(queryText);
   pool.query(queryText)
     .then((results) => {
-      console.log('GET components sorted', results);
+      // console.log('GET components sorted', results);
       res.send(results.rows);
     })
     .catch((error) => {
       console.log('Error on components sorted request', error);
       res.sendStatus(500);
   });
+});
+
+router.get('/modulesCount/:id', (req, res) => {
+  let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
+
+  pool.query(queryText, [req.params.id])
+    .then((results) => {
+      // console.log(results.rows.count);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 
@@ -71,7 +80,7 @@ router.post('/', (req, res) => {
   item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
   item.consumable, item.type, item.general_stock_item])
       .then((results) => {
-        console.log('Component insert', results);
+        // console.log('Component insert', results);
         res.sendStatus(201);
       })
       .catch((error) => {
@@ -107,7 +116,7 @@ router.put('/updateComponent', (req, res) => {
     item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
     item.consumable, item.type, item.general_stock_item, item.id])
       .then((results) => {
-        console.log('Component updated', results);
+        // console.log('Component updated', results);
         res.sendStatus(201);
       })
       .catch((error) => {
@@ -128,7 +137,7 @@ router.delete('/deleteComponent/:id', (req, res) => {
 
   pool.query(queryText, [id])
       .then((results) => {
-        console.log('Component delelted', results);
+        // console.log('Component delelted', results);
         res.sendStatus(200);
       })
       .catch((error) => {
