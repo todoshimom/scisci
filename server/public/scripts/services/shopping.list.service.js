@@ -6,6 +6,10 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     /******************************************/
     /*              GET REQUESTS              */
     /******************************************/
+    self.getModules = function(keyword) {
+      
+    }
+    
     self.getSelectedLists = function() {
 
     };//function to get selected lists 

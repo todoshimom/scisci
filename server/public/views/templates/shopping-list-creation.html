@@ -1,9 +1,16 @@
 <h1>New Shopping List</h1>
-<input type="text" name="name" placeholder="Enter Shopping List Name (name, date, region, module code)" ng-model="vm.name">
-<button ng-click="vm.createShoppingList(vm.name)">Start List</button><br>
-<input type="text" name="search" placeholder="Search Module List">
 
-<h2>Search Results</h2>
+<md-input-container class="input">
+    <label>Shopping List Name</label>
+    <input ng-model="vm.name">
+  </md-input-container>
+<button ng-click="vm.createShoppingList(vm.name)">Start List</button><br>
+<md-input-container class="input">
+    <label>Search Modules</label>
+    <input ng-model="vm.search">
+  </md-input-container>
+
+<h2 class="shopHeader">Search Results</h2>
 
 <thead>
     <tr>
@@ -15,7 +22,7 @@
     </tr>
 </thead><br>
 <tbody>
-    <tr ng-repeat="item in vm.ModuleLibrary.list">
+    <tr ng-repeat="search in vm.ModuleLibrary.list | filter: search">
         <td><md-checkbox aria-label="Add Checkbox"></md-checkbox></td>
         <td>{{item.name}}</td>
         <td>{{item.code}}</td>
@@ -23,7 +30,7 @@
         <td>{{otem.total_cost}}</td>
 </tbody><br>
 
-<h2>Added Modules</h2>
+<h2 class="shopHeader">Added Modules</h2>
 <thead>
     <tr>
         <th>Quantity</th>
@@ -44,4 +51,3 @@
 </tbody><br>
 <button>Save Shopping List</button>
 <div ng-include="'views/partials/nav.html'"></div>
-shopping list creation view

@@ -39,6 +39,10 @@ h2 {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
   font-size: 16px; }
 
+.shopHeader {
+  font-size: 28px;
+  color: #55ac56; }
+
 .nav-list,
 .sub-nav-list {
   list-style: none;
