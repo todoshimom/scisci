@@ -21,10 +21,10 @@
     <table>
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Account-Type</th>
-                <th>Username</th>
+                <th>First Name <span ng-click="vm.sortUsers('fnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('fnameDesc')">&#9660;</span></th>
+                <th>Last Name <span ng-click="vm.sortUsers('lnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('lnameDesc')">&#9660;</span></th>
+                <th>Account-Type <span ng-click="vm.sortUsers('accountAsc')">&#9650;</span><span ng-click="vm.sortUsers('accountDesc')">&#9660;</span></th>
+                <th>Username <span ng-click="vm.sortUsers('usernameAsc')">&#9650;</span><span ng-click="vm.sortUsers('usernameDesc')">&#9660;</span></th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
