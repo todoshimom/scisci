@@ -9,11 +9,9 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
 	/******************************************/
 	/*              GET REQUESTS              */
 	/******************************************/
-    // get all modules
+    // get all shopping lists
     self.getShoppingLists = function() {
-        // get the modules
-        console.log('modules got with a get');
-        $http.get(`/api/module/all`)
+        $http.get('/api/shopping/all')
           .then( function(response) {
             console.log(response.data);
             self.shoppingLists.list = response.data;
