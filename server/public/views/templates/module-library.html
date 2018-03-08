@@ -34,7 +34,7 @@
             <td><a ng-href="#!module/{{module.id}}">{{module.name}}</a></td>
             <td>{{module.code}}</td>
             <td>{{module.version_number}}</td>
-            <td>{{module.version_date}}</td>
+            <td>{{module.version_date | date: "MMM. d, yyyy"}}</td>
             <td>{{module.version_notes}}</td>
             <td>{{module.estimated_assembly_time}}</td>
             <td>{{module.assembly_notes}}</td>

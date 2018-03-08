@@ -73,6 +73,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     /*            DELETE REQUESTS             */
     /******************************************/
 
+    // TODO: prompt user to confirm before delete
+    
     self.deleteModule = function(moduleId) {
         console.log('in delete module');
         
