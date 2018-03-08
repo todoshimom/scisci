@@ -73,8 +73,8 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             //     }
             // }
         })
-        .when('/module-list', {
-            templateUrl: '/views/templates/module-list.html',
+        .when('/module-library', {
+            templateUrl: '/views/templates/module-library.html',
             controller: 'ModuleListController as vm',
             // resolve: {
             //     getuser: function (UserService) {
