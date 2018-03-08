@@ -1,15 +1,29 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
+const sorting = require('../modules/sorting.js');
 const router = express.Router();
 
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
+router.get('/all', (req, res) => {
+    const queryText = 'SELECT * FROM modules ORDER BY "name"';
+    
+    pool.query(queryText)
+        .then((results) => {
+        res.send(results.rows);
+    })
+    .catch((error) => {
+        console.log('Error on GET modules request', error);
+        res.sendStatus(500);
+    });
+
+});
+
 router.get('/:id', (req, res) => {
     const queryText = `SELECT * FROM modules WHERE modules.id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
-            console.log('result.rows', req.params.id, result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -17,8 +31,26 @@ router.get('/:id', (req, res) => {
         });
 });
 
+
+router.get('/sorting/:method', (req, res) => {
+    let sortMethod = req.params.method;
+    console.log(sortMethod);
+    let queryText = sorting.sortModules(sortMethod);
+    console.log(queryText);
+    pool.query(queryText)
+        .then((results) => {
+            console.log('GET modules sorted', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on modules sorted request', error);
+            res.sendStatus(500);
+        });
+});
+
 router.get('/components/:id', (req, res) => {
     console.log('req.params.id', req.params.id);
+    
     // get the components in a separate route
     const queryText = `SELECT * FROM components_modules
         JOIN components ON components_modules.component_id = components.id

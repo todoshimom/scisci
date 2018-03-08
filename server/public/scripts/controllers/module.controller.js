@@ -9,6 +9,18 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
 
     self.addModuleComponent = ModuleService.addModuleComponent;
 
+    // OTHER FUNCTIONS
+
+        // Save module: intelligently updates or creates an entry
+        self.saveModule = function() {
+            console.log('MODULE', self.module);
+            if ($routeParams.id) {
+                self.updateModule();
+            } else {
+                self.createModule();
+            }
+        };
+        
     self.initializeData = ModuleService.initializeData;
     self.saveModule = ModuleService.saveModule;
     self.initializeData();

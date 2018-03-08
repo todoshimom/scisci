@@ -5,10 +5,27 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.module = {};
     self.components = {};
 
+    self.moduleLibrary = {list:[{}]};
+
     /******************************************/
     /*              GET REQUESTS              */
     /******************************************/
+    // get all modules
+    self.getModules = function() {
+        // get the modules
+        console.log('modules got with a get');
+        $http.get(`/api/module/all`)
+          .then( function(response) {
+            console.log(response.data);
+            self.moduleLibrary.list = response.data;
+          })
+          .catch( function(error) {
+            console.log(error);
+          });
+        
+    };
 
+    // get single module
     self.getModule = function() {
         $http.get('/api/module/' + $routeParams.id)
             .then(response => {
@@ -86,10 +103,15 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     /*            DELETE REQUESTS             */
     /******************************************/
 
-    self.deleteModule = function() {
-        $http.delete('/api/module/' + self.module.data.id)
+    // TODO: prompt user to confirm before delete
+    
+    self.deleteModule = function(moduleId) {
+        console.log('in delete module');
+        
+        $http.delete('/api/module/' + moduleId)
             .then(response => {
                 console.log('delete response', response);
+                self.getModules();
             })
             .catch(error => {
                 console.log('error in delete', error);
@@ -129,4 +151,15 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         }
     };
 
+    self.sortModules = function(sortMethod) {
+        $http.get(`/api/module/sorting/${sortMethod}`)
+          .then( function(response) {
+            console.log(response.data);
+            self.moduleLibrary.list = response.data;
+          })
+          .catch( function(error) {
+            console.log(error);
+          });
+      };
+  
 }]);
