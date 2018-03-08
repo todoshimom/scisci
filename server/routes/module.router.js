@@ -189,6 +189,41 @@ router.put('/', (req, res) => {
         });
 });
 
+router.put('/', (req, res) => {
+    console.log(req.body);
+
+    const queryText = `UPDATE components_modules SET
+        pieces_per_kit = $2
+    WHERE id = $1`;
+    console.log('HERE', req.body.name, req.body.id);
+    pool.query(queryText, [
+        req.body.id,
+        req.body.name,
+        req.body.code,
+        req.body.estimated_assembly_time,
+        req.body.version_number,
+        req.body.version_notes,
+        req.body.version_date,
+        req.body.module_drive_link,
+        req.body.to_be_printed_link,
+        req.body.assembly_video_link,
+        req.body.activity_video_link,
+        req.body.kit_content_link,
+        req.body.other1_title,
+        req.body.other1_link,
+        req.body.other2_title,
+        req.body.other2_link,
+        req.body.assembly_notes
+    ])
+        .then(result => {
+            console.log('result.rows', result.rows);
+            res.send(result.rows);
+        }).catch(err => {
+            console.log('err', err);
+            res.sendStatus(500);
+        });
+});
+
 /******************************************/
 /*            DELETE REQUESTS             */
 /******************************************/
