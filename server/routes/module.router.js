@@ -189,31 +189,24 @@ router.put('/', (req, res) => {
         });
 });
 
-router.put('/', (req, res) => {
-    console.log(req.body);
+router.put('/components', (req, res) => {
+    console.log(`
+    
+    
+    
+    `, req.body, `
+    
+    
+    `);
 
     const queryText = `UPDATE components_modules SET
-        pieces_per_kit = $2
-    WHERE id = $1`;
+        pieces_per_kit = $1
+    WHERE module_id = $2 AND component_id = $3`;
     console.log('HERE', req.body.name, req.body.id);
     pool.query(queryText, [
-        req.body.id,
-        req.body.name,
-        req.body.code,
-        req.body.estimated_assembly_time,
-        req.body.version_number,
-        req.body.version_notes,
-        req.body.version_date,
-        req.body.module_drive_link,
-        req.body.to_be_printed_link,
-        req.body.assembly_video_link,
-        req.body.activity_video_link,
-        req.body.kit_content_link,
-        req.body.other1_title,
-        req.body.other1_link,
-        req.body.other2_title,
-        req.body.other2_link,
-        req.body.assembly_notes
+        req.body.pieces_per_kit,
+        req.body.module_id,
+        req.body.component_id
     ])
         .then(result => {
             console.log('result.rows', result.rows);

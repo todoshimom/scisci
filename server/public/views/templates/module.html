@@ -73,7 +73,7 @@
         <th>Delete</th>
     </tr>
     <tr ng-repeat="row in vm.components.data">
-        <td><input type="number" ng-model="row.pieces_per_kit" /></td>
+        <td><input type="number" ng-model="row.pieces_per_kit" /><button ng-click="vm.updateModuleComponent(row)">Update Row</button></td>
         <td>{{row.name}}</td>
         <td>{{row.type}}</td>
         <td>{{row.description}}</td>
