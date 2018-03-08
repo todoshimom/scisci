@@ -7,19 +7,6 @@ const router = express.Router();
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
-router.get('/:id', (req, res) => {
-    console.log('in the get route', req.params.id);
-    let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
-    pool.query(queryString, [req.params.id])
-        .then(result => {
-            res.send(result);
-        })
-        .catch(err => {
-            console.log('hit error on getting object', err);
-            res.sendStatus(500);
-        });
-})//end get
-
 router.get('/all', (req, res) => {
     const queryText = 'SELECT * FROM shopping_list ORDER BY "name"';
     
@@ -33,6 +20,20 @@ router.get('/all', (req, res) => {
     });
 
 });
+
+router.get('/:id', (req, res) => {
+    console.log('in the get route', req.params.id);
+    let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
+    pool.query(queryString, [req.params.id])
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => {
+            console.log('hit error on getting object', err);
+            res.sendStatus(500);
+        });
+})//end get
+
 
 /******************************************/
 /*             POST REQUESTS              */
