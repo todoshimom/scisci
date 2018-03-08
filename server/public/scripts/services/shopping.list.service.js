@@ -4,12 +4,24 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
 
     self.currentShoppingListId = { shopId: 0 };
 
-    /******************************************/
-    /*              GET REQUESTS              */
-    /******************************************/
-    self.getModules = function (keyword) {
+    self.shoppingLists = {list:[{}]};
 
-    }
+	/******************************************/
+	/*              GET REQUESTS              */
+	/******************************************/
+    // get all modules
+    self.getShoppingLists = function() {
+        // get the modules
+        console.log('modules got with a get');
+        $http.get(`/api/module/all`)
+          .then( function(response) {
+            console.log(response.data);
+            self.shoppingLists.list = response.data;
+          })
+          .catch( function(error) {
+            console.log(error);
+          });
+    };
 
     /******************************************/
     /*             POST REQUESTS              */
