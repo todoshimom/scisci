@@ -36,6 +36,17 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     self.getUserTypes();
 
+    self.sortUsers = function (sortMethod) {
+        $http.get(`/api/user/sorting/${sortMethod}`)
+            .then(function (response) {
+                console.log('Get response for sort users: ', response.data);
+                self.userLibrary.list = response.data;
+            })
+            .catch(function (error) {
+                console.log('Get response for sort users failed: ', error);
+            });
+    };
+
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
@@ -90,7 +101,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     self.setNewPassword = function (newPass) {
         console.log('sending new password: ', newPass);
-        
+
         $http.put(`/api/user/newPassword`, newPass)
             .then(function (response) {
                 console.log('Response from set new Password PUT request: ', response);

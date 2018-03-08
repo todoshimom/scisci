@@ -3,6 +3,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     let self = this;
 
     self.module = {};
+    self.components = {};
 
     self.moduleLibrary = {list:[{}]};
 
@@ -30,6 +31,19 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .then(response => {
                 console.log('get response', response.data[0]);
                 self.module.data = response.data[0];
+                
+                // get this module's components
+                self.getModuleComponents();
+            })
+            .catch(error => {
+                console.log('error in get', error);
+            });
+    };
+    self.getModuleComponents = function() {
+        $http.get('/api/module/components/' + $routeParams.id)
+            .then(response => {
+                console.log('get response', response.data);
+                self.components.data = response.data;
             })
             .catch(error => {
                 console.log('error in get', error);
@@ -51,6 +65,22 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in post', error);
             });
     };
+    self.addModuleComponent = function(componentId, piecesPerKit) {
+        const dataToSend = {
+            module_id: $routeParams.id,
+            component_id: componentId,
+            pieces_per_kit: piecesPerKit
+        };
+        $http.post('/api/module/components', dataToSend)
+            .then(response => {
+                console.log(dataToSend);
+                console.log('response', response);
+                self.getModule();
+            })
+            .catch(error => {
+                console.log('error in add module component', error);
+            })
+    }
 
 
     /******************************************/

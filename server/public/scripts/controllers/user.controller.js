@@ -46,12 +46,16 @@ myApp.controller('UserController', ['UserService', function (UserService) {
 
             self.userEdit = null; //clearing input fields after editing a user.     
         }
-    }    // Start of submitEdit function
+    }    // End of submitEdit function
 
-    self.resetPassword = function (id) {        // Start of resetPassword function    
+    self.resetPassword = function (id) {  // Start of resetPassword function    
         if (confirm(`Are you sure you want to reset this accounts password?`)) {
             UserService.resetPassword(id);
         }
-    }
+    }// End of resetPassword function    
 
-    }]);    // Start of resetPassword function
+    self.sortUsers = function (sortMethod) {// Start of Sort Users function
+        UserService.sortUsers(sortMethod);
+    }// End of Sort Users function
+
+}]);    

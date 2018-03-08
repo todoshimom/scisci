@@ -3,6 +3,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     let self = this;
 
     self.componentLibrary = {list:[]};
+    self.componentModules = {list:[]};
 
 
     /******************************************/
@@ -44,6 +45,17 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
         })
         .catch( function(error) {
           console.log(error);
+        });
+    };
+
+    self.getModules = function(component) {
+      $http.get(`/api/component/getModules/${component.id}`)
+        .then( function(response) {
+          console.log(response.data);
+          self.componentModules.list = response.data;
+        })
+        .catch( function(error) {
+          console.log('error', error);
         });
     };
 
@@ -106,6 +118,9 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*            OTHER FUNCTIONS             */
     /******************************************/
 
+    self.goToModule = function(componentModule) {
+      
+    };
 
 
 }]);

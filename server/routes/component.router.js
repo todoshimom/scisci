@@ -10,6 +10,7 @@ const router = express.Router();
 /******************************************/
 
 router.get('/', (req, res) => {
+
   let queryText = `SELECT * FROM components ORDER BY "name"`;
 
   pool.query(queryText)
@@ -41,6 +42,7 @@ router.get('/sorting/:method', (req, res) => {
 });
 
 router.get('/modulesCount/:id', (req, res) => {
+
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
 
   pool.query(queryText, [req.params.id])
@@ -50,6 +52,25 @@ router.get('/modulesCount/:id', (req, res) => {
     })
     .catch((error) => {
       console.log(error);
+    });
+});
+
+
+router.get('/getModules/:id', (req, res) => {
+  
+  let queryText = `
+  SELECT modules.id, modules.name, components_modules.component_id
+  FROM components_modules
+  JOIN modules ON components_modules.module_id = modules.id
+  WHERE components_modules.component_id = $1`;
+
+  pool.query(queryText,[req.params.id])
+    .then((results) => {
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log('Error getting component modules', error);
+      res.sendStatus(500);
     });
 });
 
@@ -71,10 +92,10 @@ router.post('/', (req, res) => {
 
   let queryText = `
   INSERT INTO components ("name", "description", "vendor_name_primary",
-  "vendor_url_primary", "vendor_name_secondary", "vendor_url_secondary",
-  "notes", "price_per_unit", "pieces_per_unit", "consumable", "type",
-  "general_stock_item")
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12); `;
+    "vendor_url_primary", "vendor_name_secondary", "vendor_url_secondary",
+    "notes", "price_per_unit", "pieces_per_unit", "consumable", "type",
+    "general_stock_item")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
 
   pool.query(queryText, [item.name, item.description, item.vendor_name_primary, item.vendor_url_primary,
   item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
