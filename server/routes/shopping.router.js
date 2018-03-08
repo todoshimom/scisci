@@ -29,8 +29,19 @@ router.post('/', (req, res) => {
     console.log('result log', req.body);
     pool.query(queryString, [req.body.name, req.body.date, req.body.user_created_by])
         .then(result => {
-            // console.log('query results', result);
-            res.send(result);
+            let queryString = `
+            SELECT id 
+            FROM shopping_list
+            WHERE name = '${req.body.name}';`
+            pool.query(queryString)
+                .then(result => {
+                    console.log('shopping list id results', result);
+                    res.send(result);
+                })
+                .catch(err => {
+                    console.log('hit error on posting of new Item', err);
+                    res.sendStatus(500);
+                });
         })//end then 
         .catch(err => {
             console.log('hit error on posting of new Item', err);
@@ -38,6 +49,34 @@ router.post('/', (req, res) => {
         });
 });
 
+
+router.post('/shoppinglist/:id', (req, res) => {  //Start of add shoppinglist junction function
+
+
+    let shoppinglistId = req.params.id
+    let modulesAdded = req.body
+    console.log('Shopping Id: ', shoppinglistId);
+    console.log('Modules added: ', modulesAdded);
+
+
+    for (let i = 0; i < modulesAdded.length; i++) {
+        let queryText = `
+            INSERT INTO modules_shopping (shopping_id, module_id, quantity)
+            VALUES (${shoppinglistId}, ${modulesAdded[i].id}, ${modulesAdded[i].quantity});`;
+
+        pool.query(queryText)
+            .then((results) => {
+                // console.log('Registered user successfully: ', results);
+                console.log('Registered one module! Next please!');
+            })
+            .catch((error) => {
+                console.log('Error registering user: ', error);
+            });
+    }
+
+    res.sendStatus(200);
+
+});  //End of add shoppinglist junction function 
 
 /******************************************/
 /*              PUT REQUESTS              */

@@ -1,10 +1,12 @@
-myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'UserService', function (ShoppingListService, UserService) {
+myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'UserService', 'ModuleService', function (ShoppingListService, UserService, ModuleService) {
     console.log('ShoppingListCreationController created');
     let self = this;
 
     self.userObject = UserService.userObject;
     console.log('userObject', self.userObject);
     
+    self.moduleLibrary = ModuleService.moduleLibrary;
+    self.addedModuleLibrary = []
 
     //function for start list button 
     self.createShoppingList = function(name, first_name, last_name) {
@@ -17,4 +19,19 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
   
 // function to save created list to populate in the dropdown on the shopping list view (post)
     
+
+self.addModule = function (moduleData) {
+    //Have to catch duplicate adds when pushed, for loop if this is approved.        
+    self.addedModuleLibrary.push(moduleData);
+    console.log(self.addedModuleLibrary);
+
+}
+
+
+self.saveShoppingList = function name(arrayOfModules) {
+    ShoppingListService.saveShoppingList(arrayOfModules
+    )
+}
+
+
 }]);
