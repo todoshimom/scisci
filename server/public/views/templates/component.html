@@ -131,7 +131,7 @@
         </select>
       </td>
 
-      <td> Left Blank </td>
+      <td> {{component.modules_used_in}} </td>
       <td ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</td>
       <td ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></td>
 

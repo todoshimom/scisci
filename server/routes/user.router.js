@@ -40,7 +40,7 @@ router.get('/users', (req, res) => { //Start of get all users function
 
     pool.query(queryText)
         .then((results) => {
-            console.log('GET all users: ', results);
+            // console.log('GET all users: ', results);
             res.send(results.rows);
         })
         .catch((error) => {
@@ -56,7 +56,7 @@ router.get('/types', (req, res) => {//Start of get user_types function
 
     pool.query(queryText)
         .then((results) => {
-            console.log('GET user_types: ', results);
+            // console.log('GET user_types: ', results);
             res.send(results.rows);
         })
         .catch((error) => {
@@ -81,7 +81,7 @@ router.post('/', (req, res) => {//Start of post new user function
 
     pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type])
         .then((results) => {
-            console.log('Registered user successfully: ', results);
+            // console.log('Registered user successfully: ', results);
             res.sendStatus(201);
         })
         .catch((error) => {
@@ -120,7 +120,7 @@ router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
 
     pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type, user.id])
         .then((results) => {
-            console.log('Edited user successfully: ', results);
+            // console.log('Edited user successfully: ', results);
             res.sendStatus(201);
         })
         .catch((error) => {
@@ -130,16 +130,36 @@ router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
 
 });//End of edit user function PUT REQUEST
 
+router.put('/newPassword', (req, res) => {//Start of resetPassword route
+
+    console.log(req.body.password);
+    let newPassword = encryptLib.encryptPassword(req.body.password);
+    
+    let queryText = `
+    UPDATE users 
+    SET 
+    password = '${newPassword}'
+    WHERE "id" = ${req.user.id};`;
+
+    pool.query(queryText)
+        .then((results) => {
+            // console.log('Password has been Reset!: ', results);
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('Error resetting password!: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of resetPassword route 
+
 router.put('/resetPassword/:id', (req, res) => {//Start of resetPassword route
 
     //Mental note, this area and resetPassword can be refactored.
-    console.log(process.env.DEFAULTPASSWORD);
     
     //This way the .env password can be set on heroku for easy management. 
     let resetPassword = encryptLib.encryptPassword(process.env.DEFAULTPASSWORD);
     
-    console.log(resetPassword);
-
     let queryText = `
     UPDATE users 
     SET 
@@ -148,7 +168,7 @@ router.put('/resetPassword/:id', (req, res) => {//Start of resetPassword route
 
     pool.query(queryText)
         .then((results) => {
-            console.log('Password has been Reset!: ', results);
+            // console.log('Password has been Reset!: ', results);
             res.sendStatus(201);
         })
         .catch((error) => {
@@ -168,7 +188,7 @@ router.delete('/:id', (req, res) => {
   
     pool.query(queryText)
         .then((results) => {
-          console.log('Successfully removed user: ', results);
+        //   console.log('Successfully removed user: ', results);
           res.sendStatus(200);
         })
         .catch((error) => {
