@@ -6,7 +6,10 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     console.log('userObject', self.userObject);
     
     self.moduleLibrary = ModuleService.moduleLibrary;
-    self.addedModuleLibrary = []
+    self.addedModuleLibrary = [];
+
+    self.showSearchResults = false;
+    self.showAddedModules = false;
 
     //function for start list button 
     self.createShoppingList = function(name, first_name, last_name) {
