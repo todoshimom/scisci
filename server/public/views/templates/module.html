@@ -51,7 +51,7 @@
 
 <input ng-model="vm.newComponentId" placeholder="new component ID" />
 <input ng-model="vm.newComponentQuantity" placeholder="new component quantity" type="number" />
-<button ng-click="vm.addModuleComponent(vm.newComponentId, vm.newComponentQuantity)">Add Component</button>
+<!-- <button ng-click="vm.addModuleComponent(vm.newComponentId, vm.newComponentQuantity)">Add Component</button> -->
 <button ng-click="vm.addModuleComponentToDraft(vm.newComponentId, vm.newComponentQuantity)">Add Component Draft</button>
 
 <table>
@@ -89,8 +89,9 @@
         <td>{{row.vendor_name_secondary}}</td>
         <td>{{row.vendor_url_secondary}}</td>
         <td>{{row.notes}}</td>
-        <td><button ng-click="vm.deleteModuleComponent(row.module_id, row.component_id)">Delete</button>
-            <button ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">Draft Delete</button>
+        <td>
+            <!-- <button ng-click="vm.deleteModuleComponent(row.module_id, row.component_id)">Delete</button> -->
+            <button ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">Delete</button>
         </td>
     </tr>
 </table>

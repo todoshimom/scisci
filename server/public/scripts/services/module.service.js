@@ -104,7 +104,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in add module component', error);
             })
         } else {
-            console.log('true');
+            alert('already in module');
         }
 
     }
@@ -123,6 +123,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         // if it isn't already here, then add it.
         if (!componentIsInModule) {
             // unshift that component to the list
+            // TODO: remove dummy data with live data from suggest box
             self.components.data.unshift(
                 {
                     component_id: componentId, module_id: 34, pieces_per_kit: piecesPerKit,
@@ -207,50 +208,67 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     };
 
     self.updateModuleComponents = function() {
-        self.getModuleComponentsPreSave();
+        // self.getModuleComponentsPreSave();
 
-        // diff self.componentsSaved.data and self.components.data;
-        let componentsToDelete = [];
-        let componentsToPost = [];
+        $http.get('/api/module/components/' + $routeParams.id)
+            .then(response => {
+                console.log('get response', response.data);
+                self.componentsSaved.data = response.data;
 
-        for (let i = 0; i < self.components.data.length; i++) {
-            let existsInBoth = false;
-            for (let j = 0; j < self.componentsSaved.data.length; j++) {
-                if (self.components.data[i] == self.componentsSaved.data[j] ) {
-                    existsInBoth = true;
-                }
-                // only run this check if we don't know if it exists in both
-                if (!existsInBoth) {
-                    // on the last step
-                    if (j == self.componentsSaved.data.length - 1) {
-                        componentsToDelete.push(self.componentsSaved.data[j])
+
+                // diff self.componentsSaved.data and self.components.data;
+                let componentsToDelete = [];
+                let componentsToPost = [];
+
+                for (let i = 0; i < self.components.data.length; i++) {
+                    let existsInBoth = false;
+                    for (let j = 0; j < self.componentsSaved.data.length; j++) {
+                        if (self.components.data[i] == self.componentsSaved.data[j] ) {
+                            existsInBoth = true;
+                            break;
+                        }
+                        // only run this check if we don't know if it exists in both
+                        if (!existsInBoth) {
+                            // on the last step
+                            if (j == self.componentsSaved.data.length - 1) {
+                                componentsToPost.push(self.components.data[i])
+                                console.log(componentsToPost);
+                            }
+                        }
                     }
                 }
-            }
-        }
 
-        for (let i = 0; i < self.components.data.length; i++) {
-            let existsInBoth = false;
-            for (let j = 0; j < self.components.data.length; j++) {
-                if (self.componentsSaved.data[i] == self.components.data[j] ) {
-                    existsInBoth = true;
-                }
-                // only run this check if we don't know if it exists in both
-                if (!existsInBoth) {
-                    // on the last step
-                    if (j == self.components.data.length - 1) {
-                        componentsToPost.push(self.componentsSaved.data[j])
-                    }
-                }
-            }
-        }
+                // for (let i = 0; i < self.components.data.length; i++) {
+                //     let existsInBoth = false;
+                //     for (let j = 0; j < self.components.data.length; j++) {
+                //         if (self.componentsSaved.data[i] == self.components.data[j] ) {
+                //             existsInBoth = true;
+                //         }
+                //         // only run this check if we don't know if it exists in both
+                //         if (!existsInBoth) {
+                //             // on the last step
+                //             if (j == self.components.data.length - 1) {
+                //                 componentsToDelete.push(self.componentsSaved.data[j])
+                //             }
+                //         }
+                //     }
+                // }
 
-        console.log('saved,', self.componentsSaved)
-        conosle.log('components,', self.components);
+                console.log('saved,', self.componentsSaved)
+                console.log('components,', self.components);
+                console.log('to save,', componentsToPost)
+                console.log('to delete,', componentsToDelete);
 
-        for (let i = 0; i < self.components.data.length; i++) {
-            self.updateModuleComponent(self.components.data[i]);
-        }
+                // for (let i = 0; i < self.components.data.length; i++) {
+                //     self.updateModuleComponent(self.components.data[i]);
+                // }
+
+
+            })
+            .catch(error => {
+                console.log('error in get', error);
+            });
+
     };
 
     /******************************************/
