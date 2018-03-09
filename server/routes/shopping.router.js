@@ -34,6 +34,24 @@ router.get('/:id', (req, res) => {
         });
 })//end get
 
+router.get('/components', (req, res) => {
+    console.log('in the get route',);
+    let queryString = `SELECT components.*
+    FROM modules_shopping 
+    JOIN modules ON modules.id = modules_shopping.id
+    JOIN components_modules ON modules.id = components_modules.id
+    JOIN components ON components.id = components_modules.id
+    `;
+    pool.query(queryString)
+        .then(result => {
+            res.send(result);
+        })
+        .catch(err => {
+            console.log('hit error on getting object', err);
+            res.sendStatus(500);
+        });
+})//end get
+
 
 /******************************************/
 /*             POST REQUESTS              */

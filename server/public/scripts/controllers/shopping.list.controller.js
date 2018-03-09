@@ -3,6 +3,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     let self = this;
 
     self.shoppingLists = ShoppingListService.shoppingLists;
+    self.components = ShoppingListService.components;
     self.showHideTableData = false;
 
     self.addShoppingList = function(list) {
@@ -17,6 +18,9 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     self.getShoppingLists = function() {
         ShoppingListService.getShoppingLists();
       }; // end getShoppingLists()
-
     self.getShoppingLists();
+    self.getComponents = function() {
+        ShoppingListService.getComponents();
+    }; //end getComponents()
+    self.getComponents();
 }]);
