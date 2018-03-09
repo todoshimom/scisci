@@ -83,6 +83,11 @@ CREATE TABLE modules_shopping (
 );
 
 CREATE TABLE app_settings (
-"id" SERIAL PRIMARY KEY, 
-"labor_rate" DECIMAL (5, 2)
+"id" SERIAL PRIMARY KEY,
+"labor_rate" DECIMAL (5, 2),
+"last_changed" VARCHAR(150)
 );
+
+
+INSERT INTO app_settings (labor_rate, last_changed)
+VALUES (0, 'Default');
