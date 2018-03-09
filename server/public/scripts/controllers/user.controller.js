@@ -58,4 +58,9 @@ myApp.controller('UserController', ['UserService', function (UserService) {
         UserService.sortUsers(sortMethod);
     }// End of Sort Users function
 
+
+    self.setLaborRate = function (rate) {
+        UserService.setLaborRate(rate)
+    }
+
 }]);    
