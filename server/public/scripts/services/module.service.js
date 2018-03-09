@@ -4,6 +4,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
     self.module = {};
     self.components = {};
+    self.componentsSaved = {};
 
     self.moduleLibrary = {list:[{}]};
 
@@ -50,6 +51,17 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
+    self.getModuleComponentsPreSave = function() {
+        $http.get('/api/module/components/' + $routeParams.id)
+            .then(response => {
+                console.log('get response', response.data);
+                self.componentsSaved.data = response.data;
+            })
+            .catch(error => {
+                console.log('error in get', error);
+            });
+    };
+
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
@@ -65,6 +77,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in post', error);
             });
     };
+
+    // MAKE A DRAFT VERSION
     self.addModuleComponent = function(componentId, piecesPerKit) {
         const dataToSend = {
             module_id: $routeParams.id,
@@ -133,6 +147,47 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     };
 
     self.updateModuleComponents = function() {
+        self.getModuleComponentsPreSave();
+
+        // diff self.componentsSaved.data and self.components.data;
+        let componentsToDelete = [];
+        let componentsToPost = [];
+
+        for (let i = 0; i < self.components.data.length; i++) {
+            let existsInBoth = false;
+            for (let j = 0; j < self.componentsSaved.data.length; j++) {
+                if (self.components.data[i] == self.componentsSaved.data[j] ) {
+                    existsInBoth = true;
+                }
+                // only run this check if we don't know if it exists in both
+                if (!existsInBoth) {
+                    // on the last step
+                    if (j == self.componentsSaved.data.length - 1) {
+                        componentsToDelete.push(self.componentsSaved.data[j])
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < self.components.data.length; i++) {
+            let existsInBoth = false;
+            for (let j = 0; j < self.components.data.length; j++) {
+                if (self.componentsSaved.data[i] == self.components.data[j] ) {
+                    existsInBoth = true;
+                }
+                // only run this check if we don't know if it exists in both
+                if (!existsInBoth) {
+                    // on the last step
+                    if (j == self.components.data.length - 1) {
+                        componentsToPost.push(self.componentsSaved.data[j])
+                    }
+                }
+            }
+        }
+
+        console.log('saved,', self.componentsSaved)
+        conosle.log('components,', self.components);
+
         for (let i = 0; i < self.components.data.length; i++) {
             self.updateModuleComponent(self.components.data[i]);
         }
@@ -167,6 +222,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .catch(error => {
                 console.log('error in delete', error);
             });
+    };
+    self.deleteModuleComponentInDraft = function(moduleId, componentId) {
+        console.log(self.components);
+        self.getModuleComponentsPreSave();
+        console.log(self.componentsSaved);
+        for (let i = 0; i < self.components.data.length; i++) {
+            console.log('hi');
+            if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
+                self.components.data.splice(i, 1);
+                break;
+            }
+        }
     };
 
     /******************************************/
