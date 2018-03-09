@@ -4,6 +4,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
     self.module = {};
     self.components = {};
+    self.componentsSaved = {};
 
     self.moduleLibrary = {list:[{}]};
 
@@ -49,6 +50,17 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
+    self.getModuleComponentsPreSave = function() {
+        $http.get('/api/module/components/' + $routeParams.id)
+            .then(response => {
+                console.log('get response', response.data);
+                self.componentsSaved.data = response.data;
+            })
+            .catch(error => {
+                console.log('error in get', error);
+            });
+    };
+
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
@@ -64,6 +76,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in post', error);
             });
     };
+
     self.addModuleComponent = function(componentId, piecesPerKit) {
         const dataToSend = {
             module_id: $routeParams.id,
@@ -90,11 +103,73 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in add module component', error);
             })
         } else {
-            console.log('true');
+            alert('already in module');
         }
 
     }
 
+    // Draft version
+    self.addModuleComponentToDraft = function(componentId, piecesPerKit) {
+
+        // check if it's already in the module
+        let componentIsInModule = false;
+        for (let i = 0; i < self.components.data.length; i++) {
+            if (self.components.data[i].component_id == componentId) {
+                componentIsInModule = true;
+            }
+        }
+
+        // if it isn't already here, then add it.
+        if (!componentIsInModule) {
+            // unshift that component to the list
+            // TODO: remove dummy data with live data from suggest box
+            self.components.data.unshift(
+                {
+                    component_id: componentId, module_id: 34, pieces_per_kit: piecesPerKit,
+                    "id":100,"name":"3 ring binder","description":"a binder","vendor_name_primary":"amazon","vendor_url_primary":"www.amazon.com","vendor_name_secondary":null,"vendor_url_secondary":null,"notes":"used to hold papers","price_per_unit":"3.00","pieces_per_unit":1,"consumable":false,"type":"binder","general_stock_item":true
+                }
+            );
+        } else {
+            alert('already in module');
+        }
+
+
+        // for (let i = 0; i < self.components.data.length; i++) {
+        //     if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
+        //         self.components.data.splice(i, 1);
+        //         break;
+        //     }
+        // }
+
+        // const dataToSend = {
+        //     module_id: $routeParams.id,
+        //     component_id: componentId,
+        //     pieces_per_kit: piecesPerKit
+        // };
+        
+        // // confirm that the component is not already attached to the module before adding
+        // let componentIsInModule = false;
+        // for (let i = 0; i < self.components.data.length; i++) {
+        //     if (self.components.data[i].component_id == componentId) {
+        //         componentIsInModule = true;
+        //     }
+        // }
+
+        // // if it isn't already here, then add it.
+        // if (!componentIsInModule) {
+        //     $http.post('/api/module/components', dataToSend)
+        //     .then(response => {
+        //         console.log('response', response);
+        //         self.getModule();
+        //     })
+        //     .catch(error => {
+        //         console.log('error in add module component', error);
+        //     })
+        // } else {
+        //     console.log('true');
+        // }
+
+    }
 
     /******************************************/
     /*              PUT REQUESTS              */
@@ -132,9 +207,67 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     };
 
     self.updateModuleComponents = function() {
-        for (let i = 0; i < self.components.data.length; i++) {
-            self.updateModuleComponent(self.components.data[i]);
-        }
+        // self.getModuleComponentsPreSave();
+
+        $http.get('/api/module/components/' + $routeParams.id)
+            .then(response => {
+                console.log('get response', response.data);
+                self.componentsSaved.data = response.data;
+
+
+                // diff self.componentsSaved.data and self.components.data;
+                let componentsToDelete = [];
+                let componentsToPost = [];
+
+                for (let i = 0; i < self.components.data.length; i++) {
+                    let existsInBoth = false;
+                    for (let j = 0; j < self.componentsSaved.data.length; j++) {
+                        if (self.components.data[i] == self.componentsSaved.data[j] ) {
+                            existsInBoth = true;
+                            break;
+                        }
+                        // only run this check if we don't know if it exists in both
+                        if (!existsInBoth) {
+                            // on the last step
+                            if (j == self.componentsSaved.data.length - 1) {
+                                componentsToPost.push(self.components.data[i])
+                                console.log(componentsToPost);
+                            }
+                        }
+                    }
+                }
+
+                // for (let i = 0; i < self.components.data.length; i++) {
+                //     let existsInBoth = false;
+                //     for (let j = 0; j < self.components.data.length; j++) {
+                //         if (self.componentsSaved.data[i] == self.components.data[j] ) {
+                //             existsInBoth = true;
+                //         }
+                //         // only run this check if we don't know if it exists in both
+                //         if (!existsInBoth) {
+                //             // on the last step
+                //             if (j == self.components.data.length - 1) {
+                //                 componentsToDelete.push(self.componentsSaved.data[j])
+                //             }
+                //         }
+                //     }
+                // }
+
+                console.log('saved,', self.componentsSaved)
+                console.log('components,', self.components);
+                console.log('to save,', componentsToPost)
+                console.log('to delete,', componentsToDelete);
+
+                // for (let i = 0; i < self.components.data.length; i++) {
+                //     self.updateModuleComponent(self.components.data[i]);
+                // }
+
+
+            })
+            .catch(error => {
+                console.log('error in get', error);
+            });
+
     };
 
     /******************************************/
@@ -166,6 +299,16 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .catch(error => {
                 console.log('error in delete', error);
             });
+    };
+
+    // Deletes a component from the draft, so that it can be saved with the module save button
+    self.deleteModuleComponentInDraft = function(moduleId, componentId) {
+        for (let i = 0; i < self.components.data.length; i++) {
+            if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
+                self.components.data.splice(i, 1);
+                break;
+            }
+        }
     };
 
     /******************************************/
