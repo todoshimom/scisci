@@ -18,32 +18,32 @@
     </h2>
 
     <!-- Manage user Table -->
-    <table>
-        <thead>
-            <tr>
-                <th>First Name <span ng-click="vm.sortUsers('fnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('fnameDesc')">&#9660;</span></th>
-                <th>Last Name <span ng-click="vm.sortUsers('lnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('lnameDesc')">&#9660;</span></th>
-                <th>Account-Type <span ng-click="vm.sortUsers('accountAsc')">&#9650;</span><span ng-click="vm.sortUsers('accountDesc')">&#9660;</span></th>
-                <th>Username <span ng-click="vm.sortUsers('usernameAsc')">&#9650;</span><span ng-click="vm.sortUsers('usernameDesc')">&#9660;</span></th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="user in vm.userLibrary.list | filter:userFilter">
-                <td>{{user.first_name}}</td>
-                <td>{{user.last_name}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.username}}</td>
-                <td>
+    <div class="mock-table" role="table" aria-label="Components">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header" row="row">
+                <h3 class="columnheader">First Name <span ng-click="vm.sortUsers('fnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('fnameDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Last Name <span ng-click="vm.sortUsers('lnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('lnameDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Account-Type <span ng-click="vm.sortUsers('accountAsc')">&#9650;</span><span ng-click="vm.sortUsers('accountDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Username <span ng-click="vm.sortUsers('usernameAsc')">&#9650;</span><span ng-click="vm.sortUsers('usernameDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Edit</h3>
+                <h3 class="columnheader">Delete</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div> <!-- /.mock-table-header -->
+        <div class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row" ng-repeat="user in vm.userLibrary.list | filter:userFilter">
+                <p role="cell">{{user.first_name}}</p>
+                <p role="cell">{{user.last_name}}</p>
+                <p role="cell">{{user.name}}</p>
+                <p role="cell">{{user.username}}</p>
+                <p role="cell">
                     <md-button class="md-raised" ng-click="vm.showEdit=!vm.showEdit; vm.editUser=user">Edit</md-button>
-                </td>
-                <td>
+                </p>
+                <p role="cell">
                     <md-button class="md-raised" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">Delete</md-button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </p>
+            </div><!-- /.mock-table-row -->
+        </div><!-- /.mock-table-body -->
+    </div> <!-- /.mock-table -->
 </div>
 <!-- This is the Add User Div for "Modal" -->
 <div ng-if="vm.showNew">
