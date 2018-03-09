@@ -11,87 +11,89 @@
 </md-input-container>
 
 <!-- Module library table-->
-<table>
-    <thead>
-        <th>Name<span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></th>
-        <th>Code<span ng-click="vm.sortColumns('codeAsc')">&#9650;</span><span ng-click="vm.sortColumns('codeDesc')">&#9660;</span></th>
-        <th>Version Number <span ng-click="vm.sortColumns('versionNumAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionNumDesc')">&#9660;</span></th>
-        <th>Version Date <span ng-click="vm.sortColumns('versionDateAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionDateDesc')">&#9660;</span></th>
-        <th>Version Notes</th>
-        <th>Est. Assembly Time <span ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">&#9650;</span><span ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">&#9660;</span></th>
-        <th>Assembly Notes</th>
-        <th>Module Drive Link</th>
-        <th>To Be Printed Link</th>
-        <th>Assembly Video Link</th>
-        <th>Activity Video Link</th>
-        <th>Kit Content Sheet Link</th>
-        <th>Custom Link 1</th>
-        <th>Custom Link 2</th>
-        <th>Delete</th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
-            <td><a ng-href="#!module/{{module.id}}">{{module.name}}</a></td>
-            <td>{{module.code}}</td>
-            <td>{{module.version_number}}</td>
-            <td>{{module.version_date | date: "MMM. d, yyyy"}}</td>
-            <td>{{module.version_notes}}</td>
-            <td>{{module.estimated_assembly_time}}</td>
-            <td>{{module.assembly_notes}}</td>
-            <td>
+<div class="mock-table" role="table" aria-label="Components">
+    <div class="mock-table-header" role="rowgroup">
+        <div class="mock-table-row mock-table-row-header" row="row">
+            <h3 class="columnheader">Name<span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Code<span ng-click="vm.sortColumns('codeAsc')">&#9650;</span><span ng-click="vm.sortColumns('codeDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Version Number <span ng-click="vm.sortColumns('versionNumAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionNumDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Version Date <span ng-click="vm.sortColumns('versionDateAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionDateDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Version Notes</h3>
+            <h3 class="columnheader">Est. Assembly Time <span ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">&#9650;</span><span ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Assembly Notes</h3>
+            <h3 class="columnheader">Module Drive Link</h3>
+            <h3 class="columnheader">To Be Printed Link</h3>
+            <h3 class="columnheader">Assembly Video Link</h3>
+            <h3 class="columnheader">Activity Video Link</h3>
+            <h3 class="columnheader">Kit Content Sheet Link</h3>
+            <h3 class="columnheader">Custom Link 1</h3>
+            <h3 class="columnheader">Custom Link 2</h3>
+            <h3 class="columnheader">Delete</h3>
+        </div><!-- /.mock-table-row -->
+    </div> <!-- /.mock-table-header -->
+    <div class="mock-table-body" role="rowgroup">
+        <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
+            <p role="cell"><a ng-href="#!module/{{module.id}}">{{module.name}}</a></p>
+            <p role="cell">{{module.code}}</p>
+            <p role="cell">{{module.version_number}}</p>
+            <p role="cell">{{module.version_date | date: "MMM. d, yyyy"}}</p>
+            <p role="cell">{{module.version_notes}}</p>
+            <p role="cell">{{module.estimated_assembly_time}}</p>
+            <p role="cell">{{module.assembly_notes}}</p>
+            <p role="cell">
                 <a ng-href="{{module.module_drive_link}}">
                     <span ng-if="module.module_drive_link">
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-            </td>
-            <td>
+            </p>
+            <p role="cell">
                 <a ng-href="{{module.to_be_printed_link}}">
                     <span ng-if="module.to_be_printed_link">
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-            </td>
-            <td>
+            </p>
+            <p role="cell">
                 <a ng-href="{{module.assembly_video_link}}">
                     <span ng-if="module.assembly_video_link">
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-            </td>
-            <td>
+            </p>
+            <p role="cell">
                 <a ng-href="{{module.activity_video_link}}">
                     <span ng-if="module.activity_video_link">
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-            </td>
-            <td>
+            </p>
+            <p role="cell">
                 <a ng-href="{{module.kit_content_link}}">
                     <span ng-if="module.kit_content_link">
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-            </td>
-            <td>
+            </p>
+            <p role="cell">
                 <a ng-href="{{module.other1_link}}">
                     <span ng-if="module.other1_link">
                         <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other1_title}}</md-tooltip>
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-                </td>
-            <td>
+                </p>
+            <p role="cell">
                 <a ng-href="{{module.other2_link}}">
                     <span ng-if="module.other2_link">
                         <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other2_title}}</md-tooltip>
                         <i class="far fa-folder"></i>
                     </span>
                 </a>
-                </td>
-            <td><button ng-click="vm.deleteModule(module.id)"><i class="fas fa-trash-alt"></i></button></td>
+                </p>
+            <p role="cell"><button ng-click="vm.deleteModule(module.id)"><i class="fas fa-trash-alt"></i></button></p>
         </tr>
     </tbody>
-</table>
+</div><!-- /.mock-table -->
 
     
