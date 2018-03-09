@@ -78,7 +78,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
-    // MAKE A DRAFT VERSION
     self.addModuleComponent = function(componentId, piecesPerKit) {
         const dataToSend = {
             module_id: $routeParams.id,
@@ -110,6 +109,67 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
     }
 
+    // Draft version
+    self.addModuleComponentToDraft = function(componentId, piecesPerKit) {
+
+        // check if it's already in the module
+        let componentIsInModule = false;
+        for (let i = 0; i < self.components.data.length; i++) {
+            if (self.components.data[i].component_id == componentId) {
+                componentIsInModule = true;
+            }
+        }
+
+        // if it isn't already here, then add it.
+        if (!componentIsInModule) {
+            // unshift that component to the list
+            self.components.data.unshift(
+                {
+                    component_id: componentId, module_id: 34, pieces_per_kit: piecesPerKit,
+                    "id":100,"name":"3 ring binder","description":"a binder","vendor_name_primary":"amazon","vendor_url_primary":"www.amazon.com","vendor_name_secondary":null,"vendor_url_secondary":null,"notes":"used to hold papers","price_per_unit":"3.00","pieces_per_unit":1,"consumable":false,"type":"binder","general_stock_item":true
+                }
+            );
+        } else {
+            alert('already in module');
+        }
+
+
+        // for (let i = 0; i < self.components.data.length; i++) {
+        //     if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
+        //         self.components.data.splice(i, 1);
+        //         break;
+        //     }
+        // }
+
+        // const dataToSend = {
+        //     module_id: $routeParams.id,
+        //     component_id: componentId,
+        //     pieces_per_kit: piecesPerKit
+        // };
+        
+        // // confirm that the component is not already attached to the module before adding
+        // let componentIsInModule = false;
+        // for (let i = 0; i < self.components.data.length; i++) {
+        //     if (self.components.data[i].component_id == componentId) {
+        //         componentIsInModule = true;
+        //     }
+        // }
+
+        // // if it isn't already here, then add it.
+        // if (!componentIsInModule) {
+        //     $http.post('/api/module/components', dataToSend)
+        //     .then(response => {
+        //         console.log('response', response);
+        //         self.getModule();
+        //     })
+        //     .catch(error => {
+        //         console.log('error in add module component', error);
+        //     })
+        // } else {
+        //     console.log('true');
+        // }
+
+    }
 
     /******************************************/
     /*              PUT REQUESTS              */
@@ -223,12 +283,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('error in delete', error);
             });
     };
+
+    // Deletes a component from the draft, so that it can be saved with the module save button
     self.deleteModuleComponentInDraft = function(moduleId, componentId) {
-        console.log(self.components);
-        self.getModuleComponentsPreSave();
-        console.log(self.componentsSaved);
         for (let i = 0; i < self.components.data.length; i++) {
-            console.log('hi');
             if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
                 self.components.data.splice(i, 1);
                 break;

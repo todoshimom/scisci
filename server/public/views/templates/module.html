@@ -50,8 +50,9 @@
 
 
 <input ng-model="vm.newComponentId" placeholder="new component ID" />
-<input ng-model="vm.newComponentQuantity" placeholder="new component quantity" />
+<input ng-model="vm.newComponentQuantity" placeholder="new component quantity" type="number" />
 <button ng-click="vm.addModuleComponent(vm.newComponentId, vm.newComponentQuantity)">Add Component</button>
+<button ng-click="vm.addModuleComponentToDraft(vm.newComponentId, vm.newComponentQuantity)">Add Component Draft</button>
 
 <table>
     <tr>
