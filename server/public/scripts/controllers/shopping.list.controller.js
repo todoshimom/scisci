@@ -3,6 +3,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     let self = this;
 
     self.shoppingLists = ShoppingListService.shoppingLists;
+    self.showHideTableData = false;
 
     self.addShoppingList = function(list) {
         ShoppingListService.addShoppingList(list);

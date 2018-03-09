@@ -40,7 +40,7 @@ h2 {
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  background: pink; }
+  background-color: #55ac56; }
 
 .header {
   display: flex;
