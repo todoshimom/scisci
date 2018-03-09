@@ -6,10 +6,13 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
 
     self.module = ModuleService.module;
     self.components = ModuleService.components;
+    self.componentsSaved = ModuleService.componentsSaved;
 
     self.addModuleComponent = ModuleService.addModuleComponent;
+    self.addModuleComponentToDraft = ModuleService.addModuleComponentToDraft;
     self.updateModuleComponent = ModuleService.updateModuleComponent;
     self.deleteModuleComponent = ModuleService.deleteModuleComponent;
+    self.deleteModuleComponentInDraft = ModuleService.deleteModuleComponentInDraft;
     
     // OTHER FUNCTIONS
 
