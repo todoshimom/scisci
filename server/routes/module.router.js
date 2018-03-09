@@ -68,6 +68,7 @@ router.get('/components/:id', (req, res) => {
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
+
 router.post('/', (req, res) => {
     console.log('req.body', req.body);
     const queryText = `INSERT INTO modules (

@@ -134,42 +134,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             alert('already in module');
         }
 
-
-        // for (let i = 0; i < self.components.data.length; i++) {
-        //     if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
-        //         self.components.data.splice(i, 1);
-        //         break;
-        //     }
-        // }
-
-        // const dataToSend = {
-        //     module_id: $routeParams.id,
-        //     component_id: componentId,
-        //     pieces_per_kit: piecesPerKit
-        // };
-        
-        // // confirm that the component is not already attached to the module before adding
-        // let componentIsInModule = false;
-        // for (let i = 0; i < self.components.data.length; i++) {
-        //     if (self.components.data[i].component_id == componentId) {
-        //         componentIsInModule = true;
-        //     }
-        // }
-
-        // // if it isn't already here, then add it.
-        // if (!componentIsInModule) {
-        //     $http.post('/api/module/components', dataToSend)
-        //     .then(response => {
-        //         console.log('response', response);
-        //         self.getModule();
-        //     })
-        //     .catch(error => {
-        //         console.log('error in add module component', error);
-        //     })
-        // } else {
-        //     console.log('true');
-        // }
-
     }
 
     /******************************************/
@@ -207,62 +171,56 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
-    self.updateModuleComponents = function() {
+    self.updateModuleEverything = function() {
         // self.getModuleComponentsPreSave();
 
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
-
-
-                // diff self.componentsSaved.data and self.components.data;
-                let componentsToDelete = [];
+                
+                // Get list of components to post
                 let componentsToPost = [];
-
                 for (let i = 0; i < self.components.data.length; i++) {
-                    let existsInBoth = false;
                     for (let j = 0; j < self.componentsSaved.data.length; j++) {
-                        if (self.components.data[i] == self.componentsSaved.data[j] ) {
-                            existsInBoth = true;
+                        if (self.components.data[i].component_id == self.componentsSaved.data[j].component_id) {
                             break;
                         }
-                        // only run this check if we don't know if it exists in both
-                        if (!existsInBoth) {
-                            // on the last step
-                            if (j == self.componentsSaved.data.length - 1) {
-                                componentsToPost.push(self.components.data[i])
-                                console.log(componentsToPost);
-                            }
+                        if (j == self.componentsSaved.data.length - 1) {
+                            componentsToPost.push(self.components.data[i]);
                         }
                     }
                 }
+                console.log('to post:', componentsToPost);
 
-                // for (let i = 0; i < self.components.data.length; i++) {
-                //     let existsInBoth = false;
-                //     for (let j = 0; j < self.components.data.length; j++) {
-                //         if (self.componentsSaved.data[i] == self.components.data[j] ) {
-                //             existsInBoth = true;
-                //         }
-                //         // only run this check if we don't know if it exists in both
-                //         if (!existsInBoth) {
-                //             // on the last step
-                //             if (j == self.components.data.length - 1) {
-                //                 componentsToDelete.push(self.componentsSaved.data[j])
-                //             }
-                //         }
-                //     }
-                // }
+                // Get list of components to delete
+                let componentsToDelete = [];
+                for (let i = 0; i < self.componentsSaved.data.length; i++) {
+                    for (let j = 0; j < self.components.data.length; j++) {
+                        if (self.componentsSaved.data[i].component_id == self.components.data[j].component_id) {
+                            break;
+                        }
+                        if (j == self.components.data.length - 1) {
+                            componentsToDelete.push(self.componentsSaved.data[i]);
+                        }
+                    }
+                }
+                console.log('to delete:', componentsToDelete);
 
-                console.log('saved,', self.componentsSaved)
-                console.log('components,', self.components);
-                console.log('to save,', componentsToPost)
-                console.log('to delete,', componentsToDelete);
-
-                // for (let i = 0; i < self.components.data.length; i++) {
-                //     self.updateModuleComponent(self.components.data[i]);
-                // }
-
+                let moduleObject = {
+                    componentsToDelete,
+                    componentsToPost,
+                    module: self.module
+                };
+                $http.post('/api/module/everything', moduleObject)
+                    .then(response => {
+                        console.log('delete response', response);
+                        self.getModule();
+                        self.getModuleComponents();
+                    })
+                    .catch(error => {
+                        console.log('error in delete', error);
+                    });
 
             })
             .catch(error => {
@@ -338,8 +296,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.saveModule = function() {
         console.log('MODULE', self.module);
         if ($routeParams.id) {
-            self.updateModule();
-            self.updateModuleComponents();
+            // self.updateModule();
+            self.updateModuleEverything();
         } else {
             self.createModule();
         }
