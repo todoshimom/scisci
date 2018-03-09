@@ -1,5 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<h1> Created Shopping Lists </h1>
+<h2 class="md-title">Created Shopping Lists </h2>
 
 <label for="shoppingLists">Lists</label>
 
@@ -11,32 +11,66 @@
 <button>Print</button>
 
  <!-- Table mock up for the time being, will be changed out later for according divs  -->
-<h2>Shopping List</h2>
-<table>
-	<thead>
-		<tr>
-			<th>Ordered</th>
-			<th>In-House</th>
-			<th>Name</th>
-			<th>Type</th>
-			<th>Description</th>
-			<th>Price Per Unit</th>
-			<th>Pieces Per Unit</th>
-			<th>General Stock</th>
-			<th>Consumable</th>
-			<th>Modules Used In</th>
-			<th>Vendor 1 Name</th>
-			<th>Vendor 1 Link</th>
-			<th>Vendor 2 Name</th>
-			<th>Vendor 2 Link</th>
-			<th>Notes</th>
-			<th>Edit</th>
-			<th>Delete</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
+<h3 class="md-title md-subtitle">Shopping List</h3>
+<div class="mock-table" role="table" aria-label="Components">
+	<div class="mock-table-header" role="rowgroup">
+		<div class="mock-table-row mock-table-row-header" row="row">
+			<h3 class="columnheader">Ordered</h3>
+			<h3 class="columnheader">In-House</h3>
+			<h3 class="columnheader">Name</h3>
+			<h3 class="columnheader">Type</h3>
+			<h3 class="columnheader">Description</h3>
+			<h3 class="columnheader">Vendor 1 Name</h3>
+			<h3 class="columnheader">Vendor 1 Link</h3>
+			<h3 class="columnheader">Edit</h3>
+			<h3 class="columnheader">Delete</h3>
+			<h3 class="columnheader">More Info</h3>
+		</div><!-- /.mock-table-row-header -->
+	</div><!-- /.mock-table-header -->
+	<div class="mock-table-body" role="rowgroup">
+		<div class="mock-table-row" row="row">
+			<p role="cell">[ ]</p>
+			<p role="cell">[ ]</p>
+			<p role="cell">3 ring binder</p>
+			<p role="cell">Binder</p>
+			<p role="cell">Three Ring Binder</p>
+			<p role="cell">vendor name 1</p>
+			<p role="cell">vendor link 1</p>
+			<p role="cell"><button>Edit</button></p>
+			<p role="cell"><button>Delete</button></p>
+			<p role="cell">
+				<p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData"><i class="fas fa-sort-down"></i></p>
+				<div class="collapsed-table-data" ng-if="vm.showHideTableData">
+					<div class="mock-table" role="table" aria-label="Components">
+						<div class="mock-table-header" role="rowgroup">
+							<div class="mock-table-row mock-table-row-header" row="row">
+								<h3 class="columnheader">Price Per Unit</h3>
+								<h3 class="columnheader">Pieces Per Unit</h3>
+								<h3 class="columnheader">General Stock</h3>
+								<h3 class="columnheader">Consumable</h3>
+								<h3 class="columnheader">Modules Used In</h3>
+								<h3 class="columnheader">Vendor 2 Name</h3>
+								<h3 class="columnheader">Vendor 2 Link</h3>
+								<h3 class="columnheader">Notes</h3>
+							</div><!-- /.mock-table-row-header -->
+						</div><!-- /.mock-table-header -->
+
+						<div class="mock-table-body" role="rowgroup">
+							<div class="mock-table-row" row="row">
+								<p role="cell">Description here</p>
+								<p role="cell">$price per unit</p>
+								<p role="cell">#pieces per unit</p>
+								<p role="cell">true</p>
+								<p role="cell">true</p>
+								<p role="cell">3</p>
+								<p role="cell">vendor name 2</p>
+								<p role="cell">vendor link 2</p>
+								<p role="cell">Notes that are here for the thing</p>
+							</div><!-- /.mock-table-row -->
+						</div><!-- /.mock-table-body -->
+					</div>
+				</div>
+			</p>
+		</div><!-- /.mock-table-row -->
+	</div><!-- /.mock-table-body -->
+</table><!-- /.mock-table -->
