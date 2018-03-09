@@ -177,6 +177,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         $http.put(`/api/user/set/rates/${rate}`)
             .then(function (response) {
                 console.log('Post response for set labor rate: ', response.data);
+                self.retrieveLaborRate()
             })
             .catch(function (error) {
                 console.log('Post response for set labor rates failed: ', error);
