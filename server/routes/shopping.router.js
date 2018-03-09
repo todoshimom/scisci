@@ -21,7 +21,7 @@ router.get('/all', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
+router.get('/list/:id', (req, res) => {
     console.log('in the get route', req.params.id);
     let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
     pool.query(queryString, [req.params.id])
@@ -45,6 +45,7 @@ router.get('/components', (req, res) => {
     pool.query(queryString)
         .then(result => {
             res.send(result);
+            console.log('component result: ', result);
         })
         .catch(err => {
             console.log('hit error on getting object', err);

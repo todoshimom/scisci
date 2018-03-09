@@ -19,6 +19,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
         ShoppingListService.getShoppingLists();
       }; // end getShoppingLists()
     self.getShoppingLists();
+    
     self.getComponents = function() {
         ShoppingListService.getComponents();
     }; //end getComponents()
