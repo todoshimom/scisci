@@ -218,7 +218,44 @@ router.delete('/:id', (req, res) => {
 /*                OTHERS                  */
 /******************************************/
 
+/********** LABOR RATE ROUTES ************/
 
+router.get('/laborRates', (req, res) => {//Start of get user_types function
 
+    let queryText = `SELECT * FROM app_settings`;
+
+    pool.query(queryText)
+        .then((results) => {
+            // console.log('GET user_types: ', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET user_type ', error);
+            res.sendStatus(500);
+        });
+
+});//End of get user_types function
+
+router.put('/set/rates/:rate', (req, res) => {//Start of post new user function
+
+    console.log(req.params.rate);
+
+    let queryText = `
+    UPDATE app_settings
+    SET 
+    labor_rate = ${req.params.rate},
+    last_changed = '${req.user.first_name} ${req.user.last_name}'
+    WHERE id = 1;`
+
+    pool.query(queryText)
+        .then((results) => {
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error updating rates: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of post new user function
 
 module.exports = router;

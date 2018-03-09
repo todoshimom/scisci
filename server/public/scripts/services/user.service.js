@@ -4,6 +4,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     self.userObject = { list: [] };
     self.userLibrary = { list: [] };
     self.userTypes = { list: [] };
+    self.currentLaborRate = { list: [] };
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -173,7 +174,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     /*****************  LABOR RATE GET AND POST  *****************/
 
     self.setLaborRate = function (rate) {// Start of set labor rate function.
-        $http.post(`/api/user/set/rates/${rate}`)
+        $http.put(`/api/user/set/rates/${rate}`)
             .then(function (response) {
                 console.log('Post response for set labor rate: ', response.data);
             })
@@ -186,6 +187,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         $http.get('/api/user/laborRates')
             .then(function (response) {
                 console.log('Get response for retrieve labor rate: ', response.data);
+                self.currentLaborRate.list = response.data;
             })
             .catch(function (error) {
                 console.log('Get response for retrieve labor rates failed: ', error);
