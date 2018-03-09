@@ -12,6 +12,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     // begin getComponents()
     self.getComponents = function() {
+
       return $http.get('/api/component')
         .then( function(response) {
           return response.data;
@@ -19,25 +20,34 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
         .catch( function(error) {
           console.log(error);
         });
+        
     }; // end getComponents()
 
-    self.getComponents()
-      .then( function(componentData) {
+    // begin getAllComponents()
+    self.getAllComponents = function() {
 
-        for (let component of componentData) {
-          $http.get(`/api/component/modulesCount/${component.id}`)
-            .then( function(response) {
-              component.modules_used_in = response.data[0].count;
-            })
-            .catch( function(error) {
-              console.log(error);
-            });
-        }
-        self.componentLibrary.list = componentData;
-    });
+      self.getComponents()
+        .then( function(componentData) {
 
+          for (let component of componentData) {
+            $http.get(`/api/component/modulesCount/${component.id}`)
+              .then( function(response) {
+                component.modules_used_in = response.data[0].count;
+              })
+              .catch( function(error) {
+                console.log(error);
+              });
+          }
+          self.componentLibrary.list = componentData;
+      });
 
+    }; // getAllComponents()
+
+    self.getAllComponents();
+
+    // begin sortComponents()
     self.sortComponents = function(sortMethod) {
+
       $http.get(`/api/component/sorting/${sortMethod}`)
         .then( function(response) {
           console.log(response.data);
@@ -46,9 +56,12 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
         .catch( function(error) {
           console.log(error);
         });
-    };
 
+    }; // end sortComponents()
+
+    // begin getModules()
     self.getModules = function(component) {
+
       $http.get(`/api/component/getModules/${component.id}`)
         .then( function(response) {
           console.log(response.data);
@@ -57,7 +70,8 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
         .catch( function(error) {
           console.log('error', error);
         });
-    };
+
+    }; // end getModules()
 
 
     /******************************************/
@@ -70,7 +84,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       $http.post('/api/component', component)
         .then( function(response) {
           console.log('Component added to library:', response);
-          self.getComponents();
+          self.getAllComponents();
         })
         .catch( function(error) {
           console.log('Error on POST:', error);
@@ -84,14 +98,16 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     // begin updateComponent()
     self.updateComponent = function(component) {
+
       $http.put(`/api/component/updateComponent`, component)
         .then( function(response) {
           console.log('Component updated', response);
-          self.getComponents();
+          self.getAllComponents();
         })
         .catch( function(error) {
           console.log('Error updating component', error);
         });
+
     }; // end updateComponent()
 
 
@@ -105,7 +121,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       $http.delete(`/api/component/deleteComponent/${componentId}`)
         .then( function(response) {
           console.log('Component deleted from library', response);
-          self.getComponents();
+          self.getAllComponents();
         })
         .catch( function(error) {
           console.log('Error deleting component', error);
@@ -118,9 +134,6 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*            OTHER FUNCTIONS             */
     /******************************************/
 
-    self.goToModule = function(componentModule) {
-      
-    };
 
 
 }]);

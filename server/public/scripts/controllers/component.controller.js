@@ -63,10 +63,4 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       self.moduleViewer = false;
     };
 
-    self.goToModule = function(componentModule) {
-      console.log(componentModule.id);
-    };
-
-
-
 }]);
