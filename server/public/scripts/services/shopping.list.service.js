@@ -38,12 +38,12 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
-    self.createShoppingList = function (name) {
-        console.log(name);
+    self.createShoppingList = function (name, first_name, last_name) {
+        let username = `${first_name} ${last_name}`;
         let shoppingListObject = {
             name,
             date: new Date(),
-            user_created_by: "name here"
+            user_created_by: username
         };
         $http.post('/api/shopping', shoppingListObject)
             .then((result) => {
