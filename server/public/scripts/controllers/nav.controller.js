@@ -3,12 +3,6 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
     let self = this;
     self.userService = UserService;
 
-    self.showManageUsers = false;
-    self.showModuleCreation = false;
-    self.showShopping = false;
-    self.showReporting = false;
-    self.showAppSettings = false;
-
     // find the location path and it matches the current item
     // add the class 'active' to the element, otherwise no class
     self.getClass = function(pathName) {
@@ -26,6 +20,10 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
     
         if(usertypeValue === 1) {
             self.showManageUsers = true;
+            self.showModuleCreation = true;
+            self.showShopping = true;
+            self.showReporting = true;
+            self.showAppSettings = true;
         }
         if(usertypeValue === 2) {
             self.showModuleCreation = true;
