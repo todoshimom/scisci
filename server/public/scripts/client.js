@@ -32,90 +32,90 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         .when('/app-settings', {
             templateUrl: '/views/templates/app-settings.html',
             controller: 'UserController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/module-nav', {
-            templateUrl: '/views/templates/module-nav.html'
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            templateUrl: '/views/templates/module-nav.html',
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/component', {
             templateUrl: '/views/templates/component.html',
             controller: 'ComponentController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/module', {
             templateUrl: '/views/templates/module.html',
             controller: 'ModuleController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/module/:id', {
             templateUrl: '/views/templates/module.html',
             controller: 'ModuleController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/module-library', {
             templateUrl: '/views/templates/module-library.html',
             controller: 'ModuleListController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/report', {
             templateUrl: '/views/templates/report.html',
             controller: 'ReportController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/shopping-nav', {
-            templateUrl: '/views/templates/shopping-nav.html'
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            templateUrl: '/views/templates/shopping-nav.html',
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/shopping-list', {
             templateUrl: '/views/templates/shopping-list.html',
             controller: 'ShoppingListController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .when('/shopping-list-creation', {
             templateUrl: '/views/templates/shopping-list-creation.html',
             controller: 'ShoppingListCreationController as vm',
-            // resolve: {
-            //     getuser: function (UserService) {
-            //         return UserService.getuser();
-            //     }
-            // }
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser();
+                }
+            }
         })
         .otherwise({
             templateUrl: '/views/templates/404.html'

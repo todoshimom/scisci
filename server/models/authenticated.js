@@ -5,7 +5,7 @@ let isAuthenticated = function (req, res, next) {
         return next();
     }
     console.log('Failed the next of authen');
-    res.sendStatus(403); //Forbiden User is not authenticated
+    res.sendStatus(403); //Forbidden User is not authenticated
 }
 
 module.exports = isAuthenticated;
