@@ -1,5 +1,5 @@
 
-CREATE TABLE user_type (
+CREATE TABLE usertype (
 "id" SERIAL PRIMARY KEY, 
 "name" VARCHAR(25) NOT NULL
 );
@@ -10,15 +10,15 @@ CREATE TABLE users (
 "last_name" VARCHAR(150) NOT NULL,  
 "username" VARCHAR(255) NOT NULL, 
 "password" VARCHAR(255) DEFAULT '$2a$10$hHqRWK07ePfHgr6xZN526u/g5.ch.YgGJa1DBFF9IkR70DEBhng5e', --The default is Welcome1 encrypted., 
-"user_type" INT REFERENCES "user_type" NOT NULL
+"usertype" INT REFERENCES "usertype" NOT NULL
 );
 
 -- The 3 standard user types used in the application.
-INSERT INTO user_type (name)
+INSERT INTO usertype (name)
 VALUES ('Admin'),('Editor'),('Shopper');
 
 -- This will be the very first admin.
-INSERT INTO users (first_name, last_name, username, user_type)
+INSERT INTO users (first_name, last_name, username, usertype)
 VALUES ('Renee', 'Piersa', 'test@email.com', 1);
 
 CREATE TABLE components (
@@ -65,7 +65,7 @@ CREATE TABLE components_modules (
 "pieces_per_kit" INT
 );
 
-CREATE TABLE shopping_list (
+CREATE TABLE shoppinglist (
 "id" SERIAL PRIMARY KEY, 
 "name" VARCHAR(100), 
 "date" TIMESTAMP, 
@@ -76,13 +76,18 @@ CREATE TABLE shopping_list (
 CREATE TABLE modules_shopping (
 "id" SERIAL PRIMARY KEY, 
 "quantity" INT, 
-"shopping_id" INT REFERENCES "shopping_list", 
+"shopping_id" INT REFERENCES "shoppinglist", 
 "module_id" INT REFERENCES "modules",
 "ordered" BOOLEAN, 
 "in_house" BOOLEAN
 );
 
 CREATE TABLE app_settings (
-"id" SERIAL PRIMARY KEY, 
-"labor_rate" DECIMAL (5, 2)
+"id" SERIAL PRIMARY KEY,
+"labor_rate" DECIMAL (5, 2),
+"last_changed" VARCHAR(150)
 );
+
+
+INSERT INTO app_settings (labor_rate, last_changed)
+VALUES (0, 'Default');

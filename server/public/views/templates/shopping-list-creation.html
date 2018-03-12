@@ -1,7 +1,7 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
 <h2 class="md-title">New Shopping List</h2>
-<form ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;">
+<form ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;"> 
     <md-input-container class="input">
         <label>Shopping List Name</label>
         <input ng-model="vm.name" required />

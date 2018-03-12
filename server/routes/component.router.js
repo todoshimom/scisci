@@ -10,9 +10,7 @@ const router = express.Router();
 /******************************************/
 
 router.get('/', (req, res) => {
-
   let queryText = `SELECT * FROM components ORDER BY "name"`;
-
   pool.query(queryText)
       .then((results) => {
         // console.log('GET components', results.rows);
@@ -25,11 +23,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/sorting/:method', (req, res) => {
-
   let sortMethod = req.params.method;
-
   let queryText = sorting.sortComponents(sortMethod);
-
   pool.query(queryText)
     .then((results) => {
       // console.log('GET components sorted', results);
@@ -42,9 +37,7 @@ router.get('/sorting/:method', (req, res) => {
 });
 
 router.get('/modulesCount/:id', (req, res) => {
-
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
-
   pool.query(queryText, [req.params.id])
     .then((results) => {
       // console.log(results.rows.count);
@@ -57,7 +50,6 @@ router.get('/modulesCount/:id', (req, res) => {
 
 
 router.get('/getModules/:id', (req, res) => {
-  
   let queryText = `
   SELECT modules.id, modules.name, components_modules.component_id
   FROM components_modules
@@ -80,7 +72,6 @@ router.get('/getModules/:id', (req, res) => {
 /******************************************/
 
 router.post('/', (req, res) => {
-
   if(!req.body.hasOwnProperty('vendor_name_secondary')) {
     req.body.vendor_name_secondary = null;
   }
@@ -89,7 +80,6 @@ router.post('/', (req, res) => {
   }
 
   let item = req.body;
-
   let queryText = `
   INSERT INTO components ("name", "description", "vendor_name_primary",
     "vendor_url_primary", "vendor_name_secondary", "vendor_url_secondary",
@@ -151,11 +141,8 @@ router.put('/updateComponent', (req, res) => {
 /******************************************/
 
 router.delete('/deleteComponent/:id', (req, res) => {
-
   let id = req.params.id;
-
   let queryText = `DELETE FROM components WHERE id = $1`;
-
   pool.query(queryText, [id])
       .then((results) => {
         // console.log('Component delelted', results);

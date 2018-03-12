@@ -5,6 +5,7 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     self.currentShoppingListId = { shopId: 0 };
 
     self.shoppingLists = {list:[{}]};
+    self.components = {list: [{}]};
 
 	/******************************************/
 	/*              GET REQUESTS              */
@@ -21,16 +22,28 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
             console.log(error);
           });
     };
+    //function to get components for the shopping list selected
+    self.getComponents = function() {
+        $http.get('/api/shopping/components')
+          .then( function(result) {
+            self.components.list = result.data;
+            console.log('components.list: ', self.components.list);
+            
+          })
+          .catch( function(error) {
+            console.log('error on getting components', error);
+          });
+    };
 
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
-    self.createShoppingList = function (name) {
-        console.log(name);
+    self.createShoppingList = function (name, first_name, last_name) {
+        let username = `${first_name} ${last_name}`;
         let shoppingListObject = {
             name,
             date: new Date(),
-            user_created_by: "name here"
+            user_created_by: username
         };
         $http.post('/api/shopping', shoppingListObject)
             .then((result) => {
@@ -70,7 +83,22 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     /******************************************/
     /*            OTHER FUNCTIONS             */
     /******************************************/
-
-
+    
+    //function to show ordered checkbox has been clicked in console 
+    self.updateOrdered = function(orderStatus) {
+        if(orderStatus == true ) {
+            console.log('Ordered Checkbox has been clicked');
+        } else if (orderStatus == false ) {
+            console.log('Ordered Checkbox un-checked');
+        }//end else if
+    }//end function 
+    //function to show InHouse checkbox has been clicked in console
+    self.updateInHouse = function(inHouseStatus) {
+        if(inHouseStatus == true ) {
+            console.log('In-House Checkbox has been clicked');
+        } else if (inHouseStatus == false ) {
+            console.log('In-House Checkbox un-checked');
+        }//end else if
+    }//end function 
 
 }]);
