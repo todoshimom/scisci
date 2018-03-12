@@ -1,4 +1,4 @@
-let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial']);
+let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAnimate']);
 
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
