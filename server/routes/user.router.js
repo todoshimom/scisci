@@ -5,6 +5,8 @@ const pool = require('../modules/pool.js');
 const router = express.Router();
 const sorting = require('../modules/sorting.js');
 const authenticated = require('../models/authenticated')
+const isAdmin = require('../models/admin')
+
 
 /******************************************/
 /*              GET ROUTES                */
@@ -31,7 +33,7 @@ router.get('/logout', (req, res) => {
 });
 
 
-router.get('/users', authenticated, (req, res) => { //Start of get all users function
+router.get('/users', authenticated, isAdmin, (req, res) => { //Start of get all users function
 
     let queryText = `
     SELECT users.first_name, users.last_name, users.username, usertype.name, users.usertype, users.id
@@ -51,7 +53,7 @@ router.get('/users', authenticated, (req, res) => { //Start of get all users fun
 
 }); //End of get all users function
 
-router.get('/types', authenticated, (req, res) => {//Start of get usertypes function
+router.get('/types', authenticated, isAdmin, (req, res) => {//Start of get usertypes function
 
     let queryText = `SELECT * FROM usertype`;
 
@@ -67,7 +69,7 @@ router.get('/types', authenticated, (req, res) => {//Start of get usertypes func
 
 });//End of get usertypes function
 
-router.get('/sorting/:method', authenticated, (req, res) => {//Start of sort users function
+router.get('/sorting/:method', authenticated, isAdmin, (req, res) => {//Start of sort users function
 
     let queryText = sorting.sortUsers(req.params.method);
 
@@ -86,7 +88,7 @@ router.get('/sorting/:method', authenticated, (req, res) => {//Start of sort use
 /*             POST ROUTES                */
 /******************************************/
 
-router.post('/', authenticated, (req, res) => {//Start of post new user function
+router.post('/', authenticated, isAdmin, (req, res) => {//Start of post new user function
 
     let user = req.body;
     console.log(user);
@@ -120,7 +122,7 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 /*              PUT ROUTES                */
 /******************************************/
 
-router.put('/', authenticated, (req, res) => {//Start of edit user function PUT REQUEST
+router.put('/', authenticated, isAdmin, (req, res) => {//Start of edit user function PUT REQUEST
 
     let user = req.body;
     console.log(user);
@@ -169,7 +171,7 @@ router.put('/newPassword', authenticated, (req, res) => {//Start of resetPasswor
 
 });//End of resetPassword route 
 
-router.put('/resetPassword/:id', authenticated, (req, res) => {//Start of resetPassword route
+router.put('/resetPassword/:id', authenticated, isAdmin, (req, res) => {//Start of resetPassword route
 
     //Mental note, this area and resetPassword can be refactored.
 
@@ -198,7 +200,7 @@ router.put('/resetPassword/:id', authenticated, (req, res) => {//Start of resetP
 /*            DELETE ROUTES               */
 /******************************************/
 
-router.delete('/:id', authenticated, (req, res) => {
+router.delete('/:id', authenticated, isAdmin, (req, res) => {
 
     let queryText = `DELETE FROM users WHERE id = ${req.params.id}`;
 
@@ -220,7 +222,7 @@ router.delete('/:id', authenticated, (req, res) => {
 
 /********** LABOR RATE ROUTES ************/
 
-router.get('/laborRates', authenticated, (req, res) => {//Start of get usertypes function
+router.get('/laborRates', authenticated, isAdmin, (req, res) => {//Start of get usertypes function
 
     let queryText = `SELECT * FROM app_settings`;
 
@@ -236,7 +238,7 @@ router.get('/laborRates', authenticated, (req, res) => {//Start of get usertypes
 
 });//End of get usertypes function
 
-router.put('/set/rates/:rate', authenticated, (req, res) => {//Start of post new user function
+router.put('/set/rates/:rate', authenticated, isAdmin, (req, res) => {//Start of post new user function
 
     console.log(req.params.rate);
 

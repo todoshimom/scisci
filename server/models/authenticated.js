@@ -2,10 +2,10 @@ const express = require('express');
 
 let isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
-        return next();        
+        return next();
     }
     console.log('Failed the next of authen');
-    res.sendStatus(401); //Unauthorized
-  }
+    res.sendStatus(403); //Forbiden User is not authenticated
+}
 
-  module.exports = isAuthenticated;
+module.exports = isAuthenticated;
