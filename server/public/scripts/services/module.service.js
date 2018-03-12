@@ -144,11 +144,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
         // reduce the row data to the junction table row's data
         let moduleComponentToSave = {
-            id: component.id,
             module_id: component.module_id,
             component_id: component.component_id,
             pieces_per_kit: component.pieces_per_kit
-        }
+        };
         console.log(moduleComponentToSave);
 
         $http.put('/api/module/components', moduleComponentToSave)
@@ -169,6 +168,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
 
+                // -----
                 // POST COMPONENTS
                 // Get list of components to post
                 let componentsToPost = [];
@@ -193,6 +193,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                     self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
                 }
 
+                // -----
                 // DELETE COMPONENTS
                 // Get list of components to delete
                 let componentsToDelete = [];
@@ -216,8 +217,14 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                     self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
                 }
 
+                // -----
+                // UPDATE QUANTITIES
+                for (let i = 0; i < self.components.data.length; i++) {
+                    self.updateModuleComponent(self.components.data[i]);
+                }
 
-                // PUT THE MODULE
+                // -----
+                // UPDATE THE MODULE
                 self.updateModule();
 
             })
