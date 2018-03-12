@@ -22,14 +22,15 @@
 
 <div ng-if="!vm.passwordStatus">
     <h1>Set New Password</h1>
-    <h3>Please set your new password! You can not use the default</h3>
+    <h3>Please set your new password! Your new password cannot match the default password.</h3>
     <div>
         <md-input-container class="md-block">
             <label>New Password</label>
             <input type="password" required md-no-asterisk name="newpassword" ng-model="vm.newPassword.password" minlength="8" maxlength="32"
                 ng-pattern="/^(?=(?:.*[a-zA-Z]){1})(?=(?:.*[0-9]){1})\w+$/" />
             <div ng-message-exp="['required', minlength', 'maxlength', 'pattern']">
-                Must be atleast 8-32 characters long and have atleast one letter and number.
+                Must be at least 8-32 characters long.
+                Must be at least one letter and number.
             </div>
         </md-input-container>
     </div>

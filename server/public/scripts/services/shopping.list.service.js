@@ -5,6 +5,7 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     self.currentShoppingListId = { shopId: 0 };
 
     self.shoppingLists = {list:[{}]};
+    self.components = {list: [{}]};
 
 	/******************************************/
 	/*              GET REQUESTS              */
@@ -21,16 +22,28 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
             console.log(error);
           });
     };
+    //function to get components for the shopping list selected
+    self.getComponents = function() {
+        $http.get('/api/shopping/components')
+          .then( function(result) {
+            self.components.list = result.data;
+            console.log('components.list: ', self.components.list);
+            
+          })
+          .catch( function(error) {
+            console.log('error on getting components', error);
+          });
+    };
 
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
-    self.createShoppingList = function (name) {
-        console.log(name);
+    self.createShoppingList = function (name, first_name, last_name) {
+        let username = `${first_name} ${last_name}`;
         let shoppingListObject = {
             name,
             date: new Date(),
-            user_created_by: "name here"
+            user_created_by: username
         };
         $http.post('/api/shopping', shoppingListObject)
             .then((result) => {
