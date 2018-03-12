@@ -22,6 +22,10 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
     self.addComponentToLib = function(component) {
       console.log(component);
       ComponentService.addComponentToLib(component);
+      self.componentItem = {
+        consumable: false,
+        general_stock_item: false
+      };
     }; // end addComponentToLib()
 
     // begin modifyComponent()
