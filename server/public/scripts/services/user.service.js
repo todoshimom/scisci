@@ -142,7 +142,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         console.log('UserService -- getuser');
         $http.get('/api/user').then(function (response) {
             if (response.data.username) {
-                // user has a curret session on the server
+                // user has a current session on the server
                 self.userObject.list = response.data;
                 console.log('UserService -- getuser -- User Data: ', self.userObject);
             } else {
