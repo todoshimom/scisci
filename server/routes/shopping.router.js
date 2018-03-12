@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
+const calculations = require('../modules/addComponents.js');
 const router = express.Router();
 
 
@@ -8,8 +9,8 @@ const router = express.Router();
 /*              GET REQUESTS              */
 /******************************************/
 router.get('/all', (req, res) => {
-    const queryText = 'SELECT * FROM shoppinglist ORDER BY "name"';
-    
+    const queryText = 'SELECT * FROM shopping_list ORDER BY "name"';
+
     pool.query(queryText)
         .then((results) => {
         res.send(results.rows);
@@ -23,7 +24,7 @@ router.get('/all', (req, res) => {
 
 router.get('/list/:id', (req, res) => {
     console.log('in the get route', req.params.id);
-    let queryString = 'SELECT id FROM shoppinglist WHERE id = $1';
+    let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
     pool.query(queryString, [req.params.id])
         .then(result => {
             res.send(result);
@@ -34,24 +35,49 @@ router.get('/list/:id', (req, res) => {
         });
 })//end get
 
+// router.get('/components', (req, res) => {
+//     console.log('in the get route',);
+//     let queryString = `SELECT components.*
+//     FROM modules_shopping
+//     JOIN modules ON modules.id = modules_shopping.id
+//     JOIN components_modules ON modules.id = components_modules.id
+//     JOIN components ON components.id = components_modules.id
+//     `;
+//     pool.query(queryString)
+//         .then(result => {
+//             res.send(result);
+//             console.log('component result: ', result);
+//         })
+//         .catch(err => {
+//             console.log('hit error on getting object', err);
+//             res.sendStatus(500);
+//         });
+// })//end get
+
+
+
 router.get('/components', (req, res) => {
-    console.log('in the get route',);
-    let queryString = `SELECT components.*
-    FROM modules_shopping 
-    JOIN modules ON modules.id = modules_shopping.id
-    JOIN components_modules ON modules.id = components_modules.id
-    JOIN components ON components.id = components_modules.id
-    `;
-    pool.query(queryString)
-        .then(result => {
-            res.send(result);
-            console.log('component result: ', result);
-        })
-        .catch(err => {
-            console.log('hit error on getting object', err);
-            res.sendStatus(500);
-        });
-})//end get
+
+  let queryText = `
+  SELECT components_modules.module_id, components_modules.component_id, components_modules.pieces_per_kit,
+  modules_shopping.quantity, modules_shopping.shopping_id, components.*, shopping_components.ordered, shopping_components.in_house FROM components_modules
+  JOIN modules_shopping ON modules_shopping.module_id = components_modules.module_id
+  JOIN components ON components_modules.component_id = components.id
+  LEFT OUTER JOIN shopping_components ON shopping_components.component_id = components.id
+  WHERE modules_shopping.shopping_id = 1;
+  `;
+
+  pool.query(queryText)
+    .then((results) => {
+        // res.send(results.rows);
+        res.send(calculations.addComponents(results.rows));
+    })
+    .catch(err => {
+        console.log('hit error on posting of new Item', err);
+        res.sendStatus(500);
+    });
+
+});
 
 
 /******************************************/
@@ -63,7 +89,7 @@ router.post('/', (req, res) => {
     pool.query(queryString, [req.body.name, req.body.date, req.body.user_created_by])
         .then(result => {
             let queryString = `
-            SELECT id 
+            SELECT id
             FROM shoppinglist
             WHERE name = '${req.body.name}';`
             pool.query(queryString)
@@ -75,7 +101,7 @@ router.post('/', (req, res) => {
                     console.log('hit error on posting of new Item', err);
                     res.sendStatus(500);
                 });
-        })//end then 
+        })//end then
         .catch(err => {
             console.log('hit error on posting of new Item', err);
             res.sendStatus(500);
@@ -109,7 +135,7 @@ router.post('/shoppinglist/:id', (req, res) => {  //Start of add shoppinglist ju
 
     res.sendStatus(200);
 
-});  //End of add shoppinglist junction function 
+});  //End of add shoppinglist junction function
 
 /******************************************/
 /*              PUT REQUESTS              */
