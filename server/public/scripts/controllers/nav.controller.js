@@ -2,6 +2,8 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
     console.log('NavController created');
     let self = this;
     self.userService = UserService;
+    
+    var usertypeValue = self.userService.userObject.list.usertype;
 
     // find the location path and it matches the current item
     // add the class 'active' to the element, otherwise no class
@@ -15,7 +17,6 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
 
     // return values to variables based on user type
     self.showNav = function() {
-        var usertypeValue = self.userService.userObject.list.usertype;
         console.log('usertypevalue', usertypeValue);
     
         if(usertypeValue === 1) {
