@@ -83,7 +83,22 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     /******************************************/
     /*            OTHER FUNCTIONS             */
     /******************************************/
-
-
+    
+    //function to show ordered checkbox has been clicked in console 
+    self.updateOrdered = function(orderStatus) {
+        if(orderStatus == true ) {
+            console.log('Ordered Checkbox has been clicked');
+        } else if (orderStatus == false ) {
+            console.log('Ordered Checkbox un-checked');
+        }//end else if
+    }//end function 
+    //function to show InHouse checkbox has been clicked in console
+    self.updateInHouse = function(inHouseStatus) {
+        if(inHouseStatus == true ) {
+            console.log('In-House Checkbox has been clicked');
+        } else if (inHouseStatus == false ) {
+            console.log('In-House Checkbox un-checked');
+        }//end else if
+    }//end function 
 
 }]);
