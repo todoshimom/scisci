@@ -24,6 +24,7 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
                             self.passwordStatus = false;
                         }
                         else {
+                            UserService.onLoad()
                             $location.path('/user');
                         }
                     } else {

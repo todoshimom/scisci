@@ -13,11 +13,11 @@ myApp.controller('UserController', ['UserService', function (UserService) {
             alert('Please fill out First Name, Last Name and Username. "Note: Default Account-Type is Editor if none is picked"')
         }
         else if (confirm(`Are you sure you want to add an account for ${newUser.first_name} ${newUser.last_name}?`)) {
-            console.log(newUser.user_type);// undefined if none.
-            if (newUser.user_type == '' || typeof newUser.user_type == 'undefined') {
-                newUser.user_type = 2 //Default is editor if none is given. 
+            console.log(newUser.usertype);// undefined if none.
+            if (newUser.usertype == '' || typeof newUser.usertype == 'undefined') {
+                newUser.usertype = 2 //Default is editor if none is given. 
             }
-            console.log(newUser.user_type);// now has the property.
+            console.log(newUser.usertype);// now has the property.
 
             UserService.addUser(newUser);
 
