@@ -159,6 +159,57 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
+    // Post new module components
+    self.updateModuleEverythingComponentsPost = function() {
+        // Get list of components to post
+        let componentsToPost = [];
+        for (let i = 0; i < self.components.data.length; i++) {
+            
+            // if the array length is zero, you can't check it, so just push it.
+            if (self.componentsSaved.data.length == 0) {
+                componentsToPost.push(self.components.data[i]);
+            } else {
+                for (let j = 0; j < self.componentsSaved.data.length; j++) {
+                    console.log(i, j, self.components.data[i].component_id, self.componentsSaved.data[j].component_id);
+                    if (self.components.data[i].component_id == self.componentsSaved.data[j].component_id) {
+                        break;
+                    }
+                    if (j == self.componentsSaved.data.length - 1) {
+                        componentsToPost.push(self.components.data[i]);
+                    }
+                }
+            }
+        }
+        for (let i = 0; i < componentsToPost.length; i++) {
+            self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
+        }
+    };
+
+    // Delete Module Components
+    self.updateModuleEverythingComponentsDelete = function() {
+        // Get list of components to delete
+        let componentsToDelete = [];
+        for (let i = 0; i < self.componentsSaved.data.length; i++) {
+
+            // if the array length is zero, you can't check it, so just push it.
+            if (self.components.data.length == 0) {
+                componentsToDelete.push(self.componentsSaved.data[i]);
+            } else {
+                for (let j = 0; j < self.components.data.length; j++) {
+                    if (self.componentsSaved.data[i].component_id == self.components.data[j].component_id) {
+                        break;
+                    }
+                    if (j == self.components.data.length - 1) {
+                        componentsToDelete.push(self.componentsSaved.data[i]);
+                    }
+                }
+            }
+        }
+        for (let i = 0; i < componentsToDelete.length; i++) {
+            self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
+        }
+    };
+
     self.updateModuleEverything = function() {
         // self.getModuleComponentsPreSave();
 
@@ -167,54 +218,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
 
-                // -----
-                // POST COMPONENTS
-                // Get list of components to post
-                let componentsToPost = [];
-                for (let i = 0; i < self.components.data.length; i++) {
-                    
-                    // if the array length is zero, you can't check it, so just push it.
-                    if (self.componentsSaved.data.length == 0) {
-                        componentsToPost.push(self.components.data[i]);
-                    } else {
-                        for (let j = 0; j < self.componentsSaved.data.length; j++) {
-                            console.log(i, j, self.components.data[i].component_id, self.componentsSaved.data[j].component_id);
-                            if (self.components.data[i].component_id == self.componentsSaved.data[j].component_id) {
-                                break;
-                            }
-                            if (j == self.componentsSaved.data.length - 1) {
-                                componentsToPost.push(self.components.data[i]);
-                            }
-                        }
-                    }
-                }
-                for (let i = 0; i < componentsToPost.length; i++) {
-                    self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
-                }
-
-                // -----
-                // DELETE COMPONENTS
-                // Get list of components to delete
-                let componentsToDelete = [];
-                for (let i = 0; i < self.componentsSaved.data.length; i++) {
-
-                    // if the array length is zero, you can't check it, so just push it.
-                    if (self.components.data.length == 0) {
-                        componentsToDelete.push(self.componentsSaved.data[i]);
-                    } else {
-                        for (let j = 0; j < self.components.data.length; j++) {
-                            if (self.componentsSaved.data[i].component_id == self.components.data[j].component_id) {
-                                break;
-                            }
-                            if (j == self.components.data.length - 1) {
-                                componentsToDelete.push(self.componentsSaved.data[i]);
-                            }
-                        }
-                    }
-                }
-                for (let i = 0; i < componentsToDelete.length; i++) {
-                    self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
-                }
+                self.updateModuleEverythingComponentsPost()
+                self.updateModuleEverythingComponentsDelete();
 
                 // -----
                 // UPDATE QUANTITIES
