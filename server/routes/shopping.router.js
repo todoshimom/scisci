@@ -2,15 +2,21 @@ const express = require('express');
 const pool = require('../modules/pool.js');
 const calculations = require('../modules/addComponents.js');
 const router = express.Router();
-
+const authenticated = require('../models/authenticated')
 
 
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
+<<<<<<< HEAD
 router.get('/all', (req, res) => {
     const queryText = 'SELECT * FROM shopping_list ORDER BY "name"';
 
+=======
+router.get('/all', authenticated, (req, res) => {
+    const queryText = 'SELECT * FROM shoppinglist ORDER BY "name"';
+
+>>>>>>> 3bbd15b47a0515508e3c69a544426c4a1a42f7ba
     pool.query(queryText)
         .then((results) => {
         res.send(results.rows);
@@ -22,7 +28,7 @@ router.get('/all', (req, res) => {
 
 });
 
-router.get('/list/:id', (req, res) => {
+router.get('/list/:id', authenticated, (req, res) => {
     console.log('in the get route', req.params.id);
     let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
     pool.query(queryString, [req.params.id])
@@ -34,26 +40,6 @@ router.get('/list/:id', (req, res) => {
             res.sendStatus(500);
         });
 })//end get
-
-// router.get('/components', (req, res) => {
-//     console.log('in the get route',);
-//     let queryString = `SELECT components.*
-//     FROM modules_shopping
-//     JOIN modules ON modules.id = modules_shopping.id
-//     JOIN components_modules ON modules.id = components_modules.id
-//     JOIN components ON components.id = components_modules.id
-//     `;
-//     pool.query(queryString)
-//         .then(result => {
-//             res.send(result);
-//             console.log('component result: ', result);
-//         })
-//         .catch(err => {
-//             console.log('hit error on getting object', err);
-//             res.sendStatus(500);
-//         });
-// })//end get
-
 
 
 router.get('/components', (req, res) => {
@@ -83,7 +69,7 @@ router.get('/components', (req, res) => {
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
     let queryString = 'INSERT INTO shoppinglist (name, date, user_created_by) VALUES ($1, $2, $3) RETURNING id';
     console.log('result log', req.body);
     pool.query(queryString, [req.body.name, req.body.date, req.body.user_created_by])
@@ -109,7 +95,7 @@ router.post('/', (req, res) => {
 });
 
 
-router.post('/shoppinglist/:id', (req, res) => {  //Start of add shoppinglist junction function
+router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add shoppinglist junction function
 
 
     let shoppinglistId = req.params.id
