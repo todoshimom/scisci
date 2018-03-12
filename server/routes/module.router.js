@@ -117,7 +117,11 @@ router.post('/', (req, res) => {
 });
 
 router.post('/components', (req, res) => {
-    console.log('req.body', req.body);
+    console.log(`
+    
+    post route
+    req.body
+    `, req.body);
     const queryText = `INSERT INTO components_modules (
         module_id,
         component_id,
@@ -227,18 +231,6 @@ router.delete('/:id', (req, res) => {
 });
 
 router.delete('/components/:module_id/:component_id', (req, res) => {
-    console.log(`hit Delete route
-    
-    
-    ${req.params.module_id}
-    
-    ${req.params.component_id}
-    
-    
-    
-    
-    
-    `);
     const queryText = 'DELETE FROM components_modules WHERE module_id = $1 AND component_id = $2';
     pool.query(queryText, [req.params.module_id, req.params.component_id])
         .then(result => {
