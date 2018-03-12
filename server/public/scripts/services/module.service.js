@@ -23,9 +23,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
           .catch( function(error) {
             console.log(error);
           });
-        
     };
-
+    self.getModules(); //Calls all modules on service load (mainly for shopping list creation area)
     // get single module
     self.getModule = function() {
         $http.get('/api/module/' + $routeParams.id)

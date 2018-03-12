@@ -1,56 +1,64 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
 <h2 class="md-title">New Shopping List</h2>
-<md-input-container class="input">
-    <label>Shopping List Name</label>
-    <input ng-model="vm.name">
-  </md-input-container>
-<button ng-click="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name)">Start List</button><br>
+<form ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;"> 
+    <md-input-container class="input">
+        <label>Shopping List Name</label>
+        <input ng-model="vm.name" required />
+    </md-input-container>
+    <input type="submit" value="Start List" />
+</form>
 
-<md-input-container class="input">
-    <label>Search Modules</label>
-    <input ng-model="vm.search">
-  </md-input-container>
+<div class="search-results" ng-if="vm.showSearchResults">
+    <md-input-container class="input">
+        <label>Search Modules</label>
+        <input ng-model="vm.search">
+    </md-input-container>
 
-<h2 class="md-title md-subtitle">Search Results</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Add</th>
-            <th>Module Name</th>
-            <th>Code</th>
-            <th>Unit Cost</th>
-            <th>Total Cost</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="module in vm.ModuleLibrary.list | filter: search">
-            <td><button>Add Module</button></td>
-            <td>{{module.name}}</td>
-            <td>{{module.code}}</td>
-            <td>{{module.unit_cost}}</td>
-            <td>{{otem.total_cost}}</td>
-    </tbody>
-</table>
+    <h2 class="md-title md-subtitle">Search Results</h2>
+    <div class="mock-table" role="table" aria-label="Components">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header" row="row">
+                <h3 class="columnheader">Add</h3>
+                <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Code</h3>
+                <h3 class="columnheader">Unit Cost</h3>
+                <h3 class="columnheader">Total Cost</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table-header -->
+        <div class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: search">
+                <p role="cell"><button ng-click="vm.addModule(module); vm.showAddedModules = true;gt">Add Module</button></p>
+                <p role="cell">{{module.name}}</p>
+                <p role="cell">{{module.code}}</p>
+                <p role="cell">{{module.unit_cost}}</p>
+                <p role="cell">{{otem.total_cost}}</p>
+            </div>
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
+</div>
 
-<h2 class="md-title md-subtitle">Added Modules</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Quantity</th>
-            <th>Module Name</th>
-            <th>Code</th>
-            <th>Unit Cost</th>
-            <th>Total Cost</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="module in vm.ModuleLibrary.list">
-            <td><input type="number" name="quantity"></td>
-            <td>{{module.name}}</td>
-            <td>{{module.code}}</td>
-            <td>{{module.unit_cost}}</td>
-            <td>{{module.total_cost}}</td>
-    </tbody>
-</table>
-<button>Save Shopping List</button>
+<div class="added-modules" ng-if="vm.showAddedModules">
+    <h2 class="md-title md-subtitle">Added Modules</h2>
+    <div class="mock-table" role="table" aria-label="Components">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header" row="row">
+                <h3 class="columnheader">Quantity</h3>
+                <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Code</h3>
+                <h3 class="columnheader">Unit Cost</h3>
+                <h3 class="columnheader">Total Cost</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table-header -->
+        <div class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row" ng-repeat="module in vm.addedModuleLibrary">
+                <p role="cell"><input type="number" name="quantity" ng-model="module.quantity"></p>
+                <p role="cell">{{module.name}}</p>
+                <p role="cell">{{module.code}}</p>
+                <p role="cell">{{module.unit_cost}}</p>
+                <p role="cell">{{module.total_cost}}</p>
+            </div>
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
+    <button ng-click="vm.saveShoppingList(vm.addedModuleLibrary)">Save Shopping List</button>
+</div>

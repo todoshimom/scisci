@@ -5,6 +5,7 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     self.userObject = UserService.userObject;
     self.userLibrary = UserService.userLibrary;
     self.userTypes = UserService.userTypes;
+    self.currentLaborRate = UserService.currentLaborRate
 
     self.addUser = function (newUser) {    // Start of addUser function
         console.log(newUser);
@@ -57,5 +58,10 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     self.sortUsers = function (sortMethod) {// Start of Sort Users function
         UserService.sortUsers(sortMethod);
     }// End of Sort Users function
+
+
+    self.setLaborRate = function (rate) {
+        UserService.setLaborRate(rate)
+    }
 
 }]);    

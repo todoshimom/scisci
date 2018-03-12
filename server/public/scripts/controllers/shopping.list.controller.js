@@ -2,14 +2,38 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     console.log('ShoppingListController created');
     let self = this;
 
+    self.shoppingLists = ShoppingListService.shoppingLists;
+    self.components = ShoppingListService.components;
+    self.showHideTableData = false;
+
     self.addShoppingList = function(list) {
         ShoppingListService.addShoppingList(list);
     }//function to add selected shopping list to table
 
-    // function to take selected shopping list from drop down and populate list below 
-    // function to print list (will need to ask someone about this)
-
     self.getuser = function () {
         UserService.getuser();
     }
+
+    // begin getShoppingLists()
+    self.getShoppingLists = function() {
+        ShoppingListService.getShoppingLists();
+      }; // end getShoppingLists()
+    self.getShoppingLists();
+    
+    self.getComponents = function() {
+        ShoppingListService.getComponents();
+    }; //end getComponents()
+    self.getComponents();
+
+    self.orderStatus = false;
+    self.inHouseStatus = false;
+    //function: ordered checkbox has been clicked 
+    self.updateOrdered = function(orderStatus) {
+        ShoppingListService.updateOrdered(orderStatus);
+    }//end function to call service 
+
+    //function: InHouse checkbox has been clicked
+    self.updateInHouse = function(inHouseStatus) {
+        ShoppingListService.updateInHouse(inHouseStatus);
+    }//end function to call service
 }]);

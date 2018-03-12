@@ -1,62 +1,104 @@
 myApp.service('ShoppingListService', ['$http', '$location', function ($http, $location) {
-	console.log('ShoppingListService Loaded');
-	let self = this;
+    console.log('ShoppingListService Loaded');
+    let self = this;
 
+    self.currentShoppingListId = { shopId: 0 };
+
+    self.shoppingLists = {list:[{}]};
+    self.components = {list: [{}]};
 
 	/******************************************/
 	/*              GET REQUESTS              */
 	/******************************************/
-	self.getModules = function (keyword) {
-
-	}
+    // get all shopping lists
+    self.getShoppingLists = function() {
+        $http.get('/api/shopping/all')
+          .then( function(response) {
+            self.shoppingLists.list = response.data;
+            console.log('self.shoppingLists.list', self.shoppingLists.list);
+            
+          })
+          .catch( function(error) {
+            console.log(error);
+          });
+    };
+    //function to get components for the shopping list selected
+    self.getComponents = function() {
+        $http.get('/api/shopping/components')
+          .then( function(result) {
+            self.components.list = result.data;
+            console.log('components.list: ', self.components.list);
+            
+          })
+          .catch( function(error) {
+            console.log('error on getting components', error);
+          });
+    };
 
     /******************************************/
     /*             POST REQUESTS              */
     /******************************************/
-    self.createShoppingList = function (name) {
-      console.log(name);
-      let shoppingListObject = {
-          name,
-          date: new Date(),
-          user_created_by: "name here"
-      };
-      $http.post('/api/shopping', shoppingListObject)
-          .then((result) => {
-              console.log('Added item', result);
-              // PUT GET REQUEST HERE TO REFRESH THE LIST
-              console.log(result.data.rows[0].id);
-              $http.get('/api/shopping/' + result.data.rows[0].id)
-                .then((result) => {
-                  console.log('get result: ', result);
-                  self.ShoppingListObject = result.data.rows[0];
-                  console.log(self.ShoppingListObject);
-                })
-              .catch(err => {
-                  console.log('hit error on getting shopping list data', err);
-              });
-          })
-          .catch(function (err) {
-              console.log('error in adding item', err);
-          })
-  } //function to create a shopping list
+    self.createShoppingList = function (name, first_name, last_name) {
+        let username = `${first_name} ${last_name}`;
+        let shoppingListObject = {
+            name,
+            date: new Date(),
+            user_created_by: username
+        };
+        $http.post('/api/shopping', shoppingListObject)
+            .then((result) => {
+                self.currentShoppingListId.shopId = result.data.rows[0]
+            })
+            .catch(function (err) {
+                console.log('error in adding item', err);
+            })
+    } //function to create a shopping list
 
 
-	/******************************************/
-	/*              PUT REQUESTS              */
-	/******************************************/
+    self.saveShoppingList = function name(arrayOfModules) { //Start of function to save shopping lists with modules
+        console.log(self.currentShoppingListId.shopId.id);
+      console.log(arrayOfModules);
+        $http.post(`/api/shopping/shoppinglist/${self.currentShoppingListId.shopId.id}`, arrayOfModules)
+            .then(response => {
+                console.log('response of save shopping list');
+                $location.path('/shopping-list');
+            })
+            .catch(error => {
+                console.log('error in shopping list save', error);
+            })
+    } //End of function to save shopping lists with modules
 
-
-
-	/******************************************/
-	/*            DELETE REQUESTS             */
-	/******************************************/
+    /******************************************/
+    /*              PUT REQUESTS              */
+    /******************************************/
 
 
 
-	/******************************************/
-	/*            OTHER FUNCTIONS             */
-	/******************************************/
+    /******************************************/
+    /*            DELETE REQUESTS             */
+    /******************************************/
 
 
+
+    /******************************************/
+    /*            OTHER FUNCTIONS             */
+    /******************************************/
+    
+    //function to show ordered checkbox has been clicked in console 
+    self.updateOrdered = function(orderStatus) {
+        if(orderStatus == true ) {
+            console.log('Ordered Checkbox has been clicked');
+        } else if (orderStatus == false ) {
+            console.log('Ordered Checkbox un-checked');
+        }//end else if
+    }//end function 
+    //function to show InHouse checkbox has been clicked in console
+    self.updateInHouse = function(inHouseStatus) {
+        if(inHouseStatus == true ) {
+            console.log('In-House Checkbox has been clicked');
+        } else if (inHouseStatus == false ) {
+            console.log('In-House Checkbox un-checked');
+        }//end else if
+    }//end function 
 
 }]);

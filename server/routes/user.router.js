@@ -34,9 +34,9 @@ router.get('/logout', (req, res) => {
 router.get('/users', (req, res) => { //Start of get all users function
 
     let queryText = `
-    SELECT users.first_name, users.last_name, users.username, user_type.name, users.user_type, users.id
+    SELECT users.first_name, users.last_name, users.username, usertype.name, users.usertype, users.id
     FROM users
-    JOIN user_type ON users.user_type = user_type.id
+    JOIN usertype ON users.usertype = usertype.id
     ORDER BY first_name;`;
 
     pool.query(queryText)
@@ -51,21 +51,21 @@ router.get('/users', (req, res) => { //Start of get all users function
 
 }); //End of get all users function
 
-router.get('/types', (req, res) => {//Start of get user_types function
+router.get('/types', (req, res) => {//Start of get usertypes function
 
-    let queryText = `SELECT * FROM user_type`;
+    let queryText = `SELECT * FROM usertype`;
 
     pool.query(queryText)
         .then((results) => {
-            // console.log('GET user_types: ', results);
+            // console.log('GET usertypes: ', results);
             res.send(results.rows);
         })
         .catch((error) => {
-            console.log('Error on GET user_type ', error);
+            console.log('Error on GET usertype ', error);
             res.sendStatus(500);
         });
 
-});//End of get user_types function
+});//End of get usertypes function
 
 router.get('/sorting/:method', (req, res) => {//Start of sort users function
 
@@ -92,10 +92,10 @@ router.post('/', (req, res) => {//Start of post new user function
     console.log(user);
 
     let queryText = `
-    INSERT INTO users (first_name, last_name, username, user_type)
+    INSERT INTO users (first_name, last_name, username, usertype)
     VALUES ($1, $2, $3, $4);`;
 
-    pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type])
+    pool.query(queryText, [user.first_name, user.last_name, user.username, user.usertype])
         .then((results) => {
             // console.log('Registered user successfully: ', results);
             res.sendStatus(201);
@@ -131,10 +131,10 @@ router.put('/', (req, res) => {//Start of edit user function PUT REQUEST
     first_name = $1,
     last_name = $2,
     username = $3,
-    user_type = $4
+    usertype = $4
     WHERE "id" = $5;`;
 
-    pool.query(queryText, [user.first_name, user.last_name, user.username, user.user_type, user.id])
+    pool.query(queryText, [user.first_name, user.last_name, user.username, user.usertype, user.id])
         .then((results) => {
             // console.log('Edited user successfully: ', results);
             res.sendStatus(201);
@@ -218,7 +218,44 @@ router.delete('/:id', (req, res) => {
 /*                OTHERS                  */
 /******************************************/
 
+/********** LABOR RATE ROUTES ************/
 
+router.get('/laborRates', (req, res) => {//Start of get usertypes function
 
+    let queryText = `SELECT * FROM app_settings`;
+
+    pool.query(queryText)
+        .then((results) => {
+            // console.log('GET usertypes: ', results);
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET usertype ', error);
+            res.sendStatus(500);
+        });
+
+});//End of get usertypes function
+
+router.put('/set/rates/:rate', (req, res) => {//Start of post new user function
+
+    console.log(req.params.rate);
+
+    let queryText = `
+    UPDATE app_settings
+    SET 
+    labor_rate = ${req.params.rate},
+    last_changed = '${req.user.first_name} ${req.user.last_name}'
+    WHERE id = 1;`
+
+    pool.query(queryText)
+        .then((results) => {
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            console.log('Error updating rates: ', error);
+            res.sendStatus(500);
+        });
+
+});//End of post new user function
 
 module.exports = router;
