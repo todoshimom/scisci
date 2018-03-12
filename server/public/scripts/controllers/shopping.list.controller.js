@@ -24,4 +24,21 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
         ShoppingListService.getComponents();
     }; //end getComponents()
     self.getComponents();
+
+    self.orderStatus = false;
+    self.inHouseStatus = false;
+    //function: ordered checkbox has been clicked 
+    self.updateOrdered = function(orderStatus) {
+        ShoppingListService.updateOrdered(orderStatus);
+    }//end function to call service 
+
+    //function: InHouse checkbox has been clicked
+    self.updateInHouse = function(inHouseStatus) {
+        ShoppingListService.updateInHouse(inHouseStatus);
+    }//end function to call service
+
+    //function: print call
+    self.printPage = function() {
+        window.print();
+    }
 }]);
