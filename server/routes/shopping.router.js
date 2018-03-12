@@ -8,15 +8,11 @@ const authenticated = require('../models/authenticated')
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
-<<<<<<< HEAD
-router.get('/all', (req, res) => {
-    const queryText = 'SELECT * FROM shopping_list ORDER BY "name"';
 
-=======
 router.get('/all', authenticated, (req, res) => {
     const queryText = 'SELECT * FROM shoppinglist ORDER BY "name"';
 
->>>>>>> 3bbd15b47a0515508e3c69a544426c4a1a42f7ba
+
     pool.query(queryText)
         .then((results) => {
         res.send(results.rows);
