@@ -22,8 +22,6 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             });
     }; // End of getAllUsers function.
 
-    self.getAllUsers();
-
     self.getUserTypes = function () {// Start of getUserTypes function.
         $http.get('/api/user/types')
             .then(function (response) {
@@ -34,8 +32,6 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
                 console.log('Get response for user types failed: ', error);
             });
     }; // End of getUserTypes function.
-
-    self.getUserTypes();
 
     self.sortUsers = function (sortMethod) {
         $http.get(`/api/user/sorting/${sortMethod}`)
@@ -160,8 +156,6 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         });
     }
 
-    self.getuser()
-
     self.logout = function () {
         console.log('UserService -- logout');
         $http.get('/api/user/logout').then(function (response) {
@@ -195,6 +189,13 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             });
     }; // End of retrieveLaborRate function.
 
-    self.retrieveLaborRate()
+    self.onLoad = function () {
+        self.retrieveLaborRate()
+        self.getuser()
+        self.getUserTypes();
+        self.getAllUsers();
+    }
+
+    self.onLoad()
 
 }]);
