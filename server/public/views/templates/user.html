@@ -67,7 +67,7 @@
 
         <md-input-container>
             <label>Account-Type</label>
-            <md-select ng-model="vm.newUser.user_type">
+            <md-select ng-model="vm.newUser.usertype">
                 <md-option ng-repeat="types in vm.userTypes.list" ng-value="types.id">
                     {{types.name}}
                 </md-option>
@@ -99,7 +99,7 @@
 
         <md-input-container>
             <label>Account-Type</label>
-            <md-select ng-model="vm.editUser.user_type">
+            <md-select ng-model="vm.editUser.usertype">
                 <md-option ng-repeat="types in vm.userTypes.list" ng-value="types.id">
                     {{types.name}}
                 </md-option>

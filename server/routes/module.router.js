@@ -2,11 +2,13 @@ const express = require('express');
 const pool = require('../modules/pool.js');
 const sorting = require('../modules/sorting.js');
 const router = express.Router();
+const authenticated = require('../models/authenticated')
+const isEditor = require('../models/editor')
 
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
-router.get('/all', (req, res) => {
+router.get('/all', authenticated, isEditor, (req, res) => {
     const queryText = 'SELECT * FROM modules ORDER BY "name"';
     
     pool.query(queryText)
@@ -20,7 +22,7 @@ router.get('/all', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticated, isEditor, (req, res) => {
     const queryText = `SELECT * FROM modules WHERE modules.id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
@@ -32,7 +34,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.get('/sorting/:method', (req, res) => {
+router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
     let sortMethod = req.params.method;
     console.log(sortMethod);
     let queryText = sorting.sortModules(sortMethod);
@@ -48,7 +50,7 @@ router.get('/sorting/:method', (req, res) => {
         });
 });
 
-router.get('/components/:id', (req, res) => {
+router.get('/components/:id', authenticated, isEditor, (req, res) => {
     console.log('req.params.id', req.params.id);
     
     // get the components in a separate route
@@ -68,7 +70,7 @@ router.get('/components/:id', (req, res) => {
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
-router.post('/', (req, res) => {
+router.post('/', authenticated, isEditor, (req, res) => {
     console.log('req.body', req.body);
     const queryText = `INSERT INTO modules (
         name,
@@ -115,7 +117,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.post('/components', (req, res) => {
+router.post('/components', authenticated, isEditor, (req, res) => {
     console.log('req.body', req.body);
     const queryText = `INSERT INTO components_modules (
         module_id,
@@ -139,7 +141,7 @@ router.post('/components', (req, res) => {
 /******************************************/
 /*              PUT REQUESTS              */
 /******************************************/
-router.put('/', (req, res) => {
+router.put('/', authenticated, isEditor, (req, res) => {
     console.log(req.body);
 
     const queryText = `UPDATE modules SET
@@ -189,7 +191,7 @@ router.put('/', (req, res) => {
         });
 });
 
-router.put('/components', (req, res) => {
+router.put('/components', authenticated, isEditor, (req, res) => {
     const queryText = `UPDATE components_modules SET
         pieces_per_kit = $1
     WHERE module_id = $2 AND component_id = $3`;
@@ -211,7 +213,7 @@ router.put('/components', (req, res) => {
 /******************************************/
 /*            DELETE REQUESTS             */
 /******************************************/
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticated, isEditor, (req, res) => {
     const queryText = 'DELETE FROM modules WHERE module_id = $1 AND component_id = $2';
     pool.query(queryText, [req.params.id])
         .then(result => {
@@ -223,7 +225,7 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-router.delete('/components/:module_id/:component_id', (req, res) => {
+router.delete('/components/:module_id/:component_id', authenticated, isEditor, (req, res) => {
     const queryText = 'DELETE FROM components_modules WHERE module_id = $1 AND component_id = $2';
     pool.query(queryText, [req.params.module_id, req.params.component_id])
         .then(result => {
