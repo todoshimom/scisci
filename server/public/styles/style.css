@@ -3,6 +3,11 @@ body, html {
   font-size: 14px;
   font-weight: 300; }
 
+.sr-only {
+  height: 0;
+  overflow: hidden;
+  position: absolute; }
+
 h2 {
   margin-top: 0;
   color: #828381; }
@@ -177,3 +182,15 @@ h2 {
 /* The finishing CSS styles for the leave animation */
 .fade.ng-leave.ng-leave-active {
   opacity: 0; }
+
+@media print {
+  .navbar {
+    display: none; }
+  .main {
+    padding: 20px 10px; }
+  .shopping-list-select {
+    display: none; }
+  .shopping-list-print {
+    display: none; }
+  @page {
+    size: landscape; } }
