@@ -8,14 +8,14 @@ const router = express.Router();
 /*              GET REQUESTS              */
 /******************************************/
 router.get('/all', (req, res) => {
-    const queryText = 'SELECT * FROM shopping_list ORDER BY "name"';
+    const queryText = 'SELECT * FROM shoppinglist ORDER BY "name"';
     
     pool.query(queryText)
         .then((results) => {
         res.send(results.rows);
     })
     .catch((error) => {
-        console.log('Error on GET shopping_list request', error);
+        console.log('Error on GET shoppinglist request', error);
         res.sendStatus(500);
     });
 
@@ -23,7 +23,7 @@ router.get('/all', (req, res) => {
 
 router.get('/list/:id', (req, res) => {
     console.log('in the get route', req.params.id);
-    let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
+    let queryString = 'SELECT id FROM shoppinglist WHERE id = $1';
     pool.query(queryString, [req.params.id])
         .then(result => {
             res.send(result);
@@ -58,13 +58,13 @@ router.get('/components', (req, res) => {
 /*             POST REQUESTS              */
 /******************************************/
 router.post('/', (req, res) => {
-    let queryString = 'INSERT INTO shopping_list (name, date, user_created_by) VALUES ($1, $2, $3) RETURNING id';
+    let queryString = 'INSERT INTO shoppinglist (name, date, user_created_by) VALUES ($1, $2, $3) RETURNING id';
     console.log('result log', req.body);
     pool.query(queryString, [req.body.name, req.body.date, req.body.user_created_by])
         .then(result => {
             let queryString = `
             SELECT id 
-            FROM shopping_list
+            FROM shoppinglist
             WHERE name = '${req.body.name}';`
             pool.query(queryString)
                 .then(result => {
