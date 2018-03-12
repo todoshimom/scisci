@@ -57,7 +57,7 @@ router.get('/components/:id', (req, res) => {
         WHERE components_modules.module_id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
-            console.log('result.rows', result.rows);
+            console.log('get request, result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -68,6 +68,7 @@ router.get('/components/:id', (req, res) => {
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
+
 router.post('/', (req, res) => {
     console.log('req.body', req.body);
     const queryText = `INSERT INTO modules (
@@ -116,7 +117,11 @@ router.post('/', (req, res) => {
 });
 
 router.post('/components', (req, res) => {
-    console.log('req.body', req.body);
+    console.log(`
+    
+    post route
+    req.body
+    `, req.body);
     const queryText = `INSERT INTO components_modules (
         module_id,
         component_id,
@@ -140,7 +145,9 @@ router.post('/components', (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 router.put('/', (req, res) => {
-    console.log(req.body);
+    console.log(`put request
+    
+    `, req.body);
 
     const queryText = `UPDATE modules SET
         name = $2,

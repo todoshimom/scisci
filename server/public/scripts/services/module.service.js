@@ -83,33 +83,23 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             component_id: componentId,
             pieces_per_kit: piecesPerKit
         };
-        
-        // confirm that the component is not already attached to the module before adding
-        let componentIsInModule = false;
-        for (let i = 0; i < self.components.data.length; i++) {
-            if (self.components.data[i].component_id == componentId) {
-                componentIsInModule = true;
-            }
-        }
 
-        // if it isn't already here, then add it.
-        if (!componentIsInModule) {
-            $http.post('/api/module/components', dataToSend)
-            .then(response => {
-                console.log('response', response);
-                self.getModule();
-            })
-            .catch(error => {
-                console.log('error in add module component', error);
-            })
-        } else {
-            alert('already in module');
-        }
+        $http.post('/api/module/components', dataToSend)
+        .then(response => {
+            console.log('response', response);
+            self.getModule();
+        })
+        .catch(error => {
+            console.log('error in add module component', error);
+        });
 
     }
 
     // Draft version
-    self.addModuleComponentToDraft = function(componentId, piecesPerKit) {
+    self.addModuleComponentToDraft = function(componentId, piecesPerKit = 0) {
+        if(!piecesPerKit) {
+            piecesPerKit = 0;
+        }
 
         // check if it's already in the module
         let componentIsInModule = false;
@@ -133,42 +123,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             alert('already in module');
         }
 
-
-        // for (let i = 0; i < self.components.data.length; i++) {
-        //     if (self.components.data[i].module_id == moduleId && self.components.data[i].component_id == componentId) {
-        //         self.components.data.splice(i, 1);
-        //         break;
-        //     }
-        // }
-
-        // const dataToSend = {
-        //     module_id: $routeParams.id,
-        //     component_id: componentId,
-        //     pieces_per_kit: piecesPerKit
-        // };
-        
-        // // confirm that the component is not already attached to the module before adding
-        // let componentIsInModule = false;
-        // for (let i = 0; i < self.components.data.length; i++) {
-        //     if (self.components.data[i].component_id == componentId) {
-        //         componentIsInModule = true;
-        //     }
-        // }
-
-        // // if it isn't already here, then add it.
-        // if (!componentIsInModule) {
-        //     $http.post('/api/module/components', dataToSend)
-        //     .then(response => {
-        //         console.log('response', response);
-        //         self.getModule();
-        //     })
-        //     .catch(error => {
-        //         console.log('error in add module component', error);
-        //     })
-        // } else {
-        //     console.log('true');
-        // }
-
     }
 
     /******************************************/
@@ -189,11 +143,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
         // reduce the row data to the junction table row's data
         let moduleComponentToSave = {
-            id: component.id,
             module_id: component.module_id,
             component_id: component.component_id,
             pieces_per_kit: component.pieces_per_kit
-        }
+        };
         console.log(moduleComponentToSave);
 
         $http.put('/api/module/components', moduleComponentToSave)
@@ -206,7 +159,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             });
     };
 
-    self.updateModuleComponents = function() {
+    self.updateModuleEverything = function() {
         // self.getModuleComponentsPreSave();
 
         $http.get('/api/module/components/' + $routeParams.id)
@@ -214,54 +167,64 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
 
-
-                // diff self.componentsSaved.data and self.components.data;
-                let componentsToDelete = [];
+                // -----
+                // POST COMPONENTS
+                // Get list of components to post
                 let componentsToPost = [];
-
                 for (let i = 0; i < self.components.data.length; i++) {
-                    let existsInBoth = false;
-                    for (let j = 0; j < self.componentsSaved.data.length; j++) {
-                        if (self.components.data[i] == self.componentsSaved.data[j] ) {
-                            existsInBoth = true;
-                            break;
-                        }
-                        // only run this check if we don't know if it exists in both
-                        if (!existsInBoth) {
-                            // on the last step
+                    
+                    // if the array length is zero, you can't check it, so just push it.
+                    if (self.componentsSaved.data.length == 0) {
+                        componentsToPost.push(self.components.data[i]);
+                    } else {
+                        for (let j = 0; j < self.componentsSaved.data.length; j++) {
+                            console.log(i, j, self.components.data[i].component_id, self.componentsSaved.data[j].component_id);
+                            if (self.components.data[i].component_id == self.componentsSaved.data[j].component_id) {
+                                break;
+                            }
                             if (j == self.componentsSaved.data.length - 1) {
-                                componentsToPost.push(self.components.data[i])
-                                console.log(componentsToPost);
+                                componentsToPost.push(self.components.data[i]);
                             }
                         }
                     }
                 }
+                for (let i = 0; i < componentsToPost.length; i++) {
+                    self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
+                }
 
-                // for (let i = 0; i < self.components.data.length; i++) {
-                //     let existsInBoth = false;
-                //     for (let j = 0; j < self.components.data.length; j++) {
-                //         if (self.componentsSaved.data[i] == self.components.data[j] ) {
-                //             existsInBoth = true;
-                //         }
-                //         // only run this check if we don't know if it exists in both
-                //         if (!existsInBoth) {
-                //             // on the last step
-                //             if (j == self.components.data.length - 1) {
-                //                 componentsToDelete.push(self.componentsSaved.data[j])
-                //             }
-                //         }
-                //     }
-                // }
+                // -----
+                // DELETE COMPONENTS
+                // Get list of components to delete
+                let componentsToDelete = [];
+                for (let i = 0; i < self.componentsSaved.data.length; i++) {
 
-                console.log('saved,', self.componentsSaved)
-                console.log('components,', self.components);
-                console.log('to save,', componentsToPost)
-                console.log('to delete,', componentsToDelete);
+                    // if the array length is zero, you can't check it, so just push it.
+                    if (self.components.data.length == 0) {
+                        componentsToDelete.push(self.componentsSaved.data[i]);
+                    } else {
+                        for (let j = 0; j < self.components.data.length; j++) {
+                            if (self.componentsSaved.data[i].component_id == self.components.data[j].component_id) {
+                                break;
+                            }
+                            if (j == self.components.data.length - 1) {
+                                componentsToDelete.push(self.componentsSaved.data[i]);
+                            }
+                        }
+                    }
+                }
+                for (let i = 0; i < componentsToDelete.length; i++) {
+                    self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
+                }
 
-                // for (let i = 0; i < self.components.data.length; i++) {
-                //     self.updateModuleComponent(self.components.data[i]);
-                // }
+                // -----
+                // UPDATE QUANTITIES
+                for (let i = 0; i < self.components.data.length; i++) {
+                    self.updateModuleComponent(self.components.data[i]);
+                }
 
+                // -----
+                // UPDATE THE MODULE
+                self.updateModule();
 
             })
             .catch(error => {
@@ -337,8 +300,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.saveModule = function() {
         console.log('MODULE', self.module);
         if ($routeParams.id) {
-            self.updateModule();
-            self.updateModuleComponents();
+            // self.updateModule();
+            self.updateModuleEverything();
         } else {
             self.createModule();
         }
