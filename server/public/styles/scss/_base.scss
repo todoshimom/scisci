@@ -4,3 +4,9 @@ body, html {
     font-weight: 300;
   }
   
+
+  .sr-only {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+  }

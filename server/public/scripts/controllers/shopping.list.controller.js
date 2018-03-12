@@ -36,4 +36,9 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     self.updateInHouse = function(inHouseStatus) {
         ShoppingListService.updateInHouse(inHouseStatus);
     }//end function to call service
+
+    //function: print call
+    self.printPage = function() {
+        window.print();
+    }
 }]);

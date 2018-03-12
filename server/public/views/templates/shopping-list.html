@@ -1,14 +1,14 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <h2 class="md-title">Created Shopping Lists </h2>
 
-<label for="shoppingLists">Lists</label>
+<label for="shoppingLists" class="sr-only">Lists</label>
 
-<select>
+<select class="shopping-list-select">
 	<option value="" selected disabled>Select a List</option>
 	<option value="" ng-repeat="list in vm.shoppingLists.list">{{list.name}}</option>
 </select>
 
-<button>Print</button>
+<button class="shopping-list-print" ng-click="vm.printPage()">Print</button>
 
  <!-- Table mock up for the time being, will be changed out later for according divs  -->
 <h3 class="md-title md-subtitle">Shopping List</h3>
