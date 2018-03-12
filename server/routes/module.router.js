@@ -57,7 +57,7 @@ router.get('/components/:id', (req, res) => {
         WHERE components_modules.module_id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
-            console.log('result.rows', result.rows);
+            console.log('get request, result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -141,7 +141,9 @@ router.post('/components', (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 router.put('/', (req, res) => {
-    console.log(req.body);
+    console.log(`put request
+    
+    `, req.body);
 
     const queryText = `UPDATE modules SET
         name = $2,
@@ -225,6 +227,18 @@ router.delete('/:id', (req, res) => {
 });
 
 router.delete('/components/:module_id/:component_id', (req, res) => {
+    console.log(`hit Delete route
+    
+    
+    ${req.params.module_id}
+    
+    ${req.params.component_id}
+    
+    
+    
+    
+    
+    `);
     const queryText = 'DELETE FROM components_modules WHERE module_id = $1 AND component_id = $2';
     pool.query(queryText, [req.params.module_id, req.params.component_id])
         .then(result => {

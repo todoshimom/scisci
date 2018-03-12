@@ -85,16 +85,16 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             pieces_per_kit: piecesPerKit
         };
         
-        // confirm that the component is not already attached to the module before adding
-        let componentIsInModule = false;
-        for (let i = 0; i < self.components.data.length; i++) {
-            if (self.components.data[i].component_id == componentId) {
-                componentIsInModule = true;
-            }
-        }
+        // // confirm that the component is not already attached to the module before adding
+        // let componentIsInModule = false;
+        // for (let i = 0; i < self.components.data.length; i++) {
+        //     if (self.components.data[i].component_id == componentId) {
+        //         componentIsInModule = true;
+        //     }
+        // }
 
         // if it isn't already here, then add it.
-        if (!componentIsInModule) {
+        // if (!componentIsInModule) {
             $http.post('/api/module/components', dataToSend)
             .then(response => {
                 console.log('response', response);
@@ -102,10 +102,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             })
             .catch(error => {
                 console.log('error in add module component', error);
-            })
-        } else {
-            alert('already in module');
-        }
+            });
+        // } else {
+        //     alert('already in module');
+        // }
 
     }
 
@@ -178,7 +178,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .then(response => {
                 console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
-                
+
+                console.log(self.components.data, self.componentsSaved.data);
+
+                // POST COMPONENTS
                 // Get list of components to post
                 let componentsToPost = [];
                 for (let i = 0; i < self.components.data.length; i++) {
@@ -192,7 +195,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                     }
                 }
                 console.log('to post:', componentsToPost);
+                for (let i = 0; i < componentsToPost.length; i++) {
+                    console.log('post this:', i, componentsToPost[i]);
+                    self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
+                }
 
+                // DELETE COMPONENTS
                 // Get list of components to delete
                 let componentsToDelete = [];
                 for (let i = 0; i < self.componentsSaved.data.length; i++) {
@@ -205,22 +213,15 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                         }
                     }
                 }
-                console.log('to delete:', componentsToDelete);
+                // console.log('to delete:', componentsToDelete);
+                for (let i = 0; i < componentsToDelete.length; i++) {
+                    console.log('delete this:', i, componentsToDelete[i]);
+                    self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
+                }
 
-                let moduleObject = {
-                    componentsToDelete,
-                    componentsToPost,
-                    module: self.module
-                };
-                $http.post('/api/module/everything', moduleObject)
-                    .then(response => {
-                        console.log('delete response', response);
-                        self.getModule();
-                        self.getModuleComponents();
-                    })
-                    .catch(error => {
-                        console.log('error in delete', error);
-                    });
+
+                // PUT THE MODULE
+                self.updateModule();
 
             })
             .catch(error => {
