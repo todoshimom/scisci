@@ -67,8 +67,14 @@ h2 {
   text-align: center;
   text-transform: uppercase; }
 
-.md-subtitle {
+.md-title-left {
   text-align: left; }
+
+.md-subtitle {
+  color: #828381;
+  font-weight: 300;
+  font-size: 18px;
+  text-transform: uppercase; }
 
 .mock-table {
   position: relative;
@@ -301,6 +307,9 @@ md-input-container {
 .quick-report-value {
   font-weight: 300;
   font-size: 30px; }
+
+.resource-list md-input-container {
+  margin: 18px 0 5px 0; }
 
 @media print {
   .navbar {

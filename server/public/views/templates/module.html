@@ -1,6 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<h2 class="md-title md-subtitle">Module Creator</h2>
+<h2 class="md-title md-title-left">Module Creator</h2>
 
 <md-input-container class="module-title-input">
     <label>Name</label>
@@ -44,67 +44,68 @@
     <!-- <input type="text" placeholder="Live-search Components" /> -->
 
 
-    <h2 class="md-title md-subtitle">Resources</h2>
+    <h2 class="md-title md-title-left">Resources</h2>
+    <div class="resource-list col col-5">
+        <md-input-container>
+            <label>Google Drive (url)</label>
+            <input type="text" ng-model="vm.module.data.module_drive_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Google Drive (url)</label>
-        <input type="text" ng-model="vm.module.data.module_drive_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>To Be Printed (url)</label>
+            <input type="text" ng-model="vm.module.data.to_be_printed_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>To Be Printed (url)</label>
-        <input type="text" ng-model="vm.module.data.to_be_printed_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Assembly Video (url)</label>
+            <input type="text" ng-model="vm.module.data.assembly_video_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Assembly Video (url)</label>
-        <input type="text" ng-model="vm.module.data.assembly_video_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Assembly Video (url)</label>
+            <input type="text" ng-model="vm.module.data.assembly_video_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Assembly Video (url)</label>
-        <input type="text" ng-model="vm.module.data.assembly_video_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Activity Video (url)</label>
+            <input type="text" ng-model="vm.module.data.activity_video_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Activity Video (url)</label>
-        <input type="text" ng-model="vm.module.data.activity_video_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Kit Content Sheet (url)</label>
+            <input type="text" ng-model="vm.module.data.kit_content_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Kit Content Sheet (url)</label>
-        <input type="text" ng-model="vm.module.data.kit_content_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Custom Link 1 (url)</label>
+            <input type="text" ng-model="vm.module.data.other1_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Custom Link 1 (url)</label>
-        <input type="text" ng-model="vm.module.data.other1_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Custom Link 1 (title)</label>
+            <input type="text" ng-model="vm.module.data.other1_title" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Custom Link 1 (title)</label>
-        <input type="text" ng-model="vm.module.data.other1_title" />
-    </md-input-container>
+        <md-input-container>
+            <label>Custom Link 2 (url)</label>
+            <input type="text" ng-model="vm.module.data.other2_link" />
+        </md-input-container>
 
-    <md-input-container>
-        <label>Custom Link 2 (url)</label>
-        <input type="text" ng-model="vm.module.data.other2_link" />
-    </md-input-container>
+        <md-input-container>
+            <label>Custom Link 2 (title)</label>
+            <input type="text" ng-model="vm.module.data.other2_title" />
+        </md-input-container>
+    </div>
 
-    <md-input-container>
-        <label>Custom Link 2 (title)</label>
-        <input type="text" ng-model="vm.module.data.other2_title" />
-    </md-input-container>
 
-    <h2 class="md-title md-subtitle">Assembly Instructions</h2>
+    <h2 class="md-title md-title-left">Assembly Instructions</h2>
 
     <md-input-container>
         <label>Assembly Notes</label>
         <textarea ng-model="vm.module.data.assembly_notes"></textarea>
     </md-input-container>
 
-    <h2 class="md-title md-subtitle">Components in Module</h2>
-
+    <h2 class="md-title md-title-left">Components in Module</h2>
 
     <md-input-container>
         <label>Component ID</label>
