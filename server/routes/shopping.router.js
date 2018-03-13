@@ -38,7 +38,7 @@ router.get('/list/:id', authenticated, (req, res) => {
 })//end get
 
 
-router.get('/components', (req, res) => {
+router.get('/components/:id', (req, res) => {
 
   let queryText = `
   SELECT components_modules.module_id, components_modules.component_id, components_modules.pieces_per_kit,
@@ -46,10 +46,10 @@ router.get('/components', (req, res) => {
   JOIN modules_shopping ON modules_shopping.module_id = components_modules.module_id
   JOIN components ON components_modules.component_id = components.id
   LEFT OUTER JOIN shopping_components ON shopping_components.component_id = components.id
-  WHERE modules_shopping.shopping_id = 1;
+  WHERE modules_shopping.shopping_id = $1;
   `;
 
-  pool.query(queryText)
+  pool.query(queryText, [req.params.id])
     .then((results) => {
         // res.send(results.rows);
         res.send(calculations.addComponents(results.rows));
