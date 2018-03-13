@@ -22,8 +22,6 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             });
     }; // End of getAllUsers function.
 
-    self.getAllUsers();
-
     self.getUserTypes = function () {// Start of getUserTypes function.
         $http.get('/api/user/types')
             .then(function (response) {
@@ -34,8 +32,6 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
                 console.log('Get response for user types failed: ', error);
             });
     }; // End of getUserTypes function.
-
-    self.getUserTypes();
 
     self.sortUsers = function (sortMethod) {
         $http.get(`/api/user/sorting/${sortMethod}`)
@@ -146,7 +142,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         console.log('UserService -- getuser');
         $http.get('/api/user').then(function (response) {
             if (response.data.username) {
-                // user has a curret session on the server
+                // user has a current session on the server
                 self.userObject.list = response.data;
                 console.log('UserService -- getuser -- User Data: ', self.userObject);
             } else {
@@ -159,8 +155,6 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             $location.path("/home");
         });
     }
-
-    self.getuser()
 
     self.logout = function () {
         console.log('UserService -- logout');
@@ -195,6 +189,13 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             });
     }; // End of retrieveLaborRate function.
 
-    self.retrieveLaborRate()
+    self.onLoad = function () {
+        self.retrieveLaborRate()
+        self.getuser()
+        self.getUserTypes();
+        self.getAllUsers();
+    }
+
+    self.onLoad()
 
 }]);

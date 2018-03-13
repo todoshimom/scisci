@@ -2,14 +2,15 @@ const express = require('express');
 const pool = require('../modules/pool.js');
 const sorting = require('../modules/sorting.js');
 const router = express.Router();
-
+const authenticated = require('../models/authenticated')
+const isEditor = require('../models/editor')
 
 
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
 
-router.get('/', (req, res) => {
+router.get('/', authenticated, isEditor, (req, res) => {
   let queryText = `SELECT * FROM components ORDER BY "name"`;
   pool.query(queryText)
       .then((results) => {
@@ -22,7 +23,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/sorting/:method', (req, res) => {
+router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
   let sortMethod = req.params.method;
   let queryText = sorting.sortComponents(sortMethod);
   pool.query(queryText)
@@ -36,7 +37,7 @@ router.get('/sorting/:method', (req, res) => {
   });
 });
 
-router.get('/modulesCount/:id', (req, res) => {
+router.get('/modulesCount/:id', authenticated, isEditor, (req, res) => {
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
   pool.query(queryText, [req.params.id])
     .then((results) => {
@@ -49,7 +50,7 @@ router.get('/modulesCount/:id', (req, res) => {
 });
 
 
-router.get('/getModules/:id', (req, res) => {
+router.get('/getModules/:id', authenticated, isEditor, (req, res) => {
   let queryText = `
   SELECT modules.id, modules.name, components_modules.component_id
   FROM components_modules
@@ -71,7 +72,7 @@ router.get('/getModules/:id', (req, res) => {
 /*             POST REQUESTS              */
 /******************************************/
 
-router.post('/', (req, res) => {
+router.post('/', authenticated, isEditor, (req, res) => {
   if(!req.body.hasOwnProperty('vendor_name_secondary')) {
     req.body.vendor_name_secondary = null;
   }
@@ -105,7 +106,7 @@ router.post('/', (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 
-router.put('/updateComponent', (req, res) => {
+router.put('/updateComponent', authenticated, isEditor, (req, res) => {
 
   if(req.body.vendor_name_secondary == '') {
     req.body.vendor_name_secondary = null;
@@ -140,7 +141,7 @@ router.put('/updateComponent', (req, res) => {
 /*            DELETE REQUESTS             */
 /******************************************/
 
-router.delete('/deleteComponent/:id', (req, res) => {
+router.delete('/deleteComponent/:id', authenticated, isEditor, (req, res) => {
   let id = req.params.id;
   let queryText = `DELETE FROM components WHERE id = $1`;
   pool.query(queryText, [id])

@@ -1,0 +1,21 @@
+@media print {
+    .navbar {
+        display: none;
+    }
+
+    .main {
+        padding: 20px 10px;
+    }
+
+    .shopping-list-select {
+        display: none;
+    }
+
+    .shopping-list-print {
+        display: none;
+    }
+
+    @page {
+        size: landscape;
+    }
+}
