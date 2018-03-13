@@ -1,7 +1,7 @@
 let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAnimate']);
 
 /// Routes ///
-myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', function ($routeProvider, $locationProvider, $mdThemingProvider) {
     console.log('myApp -- config')
     $routeProvider
         .when('/', {
@@ -120,4 +120,20 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         .otherwise({
             templateUrl: '/views/templates/404.html'
         });
+
+        var orangeMap = $mdThemingProvider.extendPalette('orange', {
+            '500': '#f59132',
+            'contrastDefaultColor': 'dark'
+        });
+        var greenMap = $mdThemingProvider.extendPalette('green', {
+            '500': '55ac56',
+            'contrastDefaultColor': 'dark'
+        });
+
+        $mdThemingProvider.definePalette('orange', orangeMap);
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('orange')
+            .accentPalette('green');
+  
 }]);
