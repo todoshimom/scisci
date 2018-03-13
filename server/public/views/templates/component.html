@@ -65,7 +65,7 @@
     <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
       Consumable
     </md-checkbox>
-    <button type="button" name="button" ng-click="vm.addComponentToLib(vm.componentItem)">Add Component</button>
+    <button type="button" name="button" ng-click="vm.addComponentToLib(vm.componentItem)" class="button">Add Component</button>
   </div>
 
   <md-input-container>
@@ -145,11 +145,11 @@
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.notes}}</p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)">Edit</button></p>
-            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)">Update</button></p>
+            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)" class="button">Edit</button></p>
+            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)" class="button">Update</button></p>
 
-            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)">Cancel</button></p>
-            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)">Delete</button></p>
+            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
+            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)" class="button">Delete</button></p>
 
         </div>
       </div>
