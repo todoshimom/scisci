@@ -41,11 +41,13 @@ router.get('/list/:id', authenticated, (req, res) => {
 router.get('/components/:id', (req, res) => {
 
   let queryText = `
-  SELECT components_modules.module_id, components_modules.component_id, components_modules.pieces_per_kit,
-  modules_shopping.quantity, modules_shopping.shopping_id, components.*, shopping_components.ordered, shopping_components.in_house FROM components_modules
+  SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity,
+  shopping_components.ordered, shopping_components.in_house, components.*, shopping_components.id AS ordered_inHouse_id
+  FROM components_modules
   JOIN modules_shopping ON modules_shopping.module_id = components_modules.module_id
   JOIN components ON components_modules.component_id = components.id
   LEFT OUTER JOIN shopping_components ON shopping_components.component_id = components.id
+  AND shopping_components.shopping_id = modules_shopping.shopping_id
   WHERE modules_shopping.shopping_id = $1;
   `;
 
@@ -55,7 +57,7 @@ router.get('/components/:id', (req, res) => {
         res.send(calculations.addComponents(results.rows));
     })
     .catch(err => {
-        console.log('hit error on posting of new Item', err);
+        console.log('Error getting shopping list components', err);
         res.sendStatus(500);
     });
 
@@ -118,6 +120,7 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add 
     res.sendStatus(200);
 
 });  //End of add shoppinglist junction function
+
 
 /******************************************/
 /*              PUT REQUESTS              */
