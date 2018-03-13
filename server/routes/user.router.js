@@ -224,7 +224,7 @@ router.delete('/:id', authenticated, isAdmin, (req, res) => {
 
 router.get('/laborRates', authenticated, isAdmin, (req, res) => {//Start of get usertypes function
 
-    let queryText = `SELECT * FROM app_settings`;
+    let queryText = `SELECT * FROM appsettings`;
 
     pool.query(queryText)
         .then((results) => {
@@ -243,7 +243,7 @@ router.put('/set/rates/:rate', authenticated, isAdmin, (req, res) => {//Start of
     console.log(req.params.rate);
 
     let queryText = `
-    UPDATE app_settings
+    UPDATE appsettings
     SET 
     labor_rate = ${req.params.rate},
     last_changed = '${req.user.first_name} ${req.user.last_name}'
