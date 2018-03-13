@@ -1,5 +1,44 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
+<h1>Module Reports(Cost/popularity)</h1>
+<table style="width:100%" ng-repeat= "module in vm.moduleLibrary.list">
+    <tr>
+        <th>Module Name</th>
+        <th>Price of module</th> 
+        <th>Popularity</th>
+      </tr>
+    <tr>
+      <td>{{module.name}}</td>
+      <td>blank</td> 
+      <td>blank</td>
+    </tr>
+</table>
 
+<h1>Component Reports</h1>
+<table style="width:100%" ng-repeat= "component in vm.componentLibrary.list">
+    <tr>
+        <th>Component Name</th>
+        <th>How many modules</th> 
+        <th># of times ordered</th>
+    </tr>
+    <tr>
+      <td>{{component.name}}</td>
+      <td>blank</td> 
+      <td>blank</td>
+    </tr>
+</table>
 
-<button ng-click="vm.getModulesReports()">THIS IS A BUTTON TO PROMPT MODULES THE REQUEST AS A TEST </button>
+<h1>Modules Reporting(version)</h1>
+<table style="width:100%" ng-repeat="module in vm.moduleLibrary.list">
+    
+    <tr>
+        <th>Module Name</th>
+        <th>Version #</th> 
+        <th>Version Date</th>
+    </tr>
+    <tr>
+        <td>{{module.name}}</td>
+        <td>{{module.version_number}}</td> 
+        <td>{{module.version_date}}</td>
+    </tr>
+</table>
