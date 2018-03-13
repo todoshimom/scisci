@@ -24,7 +24,7 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     };
     //function to get components for the shopping list selected
     self.getComponents = function() {
-        $http.get('/api/shopping/components')
+        $http.get(`/api/shopping/components/${self.currentShoppingListId.shopId}`)
           .then( function(result) {
             self.components.list = result.data;
             console.log('components.list: ', self.components.list);
@@ -48,6 +48,7 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
         $http.post('/api/shopping', shoppingListObject)
             .then((result) => {
                 self.currentShoppingListId.shopId = result.data.rows[0]
+                console.log(self.currentShoppingListId.shopId);
             })
             .catch(function (err) {
                 console.log('error in adding item', err);
