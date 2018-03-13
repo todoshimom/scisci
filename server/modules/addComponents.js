@@ -1,40 +1,45 @@
-
+// begin addComponents()
 const addComponents = function(components) {
   let componentList = [];
+
   for (let i = 0; i < components.length; i++) {
     components[i].pieces_per_kit *= components[i].quantity;
     componentList.push(Object.assign({}, components[i]));
-    // console.log(component.pieces_per_kit);
   }
+  // Gets a list of components with no duplicates to be iterated over in a later
+  // function.
+  let componentsNoDups = removeDups(components, 'id');
 
-  let componentsNoDups = removeDups(components, 'component_id');
+  // Sorts the components into an array of arrays, seperated out by component id
+  let componentsSorted = sortByProp(componentList, componentsNoDups, 'id');
 
-  let componentsSorted = sortByProp(componentList, componentsNoDups, 'component_id');
-  // return componentsSorted
+  // Performs a reduce function on each array from the results above and gives
+  // the quantity of each item to order.
   let newQuantities = calculateQuantities(componentsSorted, componentsNoDups);
-  return newQuantities;
-  // console.log(newQuantities);
-  // console.log(components);
-  // return componentsSorted;
-};
 
+  return newQuantities;
+}; // addComponents()
+
+// begin removeDups()
 function removeDups(arr, prop) {
     return arr.filter((obj, pos, arr) => {
         return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
 } // end removeDups()
 
+// begin calculateQuantities()
 function calculateQuantities(originalArray, noDuplicates) {
   let arrayCopy = [];
 
   for (var i = 0; i < noDuplicates.length; i++) {
     arrayCopy.push(Object.assign({}, noDuplicates[i]));
     let newQuantitiy = originalArray[i].reduce((x,y) => ({pieces_per_kit: x.pieces_per_kit + y.pieces_per_kit }));
-    arrayCopy[i].pieces_per_kit = newQuantitiy.pieces_per_kit;
+    arrayCopy[i].orderQty = newQuantitiy.pieces_per_kit;
   }
   return arrayCopy;
-}
+} // end calculateQuantities()
 
+// begin sortByProp()
 function sortByProp(originalArray, noDuplicates, property) {
   let sortedArray = [];
   for (let i = 0; i < noDuplicates.length; i++) {
