@@ -86,10 +86,8 @@
             <h3 class="columnheader">General Stock <span ng-click="vm.sortColumns('genStockAsc')">&#9650;</span><span ng-click="vm.sortColumns('genStockDesc')">&#9660;</span></h3>
             <h3 class="columnheader">Consumable <span ng-click="vm.sortColumns('consumableAsc')">&#9650;</span><span ng-click="vm.sortColumns('consumableDesc')">&#9660;</span></h3>
             <h3 class="columnheader">Modules Used In</h3>
-            <h3 class="columnheader">Vendor 1 Name <span ng-click="vm.sortColumns('vendor1Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor1Desc')">&#9660;</span></h3>
-            <h3 class="columnheader">Vendor 1 Link</h3>
-            <h3 class="columnheader">Vendor 2 Name <span ng-click="vm.sortColumns('vendor2Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor2Desc')">&#9660;</span></h3>
-            <h3 class="columnheader">Vendor 2 Link</h3>
+            <h3 class="columnheader">Vendor 1<span ng-click="vm.sortColumns('vendor1Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor1Desc')">&#9660;</span></h3>
+            <h3 class="columnheader">Vendor 2<span ng-click="vm.sortColumns('vendor2Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor2Desc')">&#9660;</span></h3>
             <h3 class="columnheader">Notes</h3>
             <h3 class="columnheader">Edit</h3>
             <h3 class="columnheader">Delete</h3>
@@ -130,13 +128,21 @@
 
             <p role="cell"><span ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <a ng-href="{{component.vendor_url_primary}}">
+                {{component.vendor_name_primary}}
+              </a>
+            </p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_url_primary}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]"></p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_primary" ng-model="component.vendor_url_primary"></p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_name_secondary}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <a ng-href="{{component.vendor_name_secondary}}">
+                  {{component.vendor_name_secondary}}
+              </a>
+            </p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_secondary" ng-model="component.vendor_name_secondary"></p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_url_secondary}}</p>
