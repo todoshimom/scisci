@@ -1,99 +1,165 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<button ng-click="vm.saveModule()">Save Module</button>
+<h2 class="md-title md-subtitle">Module Creator</h2>
 
-<h1>Module Creator</h1>
+<md-input-container class="module-title-input">
+    <label>Name</label>
+    <input type="text" ng-model="vm.module.data.name" required />
+    </md-input-container>
 
-<ul>
-    <li>Material Cost: {{vm.calculations.material_cost}}</li>
-    <li>Material in Kit Cost: {{vm.calculations.material_in_kit_cost}}</li>
-    <li>Estimated Labor Cost: {{vm.calculations.estimated_labor_cost}}</li>
-    <li>Materials Ordered + Labor: {{vm.calculations.materials_ordered_labor}}</li>
-    <li>Materials in Kit + Labor: {{vm.calculations.materials_in_kit_labor}}</li>
-</ul>
+<button class="button" ng-click="vm.saveModule()">Save Module</button>
 
+<div class="module">
+    <ul class="col col-5 quick-report-list">
+        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">${{vm.calculations.material_cost}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">${{vm.calculations.material_in_kit_cost}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">${{vm.calculations.estimated_labor_cost}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">${{vm.calculations.materials_ordered_labor}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">${{vm.calculations.materials_in_kit_labor}}</p></li>
+    </ul>
 
-<h2>Components</h2>
-<label>Name <input placeholder="Module Name" ng-model="vm.module.data.name" /></label><br />
-<label>Code <input placeholder="Code" ng-model="vm.module.data.code" /></label><br />
-<label>Estimated Assembly Time <input type="number" placeholder="Estimated Assembly Time (hrs.)" ng-model="vm.module.data.estimated_assembly_time" /></label><br />
+    <md-input-container>
+        <label>Code</label>
+        <input type="text" ng-model="vm.module.data.code" />
+    </md-input-container>
 
+    <md-input-container>
+        <label>Estimated Assembly Time (hrs.)</label>
+        <input type="text" ng-model="vm.module.data.estimated_assembly_time" />
+    </md-input-container>
 
-<h3>Version</h3>
-<label>Version Number <input type="text" placeholder="Version Number" ng-model="vm.module.data.version_number" /></label><br />
-<label>Version Notes <textarea type="text" placeholder="Version Notes" ng-model="vm.module.data.version_notes" /></textarea></label>
+    <h3 class="md-subtitle">Version</h3>
+    <md-input-container>
+        <label>Version Number</label>
+        <input type="text" ng-model="vm.module.data.version_number" />
+    </md-input-container>
 
-<!-- <input type="text" placeholder="DATEPICKER" ng-model="vm.module.data.version_date" /> -->
-<!-- <input type="text" placeholder="Live-search Components" /> -->
+    <md-input-container>
+        <label>Version Notes</label>
+        <textarea ng-model="vm.module.data.version_notes"></textarea>
+    </md-input-container>
 
+    <md-datepicker ng-model="vm.module.data.version_date"></md-datepicker>
 
-<h2>Resources</h2>
-    <label>Google Drive <input placeholder="URL" ng-model="vm.module.data.module_drive_link" /></label><br />
-    <label>To Be Printed <input placeholder="URL" ng-model="vm.module.data.to_be_printed_link" /></label><br />
-    <label>Assembly Video <input placeholder="URL" ng-model="vm.module.data.assembly_video_link" /></label><br />
-    <label>Activity Video <input placeholder="URL" ng-model="vm.module.data.activity_video_link" /></label><br />
-    <label>Kit Content Sheet <input placeholder="URL" ng-model="vm.module.data.kit_content_link" /></label><br />
-    <label>Custom Link 1
-        <input placeholder="Title" ng-model="vm.module.data.other1_title" />
-        <input placeholder="URL" ng-model="vm.module.data.other1_link" /></label><br />
-    <label>Custom Link 2
-        <input placeholder="Title" ng-model="vm.module.data.other2_title" />
-        <input placeholder="URL" ng-model="vm.module.data.other2_link" />
-    </label><br />
-
-
-<h2>Assembly Instructions</h2>
-
-<textarea ng-model="vm.module.data.assembly_notes"></textarea>
-
-<h2>Components in Module</h2>
+    <!-- <input type="text" placeholder="Live-search Components" /> -->
 
 
-<input ng-model="vm.newComponentId" placeholder="new component ID" />
-<input ng-model="vm.newComponentQuantity" placeholder="new component quantity" type="number" />
-<!-- <button ng-click="vm.addModuleComponent(vm.newComponentId, vm.newComponentQuantity)">Add Component</button> -->
-<button ng-click="vm.addModuleComponentToDraft(vm.newComponentId, vm.newComponentQuantity)">Add Component Draft</button>
+    <h2 class="md-title md-subtitle">Resources</h2>
 
-<div class="mock-table" role="table" aria-label="Components">
-    <div class="mock-table-header" role="rowgroup">
-      <div class="mock-table-row mock-table-row-header" row="row">
-        <h3 class="columnheader">Pieces Per Kit</h3>
-        <h3 class="columnheader">Name</h3>
-        <h3 class="columnheader">Type</h3>
-        <h3 class="columnheader">Description</h3>
-        <h3 class="columnheader">Price Per Unit</h3>
-        <h3 class="columnheader">Pieces Per Unit</h3>
-        <h3 class="columnheader">Cost Per Unit</h3>
-        <h3 class="columnheader">General Stock</h3>
-        <h3 class="columnheader">Consumable</h3>
-        <h3 class="columnheader">Modules Used In</h3>
-        <h3 class="columnheader">Vendor Name 1</h3>
-        <h3 class="columnheader">Vendor Link 1</h3>
-        <h3 class="columnheader">Vendor Name 2</h3>
-        <h3 class="columnheader">Vendor Link 2</h3>
-        <h3 class="columnheader">Purpose/Notes</h3>
-        <h3 class="columnheader">Delete</h3>
-    </div><!-- /.mock-table-row-header -->
-  </div><!-- /.mock-table-header -->
+    <md-input-container>
+        <label>Google Drive (url)</label>
+        <input type="text" ng-model="vm.module.data.module_drive_link" />
+    </md-input-container>
 
-    <div ng-repeat="row in vm.components.data" class="mock-table-body" role="rowgroup">
-        <div class="mock-table-row" row="row">
-        <p role="cell"><input type="number" ng-model="row.pieces_per_kit" /></p>
-        <p role="cell">{{row.name}}</p>
-        <p role="cell">{{row.type}}</p>
-        <p role="cell">{{row.description}}</p>
-        <p role="cell">{{row.price_per_unit}}</p>
-        <p role="cell">{{row.pieces_per_unit}}</p>
-        <p role="cell">{{row.cost_per_unit}}</p>
-        <p role="cell">{{row.general_stock_item}}</p>
-        <p role="cell">{{row.consumable}}</p>
-        <p role="cell">{{row.modules_used_in}}</p>
-        <p role="cell">{{row.vendor_name_primary}}</p>
-        <p role="cell">{{row.vendor_url_primary}}</p>
-        <p role="cell">{{row.vendor_name_secondary}}</p>
-        <p role="cell">{{row.vendor_url_secondary}}</p>
-        <p role="cell">{{row.notes}}</p>
-        <p role="cell"><button ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">Delete</button></p>
-        </div><!-- /.mock-table-row -->
-    </div><!-- /.mock-table-body -->
-</div><!-- /.mock-table-header -->
+    <md-input-container>
+        <label>To Be Printed (url)</label>
+        <input type="text" ng-model="vm.module.data.to_be_printed_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Assembly Video (url)</label>
+        <input type="text" ng-model="vm.module.data.assembly_video_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Assembly Video (url)</label>
+        <input type="text" ng-model="vm.module.data.assembly_video_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Activity Video (url)</label>
+        <input type="text" ng-model="vm.module.data.activity_video_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Kit Content Sheet (url)</label>
+        <input type="text" ng-model="vm.module.data.kit_content_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Custom Link 1 (url)</label>
+        <input type="text" ng-model="vm.module.data.other1_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Custom Link 1 (title)</label>
+        <input type="text" ng-model="vm.module.data.other1_title" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Custom Link 2 (url)</label>
+        <input type="text" ng-model="vm.module.data.other2_link" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Custom Link 2 (title)</label>
+        <input type="text" ng-model="vm.module.data.other2_title" />
+    </md-input-container>
+
+    <h2 class="md-title md-subtitle">Assembly Instructions</h2>
+
+    <md-input-container>
+        <label>Assembly Notes</label>
+        <textarea ng-model="vm.module.data.assembly_notes"></textarea>
+    </md-input-container>
+
+    <h2 class="md-title md-subtitle">Components in Module</h2>
+
+
+    <md-input-container>
+        <label>Component ID</label>
+        <input type="text" ng-model="vm.newComponentId" />
+    </md-input-container>
+
+    <md-input-container>
+        <label>Component Quantity</label>
+        <input type="number" ng-model="vm.newComponentQuantity" />
+    </md-input-container>
+
+    <!-- <button ng-click="vm.addModuleComponent(vm.newComponentId, vm.newComponentQuantity)">Add Component</button> -->
+    <button class="button" ng-click="vm.addModuleComponentToDraft(vm.newComponentId, vm.newComponentQuantity)">Add Component Draft</button>
+
+    <div class="mock-table" role="table" aria-label="Components">
+        <div class="mock-table-header" role="rowgroup">
+        <div class="mock-table-row mock-table-row-header" row="row">
+            <h3 class="columnheader">Pieces Per Kit</h3>
+            <h3 class="columnheader">Name</h3>
+            <h3 class="columnheader">Type</h3>
+            <h3 class="columnheader">Description</h3>
+            <h3 class="columnheader">Price Per Unit</h3>
+            <h3 class="columnheader">Pieces Per Unit</h3>
+            <h3 class="columnheader">Cost Per Unit</h3>
+            <h3 class="columnheader">General Stock</h3>
+            <h3 class="columnheader">Consumable</h3>
+            <h3 class="columnheader">Modules Used In</h3>
+            <h3 class="columnheader">Vendor Name 1</h3>
+            <h3 class="columnheader">Vendor Link 1</h3>
+            <h3 class="columnheader">Vendor Name 2</h3>
+            <h3 class="columnheader">Vendor Link 2</h3>
+            <h3 class="columnheader">Purpose/Notes</h3>
+            <h3 class="columnheader">Delete</h3>
+        </div><!-- /.mock-table-row-header -->
+    </div><!-- /.mock-table-header -->
+
+        <div ng-repeat="row in vm.components.data" class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row">
+            <p role="cell"><input type="number" ng-model="row.pieces_per_kit" /></p>
+            <p role="cell">{{row.name}}</p>
+            <p role="cell">{{row.type}}</p>
+            <p role="cell">{{row.description}}</p>
+            <p role="cell">{{row.price_per_unit}}</p>
+            <p role="cell">{{row.pieces_per_unit}}</p>
+            <p role="cell">{{row.cost_per_unit}}</p>
+            <p role="cell">{{row.general_stock_item}}</p>
+            <p role="cell">{{row.consumable}}</p>
+            <p role="cell">{{row.modules_used_in}}</p>
+            <p role="cell">{{row.vendor_name_primary}}</p>
+            <p role="cell">{{row.vendor_url_primary}}</p>
+            <p role="cell">{{row.vendor_name_secondary}}</p>
+            <p role="cell">{{row.vendor_url_secondary}}</p>
+            <p role="cell">{{row.notes}}</p>
+            <p role="cell"><button class="button" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">Delete</button></p>
+            </div><!-- /.mock-table-row -->
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
+</div><!-- /.module -->
