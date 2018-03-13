@@ -2,8 +2,6 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     console.log('ShoppingListService Loaded');
     let self = this;
 
-    self.currentShoppingListId = { shopId: 0 };
-
     self.shoppingLists = {list:[{}]};
     self.components = {list: [{}]};
 
@@ -16,19 +14,19 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
           .then( function(response) {
             self.shoppingLists.list = response.data;
             console.log('self.shoppingLists.list', self.shoppingLists.list);
-            
+
           })
           .catch( function(error) {
             console.log(error);
           });
     };
     //function to get components for the shopping list selected
-    self.getComponents = function() {
-        $http.get(`/api/shopping/components/${self.currentShoppingListId.shopId}`)
+    self.getComponents = function(listId) {
+        $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
             console.log('components.list: ', self.components.list);
-            
+
           })
           .catch( function(error) {
             console.log('error on getting components', error);
@@ -47,13 +45,13 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
         };
         $http.post('/api/shopping', shoppingListObject)
             .then((result) => {
-                self.currentShoppingListId.shopId = result.data.rows[0]
+                self.currentShoppingListId.shopId = result.data.rows[0];
                 console.log(self.currentShoppingListId.shopId);
             })
             .catch(function (err) {
                 console.log('error in adding item', err);
-            })
-    } //function to create a shopping list
+            });
+    }; //function to create a shopping list
 
 
     self.saveShoppingList = function name(arrayOfModules) { //Start of function to save shopping lists with modules
@@ -66,14 +64,34 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
             })
             .catch(error => {
                 console.log('error in shopping list save', error);
-            })
-    } //End of function to save shopping lists with modules
+            });
+    }; //End of function to save shopping lists with modules
+
+    self.addOrderedInHouseToComponent = function(component) {
+      $http.post('/api/shopping/addOrderedInHouse/', component)
+        .then( function(response) {
+          console.log(response.data);
+          self.getComponents(component.shopping_id);
+        })
+        .catch( function(error) {
+          console.log('error adding ordered_inHouse_id to component: ', error);
+        });
+    };
 
     /******************************************/
     /*              PUT REQUESTS              */
     /******************************************/
 
-
+    self.updateOrderedInHouseComponent = function(component) {
+      $http.put('/api/shopping/updateOrderedInHouse', component)
+      .then( function(response) {
+        console.log(response.data);
+        self.getComponents(component.shopping_id);
+      })
+      .catch( function(error) {
+        console.log('error updating component status: ', error);
+      });
+    };
 
     /******************************************/
     /*            DELETE REQUESTS             */
@@ -84,22 +102,7 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     /******************************************/
     /*            OTHER FUNCTIONS             */
     /******************************************/
-    
-    //function to show ordered checkbox has been clicked in console 
-    self.updateOrdered = function(orderStatus) {
-        if(orderStatus == true ) {
-            console.log('Ordered Checkbox has been clicked');
-        } else if (orderStatus == false ) {
-            console.log('Ordered Checkbox un-checked');
-        }//end else if
-    }//end function 
-    //function to show InHouse checkbox has been clicked in console
-    self.updateInHouse = function(inHouseStatus) {
-        if(inHouseStatus == true ) {
-            console.log('In-House Checkbox has been clicked');
-        } else if (inHouseStatus == false ) {
-            console.log('In-House Checkbox un-checked');
-        }//end else if
-    }//end function 
+
+
 
 }]);

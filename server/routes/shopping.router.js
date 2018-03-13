@@ -121,10 +121,48 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add 
 
 });  //End of add shoppinglist junction function
 
+router.post('/addOrderedInHouse', (req, res) => {
+
+  console.log(req.body);
+  let item = req.body;
+
+  let queryText = `
+  INSERT INTO shopping_components ("shopping_id", "component_id", "ordered", "in_house")
+  VALUES ($1, $2, $3, $4)`;
+
+  pool.query(queryText, [item.shopping_id, item.id, item.ordered, item.in_house])
+    .then((results) => {
+      console.log('component added to shopping_components', results);
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log('Error adding component to shopping_components', error);
+      res.sendStatus(500);
+    });
+
+});
 
 /******************************************/
 /*              PUT REQUESTS              */
 /******************************************/
+
+router.put('/updateOrderedInHouse', (req, res) => {
+
+  let item = req.body;
+
+  let queryText = `UPDATE shopping_components SET ordered = $1, in_house = $2 WHERE id = $3`;
+
+  pool.query(queryText, [item.ordered, item.in_house, item.ordered_inhouse_id])
+    .then((results) => {
+      // console.log('component updated in shopping_components', results);
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log('Error updating component in shopping_components', error);
+      res.sendStatus(500);
+    });
+
+});
 
 
 
