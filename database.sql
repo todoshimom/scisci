@@ -131,5 +131,5 @@ INSERT INTO modules (name)
 VALUES ('Sci Sci Kit Vendor Sheet'); 
 
 INSERT INTO components_modules (module_id, component_id, pieces_per_kit)
-VALUES (1, 2, 1), (1, 3, 17),(1, 4, 12), (1, 5, 15),(1, 6, 1), (1, 7, 30),(1, 8, 15), (1, 9, 15), 
-(1, 10, 15), (1, 11, 50); 
+VALUES (1, 1, 1), (1, 2, 17),(1, 3, 12), (1, 4, 15),(1, 5, 1), (1, 6, 30),(1, 7, 15), (1, 8, 15), 
+(1, 9, 15), (1, 10, 50); 
