@@ -1,0 +1,14 @@
+.button {
+    padding: 10px 30px;
+    border: 1px solid $green;
+    border-radius: 0;
+    background-color: $white;
+    color: $green;
+    text-transform: uppercase;
+    font-family: Roboto;
+    transition: all 200ms;
+    &:hover {
+        background-color: $green;
+        color: $white;
+    }
+}
