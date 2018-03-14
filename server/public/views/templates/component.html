@@ -68,13 +68,12 @@
     <button type="button" name="button" ng-click="vm.addComponentToLib(vm.componentItem)" class="button">Add Component</button>
   </div>
 
-  <md-input-container>
-    <label>Filter Components</label>
-    <input ng-model="filterString.name"/>
-  </md-input-container>
-
   <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
-  <h2>Manage Components</h2>   
+  <h2>Manage Components</h2>
+    <md-input-container>
+      <label>Filter Components</label>
+      <input ng-model="filterString.name"/>
+    </md-input-container>   
    <div class="mock-table" role="table" aria-label="Components">
       <div class="mock-table-header" role="rowgroup">
           <div class="mock-table-row mock-table-row-header" row="row">
@@ -113,16 +112,16 @@
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</p>
             <p role="cell" ng-if="vm.edit[component.id]">
               <select ng-model="component.general_stock_item">
-                <option ng-value="true">True</option>
-                <option ng-value="false">False</option>
+                <option ng-value="Yes">Yes</option>
+                <option ng-value="No">No</option>
               </select>
             </p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.consumable}}</p>
             <p role="cell" ng-if="vm.edit[component.id]">
               <select ng-model="component.consumable">
-                <option ng-value="true">True</option>
-                <option ng-value="false">False</option>
+                <option ng-value="Yes">Yes</option>
+                <option ng-value="No">No</option>
               </select>
             </p>
 
@@ -155,7 +154,11 @@
             <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)" class="button">Update</button></p>
 
             <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
-            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.deleteComponent(component.id)" class="button">Delete</button></p>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </p>
 
         </div>
       </div>
