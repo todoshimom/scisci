@@ -37,4 +37,11 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
     self.saveModule = ModuleService.saveModule;
     self.initializeData();
 
+    // // check if we're on an individual page or on the creator page
+    // self.isSavedModule = ModuleService.isSavedModule;
+    self.isSavedModule = {value: false};
+    if($routeParams.id) {
+        self.isSavedModule.value = true;
+    };
+
 }]);
