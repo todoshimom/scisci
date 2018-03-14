@@ -3,7 +3,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     let self = this;
 
     self.module = {};
-    self.components = {};
+    self.components = { data: [] };
     self.componentsSaved = {};
 
     self.moduleLibrary = {list:[{}]};
@@ -96,10 +96,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     }
 
     // Draft version
-    self.addModuleComponentToDraft = function(componentId, piecesPerKit = 0) {
+    self.addModuleComponentToDraft = function(componentId, piecesPerKit = 0, componentData) {
         if(!piecesPerKit) {
             piecesPerKit = 0;
         }
+        console.log('componentData', componentData);
 
         // check if it's already in the module
         let componentIsInModule = false;
@@ -115,8 +116,22 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             // TODO: remove dummy data with live data from suggest box
             self.components.data.unshift(
                 {
-                    component_id: componentId, module_id: 34, pieces_per_kit: piecesPerKit,
-                    "id":100,"name":"3 ring binder","description":"a binder","vendor_name_primary":"amazon","vendor_url_primary":"www.amazon.com","vendor_name_secondary":null,"vendor_url_secondary":null,"notes":"used to hold papers","price_per_unit":"3.00","pieces_per_unit":1,"consumable":false,"type":"binder","general_stock_item":true
+                    // module_id: 34, // not needed?
+                    component_id: componentId, 
+                    pieces_per_kit: piecesPerKit,
+                    id: componentData.id,
+                    name: componentData.name,
+                    description: componentData.description,
+                    vendor_name_primary: componentData.vendor_name_primary,
+                    vendor_url_primary: componentData.vendor_url_primary,
+                    vendor_name_secondary: componentData.vendor_name_secondary,
+                    vendor_url_secondary: componentData.vendor_url_secondary,
+                    notes: componentData.notes,
+                    price_per_unit: componentData.price_per_unit,
+                    pieces_per_unit: componentData.pieces_per_unit,
+                    consumable: componentData.consumable,
+                    type: componentData.type,
+                    general_stock_item: componentData.general_stock_item
                 }
             );
         } else {
@@ -322,5 +337,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             console.log(error);
           });
       };
+
+    // // check if we're on an individual page or on the creator page
+    // self.isSavedModule = {value: false};
+    // if($routeParams.id) {
+    //     self.isSavedModule.value = true;
+    // }
   
 }]);
