@@ -264,6 +264,10 @@ h2 {
     background-color: #fafafa;
     color: #828381; }
 
+.button-naked {
+  border: none;
+  background-color: transparent; }
+
 .modal {
   position: fixed;
   z-index: 10;
