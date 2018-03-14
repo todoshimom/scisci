@@ -5,6 +5,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.module = {};
     self.components = { data: [] };
     self.componentsSaved = {};
+    self.calculations = { data: {}};
 
     self.moduleLibrary = {list:[{}]};
 
@@ -44,6 +45,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .then(response => {
                 console.log('get response', response.data);
                 self.components.data = response.data;
+
+                self.getCostRates();
             })
             .catch(error => {
                 console.log('error in get', error);
@@ -58,6 +61,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             })
             .catch(error => {
                 console.log('error in get', error);
+            });
+    };
+
+    self.getCostRates = function() {
+        $http.get('/api/module/cost/rates/' + $routeParams.id)
+            .then(response => {
+                self.calculations.data = response.data;
+                console.log('get response for cost rates single module', self.calculations);
+
+            })
+            .catch(error => {
+                console.log('error in get single module cost rates', error);
             });
     };
 
