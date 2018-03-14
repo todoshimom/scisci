@@ -71,7 +71,7 @@
   <h2 >Used In Modules</h2>
     <ul>
       <li ng-repeat="module in vm.componentModules.list">
-        {{module.name}}
+        <a ng-href="#!module/{{module.id}}">{{module.name}}</a>
       </li>
     </ul>
 </div>
