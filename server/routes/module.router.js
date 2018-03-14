@@ -10,7 +10,7 @@ const isEditor = require('../models/editor')
 /******************************************/
 router.get('/all', authenticated, isEditor, (req, res) => {
     const queryText = 'SELECT * FROM modules ORDER BY "name"';
-    
+
     pool.query(queryText)
         .then((results) => {
         res.send(results.rows);
@@ -52,7 +52,7 @@ router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
 
 router.get('/components/:id', authenticated, isEditor, (req, res) => {
     console.log('req.params.id', req.params.id);
-    
+
     // get the components in a separate route
     const queryText = `SELECT * FROM components_modules
         JOIN components ON components_modules.component_id = components.id
@@ -66,7 +66,7 @@ router.get('/components/:id', authenticated, isEditor, (req, res) => {
             res.sendStatus(500);
         });
 });
- 
+
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
@@ -88,7 +88,7 @@ router.post('/', authenticated, isEditor, (req, res) => {
         other1_link,
         other2_title,
         other2_link,
-        assembly_notes 
+        assembly_notes
     ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING id`;
     pool.query(queryText, [
         req.body.name,
@@ -119,7 +119,7 @@ router.post('/', authenticated, isEditor, (req, res) => {
 
 router.post('/components', authenticated, isEditor, (req, res) => {
     console.log(`
-    
+
     post route
     req.body
     `, req.body);
@@ -147,7 +147,7 @@ router.post('/components', authenticated, isEditor, (req, res) => {
 /******************************************/
 router.put('/', authenticated, isEditor, (req, res) => {
     console.log(`put request
-    
+
     `, req.body);
 
     const queryText = `UPDATE modules SET
@@ -220,15 +220,26 @@ router.put('/components', authenticated, isEditor, (req, res) => {
 /*            DELETE REQUESTS             */
 /******************************************/
 router.delete('/:id', authenticated, isEditor, (req, res) => {
-    const queryText = 'DELETE FROM modules WHERE module_id = $1 AND component_id = $2';
+
+    let queryText = `DELETE FROM components_modules WHERE module_id = $1`;
+
     pool.query(queryText, [req.params.id])
-        .then(result => {
+      .then(result => {
+        let queryText = `DELETE FROM modules WHERE id = $1;`;
+
+        pool.query(queryText, [req.params.id])
+          .then((result) => {
             console.log('result.rows', result.rows);
             res.send(result.rows);
-        }).catch(err => {
-            console.log('err', err);
-            res.sendStatus(500);
-        });
+          })
+          .catch(err => {
+              console.log('err', err);
+              res.sendStatus(500);
+          });
+      }).catch(err => {
+          console.log('err', err);
+          res.sendStatus(500);
+      });
 });
 
 router.delete('/components/:module_id/:component_id', authenticated, isEditor, (req, res) => {
