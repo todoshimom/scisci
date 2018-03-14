@@ -6,7 +6,7 @@ const router = express.Router();
 const sorting = require('../modules/sorting.js');
 const authenticated = require('../models/authenticated')
 const isAdmin = require('../models/admin')
-
+const laborRate = require('../models/labor.rate')
 
 /******************************************/
 /*              GET ROUTES                */
@@ -224,16 +224,13 @@ router.delete('/:id', authenticated, isAdmin, (req, res) => {
 
 router.get('/laborRates', authenticated, isAdmin, (req, res) => {//Start of get usertypes function
 
-    let queryText = `SELECT * FROM appsettings`;
-
-    pool.query(queryText)
-        .then((results) => {
-            // console.log('GET usertypes: ', results);
-            res.send(results.rows);
+    laborRate()//getting labor rates.
+            .then((results) => {
+            res.send(results)
         })
         .catch((error) => {
-            console.log('Error on GET usertype ', error);
-            res.sendStatus(500);
+            console.log('Error on retrieving module costs function', error);
+            res.sendStatus(501);
         });
 
 });//End of get usertypes function
