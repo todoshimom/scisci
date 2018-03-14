@@ -10,7 +10,7 @@ const moduleCost = require('../models/module.costs')
 /*              GET REQUESTS              */
 /******************************************/
 
-router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get module reports function    
+router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get module reports function
     moduleCost()//Getting all results.
         .then((laborCosts) => {
             // const queryText = `
@@ -49,6 +49,19 @@ router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get mo
 
 
 }); //End of get module reports function
+
+router.get('/componentOrdered/:id', (req, res) => {
+  let queryText = `SELECT COUNT(component_id) FROM shopping_components WHERE component_id = $1`;
+
+  pool.query(queryText, [req.params.id])
+    .then((results) => {
+      console.log(results.rows.count);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 /******************************************/
 /*             POST REQUESTS              */

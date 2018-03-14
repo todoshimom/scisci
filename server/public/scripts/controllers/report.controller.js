@@ -3,7 +3,11 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
     let self = this;
 
    self.moduleLibrary = ReportService.moduleLibrary;
-   self.componentLibrary = ReportService.componentLibrary; 
+   self.componentLibrary = ReportService.componentLibrary;
+   self.componentModules = ReportService.componentModules;
+   self.ComponentModulesSelected = false
+
+   console.log(self.componentLibrary);
 
    self.getModules = function() {
        ReportService.getModules();
@@ -12,6 +16,15 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
    self.getComponents = function() {
        ReportService.getComponents();
    }
-   self.getComponents();
-   
+   // self.getComponents();
+
+   self.getComponentModules = function(component) {
+     ReportService.getComponentModules (component);
+     self.ComponentModulesSelected = true;
+   };
+
+   self.backToReports = function() {
+     self.ComponentModulesSelected = false
+   };
+
 }]);
