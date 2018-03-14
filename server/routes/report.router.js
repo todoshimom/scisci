@@ -50,6 +50,25 @@ router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get mo
 
 }); //End of get module reports function
 
+
+
+
+
+router.get('/version', authenticated, isAdmin, (req, res) => { //Start of get module reports function    
+
+    const queryText = 'SELECT name, code, version_number, version_date FROM modules ORDER BY "version_date"';
+
+    pool.query(queryText)
+        .then((results) => {
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET all module versions', error);
+            res.sendStatus(500);
+        });
+});
+
+
 /******************************************/
 /*             POST REQUESTS              */
 /******************************************/
