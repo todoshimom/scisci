@@ -12,13 +12,12 @@
 
 <div class="module" ng-show="vm.isSavedModule.value">
     <ul class="col col-5 quick-report-list">
-        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">${{vm.calculations.material_cost}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">${{vm.calculations.material_in_kit_cost}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">${{vm.calculations.estimated_labor_cost}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">${{vm.calculations.materials_ordered_labor}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">${{vm.calculations.materials_in_kit_labor}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">${{vm.calculations.data.currentSum}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">${{vm.calculations.data.currentKitSum}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">${{vm.calculations.data.laborCost}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">${{vm.calculations.data.current_and_labor_sum}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">${{vm.calculations.data.kit_and_labor_sum}}</p></li>
     </ul>
-
     <md-input-container>
         <label>Code</label>
         <input type="text" ng-model="vm.module.data.code" />
