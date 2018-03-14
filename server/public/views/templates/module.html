@@ -161,8 +161,8 @@
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.consumable}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]">
                   <select ng-model="component.consumable">
-                    <option ng-value="true">True</option>
-                    <option ng-value="false">False</option>
+                    <option ng-value="Yes">Yes</option>
+                    <option ng-value="No">No</option>
                   </select>
                 </p>
     
@@ -226,7 +226,11 @@
             <p role="cell">{{row.price_per_unit}}</p>
             <p role="cell">{{row.pieces_per_unit}}</p>
             <p role="cell">{{row.cost_per_unit}}</p>
-            <p role="cell"><button class="button" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">Delete</button></p>
+            <p role="cell">
+                <button class="button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </p>
             <p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData"><i class="fas fa-sort-down"></i></p>
 
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData">
