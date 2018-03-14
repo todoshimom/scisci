@@ -1,4 +1,4 @@
-myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', function (ModuleService, $http, $routeParams) {
+myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$http', '$routeParams', function (ModuleService, ComponentService, $http, $routeParams) {
     console.log('ModuleController created');
     let self = this;
 
@@ -13,7 +13,14 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
     self.updateModuleComponent = ModuleService.updateModuleComponent;
     self.deleteModuleComponent = ModuleService.deleteModuleComponent;
     self.deleteModuleComponentInDraft = ModuleService.deleteModuleComponentInDraft;
-    
+
+
+    // GET COMPONENTS
+    self.getAllComponents = ComponentService.getAllComponents;
+    self.componentLibrary = ComponentService.componentLibrary;
+    self.getAllComponents();
+    console.log(ComponentService.componentLibrary.list);
+
     // OTHER FUNCTIONS
 
         // Save module: intelligently updates or creates an entry
@@ -29,5 +36,12 @@ myApp.controller('ModuleController', ['ModuleService', '$http', '$routeParams', 
     self.initializeData = ModuleService.initializeData;
     self.saveModule = ModuleService.saveModule;
     self.initializeData();
+
+    // // check if we're on an individual page or on the creator page
+    // self.isSavedModule = ModuleService.isSavedModule;
+    self.isSavedModule = {value: false};
+    if($routeParams.id) {
+        self.isSavedModule.value = true;
+    };
 
 }]);
