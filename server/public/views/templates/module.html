@@ -1,6 +1,7 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<h2 class="md-title md-title-left">Module Creator</h2>
+<h2 class="md-title md-title-left" ng-if="vm.isSavedModule.value">Module Editor</h2>
+<h2 class="md-title md-title-left" ng-if="!vm.isSavedModule.value">Module Creator</h2>
 
 <md-input-container class="module-title-input">
     <label>Name</label>
