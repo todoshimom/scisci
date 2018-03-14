@@ -1,17 +1,15 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-if="!vm.showEdit && !vm.showNew">
 <!-- The && here is an or statement, not an "and". || was functioning as an "and" not an "or". -->
-    <p>Filter:</p>
-    <md-input-container> 
-        <label>First Name</label>
-        <input ng-model="userFilter.first_name">
-    </md-input-container>
-
-    <h2 class="md-title md-title-left">Manage Users</h2>
-
-    <h2class="md-title md-title-left">Add User</h2>
-        <md-button class="button" ng-click="vm.showNew=!vm.showNew"> + </md-button>
     
+    <h2 class="md-title md-title-left">Manage Users</h2>
+        <md-button class="button" ng-click="vm.showNew=!vm.showNew"> Add User </md-button>
+    
+    <h2>Filter</h2>
+        <md-input-container> 
+            <label>Filter by: First Name</label>
+            <input ng-model="userFilter.first_name">
+        </md-input-container>
     <!-- Manage user Table -->
     <div class="mock-table" role="table" aria-label="Components">
         <div class="mock-table-header" role="rowgroup">
