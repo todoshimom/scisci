@@ -1,5 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
-
+<div ng-if="!vm.ComponentModulesSelected">
 <h2>Module Reports</h2>
     <div class="mock-table" role="table" aria-label="Modules">
         <div class="mock-table-header" role="rowgroup">
@@ -36,11 +36,14 @@
         <div ng-repeat= "component in vm.componentLibrary.list" class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row">
                 <p role="cell">{{component.name}}</p>
-                <p role="cell">blank</p>
-                <p role="cell">blank</p>
+                <p role="cell"><span ng-click="vm.getComponentModules(component)">{{component.modules_used_in}}</span></p>
+                <p role="cell">{{component.timesOrdered}}</p>
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
+
+
+
 
 <h2>Modules Report (version info)</h2>
     <div class="mock-table" role="table" aria-label="Modules">
@@ -62,3 +65,13 @@
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
+</div>
+<div ng-if="vm.ComponentModulesSelected">
+  <h3 ng-click="vm.backToReports()">Back</h3>
+  <h2 >Used In Modules</h2>
+    <ul>
+      <li ng-repeat="module in vm.componentModules.list">
+        {{module.name}}
+      </li>
+    </ul>
+</div>

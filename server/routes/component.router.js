@@ -2,8 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool.js');
 const sorting = require('../modules/sorting.js');
 const router = express.Router();
-const authenticated = require('../models/authenticated')
-const isEditor = require('../models/editor')
+const authenticated = require('../models/authenticated');
+const isEditor = require('../models/editor');
 
 
 /******************************************/

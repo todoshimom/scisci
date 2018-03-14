@@ -1,10 +1,12 @@
-myApp.service('ReportService', ['$http', '$location', function ($http, $location) {
+myApp.service('ReportService', ['$http', '$location', 'ComponentService', function ($http, $location, ComponentService) {
     console.log('ReportService Loaded');
     let self = this;
 
-    self.moduleLibrary = { list: [] };
-    self.componentLibrary = { list: [] };
+    self.moduleLibrary = {list: []};
+    self.components = ComponentService.componentLibrary;
+    self.componentLibrary = {list: []};
     self.moduleVersionLibrary = { list: [] };
+    self.componentModules = ComponentService.componentModules;
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -21,16 +23,52 @@ myApp.service('ReportService', ['$http', '$location', function ($http, $location
             });
     };
     // get all components
-    self.getComponents = function () {
-        $http.get('/api/report/components')
-            .then(function (response) {
-                console.log("getting component response", response.data);
-                self.componentLibrary.list = response.data;
-            })
-            .catch(function (error) {
+    // begin getComponents()
+    self.getComponents = function() {
+
+      return ComponentService.getComponents();
+
+    }; // end getComponents()
+
+    // begin getAllComponents()
+    self.getAllComponents = function() {
+
+      self.getComponents()
+        .then( function(componentData) {
+
+          for (let component of componentData) {
+            $http.get(`/api/component/modulesCount/${component.id}`)
+              .then( function(response) {
+                component.modules_used_in = response.data[0].count;
+              })
+              .catch( function(error) {
                 console.log(error);
-            });
-    };
+              });
+          }
+          console.log(componentData);
+          return componentData;
+        })
+        .then( function(componentData){
+          for (let component of componentData) {
+            $http.get(`/api/report/componentOrdered/${component.id}`)
+              .then( function(response) {
+                component.timesOrdered = response.data[0].count;
+              })
+              .catch( function(error) {
+                console.log(error);
+              });
+          }
+          console.log(componentData);
+          self.componentLibrary.list = componentData;
+        });
+    }; // getAllComponents()
+
+    self.getAllComponents();
+
+    self.getComponentModules = function(component) {
+      ComponentService.getModules(component);
+      console.log(self.componentModules);
+    }; // end getModules()
 
     self.getModuleVersions = function () {
         $http.get('/api/report/version')
@@ -42,6 +80,7 @@ myApp.service('ReportService', ['$http', '$location', function ($http, $location
                 console.log(error);
             });
     };
+
 
     /******************************************/
     /*             POST REQUESTS              */

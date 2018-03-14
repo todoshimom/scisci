@@ -10,7 +10,7 @@ const moduleCost = require('../models/module.costs')
 /*              GET REQUESTS              */
 /******************************************/
 
-router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get module reports function    
+router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get module reports function
     moduleCost()//Getting all results.
         .then((laborCosts) => {
             // const queryText = `
@@ -50,11 +50,21 @@ router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get mo
 
 }); //End of get module reports function
 
+router.get('/componentOrdered/:id', (req, res) => {
+  let queryText = `SELECT COUNT(component_id) FROM shopping_components WHERE component_id = $1`;
+
+  pool.query(queryText, [req.params.id])
+    .then((results) => {
+      console.log(results.rows.count);
+      res.send(results.rows);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 
-
-
-router.get('/version', authenticated, isAdmin, (req, res) => { //Start of get module reports function    
+router.get('/version', authenticated, isAdmin, (req, res) => { //Start of get module reports function
 
     const queryText = 'SELECT name, code, version_number, version_date FROM modules ORDER BY "version_date"';
 
@@ -67,7 +77,6 @@ router.get('/version', authenticated, isAdmin, (req, res) => { //Start of get mo
             res.sendStatus(500);
         });
 });
-
 
 /******************************************/
 /*             POST REQUESTS              */
