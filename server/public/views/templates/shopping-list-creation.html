@@ -6,7 +6,7 @@
         <label>Shopping List Name</label>
         <input ng-model="vm.name" required />
     </md-input-container>
-    <input type="submit" value="Start List" />
+    <input type="submit" value="Start List" class="button" />
 </form>
 
 <div class="search-results" ng-if="vm.showSearchResults">
@@ -28,7 +28,7 @@
         </div><!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: search">
-                <p role="cell"><button ng-click="vm.addModule(module); vm.showAddedModules = true;gt">Add Module</button></p>
+                <p role="cell"><button ng-click="vm.addModule(module) ; vm.showAddedModules = true;gt" class="button">Add Module</button></p>
                 <p role="cell">{{module.name}}</p>
                 <p role="cell">{{module.code}}</p>
                 <p role="cell">{{module.unit_cost}}</p>
@@ -60,5 +60,5 @@
             </div>
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
-    <button ng-click="vm.saveShoppingList(vm.addedModuleLibrary)">Save Shopping List</button>
+    <button ng-click="vm.saveShoppingList(vm.addedModuleLibrary)" class="button">Save Shopping List</button>
 </div>
