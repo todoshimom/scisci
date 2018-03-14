@@ -65,15 +65,18 @@
     <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
       Consumable
     </md-checkbox>
+
+  </div>
+  <div>
     <button type="button" name="button" ng-click="vm.addComponentToLib(vm.componentItem)" class="button">Add Component</button>
   </div>
 
   <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
-  <h2>Manage Components</h2>
+  <h2 class=" md-title md-title-left">Manage Components</h2>
     <md-input-container>
       <label>Filter Components</label>
       <input ng-model="filterString.name"/>
-    </md-input-container>   
+    </md-input-container>
    <div class="mock-table" role="table" aria-label="Components">
       <div class="mock-table-header" role="rowgroup">
           <div class="mock-table-row mock-table-row-header" row="row">
@@ -103,32 +106,38 @@
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.description}}</p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.price_per_unit}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.price_per_unit | currency}}</p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.price_per_unit" ng-model="component.price_per_unit"></p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</p>
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <span ng-if="component.general_stock_item">{{vm.yesNo.yes}}</span>
+              <span ng-if="!component.general_stock_item">{{vm.yesNo.no}}</span>
+            </p>
             <p role="cell" ng-if="vm.edit[component.id]">
               <select ng-model="component.general_stock_item">
-                <option ng-value="Yes">Yes</option>
-                <option ng-value="No">No</option>
+                <option ng-value="true">Yes</option>
+                <option ng-value="false">No</option>
               </select>
             </p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.consumable}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <span ng-if="component.consumable">{{vm.yesNo.yes}}</span>
+              <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
+            </p>
             <p role="cell" ng-if="vm.edit[component.id]">
               <select ng-model="component.consumable">
-                <option ng-value="Yes">Yes</option>
-                <option ng-value="No">No</option>
+                <option ng-value="true">Yes</option>
+                <option ng-value="false">No</option>
               </select>
             </p>
 
             <p role="cell"><span ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">
-              <a ng-href="{{component.vendor_url_primary}}">
+              <a ng-href="http://{{component.vendor_url_primary}}" target="_blank">
                 {{component.vendor_name_primary}}
               </a>
             </p>
@@ -138,7 +147,7 @@
             <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_primary" ng-model="component.vendor_url_primary"></p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">
-              <a ng-href="{{component.vendor_name_secondary}}">
+              <a ng-href="http://{{component.vendor_url_secondary}}" target="_blank">
                   {{component.vendor_name_secondary}}
               </a>
             </p>

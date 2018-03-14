@@ -4,6 +4,10 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.componentLibrary = ComponentService.componentLibrary;
     self.componentModules = ComponentService.componentModules;
+    self.yesNo = {
+      yes: 'yes',
+      no: 'no'
+    };
 
     self.moduleViewer = false;
 
