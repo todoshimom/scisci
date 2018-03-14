@@ -1,44 +1,58 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<h1>Module Reports(Cost/popularity)</h1>
-<table style="width:100%" ng-repeat= "module in vm.moduleLibrary.list">
-    <tr>
-        <th>Module Name</th>
-        <th>Price of module</th> 
-        <th>Popularity</th>
-      </tr>
-    <tr>
-      <td>{{module.name}}</td>
-      <td>blank</td> 
-      <td>blank</td>
-    </tr>
-</table>
+<h2>Module Reports(Cost/popularity)</h2>
+    <div class="mock-table" role="table" aria-label="Modules">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header" row="row">
+                <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Price of Module</h3>
+                <h3 class="columnheader">Popularity</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table-header -->
 
-<h1>Component Reports</h1>
-<table style="width:100%" ng-repeat= "component in vm.componentLibrary.list">
-    <tr>
-        <th>Component Name</th>
-        <th>How many modules</th> 
-        <th># of times ordered</th>
-    </tr>
-    <tr>
-      <td>{{component.name}}</td>
-      <td>blank</td> 
-      <td>blank</td>
-    </tr>
-</table>
+        <div ng-repeat= "module in vm.moduleLibrary.list" class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row">
+                <p role="cell">{{module.name}}</p>
+                <p role="cell">blank</p>
+                <p role="cell">blank</p>
+            </div><!-- /.mock-table-row -->
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
 
-<h1>Modules Reporting(version)</h1>
-<table style="width:100%" ng-repeat="module in vm.moduleLibrary.list">
-    
-    <tr>
-        <th>Module Name</th>
-        <th>Version #</th> 
-        <th>Version Date</th>
-    </tr>
-    <tr>
-        <td>{{module.name}}</td>
-        <td>{{module.version_number}}</td> 
-        <td>{{module.version_date}}</td>
-    </tr>
-</table>
+<h2>Components Report</h2>
+    <div class="mock-table" role="table" aria-label="Modules">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header" row="row">
+                <h3 class="columnheader">Component Name</h3>
+                <h3 class="columnheader">How many Modules</h3>
+                <h3 class="columnheader"># of times Ordered</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table -->
+
+        <div ng-repeat= "component in vm.componentLibrary.list" class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row">
+                <p role="cell">{{component.name}}</p>
+                <p role="cell">blank</p>
+                <p role="cell">blank</p>
+            </div><!-- /.mock-table-row -->
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
+
+<h2>Modules Report (version info)</h2>
+    <div class="mock-table" role="table" aria-label="Modules">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header" row="row">
+                <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Version #</h3>
+                <h3 class="columnheader">Version Date</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table-header -->
+
+        <div ng-repeat= "module in vm.moduleLibrary.list" class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row" row="row">
+                <p role="cell">{{module.name}}</p>
+                <p role="cell">{{module.version_number}}</p>
+                <p role="cell">{{module.version_date}}</p>
+            </div><!-- /.mock-table-row -->
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
