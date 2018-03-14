@@ -1,11 +1,14 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<H1>Application Settings</H1>
+<h2 class="md-title md-title-left">Application Settings</h2>
 
 <h2>Labor Rate</h2>
-<h3>Last Set by "{{vm.currentLaborRate.list[0].last_changed}}"</h3>
+
 <md-input-container>
     <label>Current Rate: {{vm.currentLaborRate.list[0].labor_rate}}</label>
     <input type="number" min="7.87" ng-model="vm.newRate">
 </md-input-container>
-<md-button class="md-raised" ng-click="vm.setLaborRate(vm.newRate)" ng-disabled="!vm.newRate">Save Rate</md-button>
+
+<md-button class="button" ng-click="vm.setLaborRate(vm.newRate)" ng-disabled="!vm.newRate">Save Rate</md-button>
+
+<h2>Last Set by "{{vm.currentLaborRate.list[0].last_changed}}"</h2>
