@@ -91,7 +91,11 @@
                     </span>
                 </a>
                 </p>
-            <p role="cell"><button ng-click="vm.deleteModule(module.id)"><i class="fas fa-trash-alt"></i></button></p>
+            <p role="cell">
+                <button class="button-naked" ng-click="vm.deleteModule(module.id)">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </p>
         </tr>
     </tbody>
 </div><!-- /.mock-table -->
