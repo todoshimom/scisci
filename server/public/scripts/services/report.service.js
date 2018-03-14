@@ -9,7 +9,7 @@ myApp.service('ReportService', ['$http', '$location', function ($http, $location
     /******************************************/
     // get all modules
     self.getModules = function() {
-        $http.get('/api/report/all')
+        $http.get('/api/report/modules')
         .then( function(response) {
             console.log("getting module response", response.data);
             self.moduleLibrary.list = response.data;

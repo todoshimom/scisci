@@ -1,20 +1,24 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<h2>Module Reports(Cost/popularity)</h2>
+<h2>Module Reports</h2>
     <div class="mock-table" role="table" aria-label="Modules">
         <div class="mock-table-header" role="rowgroup">
             <div class="mock-table-row mock-table-row-header" row="row">
                 <h3 class="columnheader">Module Name</h3>
-                <h3 class="columnheader">Price of Module</h3>
+                <h3 class="columnheader">Material and Labor Cost</h3>
+                <h3 class="columnheader">Materials in Kit and Labor Costs(MiKaLC)</h3>
                 <h3 class="columnheader">Popularity</h3>
+                <h3 class="columnheader">Total MiKaLC</h3>
             </div><!-- /.mock-table-row-header -->
         </div><!-- /.mock-table-header -->
 
         <div ng-repeat= "module in vm.moduleLibrary.list" class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row">
-                <p role="cell">{{module.name}}</p>
-                <p role="cell">blank</p>
-                <p role="cell">blank</p>
+                <p role="cell">{{module.labordata[0].name}}</p>
+                <p role="cell">{{module.currentSum}}</p>
+                <p role="cell">{{module.currentKitSum}}</p>
+                <p role="cell">{{module.module_quantity}}</p>
+                <p role="cell">{{module.totalKitSum}}</p>
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
