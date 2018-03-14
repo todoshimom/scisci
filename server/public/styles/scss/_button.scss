@@ -6,9 +6,39 @@
     color: $green;
     text-transform: uppercase;
     font-family: Roboto;
+    line-height: 1;
     transition: all 200ms;
     &:hover {
         background-color: $green;
         color: $white;
+    }
+}
+
+.button-grayed {
+    border-color: $light-gray;
+    color: $med-gray;
+    &:hover {
+        color: $white;
+        background-color: $light-gray;
+    }
+}
+
+.md-button.md-default-theme:not([disabled]).md-focused, 
+.md-button:not([disabled]).md-focused, 
+.md-button.md-default-theme:not([disabled]):hover, 
+.md-button:not([disabled]):hover {
+    &:hover {
+        background-color: $green;
+        color: $white;
+    }
+}
+
+.md-button.md-default-theme[disabled], 
+.md-button[disabled] {
+    border: 1px solid $med-gray;
+    color: $med-gray;
+    &:hover {
+        background-color: $white;
+        color: $med-gray;
     }
 }

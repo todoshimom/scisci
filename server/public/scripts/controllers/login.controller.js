@@ -24,8 +24,8 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
                             self.passwordStatus = false;
                         }
                         else {
-                            UserService.onLoad()
-                            $location.path('/user');
+                            UserService.onLoad();
+                            UserService.userTypeHomePage(response.data);
                         }
                     } else {
                         console.log('failure error: ', response);
@@ -63,6 +63,7 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
 
     self.cancelNewPassword = ()=> {
         self.passwordStatus = true;
-        self.user = null; //clearing input fields after canceling change password.  
+        self.user = null; //clearing input fields after canceling change password.
     }
+
 }]);

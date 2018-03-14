@@ -1,21 +1,16 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<md-button class="md-raised" ng-click="vm.userService.logout()">Log Out</md-button>
-
-
 <div ng-if="!vm.showEdit && !vm.showNew">
 <!-- The && here is an or statement, not an "and". || was functioning as an "and" not an "or". -->
-    <h3>Filter:
-        <md-input-container> 
-            <label>First Name</label>
-            <input ng-model="userFilter.first_name">
-        </md-input-container>
-    </h3>
+    <p>Filter:</p>
+    <md-input-container> 
+        <label>First Name</label>
+        <input ng-model="userFilter.first_name">
+    </md-input-container>
 
-    <h2>Manage Users</h2>
+    <h2 class="md-title md-title-left">Manage Users</h2>
 
-    <h2>Add User
-        <md-button class="md-raised fade" ng-click="vm.showNew=!vm.showNew"> + </md-button>
-    </h2>
+    <h2class="md-title md-title-left">Add User</h2>
+        <md-button class="button" ng-click="vm.showNew=!vm.showNew"> + </md-button>
     
     <!-- Manage user Table -->
     <div class="mock-table" role="table" aria-label="Components">
@@ -36,10 +31,10 @@
                 <p role="cell">{{user.name}}</p>
                 <p role="cell">{{user.username}}</p>
                 <p role="cell">
-                    <md-button class="md-raised fade" ng-click="vm.showEdit=!vm.showEdit; vm.editUser=user">Edit</md-button>
+                    <md-button class="button" ng-click="vm.showEdit=!vm.showEdit; vm.editUser=user">Edit</md-button>
                 </p>
                 <p role="cell">
-                    <md-button class="md-raised" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">Delete</md-button>
+                    <md-button class="button" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">Delete</md-button>
                 </p>
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
@@ -73,8 +68,8 @@
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-button class="md-raised" ng-click="vm.addUser(vm.newUser)">Create</md-button>
-        <md-button class="md-raised" ng-click="vm.showNew=!vm.showNew">Cancel</md-button>
+        <md-button class="button" ng-click="vm.addUser(vm.newUser)">Create</md-button>
+        <md-button class="button-grayed" ng-click="vm.showNew=!vm.showNew">Cancel</md-button>
     </div><!-- /.modal-inner -->
 </div><!-- /.modal -->
 
@@ -105,8 +100,8 @@
                 </md-option>
             </md-select>
         </md-input-container>
-        <md-button class="md-raised" ng-click="vm.resetPassword(vm.editUser.id)">Reset Password</md-button>
-        <md-button class="md-raised" ng-click="vm.submitEdit(vm.editUser)">Submit</md-button>
-        <md-button class="md-raised" ng-click="vm.showEdit=!vm.showEdit">Cancel</md-button>
+        <md-button class="button" ng-click="vm.resetPassword(vm.editUser.id)">Reset Password</md-button>
+        <md-button class="button" ng-click="vm.submitEdit(vm.editUser)">Submit</md-button>
+        <md-button class="button" ng-click="vm.showEdit=!vm.showEdit">Cancel</md-button>
     </div><!-- /.modal-inner -->
 </div><!-- /.modal -->

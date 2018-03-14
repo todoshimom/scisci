@@ -38,7 +38,7 @@ router.get('/list/:id', authenticated, (req, res) => {
 })//end get
 
 
-router.get('/components/:id', (req, res) => {
+router.get('/components/:id', authenticated, (req, res) => {
 
   let queryText = `
   SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity,
@@ -121,7 +121,7 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add 
 
 });  //End of add shoppinglist junction function
 
-router.post('/addOrderedInHouse', (req, res) => {
+router.post('/addOrderedInHouse', authenticated, (req, res) => {
 
   console.log(req.body);
   let item = req.body;
@@ -146,7 +146,7 @@ router.post('/addOrderedInHouse', (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 
-router.put('/updateOrderedInHouse', (req, res) => {
+router.put('/updateOrderedInHouse', authenticated, (req, res) => {
 
   let item = req.body;
 

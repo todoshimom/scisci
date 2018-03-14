@@ -1,7 +1,7 @@
 let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAnimate']);
 
 /// Routes ///
-myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', function ($routeProvider, $locationProvider, $mdThemingProvider) {
     console.log('myApp -- config')
     $routeProvider
         .when('/', {
@@ -25,7 +25,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'UserController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3, 2);
                 }
             }
         })
@@ -34,7 +34,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'UserController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -42,7 +42,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             templateUrl: '/views/templates/module-nav.html',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -51,7 +51,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ComponentController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -60,7 +60,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ModuleController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -69,7 +69,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ModuleController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -78,7 +78,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ModuleListController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -87,7 +87,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ReportController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -95,7 +95,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             templateUrl: '/views/templates/shopping-nav.html',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(false);
                 }
             }
         })
@@ -104,7 +104,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ShoppingListController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(false);
                 }
             }
         })
@@ -113,11 +113,27 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
             controller: 'ShoppingListCreationController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(false);
                 }
             }
         })
         .otherwise({
             templateUrl: '/views/templates/404.html'
         });
+
+        var orangeMap = $mdThemingProvider.extendPalette('orange', {
+            '500': '#f59132',
+            'contrastDefaultColor': 'dark'
+        });
+        var greenMap = $mdThemingProvider.extendPalette('green', {
+            '500': '55ac56',
+            'contrastDefaultColor': 'dark'
+        });
+
+        $mdThemingProvider.definePalette('orange', orangeMap);
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('orange')
+            .accentPalette('green');
+
 }]);

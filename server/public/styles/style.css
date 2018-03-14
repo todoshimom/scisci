@@ -64,11 +64,18 @@ h2 {
   color: #828381; }
 
 .md-title {
+  margin-bottom: 15px;
   text-align: center;
   text-transform: uppercase; }
 
-.md-subtitle {
+.md-title-left {
   text-align: left; }
+
+.md-subtitle {
+  color: #828381;
+  font-weight: 300;
+  font-size: 18px;
+  text-transform: uppercase; }
 
 .mock-table {
   position: relative;
@@ -85,7 +92,8 @@ h2 {
 .mock-table-row {
   flex-wrap: wrap;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center; }
   .mock-table-row > p {
     text-align: center;
     display: inline-block; }
@@ -144,7 +152,7 @@ h2 {
   padding: 0;
   margin: 0;
   max-width: 100px;
-  height: 100%;
+  height: 100vh;
   background-color: #d5d6d5; }
 
 .nav-list-item-link {
@@ -164,6 +172,8 @@ h2 {
     flex: 1 0 100%; }
   .nav-list-item-link.active {
     background-color: #fafafa; }
+  .nav-list-item-link:hover {
+    cursor: pointer; }
 
 .sub-nav-list {
   display: flex;
@@ -225,10 +235,34 @@ h2 {
   color: #55ac56;
   text-transform: uppercase;
   font-family: Roboto;
+  line-height: 1;
   transition: all 200ms; }
   .button:hover {
     background-color: #55ac56;
     color: #fafafa; }
+
+.button-grayed {
+  border-color: #d5d6d5;
+  color: #828381; }
+  .button-grayed:hover {
+    color: #fafafa;
+    background-color: #d5d6d5; }
+
+.md-button.md-default-theme:not([disabled]).md-focused:hover,
+.md-button:not([disabled]).md-focused:hover,
+.md-button.md-default-theme:not([disabled]):hover:hover,
+.md-button:not([disabled]):hover:hover {
+  background-color: #55ac56;
+  color: #fafafa; }
+
+.md-button.md-default-theme[disabled],
+.md-button[disabled] {
+  border: 1px solid #828381;
+  color: #828381; }
+  .md-button.md-default-theme[disabled]:hover,
+  .md-button[disabled]:hover {
+    background-color: #fafafa;
+    color: #828381; }
 
 .modal {
   position: fixed;
@@ -278,6 +312,12 @@ md-input-container {
 .fade.ng-leave.ng-leave-active {
   opacity: 0; }
 
+.alert {
+  font-weight: 300; }
+
+.alert-danger {
+  color: #f59132; }
+
 .module-title-input {
   font-size: 18px;
   font-weight: 300; }
@@ -301,6 +341,9 @@ md-input-container {
 .quick-report-value {
   font-weight: 300;
   font-size: 30px; }
+
+.resource-list md-input-container {
+  margin: 18px 0 5px 0; }
 
 @media print {
   .navbar {

@@ -16,7 +16,7 @@ const laborRate = require('../models/labor.rate')
 router.get('/', (req, res) => {
     // check if logged in
     if (req.isAuthenticated()) {
-        // send back user object from database        
+        // send back user object from database
         res.send(req.user);
     } else {
         // failure best handled on the server. do redirect here.
@@ -114,7 +114,7 @@ router.post('/', authenticated, isAdmin, (req, res) => {//Start of post new user
 // this middleware will run our POST if successful
 // this middleware will send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
-    res.sendStatus(200);
+    res.send(req.user);
 });
 
 
@@ -128,8 +128,8 @@ router.put('/', authenticated, isAdmin, (req, res) => {//Start of edit user func
     console.log(user);
 
     let queryText = `
-    UPDATE users 
-    SET 
+    UPDATE users
+    SET
     first_name = $1,
     last_name = $2,
     username = $3,
@@ -154,8 +154,8 @@ router.put('/newPassword', authenticated, (req, res) => {//Start of resetPasswor
     let newPassword = encryptLib.encryptPassword(req.body.password);
 
     let queryText = `
-    UPDATE users 
-    SET 
+    UPDATE users
+    SET
     password = '${newPassword}'
     WHERE "id" = ${req.user.id};`;
 
@@ -169,18 +169,18 @@ router.put('/newPassword', authenticated, (req, res) => {//Start of resetPasswor
             res.sendStatus(500);
         });
 
-});//End of resetPassword route 
+});//End of resetPassword route
 
 router.put('/resetPassword/:id', authenticated, isAdmin, (req, res) => {//Start of resetPassword route
 
     //Mental note, this area and resetPassword can be refactored.
 
-    //This way the .env password can be set on heroku for easy management. 
+    //This way the .env password can be set on heroku for easy management.
     let resetPassword = encryptLib.encryptPassword(process.env.DEFAULTPASSWORD);
 
     let queryText = `
-    UPDATE users 
-    SET 
+    UPDATE users
+    SET
     password = '${resetPassword}'
     WHERE "id" = ${req.params.id};`;
 
@@ -194,7 +194,7 @@ router.put('/resetPassword/:id', authenticated, isAdmin, (req, res) => {//Start 
             res.sendStatus(500);
         });
 
-});//End of resetPassword route 
+});//End of resetPassword route
 
 /******************************************/
 /*            DELETE ROUTES               */
