@@ -5,21 +5,22 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
     self.moduleLibrary = {list: []};
     self.components = ComponentService.componentLibrary;
     self.componentLibrary = {list: []};
+    self.moduleVersionLibrary = { list: [] };
     self.componentModules = ComponentService.componentModules;
 
     /******************************************/
     /*              GET REQUESTS              */
     /******************************************/
     // get all modules
-    self.getModules = function() {
+    self.getModules = function () {
         $http.get('/api/report/modules')
-        .then( function(response) {
-            console.log("getting module response", response.data);
-            self.moduleLibrary.list = response.data;
-        })
-        .catch( function(error) {
-            console.log(error);
-        });
+            .then(function (response) {
+                console.log("getting module response", response.data);
+                self.moduleLibrary.list = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
     // get all components
     // begin getComponents()
@@ -68,6 +69,18 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
       ComponentService.getModules(component);
       console.log(self.componentModules);
     }; // end getModules()
+
+    self.getModuleVersions = function () {
+        $http.get('/api/report/version')
+            .then(function (response) {
+                console.log("getting module versions response", response.data);
+                self.moduleVersionLibrary.list = response.data;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+
 
     /******************************************/
     /*             POST REQUESTS              */

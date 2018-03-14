@@ -50,14 +50,16 @@
         <div class="mock-table-header" role="rowgroup">
             <div class="mock-table-row mock-table-row-header" row="row">
                 <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Code</h3>
                 <h3 class="columnheader">Version #</h3>
                 <h3 class="columnheader">Version Date</h3>
             </div><!-- /.mock-table-row-header -->
         </div><!-- /.mock-table-header -->
 
-        <div ng-repeat= "module in vm.moduleLibrary.list" class="mock-table-body" role="rowgroup">
+        <div ng-repeat= "module in vm.moduleVersionLibrary.list" class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row">
                 <p role="cell">{{module.name}}</p>
+                <p role="cell">{{module.code}}</p>
                 <p role="cell">{{module.version_number}}</p>
                 <p role="cell">{{module.version_date}}</p>
             </div><!-- /.mock-table-row -->
