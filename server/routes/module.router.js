@@ -4,6 +4,7 @@ const sorting = require('../modules/sorting.js');
 const router = express.Router();
 const authenticated = require('../models/authenticated')
 const isEditor = require('../models/editor')
+const moduleCost = require('../models/module.costs')
 
 /******************************************/
 /*              GET REQUESTS              */
@@ -13,12 +14,12 @@ router.get('/all', authenticated, isEditor, (req, res) => {
 
     pool.query(queryText)
         .then((results) => {
-        res.send(results.rows);
-    })
-    .catch((error) => {
-        console.log('Error on GET modules request', error);
-        res.sendStatus(500);
-    });
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET modules request', error);
+            res.sendStatus(500);
+        });
 
 });
 
@@ -66,6 +67,20 @@ router.get('/components/:id', authenticated, isEditor, (req, res) => {
             res.sendStatus(500);
         });
 });
+
+router.get('/cost/rates/:id', authenticated, isEditor, (req, res) => {
+    moduleCost(req.params.id)//Getting single module results.
+        .then((results) => {
+            console.log('Searchforme', results);
+            results[0].kit_and_labor_sum = results[0].currentKitSum + results[0].laborCost
+            results[0].current_and_labor_sum = results[0].currentSum + results[0].laborCost
+            res.send(results[0])
+        })
+        .catch((error) => {
+            console.log('Error on retrieving module costs function', error);
+            res.sendStatus(501);
+        });
+})
 
 /******************************************/
 /*             POST REQUESTS              */
@@ -224,22 +239,22 @@ router.delete('/:id', authenticated, isEditor, (req, res) => {
     let queryText = `DELETE FROM components_modules WHERE module_id = $1`;
 
     pool.query(queryText, [req.params.id])
-      .then(result => {
-        let queryText = `DELETE FROM modules WHERE id = $1;`;
+        .then(result => {
+            let queryText = `DELETE FROM modules WHERE id = $1;`;
 
-        pool.query(queryText, [req.params.id])
-          .then((result) => {
-            console.log('result.rows', result.rows);
-            res.send(result.rows);
-          })
-          .catch(err => {
-              console.log('err', err);
-              res.sendStatus(500);
-          });
-      }).catch(err => {
-          console.log('err', err);
-          res.sendStatus(500);
-      });
+            pool.query(queryText, [req.params.id])
+                .then((result) => {
+                    console.log('result.rows', result.rows);
+                    res.send(result.rows);
+                })
+                .catch(err => {
+                    console.log('err', err);
+                    res.sendStatus(500);
+                });
+        }).catch(err => {
+            console.log('err', err);
+            res.sendStatus(500);
+        });
 });
 
 router.delete('/components/:module_id/:component_id', authenticated, isEditor, (req, res) => {

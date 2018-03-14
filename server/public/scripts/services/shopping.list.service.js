@@ -4,7 +4,7 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
 
     self.shoppingLists = {list:[{}]};
     self.components = {list: [{}]};
-    self.currentShoppingListId = {};
+    self.currentShoppingListId = { shopId: 0 };
 
 	/******************************************/
 	/*              GET REQUESTS              */

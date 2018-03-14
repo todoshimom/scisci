@@ -6,6 +6,7 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     console.log('userObject', self.userObject);
     
     self.moduleLibrary = ModuleService.moduleLibrary;
+    self.currentShoppingListId = ShoppingListService.currentShoppingListId
     self.addedModuleLibrary = [];
 
     self.showSearchResults = false;

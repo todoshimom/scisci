@@ -34,8 +34,9 @@ let getCosts = function (moduleId) {
         JOIN components_modules ON components.id = components_modules.component_id
         JOIN modules ON components_modules.module_id = modules.id
         LEFT OUTER JOIN modules_shopping on modules.id = modules_shopping.module_id
+        WHERE components_modules.module_id = ${moduleId}
         GROUP BY components_modules.component_id, components_modules.module_id, components.pieces_per_unit, components.price_per_unit, modules.name, components_modules.pieces_per_kit, appsettings.labor_rate, modules.estimated_assembly_time
-        WHERE components_modules.module_id = ${moduleId};`;
+        ORDER BY modules.name`;
     }
     else {
         console.log('Getting All');
