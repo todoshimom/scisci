@@ -25,7 +25,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'UserController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3, 2);
                 }
             }
         })
@@ -34,7 +34,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'UserController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -42,7 +42,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             templateUrl: '/views/templates/module-nav.html',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -51,7 +51,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ComponentController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -60,7 +60,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ModuleController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -69,7 +69,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ModuleController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -78,7 +78,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ModuleListController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -87,7 +87,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ReportController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(true, 3);
                 }
             }
         })
@@ -95,7 +95,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             templateUrl: '/views/templates/shopping-nav.html',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(false);
                 }
             }
         })
@@ -104,7 +104,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ShoppingListController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(false);
                 }
             }
         })
@@ -113,7 +113,7 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             controller: 'ShoppingListCreationController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser();
+                    return UserService.getuser(false);
                 }
             }
         })
@@ -135,5 +135,5 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
         $mdThemingProvider.theme('default')
             .primaryPalette('orange')
             .accentPalette('green');
-  
+
 }]);

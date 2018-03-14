@@ -138,9 +138,20 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     /************* VERIFICATION/LOGOUT FUNCTIONS *************/
 
-    self.getuser = function () {
+    self.getuser = function (authorized, userType1, userType2) {
         console.log('UserService -- getuser');
         $http.get('/api/user').then(function (response) {
+          if (authorized) {
+            if (response.data.username && response.data.usertype !=  userType1 && response.data.usertype !=  userType2) {
+                // user has a current session on the server
+                self.userObject.list = response.data;
+                console.log('UserService -- getuser -- User Data: ', self.userObject);
+            } else {
+                console.log('UserService -- getuser -- failure');
+                // user has no session, bounce them back to the login page
+                $location.path("/404");
+            }
+          } else {
             if (response.data.username) {
                 // user has a current session on the server
                 self.userObject.list = response.data;
@@ -150,11 +161,12 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
                 // user has no session, bounce them back to the login page
                 $location.path("/home");
             }
+          }
         }, function (response) {
             console.log('UserService -- getuser -- failure: ', response);
             $location.path("/home");
         });
-    }
+    };
 
     self.logout = function () {
         console.log('UserService -- logout');
@@ -188,6 +200,17 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
                 console.log('Get response for retrieve labor rates failed: ', error);
             });
     }; // End of retrieveLaborRate function.
+
+
+    self.userTypeHomePage = function (user) {
+      if(user.usertype === 1) {
+        $location.path('/user');
+      } else if (user.usertype === 2) {
+        $location.path('/module-nav');
+      } else {
+        $location.path('/shopping-nav');
+      }
+    };
 
     self.onLoad = function () {
         self.retrieveLaborRate()
