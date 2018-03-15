@@ -59,6 +59,9 @@ body, html {
 p {
   margin: 0; }
 
+a {
+  color: #55ac56; }
+
 h2 {
   margin-top: 0;
   color: #828381; }
@@ -106,7 +109,13 @@ h2 {
   width: 100%;
   background-color: #55ac56; }
 
+.columnheader {
+  font-weight: 300;
+  text-transform: uppercase; }
+
 .header {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -208,9 +217,31 @@ h2 {
   transition: all 350ms;
   transform: scale(0.85); }
 
+.inner-navbar {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 50px;
+  height: 100vh;
+  background-color: #dadbda;
+  text-align: center; }
+
+.inner-navbar-list-item-link {
+  display: inline-block;
+  padding: 15px 10px;
+  box-sizing: border-box; }
+  .inner-navbar-list-item-link.active {
+    background-color: #fafafa; }
+
+.inner-navbar-icon {
+  color: #828381; }
+
 .main {
   position: relative;
-  padding: 20px 10px 20px 120px;
+  padding: 20px 20px 20px 170px;
   box-sizing: border-box; }
 
 .col {
@@ -310,6 +341,20 @@ md-input-container {
   width: 33%;
   box-sizing: border-box; }
 
+md-checkbox.md-checked .md-icon {
+  background-color: #55ac56; }
+
+.sort-button {
+  color: #55ac56;
+  transition: all 250ms; }
+  .sort-button:hover {
+    color: #448a44;
+    cursor: pointer; }
+
+.mockLink {
+  color: blue;
+  text-decoration: underline; }
+
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
   transition: 0.35s linear all;
@@ -361,18 +406,18 @@ md-input-container {
 .resource-list md-input-container {
   margin: 18px 0 5px 0; }
 
-.module-creation-header {
+.creation-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   max-width: 50%;
   margin: 0 auto; }
-  .module-creation-header > * {
+  .creation-header > * {
     flex: 0 1 100%;
     max-width: 100%;
     width: 100%; }
-  .module-creation-header .button-wrapper {
+  .creation-header .button-wrapper {
     text-align: center; }
 
 @media print {

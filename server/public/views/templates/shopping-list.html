@@ -1,4 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
+<div ng-include="'views/partials/subnav-shopping.html'"></div>
 
 <label for="shoppingLists" class="sr-only">Lists</label>
 
@@ -40,7 +41,11 @@ ng-options="list as list.name for list in vm.shoppingLists.list"  >
 			<p role="cell">{{component.description}}</p>
 			<p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
 			<p role="cell">
-				<p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show"><i class="fas fa-sort-down"></i></p>
+            <p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
+				<span class="sort-button">
+					<i class="fas fa-info-circle"></i>
+				</span>
+			</p>
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
