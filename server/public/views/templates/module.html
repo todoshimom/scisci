@@ -134,17 +134,73 @@
        <div class="mock-table" role="table" aria-label="Components">
           <div class="mock-table-header" role="rowgroup">
               <div class="mock-table-row mock-table-row-header" row="row">
-                <h3 class="columnheader">Name <span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Type <span ng-click="vm.sortColumns('typeAsc')">&#9650;</span><span ng-click="vm.sortColumns('typeDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Name 
+                    <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('nameDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Type 
+                    <span class="sort-button" ng-click="vm.sortColumns('typeAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('typeDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Description</h3>
-                <h3 class="columnheader">Price Per Unit <span ng-click="vm.sortColumns('pricePUAsc')">&#9650;</span><span ng-click="vm.sortColumns('pricePUDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Price Per Unit 
+                    <span class="sort-button" ng-click="vm.sortColumns('pricePUAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('pricePUDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Pieces Per Unit</h3>
-                <h3 class="columnheader">General Stock <span ng-click="vm.sortColumns('genStockAsc')">&#9650;</span><span ng-click="vm.sortColumns('genStockDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Consumable <span ng-click="vm.sortColumns('consumableAsc')">&#9650;</span><span ng-click="vm.sortColumns('consumableDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">General Stock 
+                    <span class="sort-button" ng-click="vm.sortColumns('genStockAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('genStockDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Consumable 
+                    <span class="sort-button" ng-click="vm.sortColumns('consumableAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('consumableDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Modules Used In</h3>
-                <h3 class="columnheader">Vendor 1 Name <span ng-click="vm.sortColumns('vendor1Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor1Desc')">&#9660;</span></h3>
+                <h3 class="columnheader">Vendor 1 Name 
+                    <span class="sort-button" ng-click="vm.sortColumns('vendor1Asc')">   
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                    
+                    <span class="sort-button" ng-click="vm.sortColumns('vendor1Desc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Vendor 1 Link</h3>
-                <h3 class="columnheader">Vendor 2 Name <span ng-click="vm.sortColumns('vendor2Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor2Desc')">&#9660;</span></h3>
+                <h3 class="columnheader">Vendor 2 Name 
+                    <span class="sort-button" ng-click="vm.sortColumns('vendor2Asc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                <span class="sort-button" ng-click="vm.sortColumns('vendor2Desc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
                 <h3 class="columnheader">Vendor 2 Link</h3>
                 <h3 class="columnheader">Notes</h3>
               </div><!-- /.mock-table-row -->
@@ -247,7 +303,11 @@
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </p>
-            <p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData"><i class="fas fa-sort-down"></i></p>
+            <p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData">
+                <span class="sort-button">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </p>
 
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData">
 					<div class="mock-table" role="table" aria-label="Components">

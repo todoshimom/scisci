@@ -40,7 +40,11 @@ ng-options="list as list.name for list in vm.shoppingLists.list"  >
 			<p role="cell">{{component.description}}</p>
 			<p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
 			<p role="cell">
-				<p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData"><i class="fas fa-sort-down"></i></p>
+				<p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData">
+					<span class="sort-button">
+						<i class="fas fa-info-circle"></i>
+					</span>
+				</p>
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData">
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
