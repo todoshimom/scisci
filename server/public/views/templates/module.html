@@ -303,13 +303,13 @@
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </p>
-            <p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData">
+            <p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
                 <span class="sort-button">
                     <i class="fas fa-info-circle"></i>
                 </span>
             </p>
 
-				<div class="collapsed-table-data" ng-if="vm.showHideTableData">
+				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
 							<div class="mock-table-row mock-table-row-header" row="row">
