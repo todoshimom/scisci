@@ -22,11 +22,11 @@
     <button class="button" ng-click="vm.saveModule()" ng-if="vm.isSavedModule.value">Save Module</button>
 
     <ul class="col col-5 quick-report-list">
-        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">${{vm.calculations.data.currentSum}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">${{vm.calculations.data.currentKitSum}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">${{vm.calculations.data.laborCost}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">${{vm.calculations.data.current_and_labor_sum}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">${{vm.calculations.data.kit_and_labor_sum}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentSum | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentKitSum | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">{{vm.calculations.data.laborCost | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">{{vm.calculations.data.current_and_labor_sum | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">{{vm.calculations.data.kit_and_labor_sum | currency}}</p></li>
     </ul>
     <md-input-container>
         <label>Code</label>
