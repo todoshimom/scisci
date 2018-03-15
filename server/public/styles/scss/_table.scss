@@ -37,9 +37,10 @@
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
-    background-color: $green;
-    & > * {
-    }
+    padding: 10px 0;
+    margin: 10px 0 20px 0;
+    border-top: 1px solid $med-gray;
+    border-bottom: 1px solid $med-gray;
 }
 
 .columnheader {
