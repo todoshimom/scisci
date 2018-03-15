@@ -26,7 +26,7 @@ ng-options="list as list.name for list in vm.shoppingLists.list"  >
 			<h3 class="columnheader">Order Quantity</h3>
 			<h3 class="columnheader">Type</h3>
 			<h3 class="columnheader">Description</h3>
-			<h3 class="columnheader">Vendor 1 Name</h3>
+			<h3 class="columnheader">Vendor 1</h3>
 			<h3 class="columnheader">More Info</h3>
 		</div><!-- /.mock-table-row-header -->
 	</div><!-- /.mock-table-header -->
@@ -55,8 +55,7 @@ ng-options="list as list.name for list in vm.shoppingLists.list"  >
 								<h3 class="columnheader">General Stock</h3>
 								<h3 class="columnheader">Consumable</h3>
 								<h3 class="columnheader">Modules Used In</h3>
-								<h3 class="columnheader">Vendor 2 Name</h3>
-								<h3 class="columnheader">Vendor 2 Link</h3>
+								<h3 class="columnheader">Vendor 2</h3>
 								<h3 class="columnheader">Notes</h3>
 							</div><!-- /.mock-table-row-header -->
 						</div><!-- /.mock-table-header -->
@@ -66,9 +65,8 @@ ng-options="list as list.name for list in vm.shoppingLists.list"  >
 								<p role="cell">{{component.pieces_per_unit}}</p>
 								<p role="cell">{{component.general_stock_item}}</p>
 								<p role="cell">{{component.consumable}}</p>
-								<p role="cell">GET THIS DATA</p>
-								<p role="cell">{{component.vendor_name_secondary}}</p>
-								<p role="cell">{{component.vendor_url_secondary}}</p>
+                                <p role="cell">GET THIS DATA</p>
+                                <p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
 								<p role="cell">{{component.notes}}</p>
 							</div><!-- /.mock-table-row -->
 						</div><!-- /.mock-table-body -->
