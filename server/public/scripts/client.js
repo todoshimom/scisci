@@ -108,6 +108,15 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
                 }
             }
         })
+        .when('/shopping-list/:id', {
+            templateUrl: '/views/templates/shopping-list.html',
+            controller: 'ShoppingListController as vm',
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser(true, 3);
+                }
+            }
+        })
         .when('/shopping-list-creation', {
             templateUrl: '/views/templates/shopping-list-creation.html',
             controller: 'ShoppingListCreationController as vm',
