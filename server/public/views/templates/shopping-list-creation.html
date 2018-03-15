@@ -2,13 +2,27 @@
 <div ng-include="'views/partials/subnav-shopping.html'"></div>
 
 <h2 class="md-title">New Shopping List</h2>
-<form ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;"> 
-    <md-input-container class="input">
-        <label>Shopping List Name</label>
-        <input ng-model="vm.name" required />
-    </md-input-container>
-    <input type="submit" value="Start List" class="button" />
-</form>
+
+    <form class="creation-header" ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;"> 
+        <md-input-container class="input">
+            <label>Shopping List Name</label>
+            <input ng-model="vm.name" required />
+        </md-input-container>
+        <div class="button-wrapper">
+            <input type="submit" value="Start List" class="button" />
+        </div>
+    </form>
+    
+    <!-- <form ng-submit="vm.saveModule()" class="module-creation-header">
+            <md-input-container class="module-title-input">
+                <label>Module Name</label>
+                <input type="text" ng-model="vm.module.data.name" required />
+            </md-input-container>
+            
+            <div class="button-wrapper">
+                <input type="submit" class="button" ng-if="!vm.isSavedModule.value" value="Create Module" />
+            </div>
+        </form> -->
 
 <div class="search-results" ng-if="vm.showSearchResults">
     <md-input-container class="input">

@@ -385,18 +385,18 @@ md-input-container {
 .resource-list md-input-container {
   margin: 18px 0 5px 0; }
 
-.module-creation-header {
+.creation-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   max-width: 50%;
   margin: 0 auto; }
-  .module-creation-header > * {
+  .creation-header > * {
     flex: 0 1 100%;
     max-width: 100%;
     width: 100%; }
-  .module-creation-header .button-wrapper {
+  .creation-header .button-wrapper {
     text-align: center; }
 
 @media print {
