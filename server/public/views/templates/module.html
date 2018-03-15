@@ -1,14 +1,18 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
 <div class="module" ng-show="!vm.isSavedModule.value">
-    <h2 class="md-title md-title-left" ng-if="!vm.isSavedModule.value">Module Creator</h2>
+    <h2 class="md-title" ng-if="!vm.isSavedModule.value">Module Creator</h2>
 
-    <md-input-container class="module-title-input">
-        <label>Name</label>
-        <input type="text" ng-model="vm.module.data.name" required />
-    </md-input-container>
-
-    <button class="button" ng-click="vm.saveModule()" ng-if="!vm.isSavedModule.value">Create Module</button>
+    <form ng-submit="vm.saveModule()" class="module-creation-header">
+        <md-input-container class="module-title-input">
+            <label>Module Name</label>
+            <input type="text" ng-model="vm.module.data.name" required />
+        </md-input-container>
+        
+        <div class="button-wrapper">
+            <button class="button" ng-if="!vm.isSavedModule.value">Create Module</button>
+        </div>
+    </form>
 </div>
 
 <div class="module" ng-show="vm.isSavedModule.value">
