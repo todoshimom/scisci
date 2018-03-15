@@ -14,12 +14,46 @@
 <div class="mock-table" role="table" aria-label="Components">
     <div class="mock-table-header" role="rowgroup">
         <div class="mock-table-row mock-table-row-header" row="row">
-            <h3 class="columnheader">Name<span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></h3>
-            <h3 class="columnheader">Code<span ng-click="vm.sortColumns('codeAsc')">&#9650;</span><span ng-click="vm.sortColumns('codeDesc')">&#9660;</span></h3>
-            <h3 class="columnheader">Version Number <span ng-click="vm.sortColumns('versionNumAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionNumDesc')">&#9660;</span></h3>
-            <h3 class="columnheader">Version Date <span ng-click="vm.sortColumns('versionDateAsc')">&#9650;</span><span ng-click="vm.sortColumns('versionDateDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Name
+                <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('nameDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Code
+                <span class="sort-button" ng-click="vm.sortColumns('codeAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('codeDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Version Number 
+                <span class="sort-button" ng-click="vm.sortColumns('versionNumAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('versionNumDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Version Date 
+                <span class="sort-button" ng-click="vm.sortColumns('versionDateAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('versionDateDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
             <h3 class="columnheader">Version Notes</h3>
-            <h3 class="columnheader">Est. Assembly Time (hrs) <span ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">&#9650;</span><span ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">&#9660;</span></h3>
+            <h3 class="columnheader">Est. Assembly Time (hrs) 
+                <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">
+                    <i class="fas fa-caret-square-up"></i></span
+                ><span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
             <h3 class="columnheader">Assembly Notes</h3>
             <h3 class="columnheader">Module Drive Link</h3>
             <h3 class="columnheader">To Be Printed Link</h3>

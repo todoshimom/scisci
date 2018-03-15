@@ -59,6 +59,9 @@ body, html {
 p {
   margin: 0; }
 
+a {
+  color: #55ac56; }
+
 h2 {
   margin-top: 0;
   color: #828381; }
@@ -105,6 +108,10 @@ h2 {
   flex-wrap: wrap;
   width: 100%;
   background-color: #55ac56; }
+
+.columnheader {
+  font-weight: 300;
+  text-transform: uppercase; }
 
 .header {
   position: relative;
@@ -333,6 +340,13 @@ h2 {
 md-input-container {
   width: 33%;
   box-sizing: border-box; }
+
+.sort-button {
+  color: #55ac56;
+  transition: all 250ms; }
+  .sort-button:hover {
+    color: #448a44;
+    cursor: pointer; }
 
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
