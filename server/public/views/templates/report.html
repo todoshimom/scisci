@@ -15,10 +15,10 @@
         <div ng-repeat= "module in vm.moduleLibrary.list" class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row">
                 <p role="cell">{{module.labordata[0].name}}</p>
-                <p role="cell">{{module.currentSum}}</p>
-                <p role="cell">{{module.currentKitSum}}</p>
+                <p role="cell">{{module.currentSum | currency}}</p>
+                <p role="cell">{{module.currentKitSum | currency}}</p>
                 <p role="cell">{{module.module_quantity}}</p>
-                <p role="cell">{{module.totalKitSum}}</p>
+                <p role="cell">{{module.totalKitSum | currency}}</p>
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
