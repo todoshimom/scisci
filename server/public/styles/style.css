@@ -107,6 +107,8 @@ h2 {
   background-color: #55ac56; }
 
 .header {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -208,9 +210,31 @@ h2 {
   transition: all 350ms;
   transform: scale(0.85); }
 
+.inner-navbar {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 50px;
+  height: 100vh;
+  background-color: #dadbda;
+  text-align: center; }
+
+.inner-navbar-list-item-link {
+  display: inline-block;
+  padding: 15px 10px;
+  box-sizing: border-box; }
+  .inner-navbar-list-item-link.active {
+    background-color: #fafafa; }
+
+.inner-navbar-icon {
+  color: #828381; }
+
 .main {
   position: relative;
-  padding: 20px 10px 20px 120px;
+  padding: 20px 20px 20px 170px;
   box-sizing: border-box; }
 
 .col {
