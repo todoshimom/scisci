@@ -124,6 +124,12 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
           self.getAllComponents();
         })
         .catch( function(error) {
+          swal({
+            title: "Error!",
+            text: `This component is currently being used in a module!
+            Please remove the component from it's module(s) before deleting.`,
+            icon: "error",
+          });
           console.log('Error deleting component', error);
         });
 
