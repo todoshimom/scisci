@@ -43,11 +43,11 @@
         </div><!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter:vm.search">
-                <p role="cell"><button ng-click="vm.addModule(module) ; vm.showAddedModules = true;gt" class="button">Add Module</button></p>
+                <p role="cell"><button ng-click="vm.addModule(module); vm.showAddedModules = true;" class="button">Add Module</button></p>
                 <p role="cell">{{module.name}}</p>
                 <p role="cell">{{module.code}}</p>
                 <p role="cell">{{module.unit_cost}}</p>
-                <p role="cell">{{otem.total_cost}}</p>
+                <p role="cell">{{module.total_cost}}</p>
             </div>
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
@@ -63,6 +63,7 @@
                 <h3 class="columnheader">Code</h3>
                 <h3 class="columnheader">Unit Cost</h3>
                 <h3 class="columnheader">Total Cost</h3>
+                <h3 class="columnheader">Delete</h3>
             </div><!-- /.mock-table-row-header -->
         </div><!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
@@ -72,6 +73,7 @@
                 <p role="cell">{{module.code}}</p>
                 <p role="cell">{{module.unit_cost}}</p>
                 <p role="cell">{{module.total_cost}}</p>
+                <p role="cell"><button ng-click="vm.deleteModule(module)">Delete</button></p>
             </div>
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->

@@ -27,10 +27,18 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
         console.log(self.addedModuleLibrary);
     }
 
+    // Delete a module from the full list
+    self.deleteModule = function(moduleData) {
+        for (let i = 0; i < self.addedModuleLibrary.length; i++) {
+            console.log(i);
+            if (self.addedModuleLibrary[i].id == moduleData.id) {
+                self.addedModuleLibrary.splice(i, 1);
+            }
+        }
+    }
 
     self.saveShoppingList = function name(arrayOfModules) {
-        ShoppingListService.saveShoppingList(arrayOfModules
-        )
+        ShoppingListService.saveShoppingList(arrayOfModules);
     }
 
 
