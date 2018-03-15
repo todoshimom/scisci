@@ -1,32 +1,38 @@
 <div ng-include="'views/partials/nav.html'"></div>
+<div ng-include="'views/partials/subnav-module.html'"></div>
 
-<div class="module" ng-show="!vm.isSavedModule.value">
-    <h2 class="md-title md-title-left" ng-if="!vm.isSavedModule.value">Module Creator</h2>
+<div class="module" ng-if="!vm.isSavedModule.value">
+    <h2 class="md-title" ng-if="!vm.isSavedModule.value">Module Creator</h2>
 
-    <md-input-container class="module-title-input">
-        <label>Name</label>
-        <input type="text" ng-model="vm.module.data.name" required />
-    </md-input-container>
-
-    <button class="button" ng-click="vm.saveModule()" ng-if="!vm.isSavedModule.value">Create Module</button>
+    <form ng-submit="vm.saveModule()" class="creation-header">
+        <md-input-container class="module-title-input">
+            <label>Module Name</label>
+            <input type="text" ng-model="vm.module.data.name" required />
+        </md-input-container>
+        
+        <div class="button-wrapper">
+            <input type="submit" class="button" ng-if="!vm.isSavedModule.value" value="Create Module" />
+        </div>
+    </form>
 </div>
 
-<div class="module" ng-show="vm.isSavedModule.value">
+<div class="module" ng-if="vm.isSavedModule.value">
     <h2 class="md-title md-title-left" ng-if="vm.isSavedModule.value">Module Editor</h2>
 
+    <form ng-submit="vm.saveModule()">
     <md-input-container class="module-title-input">
         <label>Name</label>
         <input type="text" ng-model="vm.module.data.name" required />
     </md-input-container>
 
-    <button class="button" ng-click="vm.saveModule()" ng-if="vm.isSavedModule.value">Save Module</button>
+    <input type="submit" class="button" value="Save Module" />
 
     <ul class="col col-5 quick-report-list">
-        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">${{vm.calculations.data.currentSum}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">${{vm.calculations.data.currentKitSum}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">${{vm.calculations.data.laborCost}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">${{vm.calculations.data.current_and_labor_sum}}</p></li>
-        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">${{vm.calculations.data.kit_and_labor_sum}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentSum | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Material in Kit Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentKitSum | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Estimated Labor Cost:</p> <p class="quick-report-value">{{vm.calculations.data.laborCost | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">{{vm.calculations.data.current_and_labor_sum | currency}}</p></li>
+        <li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">{{vm.calculations.data.kit_and_labor_sum | currency}}</p></li>
     </ul>
     <md-input-container>
         <label>Code</label>
@@ -121,30 +127,87 @@
         <label>Filter Components</label>
         <input ng-model="filterString.name" />
       </md-input-container>
+      <label>Show All Components <input type="checkbox" ng-model="vm.showAllComponents" /></label>
     
-    <div ng-show="filterString.name.length > 0">
+    <div ng-show="filterString.name.length > 0 || vm.showAllComponents">
       <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
        <div class="mock-table" role="table" aria-label="Components">
           <div class="mock-table-header" role="rowgroup">
               <div class="mock-table-row mock-table-row-header" row="row">
-                <h3 class="columnheader">Name <span ng-click="vm.sortColumns('nameAsc')">&#9650;</span><span ng-click="vm.sortColumns('nameDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Type <span ng-click="vm.sortColumns('typeAsc')">&#9650;</span><span ng-click="vm.sortColumns('typeDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Name 
+                    <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('nameDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Type 
+                    <span class="sort-button" ng-click="vm.sortColumns('typeAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('typeDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Description</h3>
-                <h3 class="columnheader">Price Per Unit <span ng-click="vm.sortColumns('pricePUAsc')">&#9650;</span><span ng-click="vm.sortColumns('pricePUDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">Price Per Unit 
+                    <span class="sort-button" ng-click="vm.sortColumns('pricePUAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('pricePUDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Pieces Per Unit</h3>
-                <h3 class="columnheader">General Stock <span ng-click="vm.sortColumns('genStockAsc')">&#9650;</span><span ng-click="vm.sortColumns('genStockDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Consumable <span ng-click="vm.sortColumns('consumableAsc')">&#9650;</span><span ng-click="vm.sortColumns('consumableDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">General Stock 
+                    <span class="sort-button" ng-click="vm.sortColumns('genStockAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('genStockDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Consumable 
+                    <span class="sort-button" ng-click="vm.sortColumns('consumableAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortColumns('consumableDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Modules Used In</h3>
-                <h3 class="columnheader">Vendor 1 Name <span ng-click="vm.sortColumns('vendor1Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor1Desc')">&#9660;</span></h3>
+                <h3 class="columnheader">Vendor 1 Name 
+                    <span class="sort-button" ng-click="vm.sortColumns('vendor1Asc')">   
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                    
+                    <span class="sort-button" ng-click="vm.sortColumns('vendor1Desc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Vendor 1 Link</h3>
-                <h3 class="columnheader">Vendor 2 Name <span ng-click="vm.sortColumns('vendor2Asc')">&#9650;</span><span ng-click="vm.sortColumns('vendor2Desc')">&#9660;</span></h3>
+                <h3 class="columnheader">Vendor 2 Name 
+                    <span class="sort-button" ng-click="vm.sortColumns('vendor2Asc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                <span class="sort-button" ng-click="vm.sortColumns('vendor2Desc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
                 <h3 class="columnheader">Vendor 2 Link</h3>
                 <h3 class="columnheader">Notes</h3>
               </div><!-- /.mock-table-row -->
           </div> <!-- /.mock-table-header -->
           <div class="mock-table-body" role="rowgroup">
               <div class="mock-table-row" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
-                <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.addModuleComponentToDraft(component.id, 0, component)">Add</button>{{component.name}}</p>
+                <p role="cell" ng-if="!vm.edit[component.id]"><a ng-click="vm.addModuleComponentToDraft(component.id, 1, component)">Add</a>{{component.name}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.type}}</p>
@@ -228,7 +291,7 @@
 
         <div ng-repeat="row in vm.components.data" class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row">
-            <p role="cell"><input type="number" ng-model="row.pieces_per_kit" /></p>
+            <p role="cell"><input min="1" required type="number" ng-model="row.pieces_per_kit" /></p>
             <p role="cell">{{row.name}}</p>
             <p role="cell">{{row.type}}</p>
             <p role="cell">{{row.description}}</p>
@@ -240,9 +303,13 @@
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </p>
-            <p role="cell" ng-click="vm.showHideTableData = !vm.showHideTableData"><i class="fas fa-sort-down"></i></p>
+            <p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
+                <span class="sort-button">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </p>
 
-				<div class="collapsed-table-data" ng-if="vm.showHideTableData">
+				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
 							<div class="mock-table-row mock-table-row-header" row="row">
@@ -275,4 +342,7 @@
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
+
+    </form>
+
 </div><!-- /.module -->

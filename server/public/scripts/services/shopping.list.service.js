@@ -1,9 +1,9 @@
-myApp.service('ShoppingListService', ['$http', '$location', function ($http, $location) {
+myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
     console.log('ShoppingListService Loaded');
     let self = this;
 
-    self.shoppingLists = {list:[{}]};
-    self.components = {list: [{}]};
+    self.shoppingLists = {list:[]};
+    self.components = {list: []};
     self.currentShoppingListId = { shopId: 0 };
 
 	/******************************************/
@@ -27,12 +27,15 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
           .then( function(result) {
             self.components.list = result.data;
             console.log('components.list: ', self.components.list);
-
+            $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
             console.log('error on getting components', error);
           });
     };
+    if($routeParams.id) {
+      self.getComponents($routeParams.id);
+    }
 
     /******************************************/
     /*             POST REQUESTS              */
@@ -56,11 +59,14 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
 
 
     self.saveShoppingList = function name(arrayOfModules) { //Start of function to save shopping lists with modules
-        console.log(self.currentShoppingListId.shopId.id);
+        // console.log(self.currentShoppingListId.shopId.id);
+        let newShoppingListId = self.currentShoppingListId.shopId.id
+        
       console.log(arrayOfModules);
-        $http.post(`/api/shopping/shoppinglist/${self.currentShoppingListId.shopId.id}`, arrayOfModules)
+        $http.post(`/api/shopping/shoppinglist/${newShoppingListId}`, arrayOfModules)
             .then(response => {
                 console.log('response of save shopping list');
+                self.getComponents(newShoppingListId)
                 $location.path('/shopping-list');
             })
             .catch(error => {

@@ -1,4 +1,4 @@
-let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAnimate']);
+let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'sticky']);
 
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', function ($routeProvider, $locationProvider, $mdThemingProvider) {
@@ -105,6 +105,15 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             resolve: {
                 getuser: function (UserService) {
                     return UserService.getuser(false);
+                }
+            }
+        })
+        .when('/shopping-list/:id', {
+            templateUrl: '/views/templates/shopping-list.html',
+            controller: 'ShoppingListController as vm',
+            resolve: {
+                getuser: function (UserService) {
+                    return UserService.getuser(true, 3);
                 }
             }
         })

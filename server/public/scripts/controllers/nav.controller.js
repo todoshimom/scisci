@@ -8,7 +8,7 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
     // find the location path and it matches the current item
     // add the class 'active' to the element, otherwise no class
     self.getClass = function(pathName) {
-        if($location.path().substr(0, pathName.length) === pathName) {
+        if($location.path() === pathName) {
             return 'active';
         } else {
             return '';
@@ -38,4 +38,12 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
     }
 
     self.showNav();
+
+
+    // tooltip controls
+    self.docTooltip = {
+        showTooltip: false,
+        tipDirection: "right"
+    };
+    // end tooltip controls
 }]);

@@ -56,7 +56,12 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('Response from add new user: ', response);
                 self.getAllUsers();
-                alert(`The account for ${newUser.first_name} ${newUser.last_name} has been created.`)
+                swal({
+                    title: `The account for ${newUser.first_name} ${newUser.last_name} has been created`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(function (error) {
                 console.log('Error on new user POST request: ', error);
@@ -74,7 +79,12 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('Response from edit a user (PUT request): ', response);
                 self.getAllUsers();
-                alert(`The account has been edited.`)
+                swal({
+                    title: `Account Edit Complete`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(function (error) {
                 console.log('Error on edit user PUT request: ', error);
@@ -88,7 +98,12 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('Response from reset Password PUT request: ', response);
                 // self.getAllUsers();
-                alert(`The password has been reset.`)
+                swal({
+                    title: `Password Reset Complete`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(function (error) {
                 console.log('Error on reset password PUT request: ', error);
@@ -103,7 +118,12 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('Response from set new Password PUT request: ', response);
                 // self.getAllUsers();
-                alert(`Your password has been updated!`)
+                swal({
+                    title: `Password Update Complete`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
                 $location.path('/user');
             })
             .catch(function (error) {
@@ -123,7 +143,12 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
             .then(function (response) {
                 console.log('User successfully removed: ', response);
                 self.getAllUsers();
-                alert(`The account has been deleted.`)
+                swal({
+                    title: `Account Deleted`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(function (error) {
                 console.log('Error removing user: ', error);

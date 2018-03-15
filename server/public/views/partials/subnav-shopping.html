@@ -1,0 +1,20 @@
+<div class="inner-navbar" ng-controller="NavController as vm">
+    <ul class="inner-navbar-list">
+        <li class="inner-navbar-list-item">
+            <a class="inner-navbar-list-item-link" ng-class="vm.getClass('/shopping-list-creation')" href="#!shopping-list-creation">
+            <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">Shopping List Creation</md-tooltip>
+            <span class="inner-navbar-icon">
+                <i class="far fa-fw fa-edit"></i>
+            </span>
+            </a>
+        </li>
+        <li class="inner-navbar-list-item">
+            <a class="inner-navbar-list-item-link" ng-class="vm.getClass('/shopping-list')" href="#!shopping-list">
+                <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">Shopping List</md-tooltip>
+                <span class="inner-navbar-icon">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
