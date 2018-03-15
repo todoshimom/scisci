@@ -47,3 +47,19 @@
     border: none;
     background-color: transparent;
 }
+
+.button-secondary {
+    padding: 10px 30px;
+    border: 1px solid $orange;
+    border-radius: 0;
+    background-color: $white;
+    color: $orange;
+    text-transform: uppercase;
+    font-family: Roboto;
+    line-height: 1;
+    transition: all 200ms;
+    &:hover {
+        background-color: $orange;
+        color: $white;
+    }
+}

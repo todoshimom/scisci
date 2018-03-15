@@ -19,7 +19,7 @@
 
  <!-- Table mock up for the time being, will be changed out later for according divs  -->
 <h3 class="md-title md-title-left">Shopping List</h3>
-<div class="mock-table" role="table" aria-label="Components">
+<div class="mock-table" role="table" aria-label="Components" ng-if="vm.components.list[0]">
 	<div class="mock-table-header" role="rowgroup">
 		<div class="mock-table-row mock-table-row-header" row="row">
 			<h3 class="columnheader">Ordered</h3>
@@ -35,7 +35,7 @@
 	<div class="mock-table-body" role="rowgroup">
 		<div class="mock-table-row" row="row" ng-repeat="component in vm.components.list">
 
-			<p role="cell" ><input type="checkbox" ng-click="vm.updateOrdered(component)" ng-model="component.ordered"></p>
+			<p role="cell"><input type="checkbox" ng-click="vm.updateOrdered(component)" ng-model="component.ordered"></p>
 			<p role="cell"><input type="checkbox" ng-click="vm.updateInHouse(component)" ng-model="component.in_house"></p>
 			<p role="cell">{{component.name}}</p>
 			<p role="cell">{{component.orderQty}}</p>
@@ -77,4 +77,6 @@
 			</p>
 		</div><!-- /.mock-table-row -->
 	</div><!-- /.mock-table-body -->
-</table><!-- /.mock-table -->
+</div><!-- /.mock-table -->
+
+<div ng-if="!vm.components.list[0]"><p>No components to show in this shopping list.</p></div>

@@ -1,7 +1,8 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-include="'views/partials/subnav-shopping.html'"></div>
 
-<h2 class="md-title">New Shopping List</h2>
+<h2 ng-if="!vm.shoppingList.name" class="md-title">New Shopping List</h2>
+<h2 ng-if="vm.shoppingList.name" class="md-title">{{vm.shoppingList.name}}</h2>
 
 <form ng-if="vm.newList" class="creation-header" ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;">
     <md-input-container class="input">

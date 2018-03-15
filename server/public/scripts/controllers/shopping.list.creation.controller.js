@@ -8,6 +8,7 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     self.moduleLibrary = ModuleService.moduleLibrary;
     self.currentShoppingListId = ShoppingListService.currentShoppingListId
     self.addedModuleLibrary = [];
+    self.shoppingList = {}
 
     self.showSearchResults = false;
     self.showAddedModules = false;
@@ -16,6 +17,7 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     //function for start list button 
     self.createShoppingList = function(name, first_name, last_name) {
         ShoppingListService.createShoppingList(name, first_name, last_name);
+        self.shoppingList.name = name;
         self.newList = false; //hide start list button once a new list is created.
     };//end function for start list button to database/service 
 
