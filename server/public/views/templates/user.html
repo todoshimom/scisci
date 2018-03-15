@@ -14,10 +14,42 @@
     <div class="mock-table" role="table" aria-label="Components">
         <div class="mock-table-header" role="rowgroup">
             <div class="mock-table-row mock-table-row-header" row="row">
-                <h3 class="columnheader">First Name <span ng-click="vm.sortUsers('fnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('fnameDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Last Name <span ng-click="vm.sortUsers('lnameAsc')">&#9650;</span><span ng-click="vm.sortUsers('lnameDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Account-Type <span ng-click="vm.sortUsers('accountAsc')">&#9650;</span><span ng-click="vm.sortUsers('accountDesc')">&#9660;</span></h3>
-                <h3 class="columnheader">Username <span ng-click="vm.sortUsers('usernameAsc')">&#9650;</span><span ng-click="vm.sortUsers('usernameDesc')">&#9660;</span></h3>
+                <h3 class="columnheader">First Name 
+                    <span class="sort-button" ng-click="vm.sortUsers('fnameAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortUsers('fnameDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Last Name 
+                    <span class="sort-button" ng-click="vm.sortUsers('lnameAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortUsers('lnameDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Account-Type 
+                    <span class="sort-button" ng-click="vm.sortUsers('accountAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortUsers('accountDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
+                <h3 class="columnheader">Username 
+                    <span class="sort-button" ng-click="vm.sortUsers('usernameAsc')">
+                        <i class="fas fa-caret-square-up"></i>
+                    </span>
+                
+                    <span class="sort-button" ng-click="vm.sortUsers('usernameDesc')">
+                        <i class="fas fa-caret-square-down"></i>
+                    </span>
+                </h3>
                 <h3 class="columnheader">Edit</h3>
                 <h3 class="columnheader">Delete</h3>
             </div><!-- /.mock-table-row-header -->
