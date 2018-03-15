@@ -5,12 +5,14 @@
 
 <label for="shoppingLists" class="sr-only">Lists</label>
 
-
-<select class="shopping-list-select" ng-change="vm.getComponents(selectedList.id)" ng-model="selectedList"
-ng-options="list as list.name for list in vm.shoppingLists.list"  >
-	<option value="" selected disabled>Select a List</option>
-</select>
-
+<div class="select-wrapper">
+	<select class="shopping-list-select" ng-change="vm.getComponents(selectedList.id)" ng-model="selectedList" ng-options="list as list.name for list in vm.shoppingLists.list">
+		<option value="" selected disabled>Select a List</option>
+	</select>
+	<span class="arrow-button">
+		<i class="fas fa-angle-down"></i>
+	</span>
+</div>
 
 <button class="shopping-list-print button" ng-click="vm.printPage()">Print</button>
 

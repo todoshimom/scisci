@@ -348,6 +348,24 @@ md-input-container {
     color: #448a44;
     cursor: pointer; }
 
+.select-wrapper {
+  position: relative;
+  display: inline-block; }
+  .select-wrapper .arrow-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #55ac56; }
+  .select-wrapper select {
+    border: 1px solid #55ac56;
+    border-radius: 0;
+    padding: 9px;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none; }
+
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
   transition: 0.35s linear all;
@@ -421,6 +439,8 @@ md-input-container {
   .shopping-list-select {
     display: none; }
   .shopping-list-print {
+    display: none; }
+  .inner-navbar {
     display: none; }
   @page {
     size: landscape; } }
