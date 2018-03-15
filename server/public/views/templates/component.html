@@ -2,7 +2,9 @@
 <div ng-include="'views/partials/subnav-module.html'"></div>
 
 <div ng-if="!vm.moduleViewer">
+
   <h2 class="md-title">Add Components</h2>
+  <form ng-submit="vm.addComponentToLib(vm.componentItem)">
   <div>
     <md-input-container>
       <label>Name</label>
@@ -13,7 +15,8 @@
       <label>Type</label>
       <input ng-model="vm.componentItem.type">
     </md-input-container>
-
+  </div>
+  <div>
     <md-input-container>
       <label>Price Per Unit</label>
       <input ng-model="vm.componentItem.price_per_unit">
@@ -25,7 +28,7 @@
     </md-input-container>
   </div>
 
-  <div >
+  <div>
     <md-input-container>
       <label>Description</label>
       <textarea ng-model="vm.componentItem.description" rows="1"></textarea>
@@ -42,7 +45,8 @@
       <label>Vendor 1 Link</label>
       <input ng-model="vm.componentItem.vendor_url_primary">
     </md-input-container>
-
+</div>
+<div>
     <md-input-container>
       <label>Vendor 2 Name</label>
       <input ng-model="vm.componentItem.vendor_name_secondary">
@@ -67,15 +71,19 @@
     <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
       Consumable
     </md-checkbox>
-    <button type="button" name="button" ng-click="vm.addComponentToLib(vm.componentItem)" class="button">Add Component</button>
+
   </div>
+  <div>
+    <button class="button">Add Component</button>
+  </div>
+</form>
 
   <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
   <h2 class="md-title md-title-left">Manage Components</h2>
     <md-input-container>
       <label>Filter Components</label>
       <input ng-model="filterString.name"/>
-    </md-input-container>   
+    </md-input-container>
    <div class="mock-table" role="table" aria-label="Components">
       <div class="mock-table-header" role="rowgroup">
           <div class="mock-table-row mock-table-row-header" row="row">
@@ -97,64 +105,35 @@
       <div class="mock-table-body" role="rowgroup">
           <div class="mock-table-row" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.name}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
-
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.type}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type"></p>
-
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.description}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></p>
-
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.price_per_unit}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.price_per_unit" ng-model="component.price_per_unit"></p>
-
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.price_per_unit | currency}}</p>
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></p>
-
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]">
-              <select ng-model="component.general_stock_item">
-                <option ng-value="Yes">Yes</option>
-                <option ng-value="No">No</option>
-              </select>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <span ng-if="component.general_stock_item">{{vm.yesNo.yes}}</span>
+              <span ng-if="!component.general_stock_item">{{vm.yesNo.no}}</span>
             </p>
 
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.consumable}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]">
-              <select ng-model="component.consumable">
-                <option ng-value="Yes">Yes</option>
-                <option ng-value="No">No</option>
-              </select>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <span ng-if="component.consumable">{{vm.yesNo.yes}}</span>
+              <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
             </p>
 
             <p role="cell"><span ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">
-              <a ng-href="{{component.vendor_url_primary}}">
+              <a ng-href="http://{{component.vendor_url_primary}}" target="_blank">
                 {{component.vendor_name_primary}}
               </a>
             </p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></p>
-
             <p role="cell" ng-if="!vm.edit[component.id]"></p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_primary" ng-model="component.vendor_url_primary"></p>
-
             <p role="cell" ng-if="!vm.edit[component.id]">
-              <a ng-href="{{component.vendor_name_secondary}}">
+              <a ng-href="http://{{component.vendor_url_secondary}}" target="_blank">
                   {{component.vendor_name_secondary}}
               </a>
             </p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_secondary" ng-model="component.vendor_name_secondary"></p>
-
-            <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_url_secondary}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_secondary" ng-model="component.vendor_url_secondary"></p>
-
             <p role="cell" ng-if="!vm.edit[component.id]">{{component.notes}}</p>
-            <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></p>
-
-            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.modifyComponent(component)" class="button">Edit</button></p>
-            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.updateComponent(component)" class="button">Update</button></p>
-
+            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.showEdit=!vm.showEdit; vm.editComponent=component" class="button">Edit</button></p>
             <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
             <p role="cell" ng-if="!vm.edit[component.id]">
               <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
@@ -165,6 +144,82 @@
         </div>
       </div>
   </div>
+
+
+  <!-- This is the Edit User Div for "Modal" -->
+  <div class="modal fade" ng-if="vm.showEdit">
+      <div class="modal-inner">
+          <h2>Edit Component</h2>
+          <md-input-container>
+              <label>Name</label>
+              <input ng-value="vm.editComponent.name" ng-model="vm.editComponent.name">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Type</label>
+              <input ng-value="vm.editComponent.type" ng-model="vm.editComponent.type">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Description</label>
+              <input ng-value="vm.editComponent.description" ng-model="vm.editComponent.description">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Price Per Unit</label>
+              <input ng-value="vm.editComponent.price_per_unit" ng-model="vm.editComponent.price_per_unit">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Pieces Per Unit</label>
+              <input ng-value="vm.editComponent.pieces_per_unit" ng-model="vm.editComponent.pieces_per_unit">
+          </md-input-container>
+
+          <md-input-container>
+              <label>General Stock Item</label>
+              <md-select ng-model="vm.editComponent.general_stock_item">
+                <md-option ng-value="true">Yes</md-option>
+                <md-option ng-value="false">No</md-option>
+              </md-select>
+          </md-input-container>
+
+          <md-input-container>
+              <label>Consumable</label>
+              <md-select ng-model="vm.editComponent.consumable">
+                <md-option ng-value="true">Yes</md-option>
+                <md-option ng-value="false">No</md-option>
+              </md-select>
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor Name Primary</label>
+              <input ng-value="vm.editComponent.vendor_name_primary" ng-model="vm.editComponent.vendor_name_primary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor URL Primary</label>
+              <input ng-value="vm.editComponent.vendor_url_primary" ng-model="vm.editComponent.vendor_url_primary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor Name Secondary</label>
+              <input ng-value="vm.editComponent.vendor_name_secondary" ng-model="vm.editComponent.vendor_name_secondary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor URL Secondary</label>
+              <input ng-value="vm.editComponent.vendor_url_secondary" ng-model="vm.editComponent.vendor_url_secondary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Notes</label>
+              <input type="text" ng-value="vm.editComponent.notes" ng-model="vm.editComponent.notes">
+          </md-input-container>
+
+          <md-button class="button" ng-click="vm.updateComponent(vm.editComponent)">Submit</md-button>
+          <md-button class="button" ng-click="vm.showEdit=!vm.showEdit">Cancel</md-button>
+      </div><!-- /.modal-inner -->
+  </div><!-- /.modal -->
 
 </div>
 <div ng-if="vm.moduleViewer">

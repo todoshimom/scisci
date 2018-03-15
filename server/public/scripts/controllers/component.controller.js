@@ -4,6 +4,10 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.componentLibrary = ComponentService.componentLibrary;
     self.componentModules = ComponentService.componentModules;
+    self.yesNo = {
+      yes: 'yes',
+      no: 'no'
+    };
 
     self.moduleViewer = false;
 
@@ -28,22 +32,12 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       };
     }; // end addComponentToLib()
 
-    // begin modifyComponent()
-    self.modifyComponent = function(component) {
-      self.edit[component.id] = true;
-    }; // end modifyComponent()
-
-    // begin cancelEdit()
-    self.cancelEdit = function(component) {
-      self.edit[component.id] = false;
-      ComponentService.getComponents();
-    }; // end cancelEdit()
-
     // beign updateComponent()
     self.updateComponent = function(component) {
-      self.edit[component.id] = false;
-      console.log(component);
       ComponentService.updateComponent(component);
+
+      self.showEdit = !self.showEdit
+
     }; // updateComponent()
 
     // begin deleteComponent()
