@@ -351,6 +351,24 @@ md-checkbox.md-checked .md-icon {
     color: #448a44;
     cursor: pointer; }
 
+.select-wrapper {
+  position: relative;
+  display: inline-block; }
+  .select-wrapper .arrow-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #55ac56; }
+  .select-wrapper select {
+    border: 1px solid #55ac56;
+    border-radius: 0;
+    padding: 9px;
+    box-shadow: none;
+    background: transparent;
+    background-image: none;
+    -webkit-appearance: none; }
+
 .mockLink {
   color: blue;
   text-decoration: underline; }
@@ -428,6 +446,8 @@ md-checkbox.md-checked .md-icon {
   .shopping-list-select {
     display: none; }
   .shopping-list-print {
+    display: none; }
+  .inner-navbar {
     display: none; }
   @page {
     size: landscape; } }
