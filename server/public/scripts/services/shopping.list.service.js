@@ -1,4 +1,4 @@
-myApp.service('ShoppingListService', ['$http', '$location', function ($http, $location) {
+myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
     console.log('ShoppingListService Loaded');
     let self = this;
 
@@ -27,12 +27,15 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
           .then( function(result) {
             self.components.list = result.data;
             console.log('components.list: ', self.components.list);
-
+            $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
             console.log('error on getting components', error);
           });
     };
+    if($routeParams.id) {
+      self.getComponents($routeParams.id);
+    }
 
     /******************************************/
     /*             POST REQUESTS              */
