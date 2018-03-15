@@ -357,6 +357,9 @@ h2 {
   box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2), 0 13px 19px 2px rgba(0, 0, 0, 0.14), 0 5px 24px 4px rgba(0, 0, 0, 0.12);
   background-color: #fafafa; }
 
+.modal-col md-input-container {
+  width: 49%; }
+
 md-input-container {
   width: 33%;
   box-sizing: border-box; }

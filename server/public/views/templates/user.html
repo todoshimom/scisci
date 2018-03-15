@@ -74,9 +74,9 @@
 </div>
 
 <!-- This is the Add User Div for "Modal" -->
-<div class="modal fade" ng-if="vm.showNew">
+<div class="modal fade modal-col" ng-if="vm.showNew">
     <div class="modal-inner">
-        <h2>Add User</h2>
+        <h2 class="md-title md-title-left">Add User</h2>
         <md-input-container>
             <label>First Name</label>
             <input ng-model="vm.newUser.first_name">
@@ -101,14 +101,14 @@
             </md-select>
         </md-input-container>
         <md-button class="button" ng-click="vm.addUser(vm.newUser)">Create</md-button>
-        <md-button class="button-grayed" ng-click="vm.showNew=!vm.showNew">Cancel</md-button>
+        <md-button class="button button-grayed" ng-click="vm.showNew=!vm.showNew">Cancel</md-button>
     </div><!-- /.modal-inner -->
 </div><!-- /.modal -->
 
 <!-- This is the Edit User Div for "Modal" -->
-<div class="modal fade" ng-if="vm.showEdit">
+<div class="modal fade modal-col" ng-if="vm.showEdit">
     <div class="modal-inner">
-        <h2>Edit User</h2>
+        <h2 class="md-title md-title-left">Edit User</h2>
         <md-input-container>
             <label>First Name</label>
             <input ng-model="vm.editUser.first_name">
@@ -134,6 +134,6 @@
         </md-input-container>
         <button class="button-secondary" ng-click="vm.resetPassword(vm.editUser.id)">Reset Password</button>
         <button class="button" ng-click="vm.submitEdit(vm.editUser)">Submit</button>
-        <button class="button" ng-click="vm.showEdit=!vm.showEdit">Cancel</button>
+        <button class="button button-grayed" ng-click="vm.showEdit=!vm.showEdit">Cancel</button>
     </div><!-- /.modal-inner -->
 </div><!-- /.modal -->
