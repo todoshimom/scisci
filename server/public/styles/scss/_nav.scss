@@ -58,7 +58,7 @@
     padding: 20px;
     box-sizing: border-box;
     color: $med-gray;
-    font-weight: 400;
+    font-weight: 300;
     text-align: center;
     text-decoration: none;
     & > * {
@@ -68,4 +68,21 @@
         margin-bottom: 20px;
         color: $green;
     }
+    &:hover {
+        .sub-nav-icon {
+            transform: scale(1);
+        }
+    }
+}
+
+.sub-nav-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.sub-nav-icon {
+    transition: all 350ms;
+    transform: scale(.85);
 }

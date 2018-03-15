@@ -32,9 +32,9 @@
                     <md-button class="button" ng-click="vm.showEdit=!vm.showEdit; vm.editUser=user">Edit</md-button>
                 </p>
                 <p role="cell">
-                    <md-button class="button-naked" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">
+                    <button class="button-naked" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">
                         <i class="fas fa-trash-alt"></i>
-                    </md-button>
+                    </button>
                 </p>
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->

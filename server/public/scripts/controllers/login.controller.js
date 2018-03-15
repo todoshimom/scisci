@@ -43,13 +43,20 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
         console.log(newPass);
 
         if (typeof newPass.password == 'undefined' || typeof newPass.retypePassword == 'undefined') {
-            alert('"Please follow instructions of atleast 8-32 characters and atleast one letter and number!"')
+            swal({
+                title: 'Please Follow Instructions',
+                text: `8-32 characters & Atleast one letter and number`,
+                icon: "error",
+            })
         }
         else if (newPass.password === newPass.retypePassword) {
             console.log('They are an exact match!');
             if (newPass.password.toLowerCase() == 'welcome1') {
                 console.log('it is the default it is no good');
-                alert('You can\'t use the default password as your new password, please choose something else. ')
+                swal({
+                    title: 'You can\'t use the default password',
+                    icon: "error",
+                })
             }
             else {
                 console.log('New password is good to go!');
@@ -57,7 +64,10 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
             }
         }
         else {
-            alert('Please make sure that both password fields match eachother.')
+            swal({
+                title: 'Please make sure that the passwords match',
+                icon: "error",
+            })
         }
     }
 

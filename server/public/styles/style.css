@@ -187,7 +187,7 @@ h2 {
   padding: 20px;
   box-sizing: border-box;
   color: #828381;
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
   text-decoration: none; }
   .sub-nav-item-link > * {
@@ -195,6 +195,18 @@ h2 {
   .sub-nav-item-link svg {
     margin-bottom: 20px;
     color: #55ac56; }
+  .sub-nav-item-link:hover .sub-nav-icon {
+    transform: scale(1); }
+
+.sub-nav-title {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 300;
+  text-transform: uppercase; }
+
+.sub-nav-icon {
+  transition: all 350ms;
+  transform: scale(0.85); }
 
 .main {
   position: relative;
@@ -348,6 +360,20 @@ md-input-container {
 
 .resource-list md-input-container {
   margin: 18px 0 5px 0; }
+
+.module-creation-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 50%;
+  margin: 0 auto; }
+  .module-creation-header > * {
+    flex: 0 1 100%;
+    max-width: 100%;
+    width: 100%; }
+  .module-creation-header .button-wrapper {
+    text-align: center; }
 
 @media print {
   .navbar {
