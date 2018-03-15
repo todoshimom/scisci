@@ -334,6 +334,9 @@ md-input-container {
   width: 33%;
   box-sizing: border-box; }
 
+md-checkbox.md-checked .md-icon {
+  background-color: #55ac56; }
+
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
   transition: 0.35s linear all;
