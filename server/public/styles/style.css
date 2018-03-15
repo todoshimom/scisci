@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/
+/* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -350,6 +350,10 @@ md-checkbox.md-checked .md-icon {
   .sort-button:hover {
     color: #448a44;
     cursor: pointer; }
+
+.mockLink {
+  color: blue;
+  text-decoration: underline; }
 
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
