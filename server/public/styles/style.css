@@ -116,6 +116,9 @@ h2 {
   font-weight: 300;
   text-transform: uppercase; }
 
+.folder {
+  color: #f59132; }
+
 .header {
   position: relative;
   z-index: 1;
