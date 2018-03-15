@@ -13,7 +13,7 @@
     <!-- Manage user Table -->
     <div class="mock-table" role="table" aria-label="Components">
         <div class="mock-table-header" role="rowgroup">
-            <div class="mock-table-row mock-table-row-header" row="row">
+            <div class="mock-table-row mock-table-row-header col col-6" row="row">
                 <h3 class="columnheader">First Name 
                     <span class="sort-button" ng-click="vm.sortUsers('fnameAsc')">
                         <i class="fas fa-caret-square-up"></i>
@@ -55,7 +55,7 @@
             </div><!-- /.mock-table-row-header -->
         </div> <!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
-            <div class="mock-table-row" row="row" ng-repeat="user in vm.userLibrary.list | filter:userFilter">
+            <div class="mock-table-row col col-6" row="row" ng-repeat="user in vm.userLibrary.list | filter:userFilter">
                 <p role="cell">{{user.first_name}}</p>
                 <p role="cell">{{user.last_name}}</p>
                 <p role="cell">{{user.name}}</p>
