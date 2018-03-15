@@ -33,3 +33,20 @@
         margin: 18px 0 5px 0;
     }
 }
+
+.module-creation-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
+    margin: 0 auto;
+    & > * {
+        flex: 0 1 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    .button-wrapper {
+        text-align: center;
+    }
+}
