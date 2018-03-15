@@ -44,4 +44,6 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
         self.isSavedModule.value = true;
     };
 
+    self.showAllComponents = false;
+
 }]);

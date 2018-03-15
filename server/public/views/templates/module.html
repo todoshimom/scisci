@@ -126,8 +126,9 @@
         <label>Filter Components</label>
         <input ng-model="filterString.name" />
       </md-input-container>
+      <label>Show All Components <input type="checkbox" ng-model="vm.showAllComponents" /></label>
     
-    <div ng-show="filterString.name.length > 0">
+    <div ng-show="filterString.name.length > 0 || vm.showAllComponents">
       <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
        <div class="mock-table" role="table" aria-label="Components">
           <div class="mock-table-header" role="rowgroup">
