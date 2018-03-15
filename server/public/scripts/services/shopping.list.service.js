@@ -56,11 +56,14 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
 
 
     self.saveShoppingList = function name(arrayOfModules) { //Start of function to save shopping lists with modules
-        console.log(self.currentShoppingListId.shopId.id);
+        // console.log(self.currentShoppingListId.shopId.id);
+        let newShoppingListId = self.currentShoppingListId.shopId.id
+        
       console.log(arrayOfModules);
-        $http.post(`/api/shopping/shoppinglist/${self.currentShoppingListId.shopId.id}`, arrayOfModules)
+        $http.post(`/api/shopping/shoppinglist/${newShoppingListId}`, arrayOfModules)
             .then(response => {
                 console.log('response of save shopping list');
+                self.getComponents(newShoppingListId)
                 $location.path('/shopping-list');
             })
             .catch(error => {

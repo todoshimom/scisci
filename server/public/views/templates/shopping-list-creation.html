@@ -3,17 +3,17 @@
 
 <h2 class="md-title">New Shopping List</h2>
 
-    <form class="creation-header" ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;"> 
-        <md-input-container class="input">
-            <label>Shopping List Name</label>
-            <input ng-model="vm.name" required />
-        </md-input-container>
-        <div class="button-wrapper">
-            <input type="submit" value="Start List" class="button" />
-        </div>
-    </form>
-    
-    <!-- <form ng-submit="vm.saveModule()" class="module-creation-header">
+<form ng-if="vm.newList" class="creation-header" ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;">
+    <md-input-container class="input">
+        <label>Shopping List Name</label>
+        <input ng-model="vm.name" required />
+    </md-input-container>
+    <div class="button-wrapper">
+        <input type="submit" value="Start List" class="button" />
+    </div>
+</form>
+
+<!-- <form ng-submit="vm.saveModule()" class="module-creation-header">
             <md-input-container class="module-title-input">
                 <label>Module Name</label>
                 <input type="text" ng-model="vm.module.data.name" required />
@@ -39,18 +39,24 @@
                 <h3 class="columnheader">Code</h3>
                 <h3 class="columnheader">Unit Cost</h3>
                 <h3 class="columnheader">Total Cost</h3>
-            </div><!-- /.mock-table-row-header -->
-        </div><!-- /.mock-table-header -->
+            </div>
+            <!-- /.mock-table-row-header -->
+        </div>
+        <!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter:vm.search">
-                <p role="cell"><button ng-click="vm.addModule(module) ; vm.showAddedModules = true;gt" class="button">Add Module</button></p>
+                <p role="cell">
+                    <button ng-click="vm.addModule(module) ; vm.showAddedModules = true;gt" class="button">Add Module</button>
+                </p>
                 <p role="cell">{{module.name}}</p>
                 <p role="cell">{{module.code}}</p>
                 <p role="cell">{{module.unit_cost}}</p>
                 <p role="cell">{{otem.total_cost}}</p>
             </div>
-        </div><!-- /.mock-table-body -->
-    </div><!-- /.mock-table-header -->
+        </div>
+        <!-- /.mock-table-body -->
+    </div>
+    <!-- /.mock-table-header -->
 </div>
 
 <div class="added-modules" ng-if="vm.showAddedModules">
@@ -63,17 +69,23 @@
                 <h3 class="columnheader">Code</h3>
                 <h3 class="columnheader">Unit Cost</h3>
                 <h3 class="columnheader">Total Cost</h3>
-            </div><!-- /.mock-table-row-header -->
-        </div><!-- /.mock-table-header -->
+            </div>
+            <!-- /.mock-table-row-header -->
+        </div>
+        <!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row" ng-repeat="module in vm.addedModuleLibrary">
-                <p role="cell"><input type="number" name="quantity" ng-model="module.quantity"></p>
+                <p role="cell">
+                    <input type="number" name="quantity" ng-model="module.quantity">
+                </p>
                 <p role="cell">{{module.name}}</p>
                 <p role="cell">{{module.code}}</p>
                 <p role="cell">{{module.unit_cost}}</p>
                 <p role="cell">{{module.total_cost}}</p>
             </div>
-        </div><!-- /.mock-table-body -->
-    </div><!-- /.mock-table-header -->
+        </div>
+        <!-- /.mock-table-body -->
+    </div>
+    <!-- /.mock-table-header -->
     <button ng-click="vm.saveShoppingList(vm.addedModuleLibrary)" class="button">Save Shopping List</button>
 </div>
