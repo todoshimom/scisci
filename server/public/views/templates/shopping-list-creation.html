@@ -42,7 +42,7 @@
             </div><!-- /.mock-table-row-header -->
         </div><!-- /.mock-table-header -->
         <div class="mock-table-body" role="rowgroup">
-            <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: search">
+            <div class="mock-table-row" row="row" ng-repeat="module in vm.moduleLibrary.list | filter:vm.search">
                 <p role="cell"><button ng-click="vm.addModule(module) ; vm.showAddedModules = true;gt" class="button">Add Module</button></p>
                 <p role="cell">{{module.name}}</p>
                 <p role="cell">{{module.code}}</p>
