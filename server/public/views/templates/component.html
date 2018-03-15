@@ -87,7 +87,7 @@
    <div class="mock-table" role="table" aria-label="Components">
       <div class="mock-table-header" role="rowgroup">
           <div class="mock-table-row mock-table-row-header" row="row">
-            <h3 class="columnheader">Name 
+            <h3 class="columnheader">Name
               <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
               <i class="fas fa-caret-square-up"></i>
             </span>
@@ -95,7 +95,7 @@
               <i class="fas fa-caret-square-up"></i>
             </span>
           </h3>
-            <h3 class="columnheader">Type 
+            <h3 class="columnheader">Type
               <span class="sort-button" ng-click="vm.sortColumns('typeAsc')">
               <i class="fas fa-caret-square-up"></i>
             </span>
@@ -104,7 +104,7 @@
             </span>
           </h3>
             <h3 class="columnheader">Description</h3>
-            <h3 class="columnheader">Price Per Unit 
+            <h3 class="columnheader">Price Per Unit
               <span class="sort-button" ng-click="vm.sortColumns('pricePUAsc')">
               <i class="fas fa-caret-square-up"></i>
             </span>
@@ -113,7 +113,7 @@
             </span>
           </h3>
             <h3 class="columnheader">Pieces Per Unit</h3>
-            <h3 class="columnheader">General Stock 
+            <h3 class="columnheader">General Stock
               <span class="sort-button" ng-click="vm.sortColumns('genStockAsc')">
               <i class="fas fa-caret-square-up"></i>
             </span>
@@ -121,7 +121,7 @@
               <i class="fas fa-caret-square-up"></i>
             </span>
           </h3>
-            <h3 class="columnheader">Consumable 
+            <h3 class="columnheader">Consumable
               <span class="sort-button" ng-click="vm.sortColumns('consumableAsc')">
               <i class="fas fa-caret-square-up"></i>
             </span>
@@ -168,7 +168,7 @@
               <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
             </p>
 
-            <p role="cell"><span ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
+            <p role="cell"><span class="mockLink"ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
 
             <p role="cell" ng-if="!vm.edit[component.id]">
               <a ng-href="http://{{component.vendor_url_primary}}" target="_blank">
