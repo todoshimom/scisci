@@ -23,15 +23,15 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
 
     // OTHER FUNCTIONS
 
-        // Save module: intelligently updates or creates an entry
-        self.saveModule = function() {
-            console.log('MODULE', self.module);
-            if ($routeParams.id) {
-                self.updateModule();
-            } else {
-                self.createModule();
-            }
-        };
+        // // Save module: intelligently updates or creates an entry
+        // self.saveModule = function() {
+        //     console.log('MODULE', self.module);
+        //     if ($routeParams.id) {
+        //         self.updateModule();
+        //     } else {
+        //         self.createModule();
+        //     }
+        // };
         
     self.initializeData = ModuleService.initializeData;
     self.saveModule = ModuleService.saveModule;
@@ -43,5 +43,7 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
     if($routeParams.id) {
         self.isSavedModule.value = true;
     };
+
+    self.showAllComponents = false;
 
 }]);

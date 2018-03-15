@@ -1,6 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 
-<div class="module" ng-show="!vm.isSavedModule.value">
+<div class="module" ng-if="!vm.isSavedModule.value">
     <h2 class="md-title" ng-if="!vm.isSavedModule.value">Module Creator</h2>
 
     <form ng-submit="vm.saveModule()" class="module-creation-header">
@@ -10,20 +10,21 @@
         </md-input-container>
         
         <div class="button-wrapper">
-            <button class="button" ng-if="!vm.isSavedModule.value">Create Module</button>
+            <input type="submit" class="button" ng-if="!vm.isSavedModule.value" value="Create Module" />
         </div>
     </form>
 </div>
 
-<div class="module" ng-show="vm.isSavedModule.value">
+<div class="module" ng-if="vm.isSavedModule.value">
     <h2 class="md-title md-title-left" ng-if="vm.isSavedModule.value">Module Editor</h2>
 
+    <form ng-submit="vm.saveModule()">
     <md-input-container class="module-title-input">
         <label>Name</label>
         <input type="text" ng-model="vm.module.data.name" required />
     </md-input-container>
 
-    <button class="button" ng-click="vm.saveModule()" ng-if="vm.isSavedModule.value">Save Module</button>
+    <input type="submit" class="button" value="Save Module" />
 
     <ul class="col col-5 quick-report-list">
         <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentSum | currency}}</p></li>
@@ -125,8 +126,9 @@
         <label>Filter Components</label>
         <input ng-model="filterString.name" />
       </md-input-container>
+      <label>Show All Components <input type="checkbox" ng-model="vm.showAllComponents" /></label>
     
-    <div ng-show="filterString.name.length > 0">
+    <div ng-show="filterString.name.length > 0 || vm.showAllComponents">
       <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
        <div class="mock-table" role="table" aria-label="Components">
           <div class="mock-table-header" role="rowgroup">
@@ -148,7 +150,7 @@
           </div> <!-- /.mock-table-header -->
           <div class="mock-table-body" role="rowgroup">
               <div class="mock-table-row" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
-                <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.addModuleComponentToDraft(component.id, 0, component)">Add</button>{{component.name}}</p>
+                <p role="cell" ng-if="!vm.edit[component.id]"><a ng-click="vm.addModuleComponentToDraft(component.id, 1, component)">Add</a>{{component.name}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.type}}</p>
@@ -232,7 +234,7 @@
 
         <div ng-repeat="row in vm.components.data" class="mock-table-body" role="rowgroup">
             <div class="mock-table-row" row="row">
-            <p role="cell"><input type="number" ng-model="row.pieces_per_kit" /></p>
+            <p role="cell"><input min="1" required type="number" ng-model="row.pieces_per_kit" /></p>
             <p role="cell">{{row.name}}</p>
             <p role="cell">{{row.type}}</p>
             <p role="cell">{{row.description}}</p>
@@ -279,4 +281,7 @@
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
+
+    </form>
+
 </div><!-- /.module -->
