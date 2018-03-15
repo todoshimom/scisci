@@ -173,10 +173,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
         // reduce the row data to the junction table row's data
         let moduleComponentToSave = {
-            module_id: component.module_id,
+            module_id: $routeParams.id,
             component_id: component.component_id,
             pieces_per_kit: component.pieces_per_kit
         };
+        console.log(component);
         console.log(moduleComponentToSave);
 
         $http.put('/api/module/components', moduleComponentToSave)
