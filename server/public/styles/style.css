@@ -341,12 +341,19 @@ md-input-container {
   width: 33%;
   box-sizing: border-box; }
 
+md-checkbox.md-checked .md-icon {
+  background-color: #55ac56; }
+
 .sort-button {
   color: #55ac56;
   transition: all 250ms; }
   .sort-button:hover {
     color: #448a44;
     cursor: pointer; }
+
+.mockLink {
+  color: blue;
+  text-decoration: underline; }
 
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
