@@ -2,8 +2,8 @@ myApp.service('ShoppingListService', ['$http', '$location', function ($http, $lo
     console.log('ShoppingListService Loaded');
     let self = this;
 
-    self.shoppingLists = {list:[{}]};
-    self.components = {list: [{}]};
+    self.shoppingLists = {list:[]};
+    self.components = {list: []};
     self.currentShoppingListId = { shopId: 0 };
 
 	/******************************************/
