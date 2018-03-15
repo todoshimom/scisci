@@ -4,7 +4,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
 
     self.shoppingLists = ShoppingListService.shoppingLists;
     self.components = ShoppingListService.components;
-    self.showHideTableData = false;
+    // self.showHideTableData = false;
 
     self.addShoppingList = function(list) {
         ShoppingListService.addShoppingList(list);

@@ -41,10 +41,11 @@ router.get('/list/:id', authenticated, (req, res) => {
 router.get('/components/:id', authenticated, (req, res) => {
 
   let queryText = `
-  SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity,
+  SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity, shoppinglist.name AS shoppinglist_name,
   shopping_components.ordered, shopping_components.in_house, components.*, shopping_components.id AS ordered_inHouse_id
   FROM components_modules
   JOIN modules_shopping ON modules_shopping.module_id = components_modules.module_id
+  JOIN shoppinglist ON shoppinglist.id = modules_shopping.shopping_id
   JOIN components ON components_modules.component_id = components.id
   LEFT OUTER JOIN shopping_components ON shopping_components.component_id = components.id
   AND shopping_components.shopping_id = modules_shopping.shopping_id
