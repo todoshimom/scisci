@@ -1,0 +1,8 @@
+.sort-button {
+    color: $green;
+    transition: all 250ms;
+    &:hover {
+        color: darken($green, 10%);
+        cursor: pointer;
+    }
+}
