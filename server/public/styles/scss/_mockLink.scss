@@ -1,4 +1,8 @@
 .mockLink {
-  color: blue;
-  text-decoration: underline;
+  color: $green;
+  text-decoration: none;
+  font-weight: 700;
+  &:hover {
+    cursor: pointer;
+  }
 }

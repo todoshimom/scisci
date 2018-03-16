@@ -168,7 +168,7 @@
               <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
             </p>
 
-            <p role="cell"><span class="mockLink"ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
+            <p role="cell"><span class="mockLink"ng-click="vm.getModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p>
 <!--
             <p role="cell" ng-if="!vm.edit[component.id]">
               <a ng-href="http://{{component.vendor_url_primary}}" target="_blank">
@@ -272,7 +272,7 @@
 
 </div>
 <div ng-if="vm.moduleViewer">
-  <h2 ng-click="vm.backToComponents()">Back</h2>
+  <h2 class="mockLink" ng-click="vm.backToComponents()"><i class="fas fa-long-arrow-alt-left"></i> Back</h2>
   <ul>
     <li ng-repeat="module in vm.componentModules.list">
       <a ng-href="#!module/{{module.id}}">{{module.name}}</a>

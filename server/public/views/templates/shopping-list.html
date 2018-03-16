@@ -21,7 +21,7 @@
 <h3 class="md-title md-title-left">Shopping List</h3>
 <div class="mock-table" role="table" aria-label="Components" ng-if="vm.components.list[0]">
 	<div class="mock-table-header" role="rowgroup">
-		<div class="mock-table-row mock-table-row-header" row="row">
+		<div class="mock-table-row mock-table-row-header col col-8" row="row">
 			<h3 class="columnheader">Ordered</h3>
 			<h3 class="columnheader">In-House</h3>
 			<h3 class="columnheader">Name</h3>
@@ -33,8 +33,7 @@
 		</div><!-- /.mock-table-row-header -->
 	</div><!-- /.mock-table-header -->
 	<div class="mock-table-body" role="rowgroup">
-		<div class="mock-table-row" row="row" ng-repeat="component in vm.components.list">
-
+		<div class="mock-table-row col col-8" row="row" ng-repeat="component in vm.components.list">
 			<p role="cell"><input type="checkbox" ng-click="vm.updateOrdered(component)" ng-model="component.ordered"></p>
 			<p role="cell"><input type="checkbox" ng-click="vm.updateInHouse(component)" ng-model="component.in_house"></p>
 			<p role="cell">{{component.name}}</p>
@@ -42,39 +41,37 @@
 			<p role="cell">{{component.type}}</p>
 			<p role="cell">{{component.description}}</p>
 			<p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
-			<p role="cell">
-            <p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
+			<p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
 				<span class="sort-button">
 					<i class="fas fa-info-circle"></i>
 				</span>
 			</p>
-				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
-					<div class="mock-table" role="table" aria-label="Components">
-						<div class="mock-table-header" role="rowgroup">
-							<div class="mock-table-row mock-table-row-header" row="row">
-								<h3 class="columnheader">Price Per Unit</h3>
-								<h3 class="columnheader">Pieces Per Unit</h3>
-								<h3 class="columnheader">General Stock</h3>
-								<h3 class="columnheader">Consumable</h3>
-								<h3 class="columnheader">Modules Used In</h3>
-								<h3 class="columnheader">Vendor 2</h3>
-								<h3 class="columnheader">Notes</h3>
-							</div><!-- /.mock-table-row-header -->
-						</div><!-- /.mock-table-header -->
-						<div class="mock-table-body" role="rowgroup">
-							<div class="mock-table-row" row="row">
-								<p role="cell">{{component.price_per_unit | currency}}</p>
-								<p role="cell">{{component.pieces_per_unit}}</p>
-								<p role="cell">{{component.general_stock_item}}</p>
-								<p role="cell">{{component.consumable}}</p>
-                                <p role="cell">GET THIS DATA</p>
-                                <p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
-								<p role="cell">{{component.notes}}</p>
-							</div><!-- /.mock-table-row -->
-						</div><!-- /.mock-table-body -->
-					</div>
+			<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
+				<div class="mock-table" role="table" aria-label="Components">
+					<div class="mock-table-header" role="rowgroup">
+						<div class="mock-table-row mock-table-row-header col col-7" row="row">
+							<h3 class="columnheader">Price Per Unit</h3>
+							<h3 class="columnheader">Pieces Per Unit</h3>
+							<h3 class="columnheader">General Stock</h3>
+							<h3 class="columnheader">Consumable</h3>
+							<h3 class="columnheader">Modules Used In</h3>
+							<h3 class="columnheader">Vendor 2</h3>
+							<h3 class="columnheader">Notes</h3>
+						</div><!-- /.mock-table-row-header -->
+					</div><!-- /.mock-table-header -->
+					<div class="mock-table-body" role="rowgroup">
+						<div class="mock-table-row col col-7" row="row">
+							<p role="cell">{{component.price_per_unit | currency}}</p>
+							<p role="cell">{{component.pieces_per_unit}}</p>
+							<p role="cell">{{component.general_stock_item}}</p>
+							<p role="cell">{{component.consumable}}</p>
+							<p role="cell">GET THIS DATA</p>
+							<p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
+							<p role="cell">{{component.notes}}</p>
+						</div><!-- /.mock-table-row -->
+					</div><!-- /.mock-table-body -->
 				</div>
-			</p>
+			</div>
 		</div><!-- /.mock-table-row -->
 	</div><!-- /.mock-table-body -->
 </div><!-- /.mock-table -->
