@@ -499,3 +499,10 @@ md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .
     display: none; }
   @page {
     size: landscape; } }
+
+
+.collapsed-table-data {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+}
