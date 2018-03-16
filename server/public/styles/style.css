@@ -89,7 +89,7 @@ h2 {
   justify-content: space-between;
   font-weight: 700; }
   .mock-table-row-header > * {
-    text-align: center;
+    text-align: left;
     display: inline-block; }
 
 .mock-table-row {
@@ -98,7 +98,7 @@ h2 {
   justify-content: space-between;
   align-items: center; }
   .mock-table-row > p {
-    text-align: center;
+    text-align: left;
     display: inline-block; }
 
 .collapsed-table-data {
@@ -250,7 +250,7 @@ h2 {
 
 .main {
   position: relative;
-  padding: 20px 20px 20px 170px;
+  padding: 20px 20px 60px 170px;
   box-sizing: border-box; }
 
 .col {
@@ -263,6 +263,11 @@ h2 {
   flex: 0 1 50%;
   width: 50%;
   max-width: 50%; }
+
+.col-3 > * {
+  flex: 0 1 33.33%;
+  width: 33.33%;
+  max-width: 33.33%; }
 
 .col-4 > * {
   flex: 0 1 25%;
@@ -293,6 +298,11 @@ h2 {
   flex: 0 1 10%;
   width: 10%;
   max-width: 10%; }
+
+.report-block + .report-block {
+  border-top: 1px solid #d5d6d5;
+  margin: 20px 0;
+  padding: 20px 0; }
 
 .button {
   padding: 10px 30px;
