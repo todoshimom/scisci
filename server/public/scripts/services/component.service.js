@@ -65,7 +65,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       return $http.get(`/api/component/getModules/${component.id}`)
         .then( function(response) {
           console.log(response.data);
-          return response.data;
+          self.componentModules.list = response.data;
         })
         .catch( function(error) {
           console.log('error', error);
