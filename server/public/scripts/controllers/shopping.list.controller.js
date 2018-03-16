@@ -31,7 +31,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
         component.ordered = true;
         ShoppingListService.addOrderedInHouseToComponent(component);
       } else {
-        component.ordered = !!component.ordered;
+        component.ordered = !component.ordered;
         console.log(component.ordered);
         ShoppingListService.updateOrderedInHouseComponent(component);
       }
@@ -45,7 +45,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
         component.in_house = true;
         ShoppingListService.addOrderedInHouseToComponent(component);
       } else {
-        component.in_house = !!component.in_house;
+        component.in_house = !component.in_house;
         console.log(component.in_house);
         ShoppingListService.updateOrderedInHouseComponent(component);
       }
