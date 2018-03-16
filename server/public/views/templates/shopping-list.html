@@ -34,8 +34,12 @@
 	</div><!-- /.mock-table-header -->
 	<div class="mock-table-body" role="rowgroup">
 		<div class="mock-table-row col col-8" row="row" ng-repeat="component in vm.components.list">
-			<p role="cell"><input type="checkbox" ng-click="vm.updateOrdered(component)" ng-model="component.ordered"></p>
-			<p role="cell"><input type="checkbox" ng-click="vm.updateInHouse(component)" ng-model="component.in_house"></p>
+			<p role="cell">
+				<md-checkbox ng-click="vm.updateOrdered(component)" ng-model="component.ordered"></md-checkbox>
+			</p>
+			<p role="cell">
+				<md-checkbox ng-click="vm.updateInHouse(component)" ng-model="component.in_house"></md-checkbox>
+			</p>
 			<p role="cell">{{component.name}}</p>
 			<p role="cell">{{component.orderQty}}</p>
 			<p role="cell">{{component.type}}</p>
