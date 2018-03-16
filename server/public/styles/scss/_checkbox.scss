@@ -1,3 +1,7 @@
 md-checkbox.md-checked .md-icon {
   background-color: $green;
 }
+
+md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .md-icon:after {
+  border-color: $white;
+}
