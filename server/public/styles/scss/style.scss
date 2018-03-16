@@ -3,8 +3,6 @@
 @import "_reset";
 @import "_base";
 @import "_typography";
-@import "_table";
-
 // Layout
 @import "_header";
 @import "_nav";
@@ -13,6 +11,7 @@
 @import "_col";
 
 // Elements
+@import "_table";
 @import "_button";
 @import "_modal";
 @import "_input";

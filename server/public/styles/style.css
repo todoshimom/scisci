@@ -80,46 +80,6 @@ h2 {
   font-size: 18px;
   text-transform: uppercase; }
 
-.mock-table {
-  position: relative;
-  width: 100%; }
-
-.mock-table-row-header {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 700; }
-  .mock-table-row-header > * {
-    text-align: center;
-    display: inline-block; }
-
-.mock-table-row {
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; }
-  .mock-table-row > p {
-    text-align: center;
-    display: inline-block; }
-
-.collapsed-table-data {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 10px 0;
-  margin: 10px 0 20px 0;
-  border-top: 1px solid #828381;
-  border-bottom: 1px solid #828381; }
-
-.columnheader {
-  margin-bottom: 10px;
-  font-weight: 700;
-  text-transform: uppercase; }
-
-.folder {
-  color: #f59132; }
-
 .header {
   position: relative;
   z-index: 1;
@@ -293,6 +253,48 @@ h2 {
   flex: 0 1 10%;
   width: 10%;
   max-width: 10%; }
+
+.mock-table {
+  position: relative;
+  width: 100%; }
+
+.mock-table-row-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700; }
+  .mock-table-row-header > * {
+    text-align: center;
+    display: inline-block; }
+
+.mock-table-row {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .mock-table-row > p {
+    text-align: center;
+    display: inline-block; }
+
+.collapsed-table-data {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px 0;
+  margin: 10px 0 20px 0;
+  border-top: 1px solid #828381;
+  border-bottom: 1px solid #828381;
+  flex: none;
+  max-width: 100%; }
+
+.columnheader {
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.folder {
+  color: #f59132; }
 
 .button {
   padding: 10px 30px;
@@ -499,10 +501,3 @@ md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .
     display: none; }
   @page {
     size: landscape; } }
-
-
-.collapsed-table-data {
-        flex: none;
-        width: 100%;
-        max-width: 100%;
-}
