@@ -35,6 +35,8 @@
     margin: 10px 0 20px 0;
     border-top: 1px solid $med-gray;
     border-bottom: 1px solid $med-gray;
+    flex: none;
+    max-width: 100%;
 }
 
 .columnheader {

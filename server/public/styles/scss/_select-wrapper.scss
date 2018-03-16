@@ -7,6 +7,7 @@
         right: 10px;
         transform: translateY(-50%);
         color: $green;
+        
     }
     select {
         border: 1px solid $green;
@@ -15,6 +16,7 @@
         box-shadow: none;
         background: transparent;
         background-image: none;
+        min-width: 250px;
         -webkit-appearance: none;
     }
 }
