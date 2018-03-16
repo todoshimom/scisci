@@ -36,3 +36,11 @@
         max-width: 16.67%;
     }
 }
+
+.col-10 {
+    & > * {
+        flex: 0 1 10%;
+        width: 10%;
+        max-width: 10%;
+    }
+}
