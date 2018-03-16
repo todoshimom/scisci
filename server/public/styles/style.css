@@ -495,3 +495,10 @@ md-checkbox.md-checked .md-icon {
     display: none; }
   @page {
     size: landscape; } }
+
+
+.collapsed-table-data {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+}
