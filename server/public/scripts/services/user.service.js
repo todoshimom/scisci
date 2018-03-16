@@ -123,8 +123,9 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
                     icon: "success",
                     timer: 1200,
                     buttons: false
-                })
-                $location.path('/user');
+                });
+                self.userTypeHomePage(response.data);
+                // $location.path('/user');
             })
             .catch(function (error) {
                 console.log('Error on set new password PUT request: ', error);
@@ -229,7 +230,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     self.userTypeHomePage = function (user) {
       if(user.usertype === 1) {
-        $location.path('/user');
+        $location.path('/report');
       } else if (user.usertype === 2) {
         $location.path('/module-nav');
       } else {
