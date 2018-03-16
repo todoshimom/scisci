@@ -128,7 +128,8 @@
       <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
        <div class="mock-table" role="table" aria-label="Components">
           <div class="mock-table-header" role="rowgroup">
-              <div class="mock-table-row mock-table-row-header" row="row">
+              <div class="mock-table-row mock-table-row-header col col-4" row="row">
+                <h3 class="columnheader">Add</h3>
                 <h3 class="columnheader">Name 
                     <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
                         <i class="fas fa-caret-square-up"></i>
@@ -148,7 +149,7 @@
                     </span>
                 </h3>
                 <h3 class="columnheader">Description</h3>
-                <h3 class="columnheader">Price Per Unit 
+                <!-- <h3 class="columnheader">Price Per Unit 
                     <span class="sort-button" ng-click="vm.sortColumns('pricePUAsc')">
                         <i class="fas fa-caret-square-up"></i>
                     </span>
@@ -197,43 +198,47 @@
                 </span>
             </h3>
                 <h3 class="columnheader">Vendor 2 Link</h3>
-                <h3 class="columnheader">Notes</h3>
+                <h3 class="columnheader">Notes</h3> -->
               </div><!-- /.mock-table-row -->
           </div> <!-- /.mock-table-header -->
           <div class="mock-table-body" role="rowgroup">
-              <div class="mock-table-row" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
-                <p role="cell" ng-if="!vm.edit[component.id]"><a ng-click="vm.addModuleComponentToDraft(component.id, 1, component)">Add</a>{{component.name}}</p>
+              <div class="mock-table-row col col-6" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
+                <p role="cell" ng-if="!vm.edit[component.id]">
+                    <md-button class="button" ng-click="vm.addModuleComponentToDraft(component.id, 1, component)">Add</md-button></p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
     
+                <p role="cell" ng-if="!vm.edit[component.id]">{{component.name}}</p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
+
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.type}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type"></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.description}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></p>
-    
+<!--     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.price_per_unit}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.price_per_unit" ng-model="component.price_per_unit"></p>
+     -->
+                <!-- <p role="cell" ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></p> -->
     
-                <p role="cell" ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.pieces_per_unit" ng-model="component.pieces_per_unit"></p>
-    
-                <p role="cell" ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]">
+                <!-- <p role="cell" ng-if="!vm.edit[component.id]">{{component.general_stock_item}}</p> -->
+                <!-- <p role="cell" ng-if="vm.edit[component.id]">
                   <select ng-model="component.general_stock_item">
                     <option ng-value="true">True</option>
                     <option ng-value="false">False</option>
                   </select>
                 </p>
-    
-                <p role="cell" ng-if="!vm.edit[component.id]">{{component.consumable}}</p>
+     -->
+                <!-- <p role="cell" ng-if="!vm.edit[component.id]">{{component.consumable}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]">
                   <select ng-model="component.consumable">
                     <option ng-value="Yes">Yes</option>
                     <option ng-value="No">No</option>
                   </select>
-                </p>
+                </p> -->
     
-                <p role="cell"><span ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
+                <!-- <p role="cell"><span ng-click="vm.getModules(component)">{{component.modules_used_in}}</span></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_name_primary}}</p>
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_primary" ng-model="component.vendor_name_primary"></p>
@@ -245,10 +250,10 @@
                 <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_name_secondary" ng-model="component.vendor_name_secondary"></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.vendor_url_secondary}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_secondary" ng-model="component.vendor_url_secondary"></p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.vendor_url_secondary" ng-model="component.vendor_url_secondary"></p> -->
     
-                <p role="cell" ng-if="!vm.edit[component.id]">{{component.notes}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></p>
+                <!-- <p role="cell" ng-if="!vm.edit[component.id]">{{component.notes}}</p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.notes" ng-model="component.notes"></p> -->
     
             </div>
           </div>
@@ -271,28 +276,34 @@
 
     <div class="mock-table" role="table" aria-label="Components">
         <div class="mock-table-header" role="rowgroup">
-        <div class="mock-table-row mock-table-row-header" row="row">
+        <div class="mock-table-row mock-table-row-header col col-8" row="row">
             <h3 class="columnheader">Pieces Per Kit</h3>
             <h3 class="columnheader">Name</h3>
             <h3 class="columnheader">Type</h3>
             <h3 class="columnheader">Description</h3>
             <h3 class="columnheader">Price Per Unit</h3>
             <h3 class="columnheader">Pieces Per Unit</h3>
-            <h3 class="columnheader">Cost Per Unit</h3>
+            <!-- <h3 class="columnheader">Cost Per Unit</h3> -->
             <h3 class="columnheader">Delete</h3>
 			<h3 class="columnheader">More Info</h3>
         </div><!-- /.mock-table-row-header -->
     </div><!-- /.mock-table-header -->
 
         <div ng-repeat="row in vm.components.data" class="mock-table-body" role="rowgroup">
-            <div class="mock-table-row" row="row">
-            <p role="cell"><input min="1" required type="number" ng-model="row.pieces_per_kit" /></p>
+            <div class="mock-table-row col col-8" row="row">
+            <p role="cell">
+
+                <md-input-container>
+                    <!-- <label>#</label> -->
+                    <input min="1" required type="number" ng-model="row.pieces_per_kit" />
+                </md-input-container>
+            </p>
             <p role="cell">{{row.name}}</p>
             <p role="cell">{{row.type}}</p>
             <p role="cell">{{row.description}}</p>
             <p role="cell">{{row.price_per_unit}}</p>
             <p role="cell">{{row.pieces_per_unit}}</p>
-            <p role="cell">{{row.cost_per_unit}}</p>
+            <!-- <p role="cell">{{row.cost_per_unit}}</p> -->
             <p role="cell">
                 <button class="button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">
                     <i class="fas fa-trash-alt"></i>
