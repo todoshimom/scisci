@@ -36,7 +36,7 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
     self.updateComponent = function(component) {
       ComponentService.updateComponent(component);
 
-      self.showEdit = !self.showEdit
+      self.showEdit = !self.showEdit;
 
     }; // updateComponent()
 
@@ -48,7 +48,7 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     self.sortColumns = function(sortMethod) {
       console.log(sortMethod);
-      ComponentService.sortComponents(sortMethod);
+      ComponentService.sortAllComponents(sortMethod);
     };
 
     self.getModules = function(component) {
