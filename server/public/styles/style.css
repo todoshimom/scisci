@@ -113,7 +113,8 @@ h2 {
   border-bottom: 1px solid #828381; }
 
 .columnheader {
-  font-weight: 300;
+  margin-bottom: 10px;
+  font-weight: 700;
   text-transform: uppercase; }
 
 .folder {
@@ -167,7 +168,8 @@ h2 {
   padding: 0;
   margin: 0;
   max-width: 100px;
-  height: 100%;
+  height: 100vh;
+  min-height: 100%;
   background-color: #d5d6d5; }
 
 .nav-list-item-link {
@@ -231,7 +233,8 @@ h2 {
   padding: 0;
   margin: 0;
   max-width: 50px;
-  height: 100%;
+  height: 100vh;
+  min-height: 100%;
   background-color: #dadbda;
   text-align: center; }
 
@@ -275,6 +278,16 @@ h2 {
   flex: 0 1 16.66%;
   width: 16.66%;
   max-width: 16.66%; }
+
+.col-7 > * {
+  flex: 0 1 14.28%;
+  width: 14.28%;
+  max-width: 14.28%; }
+
+.col-8 > * {
+  flex: 0 1 12.5%;
+  width: 12.5%;
+  max-width: 12.5%; }
 
 .col-10 > * {
   flex: 0 1 10%;
@@ -398,8 +411,11 @@ md-checkbox.md-checked .md-icon {
     -webkit-appearance: none; }
 
 .mockLink {
-  color: blue;
-  text-decoration: underline; }
+  color: #55ac56;
+  text-decoration: none;
+  font-weight: 700; }
+  .mockLink:hover {
+    cursor: pointer; }
 
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
