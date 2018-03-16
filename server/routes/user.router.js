@@ -161,8 +161,7 @@ router.put('/newPassword', authenticated, (req, res) => {//Start of resetPasswor
 
     pool.query(queryText)
         .then((results) => {
-            // console.log('Password has been Reset!: ', results);
-            res.sendStatus(200);
+          res.send(req.user);
         })
         .catch((error) => {
             console.log('Error resetting password!: ', error);
@@ -241,7 +240,7 @@ router.put('/set/rates/:rate', authenticated, isAdmin, (req, res) => {//Start of
 
     let queryText = `
     UPDATE appsettings
-    SET 
+    SET
     labor_rate = ${req.params.rate},
     last_changed = '${req.user.first_name} ${req.user.last_name}'
     WHERE id = 1;`
