@@ -276,6 +276,11 @@ h2 {
   width: 16.66%;
   max-width: 16.66%; }
 
+.col-10 > * {
+  flex: 0 1 10%;
+  width: 10%;
+  max-width: 10%; }
+
 .button {
   padding: 10px 30px;
   border: 1px solid #55ac56;

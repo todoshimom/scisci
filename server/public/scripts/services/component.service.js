@@ -62,15 +62,14 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     // begin getModules()
     self.getModules = function(component) {
 
-      $http.get(`/api/component/getModules/${component.id}`)
+      return $http.get(`/api/component/getModules/${component.id}`)
         .then( function(response) {
           console.log(response.data);
-          self.componentModules.list = response.data;
+          return response.data;
         })
         .catch( function(error) {
           console.log('error', error);
         });
-
     }; // end getModules()
 
 
@@ -124,6 +123,12 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
           self.getAllComponents();
         })
         .catch( function(error) {
+          swal({
+            title: "Error!",
+            text: `This component is currently being used in a module!
+            Please remove the component from it's module(s) before deleting.`,
+            icon: "error",
+          });
           console.log('Error deleting component', error);
         });
 
