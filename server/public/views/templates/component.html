@@ -82,7 +82,7 @@
   <h2 class="md-title md-title-left">Manage Components</h2>
     <md-input-container>
       <label>Filter Components</label>
-      <input ng-model="filterString.name"/>
+      <input ng-model="filterString"/>
     </md-input-container>
    <div class="mock-table" role="table" aria-label="Components">
       <div class="mock-table-header" role="rowgroup">
@@ -130,25 +130,9 @@
             </span>
           </h3>
           <h3 class="columnheader">Modules Used In</h3>
-            <!-- <h3 class="columnheader">Vendor 1
-              <span class="sort-button" ng-click="vm.sortColumns('vendor1Asc')">
-              <i class="fas fa-caret-square-up"></i>
-            </span>
-            <span class="sort-button" ng-click="vm.sortColumns('vendor1Desc')">
-              <i class="fas fa-caret-square-down"></i>
-            </span>
-          </h3>
-            <h3 class="columnheader">Vendor 2
-              <span class="sort-button" ng-click="vm.sortColumns('vendor2Asc')">
-              <i class="fas fa-caret-square-up"></i>
-            </span>
-            <span class="sort-button" ng-click="vm.sortColumns('vendor2Desc')">
-              <i class="fas fa-caret-square-down"></i>
-            </span>
-          </h3> -->
-            <!-- <h3 class="columnheader">Notes</h3> -->
-            <h3 class="columnheader">Edit</h3>
-            <h3 class="columnheader">Delete</h3>
+
+          <h3 class="columnheader">More Info</h3>
+          <h3 class="columnheader">Edit</h3>
           </div><!-- /.mock-table-row -->
       </div> <!-- /.mock-table-header -->
       <div class="mock-table-body" role="rowgroup">
@@ -169,27 +153,43 @@
             </p>
 
             <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p>
-<!--
-            <p role="cell" ng-if="!vm.edit[component.id]">
-              <a ng-href="http://{{component.vendor_url_primary}}" target="_blank">
-                {{component.vendor_name_primary}}
-              </a>
-            </p>
-            <p role="cell" ng-if="!vm.edit[component.id]"></p>
-            <p role="cell" ng-if="!vm.edit[component.id]">
-              <a ng-href="http://{{component.vendor_url_secondary}}" target="_blank">
-                  {{component.vendor_name_secondary}}
-              </a>
-            </p> -->
-            <!-- <p role="cell" ng-if="!vm.edit[component.id]">{{component.notes}}</p> -->
-            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.showEdit=!vm.showEdit; vm.editComponent=component" class="button">Edit</button></p>
-            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
-            <p role="cell" ng-if="!vm.edit[component.id]">
-              <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </p>
 
+            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
+            <p role="cell" ng-click="vm.showHideModuleData[$index].show = !vm.showHideModuleData[$index].show">
+                <span class="sort-button">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </p>
+            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.showEdit=!vm.showEdit; vm.editComponent=component" class="button">Edit</button></p>
+            <div class="collapsed-table-data" ng-if="vm.showHideModuleData[$index].show">
+                <div class="mock-table" role="table" aria-label="Components">
+                    <div class="mock-table-header" role="rowgroup">
+                        <div class="mock-table-row mock-table-row-header col col-4" row="row">
+                            <h3 class="columnheader">Vendor Primary</h3>
+                            <h3 class="columnheader">Vendor Secondary</h3>
+                            <h3 class="columnheader">To Be Printed Link</h3>
+                            <h3 class="columnheader">Edit</h3>
+                        </div>
+                        <!-- /.mock-table-row-header -->
+                    </div>
+                    <!-- /.mock-table-header -->
+                    <div class="mock-table-body" role="rowgroup">
+                        <div class="mock-table-row col col-4" row="row">
+                            <p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
+                            <p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
+                            <p role="cell">{{component.notes}}</p>
+
+                            <p role="cell" ng-if="!vm.edit[component.id]">
+                              <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
+                                <i class="fas fa-trash-alt"></i>
+                              </button>
+                            </p>
+                        </div>
+                        <!-- /.mock-table-row -->
+                    </div>
+                    <!-- /.mock-table-body -->
+                </div>
+            </div>
         </div>
       </div>
   </div>
