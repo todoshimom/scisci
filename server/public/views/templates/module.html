@@ -305,9 +305,9 @@
             <p role="cell">{{row.pieces_per_unit}}</p>
             <!-- <p role="cell">{{row.cost_per_unit}}</p> -->
             <p role="cell">
-                <button class="button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">
+                <a class="button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">
                     <i class="fas fa-trash-alt"></i>
-                </button>
+                </a>
             </p>
             <p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
                 <span class="sort-button">
