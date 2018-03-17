@@ -9,6 +9,8 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       no: 'no'
     };
 
+    self.componentName = null;
+
     self.moduleViewer = false;
 
     self.edit = {};
@@ -52,9 +54,11 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
     };
 
     self.getModules = function(component) {
-      console.log(component.id);
-      self.moduleViewer = true;
-      ComponentService.getModules(component);
+      if (component.modules_used_in > 0) {
+        self.componentName = component.name;
+        self.moduleViewer = true;
+        ComponentService.getModules(component);
+      }
     };
 
     self.backToComponents = function() {

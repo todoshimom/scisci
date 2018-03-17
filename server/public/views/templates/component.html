@@ -273,10 +273,6 @@
 </div>
 <div ng-if="vm.moduleViewer">
   <h2 class="mockLink" ng-click="vm.backToComponents()"><i class="fas fa-long-arrow-alt-left"></i> Back</h2>
-  <ul>
-    <li ng-repeat="module in vm.componentModules.list">
-      <a ng-href="#!module/{{module.id}}">{{module.name}}</a>
-    </li>
-  </ul>
-
+  <h2 class="md-title md-title-left">Module List For Component: {{vm.componentName}}</h2>
+  <a class="module-link" ng-href="#!module/{{module.id}}" ng-repeat="module in vm.componentModules.list">{{module.name}}</a>
 </div>
