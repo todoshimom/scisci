@@ -271,10 +271,13 @@ h2 {
 .mock-table-row-header {
   display: flex;
   justify-content: space-between;
+  background-color: #fafafa !important;
   font-weight: 700; }
   .mock-table-row-header > * {
     text-align: left;
-    display: inline-block; }
+    display: inline-block;
+    padding: 5px 5px 5px 0;
+    box-sizing: border-box; }
 
 .mock-table-row {
   flex-wrap: wrap;
@@ -283,7 +286,11 @@ h2 {
   align-items: center; }
   .mock-table-row > p {
     text-align: left;
-    display: inline-block; }
+    display: inline-block;
+    padding: 5px 5px 5px 0;
+    box-sizing: border-box; }
+  .mock-table-row:nth-child(odd) {
+    background-color: #f4f4f4; }
 
 .collapsed-table-data {
   position: relative;
