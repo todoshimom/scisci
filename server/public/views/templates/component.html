@@ -4,78 +4,79 @@
 <div ng-if="!vm.moduleViewer">
 
   <h2 class="md-title">Add Components</h2>
-  <form ng-submit="vm.addComponentToLib(vm.componentItem)">
-  <div>
-    <md-input-container>
-      <label>Name</label>
-      <input ng-model="vm.componentItem.name">
-    </md-input-container>
+  <form class="form" ng-submit="vm.addComponentToLib(vm.componentItem)">
+    <div>
+      <md-input-container>
+        <label>Name</label>
+        <input ng-model="vm.componentItem.name">
+      </md-input-container>
 
-    <md-input-container>
-      <label>Type</label>
-      <input ng-model="vm.componentItem.type">
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <label>Price Per Unit</label>
-      <input ng-model="vm.componentItem.price_per_unit">
-    </md-input-container>
+      <md-input-container>
+        <label>Type</label>
+        <input ng-model="vm.componentItem.type">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <label>Price Per Unit</label>
+        <input ng-model="vm.componentItem.price_per_unit">
+      </md-input-container>
 
-    <md-input-container>
-      <label>Pieces Per Unit</label>
-      <input ng-model="vm.componentItem.pieces_per_unit">
-    </md-input-container>
-  </div>
+      <md-input-container>
+        <label>Pieces Per Unit</label>
+        <input ng-model="vm.componentItem.pieces_per_unit">
+      </md-input-container>
+    </div>
 
-  <div>
-    <md-input-container>
-      <label>Description</label>
-      <textarea ng-model="vm.componentItem.description" rows="1"></textarea>
-    </md-input-container>
-  </div>
+    <div>
+      <md-input-container>
+        <label>Description</label>
+        <textarea ng-model="vm.componentItem.description" rows="1"></textarea>
+      </md-input-container>
+    </div>
 
-  <div>
-    <md-input-container>
-      <label>Vendor 1 Name</label>
-      <input ng-model="vm.componentItem.vendor_name_primary">
-    </md-input-container>
+    <div>
+      <md-input-container>
+        <label>Vendor 1 Name</label>
+        <input ng-model="vm.componentItem.vendor_name_primary">
+      </md-input-container>
 
-    <md-input-container>
-      <label>Vendor 1 Link</label>
-      <input ng-model="vm.componentItem.vendor_url_primary">
-    </md-input-container>
-</div>
-<div>
-    <md-input-container>
-      <label>Vendor 2 Name</label>
-      <input ng-model="vm.componentItem.vendor_name_secondary">
-    </md-input-container>
+      <md-input-container>
+        <label>Vendor 1 Link</label>
+        <input ng-model="vm.componentItem.vendor_url_primary">
+      </md-input-container>
+    </div>
 
-    <md-input-container>
-      <label>Vendor 2 Link</label>
-      <input ng-model="vm.componentItem.vendor_url_secondary">
-    </md-input-container>
-  </div>
-  <div>
-    <md-input-container>
-      <label>Notes/Purpose</label>
-      <textarea ng-model="vm.componentItem.notes" rows="1"></textarea>
-    </md-input-container>
-  </div>
+    <div>
+      <md-input-container>
+        <label>Vendor 2 Name</label>
+        <input ng-model="vm.componentItem.vendor_name_secondary">
+      </md-input-container>
 
-  <div>
-    <md-checkbox ng-model="vm.componentItem.general_stock_item" aria-label="General Stock Checkbox">
-      General Stock Item
-    </md-checkbox>
-    <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
-      Consumable
-    </md-checkbox>
+      <md-input-container>
+        <label>Vendor 2 Link</label>
+        <input ng-model="vm.componentItem.vendor_url_secondary">
+      </md-input-container>
+    </div>
 
-  </div>
-  <div>
-    <button class="button">Add Component</button>
-  </div>
+    <div>
+      <md-input-container>
+        <label>Notes/Purpose</label>
+        <textarea ng-model="vm.componentItem.notes" rows="1"></textarea>
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-checkbox ng-model="vm.componentItem.general_stock_item" aria-label="General Stock Checkbox">
+        General Stock Item
+      </md-checkbox>
+      <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
+        Consumable
+      </md-checkbox>
+    </div>
+    <div>
+      <button class="button">Add Component</button>
+    </div>
 </form>
 
   <!-- Table mock up for the time being, will be changed out later for accordion divs  -->

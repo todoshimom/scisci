@@ -400,6 +400,9 @@ h2 {
 .modal-col md-input-container {
   width: 49%; }
 
+.form {
+  margin-bottom: 50px; }
+
 md-input-container {
   width: 33%;
   box-sizing: border-box; }
