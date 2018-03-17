@@ -8,6 +8,11 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
     self.components = ModuleService.components;
     self.componentsSaved = ModuleService.componentsSaved;
 
+    self.yesNo = {
+        yes: 'yes',
+        no: 'no'
+      };
+
     self.addModuleComponent = ModuleService.addModuleComponent;
     self.addModuleComponentToDraft = ModuleService.addModuleComponentToDraft;
     self.updateModuleComponent = ModuleService.updateModuleComponent;

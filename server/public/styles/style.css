@@ -328,14 +328,16 @@ h2 {
   transition: all 200ms; }
   .button:hover {
     background-color: #55ac56;
-    color: #fafafa; }
+    color: #fafafa;
+    cursor: pointer; }
 
 .button-grayed {
   border-color: #d5d6d5;
   color: #828381; }
   .button-grayed:hover {
     color: #fafafa;
-    background-color: #d5d6d5; }
+    background-color: #d5d6d5;
+    cursor: pointer; }
 
 .md-button.md-default-theme:not([disabled]).md-focused:hover,
 .md-button:not([disabled]).md-focused:hover,

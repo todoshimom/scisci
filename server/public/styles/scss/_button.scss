@@ -11,6 +11,7 @@
     &:hover {
         background-color: $green;
         color: $white;
+        cursor: pointer;
     }
 }
 
@@ -20,6 +21,7 @@
     &:hover {
         color: $white;
         background-color: $light-gray;
+        cursor: pointer;
     }
 }
 
