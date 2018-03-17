@@ -15,7 +15,14 @@ h2 {
 
 .md-subtitle {
     color: $med-gray;
-    font-weight: 300;   
+    font-weight: 300;
     font-size: 18px;
     text-transform: uppercase;
+}
+
+.module-link {
+  color: $green;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
 }
