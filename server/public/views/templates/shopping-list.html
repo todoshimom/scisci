@@ -15,10 +15,9 @@
 <button class="shopping-list-print button" ng-click="vm.printPage()">Print</button>
 
 <h2 ng-if="!vm.components.list[0].shoppinglist_name" class="md-title">Created Shopping Lists </h2>
-<h2 ng-if="vm.components.list[0].shoppinglist_name" class="md-title md-title-left">{{vm.components.list[0].shoppinglist_name}}</h2>
 
- <!-- Table mock up for the time being, will be changed out later for according divs  -->
-<h3 class="md-title md-title-left">Shopping List</h3>
+
+<h3 class="md-title md-title-left md-title__space">Shopping List - <span ng-if="vm.components.list[0].shoppinglist_name" class="md-title md-title-left">{{vm.components.list[0].shoppinglist_name}}</span></h3>
 <div class="mock-table" role="table" aria-label="Components" ng-if="vm.components.list[0]">
 	<div class="mock-table-header" role="rowgroup">
 		<div class="mock-table-row mock-table-row-header col col-8" row="row">
