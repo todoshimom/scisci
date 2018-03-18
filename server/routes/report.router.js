@@ -17,6 +17,7 @@ router.get('/modules', authenticated, isAdmin, (req, res) => { //Start of get mo
                 laborCosts[i].totalKitSum = laborCosts[i].currentKitSum * laborCosts[i].module_quantity
                 laborCosts[i].currentKitSum = laborCosts[i].currentKitSum + laborCosts[i].laborCost
                 laborCosts[i].currentSum = laborCosts[i].currentSum + laborCosts[i].laborCost
+                laborCosts[i].totalLaborCost = laborCosts[i].laborCost * laborCosts[i].module_quantity
                 laborCosts[i].totalMatKitSum = laborCosts[i].currentKitSum * laborCosts[i].module_quantity
             }
             res.send(laborCosts);
