@@ -1,7 +1,15 @@
-let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngAnimate', 'sticky']);
+let myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'chart.js', 'ngAnimate', 'sticky']);
+
+myApp.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+        chartColors: ['#f59132', '#55ac56', '#006699'],
+        responsive: true
+    });
+}]);
 
 /// Routes ///
-myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', function ($routeProvider, $locationProvider, $mdThemingProvider) {
+myApp.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', function ($routeProvider, $locationProvider, $mdThemingProvider) {
     console.log('myApp -- config')
     $routeProvider
         .when('/', {
@@ -130,19 +138,19 @@ myApp.config(['$routeProvider', '$locationProvider','$mdThemingProvider', functi
             templateUrl: '/views/templates/404.html'
         });
 
-        var orangeMap = $mdThemingProvider.extendPalette('orange', {
-            '500': '#f59132',
-            'contrastDefaultColor': 'dark'
-        });
-        var greenMap = $mdThemingProvider.extendPalette('green', {
-            '500': '55ac56',
-            'contrastDefaultColor': 'dark'
-        });
+    var orangeMap = $mdThemingProvider.extendPalette('orange', {
+        '500': '#f59132',
+        'contrastDefaultColor': 'dark'
+    });
+    var greenMap = $mdThemingProvider.extendPalette('green', {
+        '500': '55ac56',
+        'contrastDefaultColor': 'dark'
+    });
 
-        $mdThemingProvider.definePalette('orange', orangeMap);
+    $mdThemingProvider.definePalette('orange', orangeMap);
 
-        $mdThemingProvider.theme('default')
-            .primaryPalette('orange')
-            .accentPalette('green');
+    $mdThemingProvider.theme('default')
+        .primaryPalette('orange')
+        .accentPalette('green');
 
 }]);
