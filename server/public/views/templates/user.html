@@ -64,7 +64,10 @@
                     <md-button class="button" ng-click="vm.showEdit=!vm.showEdit; vm.editUser=user">Edit</md-button>
                 </p>
                 <p role="cell">
-                    <button class="button-naked" ng-click="vm.deleteUser(user)" ng-disabled="user.id==vm.userObject.list.id">
+                    <button 
+                        class="button-naked" 
+                        ng-click="vm.deleteUser(user)" 
+                        ng-disabled="user.id==vm.userObject.list.id">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </p>
@@ -74,7 +77,7 @@
 </div>
 
 <!-- This is the Add User Div for "Modal" -->
-<div class="modal fade modal-col" ng-if="vm.showNew">
+<div class="modal fade modal-col modal-col__full" ng-if="vm.showNew">
     <div class="modal-inner">
         <h2 class="md-title md-title-left">Add User</h2>
         <md-input-container>
@@ -106,7 +109,7 @@
 </div><!-- /.modal -->
 
 <!-- This is the Edit User Div for "Modal" -->
-<div class="modal fade modal-col" ng-if="vm.showEdit">
+<div class="modal fade modal-col modal-col__full" ng-if="vm.showEdit">
     <div class="modal-inner">
         <h2 class="md-title md-title-left">Edit User</h2>
         <md-input-container>

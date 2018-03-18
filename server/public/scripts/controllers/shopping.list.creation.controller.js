@@ -3,7 +3,10 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     let self = this;
 
     self.userObject = UserService.userObject;
-    console.log('userObject', self.userObject);
+    
+    self.stepOneComplete = false;
+    self.stepTwoComplete = false;
+    self.stepThreeComplete = false;
     
     self.moduleLibrary = ModuleService.moduleLibrary;
     self.currentShoppingListId = ShoppingListService.currentShoppingListId

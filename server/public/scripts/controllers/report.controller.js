@@ -37,17 +37,15 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
    // self.getComponents();
 
    self.getComponentModules = function(component) {
-     ReportService.getComponentModules (component);
-     self.ComponentModulesSelected = true;
+     if (component.modules_used_in > 0) {
+      self.componentModulesSelected = true;
+      ReportService.getComponentModules (component);
+     }
    };
 
    self.getModuleVersions = function () {
        ReportService.getModuleVersions();
    }
    self.getModuleVersions();
-
-   self.backToReports = function() {
-     self.ComponentModulesSelected = false
-   };
 
 }]);

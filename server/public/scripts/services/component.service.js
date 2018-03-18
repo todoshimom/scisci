@@ -28,36 +28,47 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       self.getComponents()
         .then( function(componentData) {
-
-          for (let component of componentData) {
-            $http.get(`/api/component/modulesCount/${component.id}`)
-              .then( function(response) {
-                component.modules_used_in = response.data[0].count;
-              })
-              .catch( function(error) {
-                console.log(error);
-              });
-          }
-          self.componentLibrary.list = componentData;
+          self.componentLibrary.list = self.getModulesUsedIn(componentData);
       });
 
     }; // getAllComponents()
 
     self.getAllComponents();
 
+    self.getModulesUsedIn = function(componentData) {
+      for (let component of componentData) {
+        $http.get(`/api/component/modulesCount/${component.id}`)
+          .then( function(response) {
+            component.modules_used_in = response.data[0].count;
+          })
+          .catch( function(error) {
+            console.log(error);
+          });
+    }
+    return componentData;
+  };
+
     // begin sortComponents()
     self.sortComponents = function(sortMethod) {
 
-      $http.get(`/api/component/sorting/${sortMethod}`)
+      return $http.get(`/api/component/sorting/${sortMethod}`)
         .then( function(response) {
           console.log(response.data);
-          self.componentLibrary.list = response.data;
+          return response.data;
         })
         .catch( function(error) {
           console.log(error);
         });
 
     }; // end sortComponents()
+
+    self.sortAllComponents = function(sortMethod) {
+      
+      self.sortComponents(sortMethod)
+        .then( function(response) {
+          self.componentLibrary.list = self.getModulesUsedIn(response);
+        });
+    };
 
     // begin getModules()
     self.getModules = function(component) {

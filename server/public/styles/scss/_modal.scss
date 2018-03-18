@@ -30,3 +30,12 @@
         width: 49%;
     }
 }
+
+.modal-col__full {
+    md-input-container {
+        width: 100%;
+    }
+    .modal-inner {
+        max-width: 30%;
+    }
+}

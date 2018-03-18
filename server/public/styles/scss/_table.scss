@@ -11,6 +11,8 @@
     & > * {
         text-align: left;
         display: inline-block;
+        padding: 5px 5px 5px 0;
+        box-sizing: border-box;
     }
 }
 
@@ -22,6 +24,8 @@
     & > p {
         text-align: left;
         display: inline-block;
+        padding: 5px 5px 5px 0;
+        box-sizing: border-box;
     }
 }
 

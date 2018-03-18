@@ -65,9 +65,9 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
 
     self.getAllComponents();
 
-    self.getComponentModules = function (component) {
-        ComponentService.getModules(component);
-        console.log(self.componentModules);
+    self.getComponentModules = function(component) {
+      ComponentService.getModules(component);
+      console.log(self.componentModules.list);
     }; // end getModules()
 
     self.getModuleVersions = function () {
