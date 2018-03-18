@@ -86,6 +86,9 @@ h2 {
   font-size: 15px;
   text-transform: uppercase; }
 
+.md-title__space {
+  margin-top: 50px; }
+
 .header {
   position: relative;
   z-index: 1;
@@ -453,6 +456,34 @@ md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .
   font-weight: 700; }
   .mockLink:hover {
     cursor: pointer; }
+
+.progress-bar {
+  padding-bottom: 20px;
+  border-bottom: 2px solid #d5d6d5;
+  margin-bottom: 30px; }
+
+.progress-bar__list {
+  display: flex;
+  justify-content: space-evenly; }
+
+.progress-bar__list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 10%;
+  margin: 0 30px;
+  font-size: 17px;
+  font-weight: 400;
+  text-transform: uppercase; }
+
+.progress-bar__list__item__text {
+  margin-top: 10px; }
+
+.bubble {
+  display: inline-block;
+  font-size: 24px;
+  color: #55ac56; }
 
 /* The starting CSS styles for the enter animation */
 .fade.ng-enter {
