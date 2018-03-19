@@ -9,6 +9,7 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     self.stepThreeComplete = false;
     
     self.moduleLibrary = ModuleService.moduleLibrary;
+    ModuleService.getModules();
     self.currentShoppingListId = ShoppingListService.currentShoppingListId
     self.addedModuleLibrary = [];
     self.shoppingList = {}
