@@ -41,13 +41,13 @@
 
     <md-input-container>
         <label>Estimated Assembly Time (hrs.)</label>
-        <input type="text" ng-model="vm.module.data.estimated_assembly_time" />
+        <input type="number" min="0" ng-model="vm.module.data.estimated_assembly_time" />
     </md-input-container>
 
     <h3 class="md-subtitle">Version</h3>
     <md-input-container>
         <label>Version Number</label>
-        <input type="text" ng-model="vm.module.data.version_number" />
+        <input type="number" min="0" ng-model="vm.module.data.version_number" />
     </md-input-container>
 
     <md-input-container>
