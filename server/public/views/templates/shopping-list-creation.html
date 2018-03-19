@@ -4,16 +4,19 @@
 <div class="progress-bar progress-bar__3">
     <ul class="progress-bar__list">
         <li class="progress-bar__list__item"> 
+            <span class="progress-bar__list__item__text">Step 1:</span>
             <span ng-if="!vm.stepOneComplete" class="bubble"><i class="far fa-circle"></i></span>
             <span ng-if="vm.stepOneComplete" class="bubble bubble__complete"><i class="fas fa-check-circle"></i></span>
             <span class="progress-bar__list__item__text">Enter Shopping List Name</span>
         </li>
         <li class="progress-bar__list__item"> 
+            <span class="progress-bar__list__item__text">Step 2:</span>
             <span ng-if="!vm.stepTwoComplete" class="bubble"><i class="far fa-circle"></i></span>
             <span ng-if="vm.stepTwoComplete" class="bubble bubble__complete"><i class="fas fa-check-circle"></i></span>
             <span class="progress-bar__list__item__text">Add Modules</span>
         </li>
         <li class="progress-bar__list__item"> 
+            <span class="progress-bar__list__item__text">Step 3:</span>
             <span ng-if="!vm.stepThreeComplete" class="bubble"><i class="far fa-circle"></i></span>
             <span ng-if="vm.stepThreeComplete" class="bubble bubble__complete"><i class="fas fa-check-circle"></i></span>
             <span class="progress-bar__list__item__text">Add Quantities</span>
