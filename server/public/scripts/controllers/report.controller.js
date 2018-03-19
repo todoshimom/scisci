@@ -9,7 +9,7 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
    self.moduleVersionLibrary = ReportService.moduleVersionLibrary;
    self.ComponentModulesSelected = false
    self.labels = [];
-   self.data = []; 
+   self.data = [];
    self.showNew = false;
 
    self.showChart = function (data) {
@@ -19,7 +19,7 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
         self.totalMatKitSum = data.totalMatKitSum
         self.chartModule = data.labordata[0].name
         self.labels = ['Total Materials in Kit Cost', 'Total Labor Cost'];
-        self.data = [Math.round(data.totalKitSum), Math.round(data.totalLaborCost)]; 
+        self.data = [Math.round(data.totalKitSum), Math.round(data.totalLaborCost)];
         self.showNew = true
         console.log(self.data);
         console.log(self.labels);
@@ -47,5 +47,7 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
        ReportService.getModuleVersions();
    }
    self.getModuleVersions();
+
+   ReportService.getAllComponents();
 
 }]);
