@@ -28,21 +28,25 @@
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
 
-<div class="modal fade modal-col" ng-if="vm.showNew">
-        <div class="modal-inner">
-            <h1 style="font-size:24px">{{vm.chartModule}} - Overall Kit & Labor Costs</h1>
-            <br>
-                <canvas id="doughnut" class="chart chart-doughnut"
-                chart-data="vm.data" chart-labels="vm.labels" chart-options="vm.options">
-            </canvas>
-            <br>
-            <h3><p class="fas fa-square" style="color:#f59132"></p> Total Material in Kit Cost: {{vm.totalKitSum | currency }}</h3>
-            <h3><p class="fas fa-square" style="color:#55ac56"></p> Total Labor Cost: {{vm.totalLaborCost | currency }}</h3>
-            <br>
-            <h3>Total: {{vm.totalMatKitSum | currency}}</h3>
-            <md-button ng-click="vm.showNew=!vm.showNew" class="button" style="float:right">close</md-button>
-        </div><!-- /.modal-inner -->
-    </div><!-- /.modal -->
+<div class="modal fade modal-col chart-container" ng-if="vm.showNew">
+    <div class="modal-inner">
+        <h2 class="md-title" style="font-size:24px">{{vm.chartModule}} - Overall Kit &amp; Labor Costs</h2>
+        
+        <canvas id="doughnut" class="chart chart-doughnut"
+            chart-data="vm.data" chart-labels="vm.labels" chart-options="vm.options">
+        </canvas>
+        <div class="col">
+            <span class="fas fa-square" style="color:#f59132"></span>
+            <span class="chart-text">Total Material in Kit Cost: <span class="strong">{{vm.totalKitSum | currency }}</span></span>
+        </div>
+        <div class="col">
+            <span class="fas fa-square" style="color:#55ac56"></span>
+            <span class="chart-text">Total Labor Cost: <span class="strong">{{vm.totalLaborCost | currency }}</span></span>
+        </div>
+        <span class="chart-text">Total: <span class="strong">{{vm.totalMatKitSum | currency}}</span></span>
+        <md-button ng-click="vm.showNew=!vm.showNew" class="button">close</md-button>
+    </div><!-- /.modal-inner -->
+</div><!-- /.modal -->
 
 </div><!-- /.report-block -->
 
