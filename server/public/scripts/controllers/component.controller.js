@@ -65,4 +65,6 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       self.moduleViewer = false;
     };
 
+    ComponentService.getAllComponents();
+
 }]);
