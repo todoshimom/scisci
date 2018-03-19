@@ -477,11 +477,9 @@ md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .
   font-weight: 400;
   text-transform: uppercase; }
 
-.progress-bar__list__item__text {
-  margin-top: 10px; }
-
 .bubble {
   display: inline-block;
+  margin: 10px 0;
   font-size: 24px;
   color: #55ac56; }
 
