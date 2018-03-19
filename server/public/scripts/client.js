@@ -121,7 +121,7 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', funct
             controller: 'ShoppingListController as vm',
             resolve: {
                 getuser: function (UserService) {
-                    return UserService.getuser(true, 3);
+                    return UserService.getuser(false);
                 }
             }
         })

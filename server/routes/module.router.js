@@ -9,7 +9,7 @@ const moduleCost = require('../models/module.costs')
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
-router.get('/all', authenticated, isEditor, (req, res) => {
+router.get('/all', authenticated, (req, res) => {
     const queryText = 'SELECT * FROM modules ORDER BY "name"';
 
     pool.query(queryText)
