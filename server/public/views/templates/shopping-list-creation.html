@@ -106,7 +106,7 @@
             <div class="mock-table-row col col-6" row="row" ng-repeat="module in vm.addedModuleLibrary">
                 <p role="cell">
                     <md-input-container>
-                        <input type="number" name="quantity" ng-change="vm.stepThreeComplete = true;" ng-model="module.quantity">  
+                        <input type="number" min="1" name="quantity" ng-change="vm.stepThreeComplete = true;" ng-model="module.quantity">  
                     </md-input-container>
                 </p>
                 <p role="cell">{{module.name}}</p>
