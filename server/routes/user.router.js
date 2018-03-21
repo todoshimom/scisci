@@ -104,7 +104,6 @@ router.get('/sorting/:method', authenticated, isAdmin, (req, res) => {//Start of
 router.post('/', authenticated, isAdmin, (req, res) => {//Start of post new user function
 
     let user = req.body;
-    console.log(user);
 
     let queryText = `
     INSERT INTO users (first_name, last_name, username, usertype)
