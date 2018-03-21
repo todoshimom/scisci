@@ -122,7 +122,6 @@
       <md-checkbox ng-model="vm.showAllComponents" >Show All Components</md-checkbox> 
     
     <div ng-show="filterString.name.length > 0 || vm.showAllComponents">
-      <!-- Table mock up for the time being, will be changed out later for accordion divs  -->
        <div class="mock-table" role="table" aria-label="Components">
           <div class="mock-table-header" role="rowgroup">
               <div class="mock-table-row mock-table-row-header col col-4" row="row">
@@ -184,7 +183,6 @@
             <h3 class="columnheader">Description</h3>
             <h3 class="columnheader">Price Per Unit</h3>
             <h3 class="columnheader">Pieces Per Unit</h3>
-            <!-- <h3 class="columnheader">Cost Per Unit</h3> -->
             <h3 class="columnheader">Delete</h3>
 			<h3 class="columnheader">More Info</h3>
         </div><!-- /.mock-table-row-header -->
@@ -195,7 +193,6 @@
             <p role="cell">
 
                 <md-input-container>
-                    <!-- <label>#</label> -->
                     <input min="1" required type="number" ng-model="row.pieces_per_kit" />
                 </md-input-container>
             </p>
@@ -204,7 +201,6 @@
             <p role="cell">{{row.description}}</p>
             <p role="cell">{{row.price_per_unit}}</p>
             <p role="cell">{{row.pieces_per_unit}}</p>
-            <!-- <p role="cell">{{row.cost_per_unit}}</p> -->
             <p role="cell">
                 <a class="button button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">
                     <i class="fas fa-trash-alt"></i>
@@ -220,7 +216,6 @@
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
 							<div class="mock-table-row mock-table-row-header col col-5" row="row">
-                                <!-- <h3 class="columnheader">Modules Used In</h3> -->
                                 <h3 class="columnheader">General Stock</h3>
                                 <h3 class="columnheader">Consumable</h3>
                                 <h3 class="columnheader">Vendor 1</h3>
@@ -231,9 +226,7 @@
 
 
 						<div class="mock-table-body" role="rowgroup">
-                            <div class="mock-table-row col col-5" row="row">
-                                <!-- <p role="cell">{{row.modules_used_in}}</p> -->
-                                
+                            <div class="mock-table-row col col-5" row="row">                                
                                 <p role="cell">{{row.general_stock_item}}</p>
                                 <p role="cell">{{row.consumable}}</p>
                                 <p role="cell">

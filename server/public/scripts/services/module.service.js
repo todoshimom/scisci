@@ -1,5 +1,4 @@
 myApp.service('ModuleService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
-    console.log('ModuleService Loaded');
     let self = this;
 
     self.module = {};
@@ -15,10 +14,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     // get all modules
     self.getModules = function() {
         // get the modules
-        console.log('modules got with a get');
         $http.get(`/api/module/all`)
           .then( function(response) {
-            console.log(response.data);
             self.moduleLibrary.list = response.data;
           })
           .catch( function(error) {
@@ -30,7 +27,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.getModule = function() {
         $http.get('/api/module/' + $routeParams.id)
             .then(response => {
-                console.log('get response', response.data[0]);
                 self.module.data = response.data[0];
                 
                 // get this module's components
@@ -43,7 +39,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.getModuleComponents = function() {
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
-                console.log('get response', response.data);
                 self.components.data = response.data;
 
                 self.getCostRates();
@@ -56,7 +51,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.getModuleComponentsPreSave = function() {
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
-                console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
             })
             .catch(error => {
@@ -68,8 +62,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.get('/api/module/cost/rates/' + $routeParams.id)
             .then(response => {
                 self.calculations.data = response.data;
-                console.log('get response for cost rates single module', self.calculations);
-
             })
             .catch(error => {
                 console.log('error in get single module cost rates', error);
@@ -83,8 +75,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.createModule = function() {
         $http.post('/api/module', self.module.data)
             .then(response => {
-                console.log('self.module.data', self.module.data);
-                console.log('post response', response);
                 $location.path('/module/' + response.data[0].id);
             })
             .catch(error => {
@@ -101,7 +91,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
         $http.post('/api/module/components', dataToSend)
         .then(response => {
-            console.log('response', response);
             self.getModule();
         })
         .catch(error => {
@@ -115,7 +104,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         if(!piecesPerKit) {
             piecesPerKit = 0;
         }
-        console.log('componentData', componentData);
 
         // check if it's already in the module
         let componentIsInModule = false;
@@ -162,8 +150,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.updateModule = function() {
         $http.put('/api/module', self.module.data)
             .then(response => {
-                console.log(self.module.data);
-                console.log('put response', response);
+                // no action on response
             })
             .catch(error => {
                 console.log('error in put', error);
@@ -177,13 +164,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             component_id: component.component_id,
             pieces_per_kit: component.pieces_per_kit
         };
-        console.log(component);
-        console.log(moduleComponentToSave);
 
         $http.put('/api/module/components', moduleComponentToSave)
             .then(response => {
-                console.log('sent in put:', moduleComponentToSave);
-                console.log('put response', response);
+                // no action on response
             })
             .catch(error => {
                 console.log('error in put', error);
@@ -201,7 +185,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 componentsToPost.push(self.components.data[i]);
             } else {
                 for (let j = 0; j < self.componentsSaved.data.length; j++) {
-                    console.log(i, j, self.components.data[i].component_id, self.componentsSaved.data[j].component_id);
                     if (self.components.data[i].component_id == self.componentsSaved.data[j].component_id) {
                         break;
                     }
@@ -246,19 +229,16 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
-                console.log('get response', response.data);
                 self.componentsSaved.data = response.data;
 
                 self.updateModuleEverythingComponentsPost()
                 self.updateModuleEverythingComponentsDelete();
 
-                // -----
                 // UPDATE QUANTITIES
                 for (let i = 0; i < self.components.data.length; i++) {
                     self.updateModuleComponent(self.components.data[i]);
                 }
 
-                // -----
                 // UPDATE THE MODULE
                 self.updateModule();
 
@@ -272,27 +252,19 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     /******************************************/
     /*            DELETE REQUESTS             */
     /******************************************/
-
-    // TODO: prompt user to confirm before delete
     
     self.deleteModule = function(moduleId) {
-        console.log('in delete module');
-        
         $http.delete('/api/module/' + moduleId)
             .then(response => {
-                console.log('delete response', response);
                 self.getModules();
             })
             .catch(error => {
                 console.log('error in delete', error);
             });
     };
-    self.deleteModuleComponent = function(moduleId, componentId) {
-        console.log('in delete module');
-        
+    self.deleteModuleComponent = function(moduleId, componentId) {        
         $http.delete('/api/module/components/' + moduleId + '/' + componentId)
             .then(response => {
-                console.log('delete response', response);
                 self.getModuleComponents();
             })
             .catch(error => {
@@ -329,14 +301,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         } else {
             self.module.data = {};
         }
-        console.log('intiializedata');
     }
 
     // Save Module
     self.saveModule = function() {
-        console.log('MODULE', self.module);
         if ($routeParams.id) {
-            // self.updateModule();
             self.updateModuleEverything();
         } else {
             self.createModule();
@@ -346,18 +315,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.sortModules = function(sortMethod) {
         $http.get(`/api/module/sorting/${sortMethod}`)
           .then( function(response) {
-            console.log(response.data);
             self.moduleLibrary.list = response.data;
           })
           .catch( function(error) {
             console.log(error);
           });
       };
-
-    // // check if we're on an individual page or on the creator page
-    // self.isSavedModule = {value: false};
-    // if($routeParams.id) {
-    //     self.isSavedModule.value = true;
-    // }
   
 }]);

@@ -1,5 +1,4 @@
 myApp.controller('UserController', ['UserService', function (UserService) {
-    console.log('UserController created');
     let self = this;
     self.userService = UserService;
     self.userObject = UserService.userObject;
@@ -8,7 +7,6 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     self.currentLaborRate = UserService.currentLaborRate
 
     self.addUser = function (newUser) {    // Start of addUser function
-        console.log(newUser);
         if (newUser.first_name == '' || newUser.last_name == '' || newUser.username == '' || typeof newUser.first_name == 'undefined' || typeof newUser.last_name == 'undefined' || typeof newUser.username == 'undefined') {
             swal({
                 title: 'Please fill out First Name, Last Name and Username',
@@ -24,8 +22,8 @@ myApp.controller('UserController', ['UserService', function (UserService) {
                 dangerMode: 'Yes',
                 buttons: ["No", "Yes"],
             })
-                .then(value => { //Sweet Alerts confirmation if user wants to add an account. 
-                    if (value) { //To make sure that the user wants to add an account. 
+                .then(value => { // Sweet Alerts confirmation if user wants to add an account. 
+                    if (value) { // To make sure that the user wants to add an account. 
                         if (newUser.usertype == '' || typeof newUser.usertype == 'undefined') {
                             newUser.usertype = 2 //Default is editor if none is given. 
                         }
@@ -75,7 +73,7 @@ myApp.controller('UserController', ['UserService', function (UserService) {
 
             self.showEdit = !self.showEdit
 
-            self.userEdit = null; //clearing input fields after editing a user.     
+            self.userEdit = null; // clearing input fields after editing a user.     
         }
     }    // End of submitEdit function
 
