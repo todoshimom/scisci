@@ -1,5 +1,4 @@
 myApp.controller('ReportController', ['ReportService', function (ReportService) {
-    console.log('ReportController created');
     let self = this;
 
 
@@ -13,7 +12,6 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
    self.showNew = false;
 
    self.showChart = function (data) {
-       console.log(data);
         self.totalKitSum = data.totalKitSum
         self.totalLaborCost = data.totalLaborCost
         self.totalMatKitSum = data.totalMatKitSum
@@ -21,11 +19,7 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
         self.labels = ['Total Materials in Kit Cost', 'Total Labor Cost'];
         self.data = [Math.round(data.totalKitSum), Math.round(data.totalLaborCost)];
         self.showNew = true
-        console.log(self.data);
-        console.log(self.labels);
    }
-
-   console.log(self.componentLibrary);
 
    self.getModules = function() {
        ReportService.getModules();

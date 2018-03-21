@@ -101,7 +101,7 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {
 
         pool.query(queryText)
             .then((results) => {
-                console.log('Registered one module! Next please!');
+                // success
             })
             .catch((error) => {
                 console.log('Error registering user: ', error);
