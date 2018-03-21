@@ -15,3 +15,21 @@
 
   <h2>Last Set by "{{vm.currentLaborRate.list[0].last_changed}}"</h2>
 </div>
+<br>
+<br>
+<br>
+<div>
+  <h2 class="md-subtitle">Remove Shopping Lists</h2>
+
+  <div>
+    <div class="select-wrapper">
+    	<select class="shopping-list-select" ng-model="vm.singleList" ng-options="list as list.name for list in vm.shoppingLists.list">
+    		<option value="" selected disabled>Select a List</option>
+    	</select>
+    	<span class="arrow-button">
+    		<i class="fas fa-angle-down"></i>
+    	</span>
+    </div>
+  </div>
+  <md-button class="button" ng-click="vm.removeList(vm.singleList)">Remove List</md-button>
+</div>

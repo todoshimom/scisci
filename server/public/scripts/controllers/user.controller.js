@@ -5,7 +5,8 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     self.userObject = UserService.userObject;
     self.userLibrary = UserService.userLibrary;
     self.userTypes = UserService.userTypes;
-    self.currentLaborRate = UserService.currentLaborRate
+    self.currentLaborRate = UserService.currentLaborRate;
+    self.shoppingLists = UserService.shoppingLists;
 
     self.addUser = function (newUser) {    // Start of addUser function
         console.log(newUser);
@@ -24,16 +25,16 @@ myApp.controller('UserController', ['UserService', function (UserService) {
                 dangerMode: 'Yes',
                 buttons: ["No", "Yes"],
             })
-                .then(value => { //Sweet Alerts confirmation if user wants to add an account. 
-                    if (value) { //To make sure that the user wants to add an account. 
+                .then(value => { //Sweet Alerts confirmation if user wants to add an account.
+                    if (value) { //To make sure that the user wants to add an account.
                         if (newUser.usertype == '' || typeof newUser.usertype == 'undefined') {
-                            newUser.usertype = 2 //Default is editor if none is given. 
+                            newUser.usertype = 2 //Default is editor if none is given.
                         }
                         UserService.addUser(newUser);
 
                         self.showNew = !self.showNew
 
-                        self.newUser = null; //clearing input fields after adding a user. 
+                        self.newUser = null; //clearing input fields after adding a user.
                     }
                 })
         }
@@ -54,8 +55,8 @@ myApp.controller('UserController', ['UserService', function (UserService) {
                 dangerMode: 'Yes',
                 buttons: ["No", "Yes"],
             })
-                .then(value => { //Sweet Alerts confirmation if user wants to delete the accounts. 
-                    if (value) { //To make sure that the user wants to delete the account. 
+                .then(value => { //Sweet Alerts confirmation if user wants to delete the accounts.
+                    if (value) { //To make sure that the user wants to delete the account.
                         UserService.deleteUser(user.id);
                     }
                 })
@@ -75,31 +76,41 @@ myApp.controller('UserController', ['UserService', function (UserService) {
 
             self.showEdit = !self.showEdit
 
-            self.userEdit = null; //clearing input fields after editing a user.     
+            self.userEdit = null; //clearing input fields after editing a user.
         }
     }    // End of submitEdit function
 
-    self.resetPassword = function (id) {  // Start of resetPassword function    
+    self.resetPassword = function (id) {  // Start of resetPassword function
         swal({
             title: `Are you sure you want to reset this accounts password?`,
             icon: "warning",
             dangerMode: 'Yes',
             buttons: ["No", "Yes"],
         })
-            .then(value => { //Sweet Alerts confirmation if user wants to reset the accounts password. 
-                if (value) { //To make sure that the user wants to reset the account password. 
+            .then(value => { //Sweet Alerts confirmation if user wants to reset the accounts password.
+                if (value) { //To make sure that the user wants to reset the account password.
                     UserService.resetPassword(id);
                 }
             })
-    }// End of resetPassword function    
+    }// End of resetPassword function
 
     self.sortUsers = function (sortMethod) {// Start of Sort Users function
         UserService.sortUsers(sortMethod);
-    }// End of Sort Users function
+    };// End of Sort Users function
 
 
     self.setLaborRate = function (rate) {
-        UserService.setLaborRate(rate)
-    }
+        UserService.setLaborRate(rate);
+    };
 
-}]);    
+    self.getShoppingLists = function() {
+      UserService.getShoppingLists();
+    };
+
+    self.removeList = function(list) {
+      UserService.removeList(list);
+    };
+
+    self.getShoppingLists();
+
+}]);
