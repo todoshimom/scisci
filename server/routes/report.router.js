@@ -36,7 +36,6 @@ router.get('/componentOrdered/:id', (req, res) => {
 
   pool.query(queryText, [req.params.id])
     .then((results) => {
-      console.log(results.rows.count);
       res.send(results.rows);
     })
     .catch((error) => {
@@ -46,7 +45,6 @@ router.get('/componentOrdered/:id', (req, res) => {
 
 
 router.get('/version', authenticated, isAdmin, (req, res) => { //Start of get module reports function
-
     const queryText = 'SELECT name, code, version_number, version_date FROM modules ORDER BY "version_date"';
 
     pool.query(queryText)
@@ -58,29 +56,5 @@ router.get('/version', authenticated, isAdmin, (req, res) => { //Start of get mo
             res.sendStatus(500);
         });
 });
-
-/******************************************/
-/*             POST REQUESTS              */
-/******************************************/
-
-
-
-/******************************************/
-/*              PUT REQUESTS              */
-/******************************************/
-
-
-
-/******************************************/
-/*            DELETE REQUESTS             */
-/******************************************/
-
-
-
-/******************************************/
-/*            OTHER FUNCTIONS             */
-/******************************************/
-
-
 
 module.exports = router;

@@ -15,7 +15,6 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
     self.getModules = function () {
         $http.get('/api/report/modules')
             .then(function (response) {
-                console.log("getting module response", response.data);
                 self.moduleLibrary.list = response.data;
             })
             .catch(function (error) {
@@ -25,17 +24,13 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
     // get all components
     // begin getComponents()
     self.getComponents = function () {
-
         return ComponentService.getComponents();
-
     }; // end getComponents()
 
     // begin getAllComponents()
     self.getAllComponents = function () {
-
         self.getComponents()
             .then(function (componentData) {
-
                 for (let component of componentData) {
                     $http.get(`/api/component/modulesCount/${component.id}`)
                         .then(function (response) {
@@ -45,7 +40,6 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
                             console.log(error);
                         });
                 }
-                console.log(componentData);
                 return componentData;
             })
             .then(function (componentData) {
@@ -58,7 +52,6 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
                             console.log(error);
                         });
                 }
-                console.log(componentData);
                 self.componentLibrary.list = componentData;
             });
     }; // getAllComponents()
@@ -67,43 +60,17 @@ myApp.service('ReportService', ['$http', '$location', 'ComponentService', functi
 
     self.getComponentModules = function(component) {
       ComponentService.getModules(component);
-      console.log(self.componentModules.list);
     }; // end getModules()
 
     self.getModuleVersions = function () {
         $http.get('/api/report/version')
             .then(function (response) {
-                console.log("getting module versions response", response.data);
                 self.moduleVersionLibrary.list = response.data;
             })
             .catch(function (error) {
                 console.log(error);
             });
     };
-
-
-    /******************************************/
-    /*             POST REQUESTS              */
-    /******************************************/
-
-
-
-    /******************************************/
-    /*              PUT REQUESTS              */
-    /******************************************/
-
-
-
-    /******************************************/
-    /*            DELETE REQUESTS             */
-    /******************************************/
-
-
-
-    /******************************************/
-    /*            OTHER FUNCTIONS             */
-    /******************************************/
-
 
 
 }]);
