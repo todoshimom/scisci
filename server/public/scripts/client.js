@@ -10,7 +10,6 @@ myApp.config(['ChartJsProvider', function (ChartJsProvider) {
 
 /// Routes ///
 myApp.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', function ($routeProvider, $locationProvider, $mdThemingProvider) {
-    console.log('myApp -- config')
     $routeProvider
         .when('/', {
             redirectTo: 'home'

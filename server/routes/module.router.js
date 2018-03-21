@@ -11,7 +11,6 @@ const moduleCost = require('../models/module.costs')
 /******************************************/
 router.get('/all', authenticated, (req, res) => {
     const queryText = 'SELECT * FROM modules ORDER BY "name"';
-
     pool.query(queryText)
         .then((results) => {
             res.send(results.rows);
@@ -37,12 +36,9 @@ router.get('/:id', authenticated, isEditor, (req, res) => {
 
 router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
     let sortMethod = req.params.method;
-    console.log(sortMethod);
     let queryText = sorting.sortModules(sortMethod);
-    console.log(queryText);
     pool.query(queryText)
         .then((results) => {
-            console.log('GET modules sorted', results);
             res.send(results.rows);
         })
         .catch((error) => {
@@ -52,15 +48,12 @@ router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
 });
 
 router.get('/components/:id', authenticated, isEditor, (req, res) => {
-    console.log('req.params.id', req.params.id);
-
     // get the components in a separate route
     const queryText = `SELECT * FROM components_modules
         JOIN components ON components_modules.component_id = components.id
         WHERE components_modules.module_id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
-            console.log('get request, result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -69,9 +62,8 @@ router.get('/components/:id', authenticated, isEditor, (req, res) => {
 });
 
 router.get('/cost/rates/:id', authenticated, isEditor, (req, res) => {
-    moduleCost(req.params.id)//Getting single module results.
+    moduleCost(req.params.id) // Getting single module results.
         .then((results) => {
-            console.log('Searchforme', results);
             results[0].kit_and_labor_sum = results[0].currentKitSum + results[0].laborCost
             results[0].current_and_labor_sum = results[0].currentSum + results[0].laborCost
             res.send(results[0])
@@ -86,7 +78,6 @@ router.get('/cost/rates/:id', authenticated, isEditor, (req, res) => {
 /*             POST REQUESTS              */
 /******************************************/
 router.post('/', authenticated, isEditor, (req, res) => {
-    console.log('req.body', req.body);
     const queryText = `INSERT INTO modules (
         name,
         code,
@@ -124,7 +115,6 @@ router.post('/', authenticated, isEditor, (req, res) => {
         req.body.assembly_notes
     ])
         .then(result => {
-            console.log('result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -133,11 +123,6 @@ router.post('/', authenticated, isEditor, (req, res) => {
 });
 
 router.post('/components', authenticated, isEditor, (req, res) => {
-    console.log(`
-
-    post route
-    req.body
-    `, req.body);
     const queryText = `INSERT INTO components_modules (
         module_id,
         component_id,
@@ -149,7 +134,6 @@ router.post('/components', authenticated, isEditor, (req, res) => {
         req.body.pieces_per_kit
     ])
         .then(result => {
-            console.log('result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -161,10 +145,6 @@ router.post('/components', authenticated, isEditor, (req, res) => {
 /*              PUT REQUESTS              */
 /******************************************/
 router.put('/', authenticated, isEditor, (req, res) => {
-    console.log(`put request
-
-    `, req.body);
-
     const queryText = `UPDATE modules SET
         name = $2,
         code = $3,
@@ -183,7 +163,6 @@ router.put('/', authenticated, isEditor, (req, res) => {
         other2_link = $16,
         assembly_notes = $17
     WHERE id = $1`;
-    console.log('HERE', req.body.name, req.body.id);
     pool.query(queryText, [
         req.body.id,
         req.body.name,
@@ -204,7 +183,6 @@ router.put('/', authenticated, isEditor, (req, res) => {
         req.body.assembly_notes
     ])
         .then(result => {
-            console.log('result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -216,14 +194,12 @@ router.put('/components', authenticated, isEditor, (req, res) => {
     const queryText = `UPDATE components_modules SET
         pieces_per_kit = $1
     WHERE module_id = $2 AND component_id = $3`;
-    console.log('HERE', req.body.name, req.body.id);
     pool.query(queryText, [
         req.body.pieces_per_kit,
         req.body.module_id,
         req.body.component_id
     ])
         .then(result => {
-            console.log('result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -235,16 +211,13 @@ router.put('/components', authenticated, isEditor, (req, res) => {
 /*            DELETE REQUESTS             */
 /******************************************/
 router.delete('/:id', authenticated, isEditor, (req, res) => {
-
     let queryText = `DELETE FROM components_modules WHERE module_id = $1`;
-
     pool.query(queryText, [req.params.id])
         .then(result => {
             let queryText = `DELETE FROM modules WHERE id = $1;`;
 
             pool.query(queryText, [req.params.id])
                 .then((result) => {
-                    console.log('result.rows', result.rows);
                     res.send(result.rows);
                 })
                 .catch(err => {
@@ -261,7 +234,6 @@ router.delete('/components/:module_id/:component_id', authenticated, isEditor, (
     const queryText = 'DELETE FROM components_modules WHERE module_id = $1 AND component_id = $2';
     pool.query(queryText, [req.params.module_id, req.params.component_id])
         .then(result => {
-            console.log('result.rows', result.rows);
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
@@ -272,7 +244,5 @@ router.delete('/components/:module_id/:component_id', authenticated, isEditor, (
 /******************************************/
 /*            OTHER FUNCTIONS             */
 /******************************************/
-
-
 
 module.exports = router;

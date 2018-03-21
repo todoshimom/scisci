@@ -12,7 +12,6 @@ const authenticated = require('../models/authenticated')
 router.get('/all', authenticated, (req, res) => {
     const queryText = 'SELECT * FROM shoppinglist ORDER BY "name"';
 
-
     pool.query(queryText)
         .then((results) => {
         res.send(results.rows);
@@ -25,7 +24,6 @@ router.get('/all', authenticated, (req, res) => {
 });
 
 router.get('/list/:id', authenticated, (req, res) => {
-    console.log('in the get route', req.params.id);
     let queryString = 'SELECT id FROM shopping_list WHERE id = $1';
     pool.query(queryString, [req.params.id])
         .then(result => {
@@ -70,7 +68,6 @@ router.get('/components/:id', authenticated, (req, res) => {
 /******************************************/
 router.post('/', authenticated, (req, res) => {
     let queryString = 'INSERT INTO shoppinglist (name, date, user_created_by) VALUES ($1, $2, $3) RETURNING id';
-    console.log('result log', req.body);
     pool.query(queryString, [req.body.name, req.body.date, req.body.user_created_by])
         .then(result => {
             let queryString = `
@@ -79,7 +76,6 @@ router.post('/', authenticated, (req, res) => {
             WHERE name = '${req.body.name}';`
             pool.query(queryString)
                 .then(result => {
-                    console.log('shopping list id results', result);
                     res.send(result);
                 })
                 .catch(err => {
@@ -93,15 +89,10 @@ router.post('/', authenticated, (req, res) => {
         });
 });
 
-
-router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add shoppinglist junction function
-
-
-    let shoppinglistId = req.params.id
-    let modulesAdded = req.body
-    console.log('Shopping Id: ', shoppinglistId);
-    console.log('Modules added: ', modulesAdded);
-
+  //Start of add shoppinglist junction function
+router.post('/shoppinglist/:id', authenticated, (req, res) => {
+    let shoppinglistId = req.params.id;
+    let modulesAdded = req.body;
 
     for (let i = 0; i < modulesAdded.length; i++) {
         let queryText = `
@@ -110,8 +101,7 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add 
 
         pool.query(queryText)
             .then((results) => {
-                // console.log('Registered user successfully: ', results);
-                console.log('Registered one module! Next please!');
+                // success
             })
             .catch((error) => {
                 console.log('Error registering user: ', error);
@@ -123,8 +113,6 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {  //Start of add 
 });  //End of add shoppinglist junction function
 
 router.post('/addOrderedInHouse', authenticated, (req, res) => {
-
-  console.log(req.body);
   let item = req.body;
 
   let queryText = `
@@ -133,7 +121,6 @@ router.post('/addOrderedInHouse', authenticated, (req, res) => {
 
   pool.query(queryText, [item.shopping_id, item.id, item.ordered, item.in_house])
     .then((results) => {
-      console.log('component added to shopping_components', results);
       res.sendStatus(201);
     })
     .catch((error) => {
@@ -148,14 +135,11 @@ router.post('/addOrderedInHouse', authenticated, (req, res) => {
 /******************************************/
 
 router.put('/updateOrderedInHouse', authenticated, (req, res) => {
-
   let item = req.body;
-
   let queryText = `UPDATE shopping_components SET ordered = $1, in_house = $2 WHERE id = $3`;
 
   pool.query(queryText, [item.ordered, item.in_house, item.ordered_inhouse_id])
     .then((results) => {
-      // console.log('component updated in shopping_components', results);
       res.sendStatus(201);
     })
     .catch((error) => {
@@ -164,19 +148,6 @@ router.put('/updateOrderedInHouse', authenticated, (req, res) => {
     });
 
 });
-
-
-
-/******************************************/
-/*            DELETE REQUESTS             */
-/******************************************/
-
-
-
-/******************************************/
-/*            OTHER FUNCTIONS             */
-/******************************************/
-
 
 
 module.exports = router;

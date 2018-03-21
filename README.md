@@ -9,6 +9,7 @@ This application’s purpose is to allow easy management and maintenance of educ
 - AngularJS
 - Express.js
 - Passport.js
+- Chart.js
 
 ## Authors
 
