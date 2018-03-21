@@ -222,4 +222,29 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     self.onLoad()
 
+
+    /*****************  APP SETTINGS REMOVE SHOPPING LISTS  *****************/
+
+  self.shoppingLists = {list:[]};
+
+  self.getShoppingLists = function() {
+    $http.get('/api/user/shopping')
+      .then( function(response) {
+        self.shoppingLists.list = response.data;
+      })
+      .catch( function(error) {
+        console.log('Error getting shopping lists', error);
+      });
+  };
+
+  self.removeList = function(item) {
+    $http.delete(`/api/user/shopping/${item}`)
+      .then( function(response) {
+        self.getShoppingLists();
+      })
+      .catch( function(error) {
+        console.log('Error removing shopping list', error);
+      });
+  };
+
 }]);
