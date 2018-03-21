@@ -1,0 +1,89 @@
+.nav-list,
+.sub-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    // fontawesome icons
+    svg {
+        font-size: 28px;
+    }
+}
+
+.nav-list {
+    position: absolute; // to position navigation around views
+    top: 0;
+    left: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 100px;
+    height: 100vh;
+    min-height: 100%;
+    background-color: $light-gray;
+}
+
+.nav-list-item-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    height: 100px;
+    box-sizing: border-box;
+    background-color: $light-gray;
+    color: $med-gray;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    & > * {
+        flex: 1 0 100%;
+    }
+    &.active {
+        background-color: $white;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.sub-nav-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.sub-nav-item-link {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    box-sizing: border-box;
+    color: $med-gray;
+    font-weight: 300;
+    text-align: center;
+    text-decoration: none;
+    & > * {
+        flex: 1 0 100%;
+    }
+    svg {
+        margin-bottom: 20px;
+        color: $green;
+    }
+    &:hover {
+        .sub-nav-icon {
+            transform: scale(1);
+        }
+    }
+}
+
+.sub-nav-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.sub-nav-icon {
+    transition: all 350ms;
+    transform: scale(.85);
+}

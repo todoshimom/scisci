@@ -4,18 +4,24 @@
         <title>Science From Scientists</title>
 
          <!-- STYLES -->
-         <link rel="stylesheet" href="styles/style.css">
          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900" rel="stylesheet">
          <link rel="stylesheet" href="vendors/angular-material/angular-material.css">
          <link rel="icon" type="image/png" href="./styles/images/MMTfavicon.png">
+         <link rel="stylesheet" href="styles/style.css">
  
          <!-- VENDORS -->
+         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
          <script type="text/javascript" src="vendors/angular/angular.min.js"></script>
          <script type="text/javascript" src="vendors/angular-route/angular-route.min.js"></script>
-         <script type="text/javascript" src="vendors/angular-animate/angular-animate.js"></script>
+         <script src="vendors/Chart.min.js"></script>
+         <script src="vendors/angular-chart.min.js"></script>
+         <script type="text/javascript" src="vendors/angular-animate/angular-animate.min.js"></script>
          <script type="text/javascript" src="vendors/angular-aria/angular-aria.js"></script>
          <script type="text/javascript" src="vendors/angular-messages/angular-messages.js"></script>
          <script type="text/javascript" src="vendors/angular-material/angular-material.js"></script>
+         <script type="text/javascript" src="vendors/sweetalert/dist/sweetalert.min.js"></script>
+         <script type="text/javascript" src="vendors/sticky.min.js"></script>
  
          <!-- SCRIPT -->
          <script type="text/javascript" src="scripts/client.js"></script>
@@ -29,18 +35,28 @@
          <script type="text/javascript" src="scripts/controllers/shopping.list.controller.js"></script>
          <script type="text/javascript" src="scripts/controllers/shopping.list.creation.controller.js"></script>
          <script type="text/javascript" src="scripts/controllers/user.controller.js"></script>
+         <script type="text/javascript" src="scripts/controllers/nav.controller.js"></script>
          <script type="text/javascript" src="scripts/services/component.service.js"></script>
          <script type="text/javascript" src="scripts/services/module.service.js"></script>
          <script type="text/javascript" src="scripts/services/report.service.js"></script>
          <script type="text/javascript" src="scripts/services/shopping.list.service.js"></script>
          <script type="text/javascript" src="scripts/services/user.service.js"></script>
 
+         <!-- FAVICON -->
+        <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+
     </head>
 
     <body ng-app="myApp">
-      <header ng-include="'/views/partials/header.html'"></header>
+      <header class="header" ng-include="'/views/partials/header.html'"></header>
 
-      <main ng-view></main>
+      <main class="main" ng-view></main>
 
     </body>
 </html>

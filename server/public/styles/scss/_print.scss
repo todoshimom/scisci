@@ -1,0 +1,30 @@
+@media print {
+    .navbar {
+        display: none;
+    }
+
+    .main {
+        padding: 20px 10px;
+    }
+
+    .shopping-list-select {
+        display: none;
+    }
+
+    .shopping-list-print {
+        display: none;
+    }
+
+    .inner-navbar {
+        display: none;
+    }
+
+    @page {
+        size: landscape;
+    }
+
+
+    md-checkbox.md-default-theme.md-checked .md-icon:after, md-checkbox.md-checked .md-icon:after {
+        border-color: $med-gray;
+    }
+}

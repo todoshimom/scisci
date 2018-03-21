@@ -1,0 +1,26 @@
+.inner-navbar {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 50px;
+    height: 100vh;
+    min-height: 100%;
+    background-color: lighten($light-gray, 2%);
+    text-align: center;
+}
+
+.inner-navbar-list-item-link {
+    display: inline-block;
+    padding: 15px 10px;
+    box-sizing: border-box;
+    &.active {
+        background-color: $white;
+    }
+}
+
+.inner-navbar-icon {
+    color: $med-gray;
+}

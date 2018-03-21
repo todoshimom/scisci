@@ -1,0 +1,32 @@
+h2 {
+    margin-top: 0;
+    color: $med-gray;
+}
+
+.md-title {
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.md-title-left {
+    text-align: left;
+}
+
+.md-subtitle {
+    color: $med-gray;
+    font-weight: 300;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.module-link {
+  color: $green;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.md-title__space {
+    margin-top: 50px;
+}

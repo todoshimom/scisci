@@ -1,0 +1,115 @@
+<div ng-include="'views/partials/nav.html'"></div>
+<div ng-include="'views/partials/subnav-shopping.html'"></div>
+
+<div class="progress-bar progress-bar__3">
+    <ul class="progress-bar__list">
+        <li class="progress-bar__list__item"> 
+            <span class="progress-bar__list__item__text">Step 1:</span>
+            <span ng-if="!vm.stepOneComplete" class="bubble"><i class="far fa-circle"></i></span>
+            <span ng-if="vm.stepOneComplete" class="bubble bubble__complete"><i class="fas fa-check-circle"></i></span>
+            <span class="progress-bar__list__item__text">Enter Shopping List Name</span>
+        </li>
+        <li class="progress-bar__list__item"> 
+            <span class="progress-bar__list__item__text">Step 2:</span>
+            <span ng-if="!vm.stepTwoComplete" class="bubble"><i class="far fa-circle"></i></span>
+            <span ng-if="vm.stepTwoComplete" class="bubble bubble__complete"><i class="fas fa-check-circle"></i></span>
+            <span class="progress-bar__list__item__text">Add Modules</span>
+        </li>
+        <li class="progress-bar__list__item"> 
+            <span class="progress-bar__list__item__text">Step 3:</span>
+            <span ng-if="!vm.stepThreeComplete" class="bubble"><i class="far fa-circle"></i></span>
+            <span ng-if="vm.stepThreeComplete" class="bubble bubble__complete"><i class="fas fa-check-circle"></i></span>
+            <span class="progress-bar__list__item__text">Add Quantities</span>
+        </li>
+    </ul>
+               
+</div>
+
+<h2 ng-if="!vm.shoppingList.name" class="md-title">Create Shopping List</h2>
+<h2 ng-if="vm.shoppingList.name" class="md-title md-title-left fade">{{vm.shoppingList.name}}</h2>
+
+<form ng-if="vm.newList" class="creation-header" ng-submit="vm.createShoppingList(vm.name, vm.userObject.list.first_name, vm.userObject.list.last_name); vm.showSearchResults = true;">
+    <md-input-container class="input">
+        <label>Shopping List Name</label>
+        <input ng-model="vm.name" required />
+    </md-input-container>
+    <div class="button-wrapper">
+        <input type="submit" value="Start List" ng-click="vm.stepOneComplete=true;" class="button" />
+    </div>
+</form>
+
+<!-- <form ng-submit="vm.saveModule()" class="module-creation-header">
+            <md-input-container class="module-title-input">
+                <label>Module Name</label>
+                <input type="text" ng-model="vm.module.data.name" required />
+            </md-input-container>
+            
+            <div class="button-wrapper">
+                <input type="submit" class="button" ng-if="!vm.isSavedModule.value" value="Create Module" />
+            </div>
+        </form> -->
+
+<div class="search-results" ng-if="vm.showSearchResults">
+    <md-input-container class="input">
+        <label>Search Modules</label>
+        <input ng-model="vm.search">
+    </md-input-container>
+
+    <div ng-if="vm.search">
+        <h2 class="md-title md-title-left">Search Results</h2>
+        <div class="mock-table" role="table" aria-label="Components">
+            <div class="mock-table-header" role="rowgroup">
+                <div class="mock-table-row mock-table-row-header col col-3" row="row">
+                    <h3 class="columnheader">Add</h3>
+                    <h3 class="columnheader">Module Name</h3>
+                    <h3 class="columnheader">Code</h3>
+                </div>
+                <!-- /.mock-table-row-header -->
+            </div>
+            <!-- /.mock-table-header -->
+            <div class="mock-table-body" role="rowgroup">
+                <div class="mock-table-row col col-3" row="row" ng-repeat="module in vm.moduleLibrary.list | filter:vm.search">
+                    <p role="cell">
+                        <button ng-click="vm.addModule(module); vm.showAddedModules = true; vm.stepTwoComplete = true;" class="button">
+                            Add Module
+                        </button>
+                    </p>
+                    <p role="cell">{{module.name}}</p>
+                    <p role="cell">{{module.code}}</p>
+                </div>
+            </div>
+            <!-- /.mock-table-body -->
+        </div>
+        <!-- /.mock-table-header -->
+
+    </div>
+</div>
+
+<div class="added-modules" ng-if="vm.showAddedModules">
+    <h2 class="md-title md-title-left md-title__space">Added Modules</h2>
+    <div class="mock-table" role="table" aria-label="Components">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header col col-4" row="row">
+                <h3 class="columnheader">Quantity</h3>
+                <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Code</h3>
+                <h3 class="columnheader">Delete</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table-header -->
+        <div class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row col col-4" row="row" ng-repeat="module in vm.addedModuleLibrary">
+                <p role="cell">
+                    <md-input-container>
+                        <input type="number" min="1" name="quantity" ng-change="vm.stepThreeComplete = true;" ng-model="module.quantity">  
+                    </md-input-container>
+                </p>
+                <p role="cell">{{module.name}}</p>
+                <p role="cell">{{module.code}}</p>
+                <p role="cell"><a ng-click="vm.deleteModule(module)"><i class="fas fa-trash-alt"></i></a></p>
+            </div>
+        </div>
+        <!-- /.mock-table-body -->
+    </div>
+    <!-- /.mock-table-header -->
+    <button ng-click="vm.saveShoppingList(vm.addedModuleLibrary)" class="button">Save Shopping List</button>
+</div>

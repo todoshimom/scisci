@@ -1,18 +1,46 @@
-<div class="container">
-    <h1 class="lead">Login</h1>
-    <h1 class="lead alert alert-danger" role="alert" ng-if="vm.message != ''">{{vm.message}}</h2>
-        <form ng-submit="vm.login()">
-            <div>
+<div class="login-box" ng-if="vm.passwordStatus">
+    <h2 class="md-title md-title-left">Login</h2>
+    <h2 class="alert alert-danger" role="alert" ng-if="vm.message != ''">{{vm.message}}</h2>
+    <form ng-submit="vm.login()">
+        <div>
+            <md-input-container>
                 <label for="username">Username:</label>
                 <input type="text" ng-model="vm.user.username" />
-            </div>
-            <div>
+            </md-input-container>
+        </div>
+        <div>
+            <md-input-container>
                 <label for="password">Password:</label>
                 <input type="password" ng-model="vm.user.password" />
+            </md-input-container>
+        </div>
+        <div>
+            <input class="button" type="submit" name="submit" value="Log In" />
+        </div>
+    </form>
+</div>
+
+<div ng-if="!vm.passwordStatus">
+    <h2 class="md-title">Set New Password</h2>
+    <p class="alert alert-danger">Please set your new password! Your new password cannot match the default password.</p>
+    <div>
+        <md-input-container class="md-block">
+            <label>New Password</label>
+            <input type="password" required md-no-asterisk name="newpassword" ng-model="vm.newPassword.password" minlength="8" maxlength="32"
+                ng-pattern="/^(?=(?:.*[a-zA-Z]){1})(?=(?:.*[0-9]){1})\w+$/" />
+            <div ng-message-exp="['required', minlength', 'maxlength', 'pattern']">
+                <p>Must be at least 8-32 characters long.</p>
+                <p>Must be at least one letter and number.</p>
             </div>
-            <div>
-                <input class="btn btn-default" type="submit" name="submit" value="Log In" />
-                <a href="#!register">Register</a>
-            </div>
-        </form>
+        </md-input-container>
+    </div>
+    <div>
+        <md-input-container class="md-block">
+            <label>Retype New Password</label>
+            <input type="password" required md-no-asterisk name="retypepassword" ng-model="vm.newPassword.retypePassword" minlength="8"
+                maxlength="32" ng-pattern="/^(?=(?:.*[a-zA-Z]){1})(?=(?:.*[0-9]){1})\w+$/" />
+        </md-input-container>
+    </div>
+    <md-button class="button" ng-click="vm.setNewPassword(vm.newPassword)">Submit</md-button>
+    <button class="button button-grayed" ng-click="vm.cancelNewPassword()">Cancel</button>
 </div>

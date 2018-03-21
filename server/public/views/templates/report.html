@@ -1,0 +1,105 @@
+<div ng-include="'views/partials/nav.html'"></div>
+<div ng-if="!vm.componentModulesSelected">
+<div class="report-block">
+    <h2 class="md-title md-title-left" >Module Reports</h2>
+    <div class="mock-table" role="table" aria-label="Modules">
+        <div class="mock-table-header" role="rowgroup">
+            <div class="mock-table-row mock-table-row-header col col-5" row="row">
+                <h3 class="columnheader">Module Name</h3>
+                <h3 class="columnheader">Materials Ordered + Labor</h3>
+                <h3 class="columnheader">Materials in Kit + Labor</h3>
+                <h3 class="columnheader">Count of Kits Used</h3>
+                <h3 class="columnheader">More Information</h3>
+            </div><!-- /.mock-table-row-header -->
+        </div><!-- /.mock-table-header -->
+
+        <div ng-repeat= "module in vm.moduleLibrary.list" class="mock-table-body" role="rowgroup">
+            <div class="mock-table-row col col-5" row="row">
+                <p role="cell"><a ng-href="#!module/{{module.moduleid}}">{{module.labordata[0].name}}</a></p>
+                <p role="cell">{{module.currentSum | currency}}</p>
+                <p role="cell">{{module.currentKitSum | currency}}</p>
+                <p role="cell">{{module.module_quantity}}</p>
+                <p role="cell" ng-click="vm.showChart(module)">
+                        <span class="sort-button">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                    </p>
+            </div><!-- /.mock-table-row -->
+        </div><!-- /.mock-table-body -->
+    </div><!-- /.mock-table-header -->
+
+<div class="modal fade modal-col chart-container" ng-if="vm.showNew">
+    <div class="modal-inner">
+        <h2 class="md-title" style="font-size:24px">{{vm.chartModule}} - Overall Kit &amp; Labor Costs</h2>
+        
+        <canvas id="doughnut" class="chart chart-doughnut"
+            chart-data="vm.data" chart-labels="vm.labels" chart-options="vm.options">
+        </canvas>
+        <div class="col">
+            <span class="fas fa-square" style="color:#f59132"></span>
+            <span class="chart-text">Total Material in Kit Cost: <span class="strong">{{vm.totalKitSum | currency }}</span></span>
+        </div>
+        <div class="col">
+            <span class="fas fa-square" style="color:#55ac56"></span>
+            <span class="chart-text">Total Labor Cost: <span class="strong">{{vm.totalLaborCost | currency }}</span></span>
+        </div>
+        <span class="chart-text">Total: <span class="strong">{{vm.totalMatKitSum | currency}}</span></span>
+        <md-button ng-click="vm.showNew=!vm.showNew" class="button">close</md-button>
+    </div><!-- /.modal-inner -->
+</div><!-- /.modal -->
+
+</div><!-- /.report-block -->
+
+
+  <div class="report-block">
+      <h2 class="md-title md-title-left">Components Report</h2>
+      <div ng-if="!vm.componentModulesSelected" class="mock-table" role="table" aria-label="Modules">
+          <div class="mock-table-header" role="rowgroup">
+              <div class="mock-table-row mock-table-row-header col col-3" row="row">
+                  <h3 class="columnheader">Component Name</h3>
+                  <h3 class="columnheader">How many Modules</h3>
+                  <h3 class="columnheader"># of times Ordered</h3>
+              </div><!-- /.mock-table-row-header -->
+          </div><!-- /.mock-table -->
+
+          <div ng-repeat= "component in vm.componentLibrary.list" class="mock-table-body" role="rowgroup">
+              <div class="mock-table-row col col-3" row="row">
+                  <p role="cell">{{component.name}}</p>
+                  <p role="cell"><span class="mockLink" ng-click="vm.getComponentModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p>
+                  <p role="cell">{{component.timesOrdered}}</p>
+              </div><!-- /.mock-table-row -->
+          </div><!-- /.mock-table-body -->
+      </div><!-- /.mock-table-header -->
+  </div><!-- /.report-block -->
+
+
+  <div class="report-block">
+      <h2 class="md-title md-title-left">Version Information (Modules)</h2>
+      <div class="mock-table" role="table" aria-label="Modules">
+          <div class="mock-table-header" role="rowgroup">
+              <div class="mock-table-row mock-table-row-header col col-4" row="row">
+                  <h3 class="columnheader">Module Name</h3>
+                  <h3 class="columnheader">Code</h3>
+                  <h3 class="columnheader">Version #</h3>
+                  <h3 class="columnheader">Version Date</h3>
+              </div><!-- /.mock-table-row-header -->
+          </div><!-- /.mock-table-header -->
+
+          <div ng-repeat= "module in vm.moduleVersionLibrary.list" class="mock-table-body" role="rowgroup">
+              <div class="mock-table-row col col-4" row="row">
+                  <p role="cell">{{module.name}}</p>
+                  <p role="cell">{{module.code}}</p>
+                  <p role="cell">{{module.version_number}}</p>
+                  <p role="cell">{{module.version_date | date: "MMM. d, yyyy" }}</p>
+              </div><!-- /.mock-table-row -->
+          </div><!-- /.mock-table-body -->
+      </div><!-- /.mock-table-header -->
+  </div><!-- /.report-block -->
+</div>
+<div ng-if="vm.componentModulesSelected">
+  <h3 class="mockLink" ng-click="vm.componentModulesSelected = !vm.componentModulesSelected">Back <i class="fas fa-long-arrow-alt-left"></i> </h3>
+  <h2 class="md-title md-title-left">Module List For Component: {{vm.componentName}}</h2>
+  <div ng-repeat="module in vm.componentModules.list">
+    <a class="module-link" ng-href="#!module/{{module.id}}">{{module.name}}</a>
+  </div>
+</div>

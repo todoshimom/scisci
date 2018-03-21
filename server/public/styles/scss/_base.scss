@@ -1,0 +1,23 @@
+body, html {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+.sr-only {
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
+p {
+	margin: 0;
+}
+
+a {
+	color: $green;
+}
+
+.strong {
+	font-weight: 600;
+}

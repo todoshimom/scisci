@@ -1,6 +1,278 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
-    <p>
-        In Info
-    </p>
+<div ng-include="'views/partials/subnav-module.html'"></div>
+
+<div ng-if="!vm.moduleViewer">
+
+  <h2 class="md-title">Add Components</h2>
+  <form class="form" ng-submit="vm.addComponentToLib(vm.componentItem)">
+    <div>
+      <md-input-container>
+        <label>Name</label>
+        <input ng-model="vm.componentItem.name">
+      </md-input-container>
+
+      <md-input-container>
+        <label>Type</label>
+        <input ng-model="vm.componentItem.type">
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <label>Price Per Unit</label>
+        <input type="text" ng-model="vm.componentItem.price_per_unit">
+      </md-input-container>
+
+      <md-input-container>
+        <label>Pieces Per Unit</label>
+        <input type="number" min="1" ng-model="vm.componentItem.pieces_per_unit">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <label>Description</label>
+        <textarea ng-model="vm.componentItem.description" rows="1"></textarea>
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <label>Vendor 1 Name</label>
+        <input ng-model="vm.componentItem.vendor_name_primary">
+      </md-input-container>
+
+      <md-input-container>
+        <label>Vendor 1 Link</label>
+        <input ng-model="vm.componentItem.vendor_url_primary">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <label>Vendor 2 Name</label>
+        <input ng-model="vm.componentItem.vendor_name_secondary">
+      </md-input-container>
+
+      <md-input-container>
+        <label>Vendor 2 Link</label>
+        <input ng-model="vm.componentItem.vendor_url_secondary">
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-input-container>
+        <label>Notes/Purpose</label>
+        <textarea ng-model="vm.componentItem.notes" rows="1"></textarea>
+      </md-input-container>
+    </div>
+
+    <div>
+      <md-checkbox ng-model="vm.componentItem.general_stock_item" aria-label="General Stock Checkbox">
+        General Stock Item
+      </md-checkbox>
+      <md-checkbox ng-model="vm.componentItem.consumable" aria-label="Consumable Checkbox">
+        Consumable
+      </md-checkbox>
+    </div>
+    <div>
+      <button class="button">Add Component</button>
+    </div>
+</form>
+
+  <h2 class="md-title md-title-left">Manage Components</h2>
+    <md-input-container>
+      <label>Filter Components</label>
+      <input ng-model="filterString"/>
+    </md-input-container>
+   <div class="mock-table" role="table" aria-label="Components">
+      <div class="mock-table-header" role="rowgroup">
+          <div class="mock-table-row mock-table-row-header col col-10" row="row">
+            <h3 class="columnheader">Name
+              <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
+              <i class="fas fa-caret-square-up"></i>
+            </span>
+            <span class="sort-button" ng-click="vm.sortColumns('nameDesc')">
+              <i class="fas fa-caret-square-down"></i>
+            </span>
+          </h3>
+            <h3 class="columnheader">Type
+              <span class="sort-button" ng-click="vm.sortColumns('typeAsc')">
+              <i class="fas fa-caret-square-up"></i>
+            </span>
+            <span class="sort-button" ng-click="vm.sortColumns('typeDesc')">
+              <i class="fas fa-caret-square-down"></i>
+            </span>
+          </h3>
+            <h3 class="columnheader">Description</h3>
+            <h3 class="columnheader">Price Per Unit
+              <span class="sort-button" ng-click="vm.sortColumns('pricePUAsc')">
+              <i class="fas fa-caret-square-up"></i>
+            </span>
+            <span class="sort-button" ng-click="vm.sortColumns('pricePUDesc')">
+              <i class="fas fa-caret-square-down"></i>
+            </span>
+          </h3>
+            <h3 class="columnheader">Pieces Per Unit</h3>
+            <h3 class="columnheader">General Stock
+              <span class="sort-button" ng-click="vm.sortColumns('genStockAsc')">
+              <i class="fas fa-caret-square-up"></i>
+            </span>
+            <span class="sort-button" ng-click="vm.sortColumns('genStockDesc')">
+              <i class="fas fa-caret-square-down"></i>
+            </span>
+          </h3>
+            <h3 class="columnheader">Consumable
+              <span class="sort-button" ng-click="vm.sortColumns('consumableAsc')">
+              <i class="fas fa-caret-square-up"></i>
+            </span>
+            <span class="sort-button" ng-click="vm.sortColumns('consumableDesc')">
+              <i class="fas fa-caret-square-down"></i>
+            </span>
+          </h3>
+          <h3 class="columnheader">Modules Used In</h3>
+
+          <h3 class="columnheader">More Info</h3>
+          <h3 class="columnheader">Edit</h3>
+          </div><!-- /.mock-table-row -->
+      </div> <!-- /.mock-table-header -->
+      <div class="mock-table-body" role="rowgroup">
+          <div class="mock-table-row col col-10" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.name}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.type}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.description}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.price_per_unit | currency}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">{{component.pieces_per_unit}}</p>
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <span ng-if="component.general_stock_item">{{vm.yesNo.yes}}</span>
+              <span ng-if="!component.general_stock_item">{{vm.yesNo.no}}</span>
+            </p>
+
+            <p role="cell" ng-if="!vm.edit[component.id]">
+              <span ng-if="component.consumable">{{vm.yesNo.yes}}</span>
+              <span ng-if="!component.consumable">{{vm.yesNo.no}}</span>
+            </p>
+
+            <p role="cell"><span class="mockLink" ng-click="vm.getModules(component)">{{component.modules_used_in}} <i class="fas fa-arrow-circle-right"></i></span></p>
+
+            <p role="cell" ng-if="vm.edit[component.id]"><button ng-click="vm.cancelEdit(component)" class="button">Cancel</button></p>
+            <p role="cell" ng-click="vm.showHideModuleData[$index].show = !vm.showHideModuleData[$index].show">
+                <span class="sort-button">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </p>
+            <p role="cell" ng-if="!vm.edit[component.id]"><button ng-click="vm.showEdit=!vm.showEdit; vm.editComponent=component" class="button">Edit</button></p>
+            <div class="collapsed-table-data" ng-if="vm.showHideModuleData[$index].show">
+                <div class="mock-table" role="table" aria-label="Components">
+                    <div class="mock-table-header" role="rowgroup">
+                        <div class="mock-table-row mock-table-row-header col col-4" row="row">
+                            <h3 class="columnheader">Vendor Primary</h3>
+                            <h3 class="columnheader">Vendor Secondary</h3>
+                            <h3 class="columnheader">Notes</h3>
+                            <h3 class="columnheader">Delete</h3>
+                        </div>
+                        <!-- /.mock-table-row-header -->
+                    </div>
+                    <!-- /.mock-table-header -->
+                    <div class="mock-table-body" role="rowgroup">
+                        <div class="mock-table-row col col-4" row="row">
+                            <p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
+                            <p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
+                            <p role="cell">{{component.notes}}</p>
+
+                            <p role="cell" ng-if="!vm.edit[component.id]">
+                              <button ng-click="vm.deleteComponent(component.id)" class="button-naked">
+                                <i class="fas fa-trash-alt"></i>
+                              </button>
+                            </p>
+                        </div>
+                        <!-- /.mock-table-row -->
+                    </div>
+                    <!-- /.mock-table-body -->
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="modal fade" ng-if="vm.showEdit">
+      <div class="modal-inner">
+          <h2>Edit Component</h2>
+          <md-input-container>
+              <label>Name</label>
+              <input ng-value="vm.editComponent.name" ng-model="vm.editComponent.name">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Type</label>
+              <input ng-value="vm.editComponent.type" ng-model="vm.editComponent.type">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Description</label>
+              <input ng-value="vm.editComponent.description" ng-model="vm.editComponent.description">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Price Per Unit</label>
+              <input type="text" ng-value="vm.editComponent.price_per_unit" ng-model="vm.editComponent.price_per_unit">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Pieces Per Unit</label>
+              <input type="number" min="1" ng-value="vm.editComponent.pieces_per_unit" ng-model="vm.editComponent.pieces_per_unit">
+          </md-input-container>
+
+          <md-input-container>
+              <label>General Stock Item</label>
+              <md-select ng-model="vm.editComponent.general_stock_item">
+                <md-option ng-value="true">Yes</md-option>
+                <md-option ng-value="false">No</md-option>
+              </md-select>
+          </md-input-container>
+
+          <md-input-container>
+              <label>Consumable</label>
+              <md-select ng-model="vm.editComponent.consumable">
+                <md-option ng-value="true">Yes</md-option>
+                <md-option ng-value="false">No</md-option>
+              </md-select>
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor Name Primary</label>
+              <input ng-value="vm.editComponent.vendor_name_primary" ng-model="vm.editComponent.vendor_name_primary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor URL Primary</label>
+              <input ng-value="vm.editComponent.vendor_url_primary" ng-model="vm.editComponent.vendor_url_primary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor Name Secondary</label>
+              <input ng-value="vm.editComponent.vendor_name_secondary" ng-model="vm.editComponent.vendor_name_secondary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Vendor URL Secondary</label>
+              <input ng-value="vm.editComponent.vendor_url_secondary" ng-model="vm.editComponent.vendor_url_secondary">
+          </md-input-container>
+
+          <md-input-container>
+              <label>Notes</label>
+              <input type="text" ng-value="vm.editComponent.notes" ng-model="vm.editComponent.notes">
+          </md-input-container>
+
+          <md-button class="button" ng-click="vm.updateComponent(vm.editComponent)">Submit</md-button>
+          <md-button class="button" ng-click="vm.showEdit=!vm.showEdit">Cancel</md-button>
+      </div><!-- /.modal-inner -->
+  </div><!-- /.modal -->
+
+</div>
+<div ng-if="vm.moduleViewer">
+  <h2 class="mockLink" ng-click="vm.backToComponents()"><i class="fas fa-long-arrow-alt-left"></i> Back</h2>
+  <h2 class="md-title md-title-left">Module List For Component: {{vm.componentName}}</h2>
+  <div ng-repeat="module in vm.componentModules.list">
+    <a class="module-link" ng-href="#!module/{{module.id}}">{{module.name}}</a>
+  </div>
 </div>

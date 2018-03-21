@@ -1,0 +1,35 @@
+<div ng-include="'views/partials/nav.html'"></div>
+<div>
+  <h2 class="md-title md-title-left">Application Settings</h2>
+
+  <h2 class="md-subtitle">Labor Rate</h2>
+<div>
+  <md-input-container>
+      <label>Current Rate: {{vm.currentLaborRate.list[0].labor_rate}}</label>
+      <input type="number" min="0" ng-model="vm.newRate">
+  </md-input-container>
+</div>
+<div >
+  <md-button class="button" ng-click="vm.setLaborRate(vm.newRate)" ng-disabled="!vm.newRate">Save Rate</md-button>
+</div>
+
+  <h2>Last Set by "{{vm.currentLaborRate.list[0].last_changed}}"</h2>
+</div>
+<br>
+<br>
+<br>
+<div>
+  <h2 class="md-subtitle">Remove Shopping Lists</h2>
+
+  <div>
+    <div class="select-wrapper">
+    	<select class="shopping-list-select" ng-model="vm.singleList" ng-options="list as list.name for list in vm.shoppingLists.list">
+    		<option value="" selected disabled>Select a List</option>
+    	</select>
+    	<span class="arrow-button">
+    		<i class="fas fa-angle-down"></i>
+    	</span>
+    </div>
+  </div>
+  <md-button class="button" ng-click="vm.removeList(vm.singleList)">Remove List</md-button>
+</div>

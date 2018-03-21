@@ -1,0 +1,52 @@
+.module-title-input {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.quick-report-list {
+    margin: 20px 0;
+}
+
+.quick-report-list-item {
+    padding: 10px 20px;
+    text-align: center;
+    color: $med-gray;
+    box-sizing: border-box;
+    & + .quick-report-list-item {
+        border-left: 1px solid $green;
+    }
+}
+
+.quick-report-title {
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.quick-report-value {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.resource-list {
+    md-input-container {
+        margin: 18px 0 5px 0;
+    }
+}
+
+.creation-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 50%;
+    margin: 0 auto;
+    & > * {
+        flex: 0 1 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+    .button-wrapper {
+        text-align: center;
+    }
+}

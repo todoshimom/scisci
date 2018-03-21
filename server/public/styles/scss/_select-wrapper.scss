@@ -1,0 +1,22 @@
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    .arrow-button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: $green;
+        
+    }
+    select {
+        border: 1px solid $green;
+        border-radius: 0;
+        padding: 9px;
+        box-shadow: none;
+        background: transparent;
+        background-image: none;
+        min-width: 250px;
+        -webkit-appearance: none;
+    }
+}

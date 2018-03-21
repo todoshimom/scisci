@@ -1,0 +1,163 @@
+<div ng-include="'views/partials/nav.html'"></div>
+<div ng-include="'views/partials/subnav-module.html'"></div>
+
+<h2 class="md-title">Module Library</h2>
+<div>
+    <button class="button" ng-href="#!module">Create New Module</button>
+</div>
+<md-input-container>
+    <label>Filter Module list</label>
+    <input ng-model="moduleFilter">
+</md-input-container>
+
+<div class="mock-table" role="table" aria-label="Components">
+    <div class="mock-table-header" role="rowgroup">
+        <div class="mock-table-row mock-table-row-header col col-8" row="row">
+            <h3 class="columnheader">Name
+                <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('nameDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Code
+                <span class="sort-button" ng-click="vm.sortColumns('codeAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('codeDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            
+            <h3 class="columnheader">Version Number
+                <span class="sort-button" ng-click="vm.sortColumns('versionNumAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('versionNumDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Version Date
+                <span class="sort-button" ng-click="vm.sortColumns('versionDateAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('versionDateDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Version Notes</h3>
+            <h3 class="columnheader">Assembly Time (hrs)
+                <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Delete</h3>
+            <h3 class="columnheader">More Info</h3>
+        </div>
+        <!-- /.mock-table-row -->
+    </div>
+    <!-- /.mock-table-header -->
+    <div class="mock-table-body" role="rowgroup">
+        <div class="mock-table-row col col-8" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
+            <p role="cell">
+                <a ng-href="#!module/{{module.id}}">{{module.name}}</a>
+            </p>
+            <p role="cell">{{module.code}}</p>
+            <p role="cell">{{module.version_number}}</p>
+            <p role="cell">{{module.version_date | date: "MMM. d, yyyy"}}</p>
+            <p role="cell">{{module.version_notes}}</p>
+            <p role="cell">{{module.estimated_assembly_time}}</p>
+            <p role="cell">
+                <button class="button-naked" ng-click="vm.deleteModule(module.id)">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </p>
+            <p role="cell" ng-click="vm.showHideModuleData[$index].show = !vm.showHideModuleData[$index].show">
+                <span class="sort-button">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </p>
+            <div class="collapsed-table-data" ng-if="vm.showHideModuleData[$index].show">
+                <div class="mock-table" role="table" aria-label="Components">
+                    <div class="mock-table-header" role="rowgroup">
+                        <div class="mock-table-row mock-table-row-header col col-8" row="row">
+                            <h3 class="columnheader">Assembly Notes</h3>
+                            <h3 class="columnheader">Module Drive Link</h3>
+                            <h3 class="columnheader">To Be Printed Link</h3>
+                            <h3 class="columnheader">Assembly Video Link</h3>
+                            <h3 class="columnheader">Activity Video Link</h3>
+                            <h3 class="columnheader">Kit Content Sheet Link</h3>
+                            <h3 class="columnheader">Custom Link 1</h3>
+                            <h3 class="columnheader">Custom Link 2</h3>
+                        </div>
+                        <!-- /.mock-table-row-header -->
+                    </div>
+                    <!-- /.mock-table-header -->
+                    <div class="mock-table-body" role="rowgroup">
+                        <div class="mock-table-row col col-8" row="row">
+                            <p role="cell">{{module.assembly_notes}}</p>
+                            <p role="cell">
+                                <a ng-href="{{module.module_drive_link}}">
+                                    <span class="folder" ng-if="module.module_drive_link">
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                            <p role="cell">
+                                <a ng-href="{{module.to_be_printed_link}}">
+                                    <span class="folder" ng-if="module.to_be_printed_link">
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                            <p role="cell">
+                                <a ng-href="{{module.assembly_video_link}}">
+                                    <span class="folder" ng-if="module.assembly_video_link">
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                            <p role="cell">
+                                <a ng-href="{{module.activity_video_link}}">
+                                    <span class="folder" ng-if="module.activity_video_link">
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                            <p role="cell">
+                                <a ng-href="{{module.kit_content_link}}">
+                                    <span class="folder" ng-if="module.kit_content_link">
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                            <p role="cell">
+                                <a ng-href="{{module.other1_link}}">
+                                    <span class="folder" ng-if="module.other1_link">
+                                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other1_title}}</md-tooltip>
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                            <p role="cell">
+                                <a ng-href="{{module.other2_link}}">
+                                    <span class="folder" ng-if="module.other2_link">
+                                        <md-tooltip md-direction="{{vm.docTooltip.tipDirection}}">{{module.other2_title}}</md-tooltip>
+                                        <i class="far fa-folder"></i>
+                                    </span>
+                                </a>
+                            </p>
+                        </div>
+                        <!-- /.mock-table-row -->
+                    </div>
+                    <!-- /.mock-table-body -->
+                </div>
+            </div>
+            </tr>
+            </tbody>
+        </div>
+        <!-- /.mock-table -->
