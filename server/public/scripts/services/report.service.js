@@ -1,5 +1,4 @@
 myApp.service('ReportService', ['$http', '$location', 'ComponentService', function ($http, $location, ComponentService) {
-    console.log('ReportService Loaded');
     let self = this;
 
     self.moduleLibrary = { list: [] };

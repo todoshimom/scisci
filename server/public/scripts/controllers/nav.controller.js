@@ -1,5 +1,4 @@
 myApp.controller('NavController', ['$location', 'UserService', function ($location, UserService) {
-    console.log('NavController created');
     let self = this;
     self.userService = UserService;
     
@@ -17,8 +16,6 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
 
     // return values to variables based on user type
     self.showNav = function() {
-        console.log('usertypevalue', usertypeValue);
-    
         if(usertypeValue === 1) {
             self.showManageUsers = true;
             self.showModuleCreation = true;
