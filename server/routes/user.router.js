@@ -43,7 +43,6 @@ router.get('/users', authenticated, isAdmin, (req, res) => { //Start of get all 
 
     pool.query(queryText)
         .then((results) => {
-            // console.log('GET all users: ', results);
             res.send(results.rows);
         })
         .catch((error) => {
@@ -75,7 +74,6 @@ router.get('/types', authenticated, isAdmin, (req, res) => {//Start of get usert
 
     pool.query(queryText)
         .then((results) => {
-            // console.log('GET usertypes: ', results);
             res.send(results.rows);
         })
         .catch((error) => {
@@ -91,7 +89,6 @@ router.get('/sorting/:method', authenticated, isAdmin, (req, res) => {//Start of
 
     pool.query(queryText)
         .then((results) => {
-            // console.log('GET users sorted', results);
             res.send(results.rows);
         })
         .catch((error) => {
@@ -115,7 +112,6 @@ router.post('/', authenticated, isAdmin, (req, res) => {//Start of post new user
 
     pool.query(queryText, [user.first_name, user.last_name, user.username, user.usertype])
         .then((results) => {
-            // console.log('Registered user successfully: ', results);
             res.sendStatus(201);
         })
         .catch((error) => {
@@ -141,7 +137,6 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
 router.put('/', authenticated, isAdmin, (req, res) => {//Start of edit user function PUT REQUEST
 
     let user = req.body;
-    console.log(user);
 
     let queryText = `
     UPDATE users
@@ -154,7 +149,6 @@ router.put('/', authenticated, isAdmin, (req, res) => {//Start of edit user func
 
     pool.query(queryText, [user.first_name, user.last_name, user.username, user.usertype, user.id])
         .then((results) => {
-            // console.log('Edited user successfully: ', results);
             res.sendStatus(201);
         })
         .catch((error) => {
@@ -166,7 +160,6 @@ router.put('/', authenticated, isAdmin, (req, res) => {//Start of edit user func
 
 router.put('/newPassword', authenticated, (req, res) => {//Start of resetPassword route
 
-    console.log(req.body.password);
     let newPassword = encryptLib.encryptPassword(req.body.password);
 
     let queryText = `
@@ -188,8 +181,6 @@ router.put('/newPassword', authenticated, (req, res) => {//Start of resetPasswor
 
 router.put('/resetPassword/:id', authenticated, isAdmin, (req, res) => {//Start of resetPassword route
 
-    //Mental note, this area and resetPassword can be refactored.
-
     //This way the .env password can be set on heroku for easy management.
     let resetPassword = encryptLib.encryptPassword(process.env.DEFAULTPASSWORD);
 
@@ -201,7 +192,6 @@ router.put('/resetPassword/:id', authenticated, isAdmin, (req, res) => {//Start 
 
     pool.query(queryText)
         .then((results) => {
-            // console.log('Password has been Reset!: ', results);
             res.sendStatus(201);
         })
         .catch((error) => {
@@ -221,7 +211,6 @@ router.delete('/:id', authenticated, isAdmin, (req, res) => {
 
     pool.query(queryText)
         .then((results) => {
-            //   console.log('Successfully removed user: ', results);
             res.sendStatus(200);
         })
         .catch((error) => {
@@ -266,8 +255,6 @@ router.get('/laborRates', authenticated, isAdmin, (req, res) => {//Start of get 
 });//End of get usertypes function
 
 router.put('/set/rates/:rate', authenticated, isAdmin, (req, res) => {//Start of post new user function
-
-    console.log(req.params.rate);
 
     let queryText = `
     UPDATE appsettings

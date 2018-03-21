@@ -1,5 +1,4 @@
 myApp.service('ComponentService', ['$http', '$location', function ($http, $location) {
-    console.log('ComponentService Loaded');
     let self = this;
 
     self.componentLibrary = {list:[]};
@@ -53,7 +52,6 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       return $http.get(`/api/component/sorting/${sortMethod}`)
         .then( function(response) {
-          console.log(response.data);
           return response.data;
         })
         .catch( function(error) {
@@ -75,7 +73,6 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       return $http.get(`/api/component/getModules/${component.id}`)
         .then( function(response) {
-          console.log(response.data);
           self.componentModules.list = response.data;
         })
         .catch( function(error) {
@@ -93,7 +90,6 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       $http.post('/api/component', component)
         .then( function(response) {
-          console.log('Component added to library:', response);
           self.getAllComponents();
         })
         .catch( function(error) {
@@ -111,7 +107,6 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       $http.put(`/api/component/updateComponent`, component)
         .then( function(response) {
-          console.log('Component updated', response);
           self.getAllComponents();
         })
         .catch( function(error) {
@@ -130,7 +125,6 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
       $http.delete(`/api/component/deleteComponent/${componentId}`)
         .then( function(response) {
-          console.log('Component deleted from library', response);
           self.getAllComponents();
         })
         .catch( function(error) {

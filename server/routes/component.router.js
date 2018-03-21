@@ -14,7 +14,6 @@ router.get('/', authenticated, isEditor, (req, res) => {
   let queryText = `SELECT * FROM components ORDER BY "name"`;
   pool.query(queryText)
       .then((results) => {
-        // console.log('GET components', results.rows);
         res.send(results.rows);
       })
       .catch((error) => {
@@ -28,7 +27,6 @@ router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
   let queryText = sorting.sortComponents(sortMethod);
   pool.query(queryText)
     .then((results) => {
-      // console.log('GET components sorted', results);
       res.send(results.rows);
     })
     .catch((error) => {
@@ -41,7 +39,6 @@ router.get('/modulesCount/:id', authenticated, isEditor, (req, res) => {
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
   pool.query(queryText, [req.params.id])
     .then((results) => {
-      // console.log(results.rows.count);
       res.send(results.rows);
     })
     .catch((error) => {
@@ -92,7 +89,6 @@ router.post('/', authenticated, isEditor, (req, res) => {
   item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
   item.consumable, item.type, item.general_stock_item])
       .then((results) => {
-        // console.log('Component insert', results);
         res.sendStatus(201);
       })
       .catch((error) => {
@@ -128,7 +124,6 @@ router.put('/updateComponent', authenticated, isEditor, (req, res) => {
     item.vendor_name_secondary, item.vendor_url_secondary, item.notes, item.price_per_unit, item.pieces_per_unit,
     item.consumable, item.type, item.general_stock_item, item.id])
       .then((results) => {
-        // console.log('Component updated', results);
         res.sendStatus(201);
       })
       .catch((error) => {
@@ -146,7 +141,6 @@ router.delete('/deleteComponent/:id', authenticated, isEditor, (req, res) => {
   let queryText = `DELETE FROM components WHERE id = $1`;
   pool.query(queryText, [id])
       .then((results) => {
-        // console.log('Component delelted', results);
         res.sendStatus(200);
       })
       .catch((error) => {

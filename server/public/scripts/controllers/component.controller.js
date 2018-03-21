@@ -1,5 +1,4 @@
 myApp.controller('ComponentController', ['ComponentService', function (ComponentService) {
-    console.log('ComponentController created');
     let self = this;
 
     self.componentLibrary = ComponentService.componentLibrary;
@@ -26,7 +25,6 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     // begin addComponentToLib()
     self.addComponentToLib = function(component) {
-      console.log(component);
       ComponentService.addComponentToLib(component);
       self.componentItem = {
         consumable: false,
@@ -44,12 +42,10 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
 
     // begin deleteComponent()
     self.deleteComponent = function(componentId) {
-      console.log(componentId);
       ComponentService.deleteComponent(componentId);
     }; // end deleteComponent()
 
     self.sortColumns = function(sortMethod) {
-      console.log(sortMethod);
       ComponentService.sortAllComponents(sortMethod);
     };
 
