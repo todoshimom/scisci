@@ -55,7 +55,7 @@ router.get('/users', authenticated, isAdmin, (req, res) => { //Start of get all 
 router.get('/shopping', authenticated, isAdmin, (req, res) => { //Start of get all users function
 
     let queryText = `
-    SELECT * 
+    SELECT *
     FROM shoppinglist;`;
     pool.query(queryText)
         .then((results) => {
@@ -221,7 +221,9 @@ router.delete('/:id', authenticated, isAdmin, (req, res) => {
 
 router.delete('/shopping/:id', authenticated, isAdmin, (req, res) => {
 
-    let queryText = `DELETE FROM shoppinglist WHERE id = ${req.params.id}`;
+    let queryText = `DELETE FROM modules_shopping WHERE shopping_id = ${req.params.id};
+    DELETE FROM shopping_components WHERE shopping_components.shopping_id = ${req.params.id};
+    DELETE FROM shoppinglist WHERE id = ${req.params.id};`;
 
     pool.query(queryText)
         .then((results) => {

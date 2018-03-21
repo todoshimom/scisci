@@ -230,7 +230,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
   self.getShoppingLists = function() {
     $http.get('/api/user/shopping')
       .then( function(response) {
-        console.log('shopping', response.data);
+        // console.log('shopping', response.data);
         self.shoppingLists.list = response.data;
       })
       .catch( function(error) {
@@ -241,7 +241,8 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
   self.removeList = function(item) {
     $http.delete(`/api/user/shopping/${item}`)
       .then( function(response) {
-        console.log('list removed', response.data);
+        // console.log('list removed', response.data);
+        self.getShoppingLists();
       })
       .catch( function(error) {
         console.log('Error removing shopping list', error);

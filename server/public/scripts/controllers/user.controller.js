@@ -106,7 +106,7 @@ myApp.controller('UserController', ['UserService', function (UserService) {
     };
 
     self.removeList = function(list) {
-      UserService.removeList(list);
+      UserService.removeList(list.id);
     };
 
     self.getShoppingLists();
