@@ -65,7 +65,7 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
 
     self.cancelNewPassword = ()=> {
         self.passwordStatus = true;
-        self.user = null; //clearing input fields after canceling change password.
+        self.user = null;
     }
 
 }]);
