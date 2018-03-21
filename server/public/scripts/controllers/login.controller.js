@@ -1,5 +1,4 @@
 myApp.controller('LoginController', ['$http', '$location', 'UserService', function ($http, $location, UserService) {
-    console.log('LoginController created');
     let self = this;
     self.user = {
         username: '',
@@ -14,11 +13,9 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
         if (self.user.username === '' || self.user.password === '') {
             self.message = "Enter your username and password!";
         } else {
-            console.log('sending to server...', self.user);
             $http.post('/api/user/login', self.user).then(
                 function (response) {
                     if (response.status == 200) {
-                        console.log('success: ', response.data);
                         // location works with SPA (ng-route)
                         if (self.user.password.toLowerCase() == 'welcome1') {
                             self.passwordStatus = false;
@@ -40,8 +37,6 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
     };
 
     self.setNewPassword = function (newPass) {
-        console.log(newPass);
-
         if (typeof newPass.password == 'undefined' || typeof newPass.retypePassword == 'undefined') {
             swal({
                 title: 'Please Follow Instructions',
@@ -50,16 +45,13 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
             })
         }
         else if (newPass.password === newPass.retypePassword) {
-            console.log('They are an exact match!');
             if (newPass.password.toLowerCase() == 'welcome1') {
-                console.log('it is the default it is no good');
                 swal({
                     title: 'You can\'t use the default password',
                     icon: "error",
                 })
             }
             else {
-                console.log('New password is good to go!');
                 UserService.setNewPassword(newPass)
             }
         }
