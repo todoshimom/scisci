@@ -1,5 +1,4 @@
 myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
-    console.log('ShoppingListService Loaded');
     let self = this;
 
     self.shoppingLists = {list:[]};
@@ -14,8 +13,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get('/api/shopping/all')
           .then( function(response) {
             self.shoppingLists.list = response.data;
-            console.log('self.shoppingLists.list', self.shoppingLists.list);
-
           })
           .catch( function(error) {
             console.log(error);
@@ -26,7 +23,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
-            console.log('components.list: ', self.components.list);
             $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
@@ -50,22 +46,18 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.post('/api/shopping', shoppingListObject)
             .then((result) => {
                 self.currentShoppingListId.shopId = result.data.rows[0];
-                console.log(self.currentShoppingListId.shopId);
             })
             .catch(function (err) {
                 console.log('error in adding item', err);
             });
     }; //function to create a shopping list
 
-
-    self.saveShoppingList = function name(arrayOfModules) { //Start of function to save shopping lists with modules
-        // console.log(self.currentShoppingListId.shopId.id);
+    //Start of function to save shopping lists with modules
+    self.saveShoppingList = function name(arrayOfModules) {
         let newShoppingListId = self.currentShoppingListId.shopId.id
         
-      console.log(arrayOfModules);
         $http.post(`/api/shopping/shoppinglist/${newShoppingListId}`, arrayOfModules)
             .then(response => {
-                console.log('response of save shopping list');
                 self.getComponents(newShoppingListId)
                 $location.path('/shopping-list');
             })
@@ -77,7 +69,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     self.addOrderedInHouseToComponent = function(component) {
       $http.post('/api/shopping/addOrderedInHouse/', component)
         .then( function(response) {
-          console.log(response.data);
           self.getComponents(component.shopping_id);
         })
         .catch( function(error) {
@@ -92,24 +83,10 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     self.updateOrderedInHouseComponent = function(component) {
       $http.put('/api/shopping/updateOrderedInHouse', component)
       .then( function(response) {
-        console.log(response.data);
         self.getComponents(component.shopping_id);
       })
       .catch( function(error) {
         console.log('error updating component status: ', error);
       });
     };
-
-    /******************************************/
-    /*            DELETE REQUESTS             */
-    /******************************************/
-
-
-
-    /******************************************/
-    /*            OTHER FUNCTIONS             */
-    /******************************************/
-
-
-
 }]);

@@ -1,5 +1,4 @@
 myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'UserService', 'ModuleService', function (ShoppingListService, UserService, ModuleService) {
-    console.log('ShoppingListCreationController created');
     let self = this;
 
     self.userObject = UserService.userObject;
@@ -33,13 +32,11 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
         //Have to catch duplicate adds when pushed, for loop if this is approved. 
         moduleData.quantity = 1  //make default 1     
         self.addedModuleLibrary.push(moduleData);
-        console.log(self.addedModuleLibrary);
     }
 
     // Delete a module from the full list
     self.deleteModule = function(moduleData) {
         for (let i = 0; i < self.addedModuleLibrary.length; i++) {
-            console.log(i);
             if (self.addedModuleLibrary[i].id == moduleData.id) {
                 self.addedModuleLibrary.splice(i, 1);
             }
@@ -49,6 +46,5 @@ myApp.controller('ShoppingListCreationController', ['ShoppingListService', 'User
     self.saveShoppingList = function name(arrayOfModules) {
         ShoppingListService.saveShoppingList(arrayOfModules);
     }
-
 
 }]);
