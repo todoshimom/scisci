@@ -1,14 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
 
-
 function getLaborRate() {
 
     let queryText = `SELECT * FROM appsettings`;
 
     return pool.query(queryText)
         .then((results) => {
-            // console.log('GET usertypes: ', results);
             return results.rows
         })
         .catch((error) => {

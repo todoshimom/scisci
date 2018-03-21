@@ -1,33 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
-// const laborRate = require('./labor.rate')
-
-// function test() {
-
-//     console.log('new function');
-
-//     laborRate()//getting labor rates.
-//         .then((results) => {
-//             let data = results[0].labor_rate
-//             console.log('This is the data 55', data);
-
-//             return data
-
-//         })
-//         .catch((error) => {
-//             console.log('Error on retrieving module costs function', error);
-//         });
-//     }
 
 let getCosts = function (moduleId) {
-
-    // let labRate = test()
-    // console.log(labRate, 'LAB RATES');
-
     let queryText
 
     if (moduleId) {
-        console.log('Getting one');
         queryText = `
         SELECT components_modules.component_id, components_modules.module_id, components.pieces_per_unit, components.price_per_unit, modules.name, sum(CASE WHEN modules_shopping.quantity>0 THEN modules_shopping.quantity ELSE 0 END) AS module_quantity, components_modules.pieces_per_kit, appsettings.labor_rate, modules.estimated_assembly_time 
         FROM appsettings, components
@@ -39,8 +16,6 @@ let getCosts = function (moduleId) {
         ORDER BY modules.name`;
     }
     else {
-        console.log('Getting All');
-
         queryText = `
         SELECT components_modules.component_id, components_modules.module_id, components.pieces_per_unit, components.price_per_unit, modules.name, sum(CASE WHEN modules_shopping.quantity>0 THEN modules_shopping.quantity ELSE 0 END) AS module_quantity, components_modules.pieces_per_kit, appsettings.labor_rate, modules.estimated_assembly_time 
         FROM appsettings, components
@@ -54,7 +29,6 @@ let getCosts = function (moduleId) {
     return pool.query(queryText)
         .then((results) => {
             let data = results.rows
-
 
             let moduleArray = [];
             let currentSum = 0;
