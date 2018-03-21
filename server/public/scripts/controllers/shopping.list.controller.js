@@ -1,5 +1,4 @@
 myApp.controller('ShoppingListController', ['ShoppingListService', function (ShoppingListService) {
-    console.log('ShoppingListController created');
     let self = this;
 
     self.shoppingLists = ShoppingListService.shoppingLists;
@@ -26,13 +25,11 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
 
     //function: ordered checkbox has been clicked
     self.updateOrdered = function(component) {
-      console.log(component.ordered_inhouse_id);
       if (component.ordered_inhouse_id === null) {
         component.ordered = true;
         ShoppingListService.addOrderedInHouseToComponent(component);
       } else {
         component.ordered = !component.ordered;
-        console.log(component.ordered);
         ShoppingListService.updateOrderedInHouseComponent(component);
       }
         // ShoppingListService.updateOrdered(orderStatus);
@@ -40,13 +37,11 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
 
     //function: InHouse checkbox has been clicked
     self.updateInHouse = function(component) {
-      console.log('in house', component.ordered_inhouse_id);
       if (component.ordered_inhouse_id === null) {
         component.in_house = true;
         ShoppingListService.addOrderedInHouseToComponent(component);
       } else {
         component.in_house = !component.in_house;
-        console.log(component.in_house);
         ShoppingListService.updateOrderedInHouseComponent(component);
       }
     };//end function to call service
