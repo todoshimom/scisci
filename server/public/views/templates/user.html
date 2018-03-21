@@ -1,6 +1,5 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div ng-if="!vm.showEdit && !vm.showNew">
-<!-- The && here is an or statement, not an "and". || was functioning as an "and" not an "or". -->
     
     <h2 class="md-title md-title-left">Manage Users</h2>
         <md-button class="button" ng-click="vm.showNew=!vm.showNew"> Add User </md-button>
@@ -76,7 +75,6 @@
     </div> <!-- /.mock-table -->
 </div>
 
-<!-- This is the Add User Div for "Modal" -->
 <div class="modal fade modal-col modal-col__full" ng-if="vm.showNew">
     <div class="modal-inner">
         <h2 class="md-title md-title-left">Add User</h2>
@@ -108,7 +106,6 @@
     </div><!-- /.modal-inner -->
 </div><!-- /.modal -->
 
-<!-- This is the Edit User Div for "Modal" -->
 <div class="modal fade modal-col modal-col__full" ng-if="vm.showEdit">
     <div class="modal-inner">
         <h2 class="md-title md-title-left">Edit User</h2>

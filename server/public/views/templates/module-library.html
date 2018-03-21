@@ -10,7 +10,6 @@
     <input ng-model="moduleFilter">
 </md-input-container>
 
-<!-- Module library table-->
 <div class="mock-table" role="table" aria-label="Components">
     <div class="mock-table-header" role="rowgroup">
         <div class="mock-table-row mock-table-row-header col col-8" row="row">
@@ -30,8 +29,7 @@
                     <i class="fas fa-caret-square-down"></i>
                 </span>
             </h3>
-            <!-- Moved delete to the end. -->
-            <!-- Moved more information to the end. -->
+            
             <h3 class="columnheader">Version Number
                 <span class="sort-button" ng-click="vm.sortColumns('versionNumAsc')">
                     <i class="fas fa-caret-square-up"></i>
@@ -56,7 +54,6 @@
                 <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">
                     <i class="fas fa-caret-square-down"></i>
                 </span>
-                <!-- Removed EST from this to shorten column name. -->
             </h3>
             <h3 class="columnheader">Delete</h3>
             <h3 class="columnheader">More Info</h3>
