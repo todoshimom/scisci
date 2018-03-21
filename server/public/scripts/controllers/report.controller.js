@@ -34,7 +34,6 @@ myApp.controller('ReportController', ['ReportService', function (ReportService) 
    self.getComponents = function() {
        ReportService.getComponents();
    }
-   // self.getComponents();
 
    self.getComponentModules = function(component) {
      if (component.modules_used_in > 0) {
