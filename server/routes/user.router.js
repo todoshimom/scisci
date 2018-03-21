@@ -53,6 +53,22 @@ router.get('/users', authenticated, isAdmin, (req, res) => { //Start of get all 
 
 }); //End of get all users function
 
+router.get('/shopping', authenticated, isAdmin, (req, res) => { //Start of get all users function
+
+    let queryText = `
+    SELECT * 
+    FROM shoppinglist;`;
+    pool.query(queryText)
+        .then((results) => {
+            res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET shoppinglist request', error);
+            res.sendStatus(500);
+        });
+
+}); //End of get all users function
+
 router.get('/types', authenticated, isAdmin, (req, res) => {//Start of get usertypes function
 
     let queryText = `SELECT * FROM usertype`;
@@ -210,6 +226,21 @@ router.delete('/:id', authenticated, isAdmin, (req, res) => {
         })
         .catch((error) => {
             console.log('Error removing user: ', error);
+            res.sendStatus(500);
+        });
+
+});
+
+router.delete('/shopping/:id', authenticated, isAdmin, (req, res) => {
+
+    let queryText = `DELETE FROM shoppinglist WHERE id = ${req.params.id}`;
+
+    pool.query(queryText)
+        .then((results) => {
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('Error deleting shopping list: ', error);
             res.sendStatus(500);
         });
 
