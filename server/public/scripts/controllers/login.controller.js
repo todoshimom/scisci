@@ -21,7 +21,7 @@ myApp.controller('LoginController', ['$http', '$location', 'UserService', functi
                             self.passwordStatus = false;
                         }
                         else {
-                            UserService.onLoad();
+                            console.log(self.user);
                             UserService.userTypeHomePage(response.data);
                         }
                     } else {

@@ -111,4 +111,6 @@ myApp.controller('UserController', ['UserService', function (UserService) {
 
     self.getShoppingLists();
 
+    UserService.onLoad()
+
 }]);
