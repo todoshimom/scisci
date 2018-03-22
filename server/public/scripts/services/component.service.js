@@ -9,9 +9,8 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*              GET REQUESTS              */
     /******************************************/
 
-    // begin getComponents()
+    /** Gets a single component */
     self.getComponents = function() {
-
       return $http.get('/api/component')
         .then( function(response) {
           return response.data;
@@ -22,7 +21,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     }; // end getComponents()
 
-    // begin getAllComponents()
+    /** Gets all components */
     self.getAllComponents = function() {
 
       self.getComponents()
@@ -34,6 +33,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     self.getAllComponents();
 
+    /** Gets all modules a component is used in */
     self.getModulesUsedIn = function(componentData) {
       for (let component of componentData) {
         $http.get(`/api/component/modulesCount/${component.id}`)
@@ -47,7 +47,8 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     return componentData;
   };
 
-    // begin sortComponents()
+    
+    /** Sorts a single component */
     self.sortComponents = function(sortMethod) {
 
       return $http.get(`/api/component/sorting/${sortMethod}`)
@@ -60,6 +61,7 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     }; // end sortComponents()
 
+    /** Sorts all components */
     self.sortAllComponents = function(sortMethod) {
       
       self.sortComponents(sortMethod)

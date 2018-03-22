@@ -177,6 +177,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     self.logout = function () {
         $http.get('/api/user/logout').then(function (response) {
+            location.reload();
             $location.path("/home");
         });
     }

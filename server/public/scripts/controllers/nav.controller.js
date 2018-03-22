@@ -1,7 +1,7 @@
 myApp.controller('NavController', ['$location', 'UserService', function ($location, UserService) {
     let self = this;
     self.userService = UserService;
-    
+
     var usertypeValue = self.userService.userObject.list.usertype;
 
     // find the location path and it matches the current item
@@ -26,8 +26,6 @@ myApp.controller('NavController', ['$location', 'UserService', function ($locati
         if(usertypeValue === 2) {
             self.showModuleCreation = true;
             self.showShopping = true;
-            self.showReporting = true;
-            self.showAppSettings = true;
         }
         if(usertypeValue === 3) {
             self.showShopping = true;

@@ -12,16 +12,18 @@ This software is required to install this application.
 
 ## Installing 
 1. Download this project.
-2. Spin up a PostreSQL database called "sciencefromscientists" and run the project `database.sql` file.
+2. Start PostreSQL, add a database called "sciencefromscientists", then run the project `database.sql` file. 
 3. `npm install`
-4. `npm start`
+4. Create a `.env` 
+    a. Add `SERVER_SESSION_SECRET = ` and a random string
+    b. Also, add `DEFAULTPASSWORD=Welcome1` 
+5. `npm start`
 
 ### Build scss files into CSS
 1. To build scss file changes, run `npm run build-css`
 2. To watch scss file changes, run `npm run watch-css`
 
 ## Built With
-
 - Node.js
 - PostgreSQL
 - AngularJS
