@@ -14,18 +14,9 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', funct
         .when('/', {
             redirectTo: 'home'
         })
-        .when('/register', {
-            templateUrl: '/views/templates/register.html',
-            controller: 'LoginController as vm'
-        })
         .when('/home', {
             templateUrl: '/views/templates/home.html',
             controller: 'LoginController as vm',
-            resolve: {
-                getuser: function (UserService) {
-                    return UserService.getuser();
-                }
-            }
         })
         .when('/user', {
             templateUrl: '/views/templates/user.html',
