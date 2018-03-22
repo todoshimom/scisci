@@ -188,7 +188,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     self.setLaborRate = function (rate) {// Start of set labor rate function.
         $http.put(`/api/user/set/rates/${rate}`)
             .then(function (response) {
-                self.retrieveLaborRate()
+                self.retrieveLaborRate();
             })
             .catch(function (error) {
                 console.log('Post response for set labor rates failed: ', error);
@@ -217,14 +217,16 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     };
 
     self.onLoad = function () {
-        self.retrieveLaborRate()
         self.getuser()
-        self.getUserTypes();
-        self.getAllUsers();
+        if ($location.$$url == '/reports' || $location.$$url == '/app-settings' || $location.$$url == '/user') {
+            self.retrieveLaborRate();
+            self.getUserTypes();
+            self.getAllUsers();
+        }
     }
 
     if ($location.$$url !== '/home') {
-        self.onLoad()
+        self.onLoad();
     }
 
 
