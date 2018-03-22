@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 This software is required to install this application.
 - [Node.js](https://nodejs.org/en/)
-- [Postico](https://eggerapps.at/postico/)
+- [PostreSQL](https://www.postgresql.org/)
 
 ## Installing 
 1. Download this project.
