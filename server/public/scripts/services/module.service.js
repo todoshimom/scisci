@@ -76,6 +76,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.post('/api/module', self.module.data)
             .then(response => {
                 $location.path('/module/' + response.data[0].id);
+                swal({
+                    title: `Module ${self.module.data.name} has been created!`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(error => {
                 console.log('error in post', error);
@@ -151,6 +157,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.put('/api/module', self.module.data)
             .then(response => {
                 // no action on response
+                swal({
+                    title: `Module has been saved!`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(error => {
                 console.log('error in put', error);
@@ -257,6 +269,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.delete('/api/module/' + moduleId)
             .then(response => {
                 self.getModules();
+                swal({
+                    title: `Module has been deleted!`,
+                    icon: "success",
+                    timer: 1200,
+                    buttons: false
+                })
             })
             .catch(error => {
                 console.log('error in delete', error);
