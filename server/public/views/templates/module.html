@@ -52,7 +52,7 @@
 
     <md-input-container>
         <label>Version Notes</label>
-        <textarea ng-model="vm.module.data.version_notes"></textarea>
+        <textarea ng-model="vm.module.data.version_notes" auto-grow></textarea>
     </md-input-container>
 
     <md-datepicker ng-model="vm.module.data.version_date"></md-datepicker>
@@ -106,12 +106,6 @@
     </div>
 
 
-    <h2 class="md-title md-title-left">Assembly Instructions</h2>
-
-    <md-input-container>
-        <label>Assembly Notes</label>
-        <textarea ng-model="vm.module.data.assembly_notes"></textarea>
-    </md-input-container>
 
     <h2 class="md-title md-title-left">Add Components</h2>
 
@@ -248,6 +242,14 @@
             </div><!-- /.mock-table-row -->
         </div><!-- /.mock-table-body -->
     </div><!-- /.mock-table-header -->
+
+
+    <h2 class="md-title md-title-left">Assembly Instructions</h2>
+
+    <md-input-container>
+        <label>Assembly Notes</label>
+        <textarea ng-model="vm.module.data.assembly_notes" auto-grow></textarea>
+    </md-input-container>
 
     </form>
 
