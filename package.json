@@ -1,7 +1,7 @@
 {
-  "name": "prime-solo-base-project",
+  "name": "sciencefromscientists",
   "version": "1.0.0",
-  "description": "",
+  "description": "SQL, Express, AngularJS, and Node application",
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

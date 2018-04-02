@@ -147,30 +147,32 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
     /************* VERIFICATION/LOGOUT FUNCTIONS *************/
     self.getuser = function (authorized, userType1, userType2) {
-        $http.get('/api/user').then(function (response) {
-          if (authorized) {
-            if (response.data.username && response.data.usertype !=  userType1 && response.data.usertype !=  userType2) {
-                // user has a current session on the server
-                self.userObject.list = response.data;
-            } else {
-                console.log('UserService -- getuser -- failure');
-                // user has no session, bounce them back to the login page
-                $location.path("/404");
-            }
-          } else {
-            if (response.data.username) {
-                // user has a current session on the server
-                self.userObject.list = response.data;
-            } else {
-                console.log('UserService -- getuser -- failure');
-                // user has no session, bounce them back to the login page
+        if ($location.$$url !== '/home') {
+            $http.get('/api/user').then(function (response) {
+                if (authorized) {
+                    if (response.data.username && response.data.usertype != userType1 && response.data.usertype != userType2) {
+                        // user has a current session on the server
+                        self.userObject.list = response.data;
+                    } else {
+                        console.log('UserService -- getuser -- failure');
+                        // user has no session, bounce them back to the login page
+                        $location.path("/404");
+                    }
+                } else {
+                    if (response.data.username) {
+                        // user has a current session on the server
+                        self.userObject.list = response.data;
+                    } else {
+                        console.log('UserService -- getuser -- failure');
+                        // user has no session, bounce them back to the login page
+                        $location.path("/home");
+                    }
+                }
+            }, function (response) {
+                console.log('UserService -- getuser -- failure: ', response);
                 $location.path("/home");
-            }
-          }
-        }, function (response) {
-            console.log('UserService -- getuser -- failure: ', response);
-            $location.path("/home");
-        });
+            });
+        }
     };
 
     self.logout = function () {
@@ -186,7 +188,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     self.setLaborRate = function (rate) {// Start of set labor rate function.
         $http.put(`/api/user/set/rates/${rate}`)
             .then(function (response) {
-                self.retrieveLaborRate()
+                self.retrieveLaborRate();
             })
             .catch(function (error) {
                 console.log('Post response for set labor rates failed: ', error);
@@ -205,47 +207,51 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
 
     self.userTypeHomePage = function (user) {
-      if(user.usertype === 1) {
-        $location.path('/report');
-      } else if (user.usertype === 2) {
-        $location.path('/module-nav');
-      } else {
-        $location.path('/shopping-nav');
-      }
+        if (user.usertype === 1) {
+            $location.path('/report');
+        } else if (user.usertype === 2) {
+            $location.path('/module-nav');
+        } else {
+            $location.path('/shopping-nav');
+        }
     };
 
     self.onLoad = function () {
-        self.retrieveLaborRate()
         self.getuser()
-        self.getUserTypes();
-        self.getAllUsers();
+        if ($location.$$url == '/reports' || $location.$$url == '/app-settings' || $location.$$url == '/user') {
+            self.retrieveLaborRate();
+            self.getUserTypes();
+            self.getAllUsers();
+        }
     }
 
-    self.onLoad()
+    if ($location.$$url !== '/home') {
+        self.onLoad();
+    }
 
 
     /*****************  APP SETTINGS REMOVE SHOPPING LISTS  *****************/
 
-  self.shoppingLists = {list:[]};
+    self.shoppingLists = { list: [] };
 
-  self.getShoppingLists = function() {
-    $http.get('/api/user/shopping')
-      .then( function(response) {
-        self.shoppingLists.list = response.data;
-      })
-      .catch( function(error) {
-        console.log('Error getting shopping lists', error);
-      });
-  };
+    self.getShoppingLists = function () {
+        $http.get('/api/user/shopping')
+            .then(function (response) {
+                self.shoppingLists.list = response.data;
+            })
+            .catch(function (error) {
+                console.log('Error getting shopping lists', error);
+            });
+    };
 
-  self.removeList = function(item) {
-    $http.delete(`/api/user/shopping/${item}`)
-      .then( function(response) {
-        self.getShoppingLists();
-      })
-      .catch( function(error) {
-        console.log('Error removing shopping list', error);
-      });
-  };
+    self.removeList = function (item) {
+        $http.delete(`/api/user/shopping/${item}`)
+            .then(function (response) {
+                self.getShoppingLists();
+            })
+            .catch(function (error) {
+                console.log('Error removing shopping list', error);
+            });
+    };
 
 }]);
