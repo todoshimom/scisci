@@ -89,10 +89,15 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
 
     // begin addComponentToLib()
     self.addComponentToLib = function(component) {
-
       $http.post('/api/component', component)
         .then( function(response) {
           self.getAllComponents();
+          swal({
+            title: `${component.name} added!`,
+            icon: "success",
+            timer: 1200,
+            buttons: false
+        })
         })
         .catch( function(error) {
           console.log('Error on POST:', error);
@@ -110,6 +115,12 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       $http.put(`/api/component/updateComponent`, component)
         .then( function(response) {
           self.getAllComponents();
+          swal({
+            title: `Component has been updated!`,
+            icon: "success",
+            timer: 1200,
+            buttons: false
+        })
         })
         .catch( function(error) {
           console.log('Error updating component', error);
@@ -128,6 +139,12 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
       $http.delete(`/api/component/deleteComponent/${componentId}`)
         .then( function(response) {
           self.getAllComponents();
+          swal({
+            title: `Component removed`,
+            icon: "success",
+            timer: 1200,
+            buttons: false
+        })
         })
         .catch( function(error) {
           swal({
