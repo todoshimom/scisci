@@ -419,7 +419,9 @@ h2 {
 
 md-input-container {
   width: 33%;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
 
 md-checkbox.md-checked .md-icon {
   background-color: #55ac56; }
