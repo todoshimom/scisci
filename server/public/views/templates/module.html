@@ -7,7 +7,7 @@
     <form ng-submit="vm.saveModule()" class="creation-header">
         <md-input-container class="module-title-input">
             <label>Module Name</label>
-            <input type="text" ng-model="vm.module.data.name" required />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.name" required />
         </md-input-container>
         
         <div class="button-wrapper">
@@ -18,14 +18,17 @@
 
 <div class="module" ng-if="vm.isSavedModule.value">
     <h2 class="md-title md-title-left" ng-if="vm.isSavedModule.value">Module Editor</h2>
-
-    <form ng-submit="vm.saveModule()">
+    
+    <form ng-submit="vm.saveModule()" name="moduleForm">
     <md-input-container class="module-title-input">
         <label>Name</label>
-        <input type="text" ng-model="vm.module.data.name" required />
+        <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.name" required class="requiredForSubmission" />
     </md-input-container>
 
-    <input type="submit" class="button" value="Save Module" />
+    <!--<input type="submit" class="button" value="Save Module" />-->
+    <div ng-if="!vm.hasUnsavedChanges.status">All changes up to date</div>
+    <div ng-if="vm.hasUnsavedChanges.status">Unsaved changes</div>
+    here:{{vm.hasUnsavedChanges}}
 
     <ul class="col col-5 quick-report-list">
         <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentSum | currency}}</p></li>
@@ -36,23 +39,23 @@
     </ul>
     <md-input-container>
         <label>Code</label>
-        <input type="text" ng-model="vm.module.data.code" />
+        <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.code" required class="requiredForSubmission" />
     </md-input-container>
 
     <md-input-container>
         <label>Estimated Assembly Time (hrs.)</label>
-        <input type="text" ng-model="vm.module.data.estimated_assembly_time" />
+        <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.estimated_assembly_time" required class="requiredForSubmission" />
     </md-input-container>
 
     <h3 class="md-subtitle">Version</h3>
     <md-input-container>
         <label>Version Number</label>
-        <input type="number" min="0" ng-model="vm.module.data.version_number" />
+        <input ng-change="vm.newUnsavedChange()" type="number" min="0" ng-model="vm.module.data.version_number" required class="requiredForSubmission" />
     </md-input-container>
 
     <md-input-container>
         <label>Version Notes</label>
-        <textarea ng-model="vm.module.data.version_notes" auto-grow></textarea>
+        <textarea ng-change="vm.newUnsavedChange()" ng-model="vm.module.data.version_notes" auto-grow></textarea>
     </md-input-container>
 
     <md-datepicker ng-model="vm.module.data.version_date"></md-datepicker>
@@ -61,47 +64,47 @@
     <div class="resource-list col col-5">
         <md-input-container>
             <label>Google Drive (url)</label>
-            <input type="text" ng-model="vm.module.data.module_drive_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.module_drive_link" />
         </md-input-container>
 
         <md-input-container>
             <label>To Be Printed (url)</label>
-            <input type="text" ng-model="vm.module.data.to_be_printed_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.to_be_printed_link" />
         </md-input-container>
 
         <md-input-container>
             <label>Assembly Video (url)</label>
-            <input type="text" ng-model="vm.module.data.assembly_video_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.assembly_video_link" />
         </md-input-container>
 
         <md-input-container>
             <label>Activity Video (url)</label>
-            <input type="text" ng-model="vm.module.data.activity_video_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.activity_video_link" />
         </md-input-container>
 
         <md-input-container>
             <label>Kit Content Sheet (url)</label>
-            <input type="text" ng-model="vm.module.data.kit_content_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.kit_content_link" />
         </md-input-container>
 
         <md-input-container>
             <label>Custom Link 1 (url)</label>
-            <input type="text" ng-model="vm.module.data.other1_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.other1_link" />
         </md-input-container>
 
         <md-input-container>
             <label>Custom Link 1 (title)</label>
-            <input type="text" ng-model="vm.module.data.other1_title" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.other1_title" />
         </md-input-container>
 
         <md-input-container>
             <label>Custom Link 2 (url)</label>
-            <input type="text" ng-model="vm.module.data.other2_link" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.other2_link" />
         </md-input-container>
 
         <md-input-container>
             <label>Custom Link 2 (title)</label>
-            <input type="text" ng-model="vm.module.data.other2_title" />
+            <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.other2_title" />
         </md-input-container>
     </div>
 
@@ -113,7 +116,7 @@
         <label>Filter Components</label>
         <input ng-model="filterString.name" />
       </md-input-container>
-      <md-checkbox ng-model="vm.showAllComponents" >Show All Components</md-checkbox> 
+      <md-checkbox ng-model="vm.showAllComponents">Show All Components</md-checkbox> 
     
     <div ng-show="filterString.name.length > 0 || vm.showAllComponents">
        <div class="mock-table" role="table" aria-label="Components">
@@ -148,16 +151,16 @@
                         <i class="fas fa-plus-circle"></i>
                     </md-button>
                 </p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name" ng-change="vm.newUnsavedChange()"></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.name}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name"></p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.name" ng-model="component.name" ng-change="vm.newUnsavedChange()"></p>
 
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.type}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type"></p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.type" ng-model="component.type" ng-change="vm.newUnsavedChange()"></p>
     
                 <p role="cell" ng-if="!vm.edit[component.id]">{{component.description}}</p>
-                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description"></p>
+                <p role="cell" ng-if="vm.edit[component.id]"><input type="text" ng-value="component.description" ng-model="component.description" ng-change="vm.newUnsavedChange()"></p>
     
             </div>
           </div>
@@ -187,7 +190,7 @@
             <p role="cell">
 
                 <md-input-container>
-                    <input min="1" required type="number" ng-model="row.pieces_per_kit" />
+                    <input min="1" type="number" ng-model="row.pieces_per_kit" ng-change="vm.newUnsavedChange()" required class="requiredForSubmission" />
                 </md-input-container>
             </p>
             <p role="cell">{{row.name}}</p>
@@ -196,7 +199,7 @@
             <p role="cell">{{row.price_per_unit}}</p>
             <p role="cell">{{row.pieces_per_unit}}</p>
             <p role="cell">
-                <a class="button button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id)">
+                <a class="button button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id); vm.newUnsavedChange()">
                     <i class="fas fa-trash-alt"></i>
                 </a>
             </p>

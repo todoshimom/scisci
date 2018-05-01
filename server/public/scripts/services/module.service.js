@@ -1,4 +1,4 @@
-myApp.service('ModuleService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
+myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval', function ($http, $location, $routeParams, $interval) {
     let self = this;
 
     self.module = {};
@@ -7,6 +7,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.calculations = { data: {}};
 
     self.moduleLibrary = {list:[{}]};
+    self.hasUnsavedChanges = { status: false };
+
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -157,12 +159,13 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.put('/api/module', self.module.data)
             .then(response => {
                 // no action on response
-                swal({
-                    title: `Module has been saved!`,
-                    icon: "success",
-                    timer: 1200,
-                    buttons: false
-                })
+                // swal({
+                //     title: `Module has been saved!`,
+                //     icon: "success",
+                //     timer: 1200,
+                //     buttons: false
+                // });
+                self.hasUnsavedChanges.status = false;
             })
             .catch(error => {
                 console.log('error in put', error);
@@ -321,6 +324,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         }
     }
 
+    // Note when there are new unsaved changes
+    self.newUnsavedChange = function() {
+        console.log(self.hasUnsavedChanges);
+        self.hasUnsavedChanges.status = true;
+    }
+
     // Save Module
     self.saveModule = function() {
         if ($routeParams.id) {
@@ -340,4 +349,45 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
           });
       };
   
+    // var requiredElements = document.getElementById("form").querySelectorAll(".requiredForAutosave"),
+    // c = document.getElementById("check"),
+    // o = document.getElementById("output");
+    
+    // c.addEventListener("click", function() {
+    //   var s = "";
+    //   for (var i = 0; i < requiredElements.length; i++) {
+    //     var e = requiredElements[i];
+    //     s += e.id + ": " + (e.value.length ? "Filled" : "Not Filled") + "<br>";
+    //   }
+    //   o.innerHTML = s;
+    // });
+
+
+    // Auto-save: check four times a second for changes, and auto-save them.
+    $interval(function() {
+        let requiredUnfilledCount = 0;
+
+        console.log(self.hasUnsavedChanges);
+        if (self.hasUnsavedChanges.status) {
+            console.log('inside');
+            // get all the inputs that are required (they have class 'requiredForSubmission')
+            let requiredInputs = document.querySelectorAll('.requiredForSubmission');
+
+            // check to see if any of them is empty
+            for (let i = 0; i < requiredInputs.length; i++) {
+                // if one is empty
+                if (requiredInputs[i].value === '') {
+                    // increase the count
+                    requiredUnfilledCount++;
+                }
+            }
+            
+            // if they're all valid, save it and reset the unsaved marker
+            if (requiredUnfilledCount === 0) {
+                self.hasUnsavedChanges = false;
+                self.saveModule();
+            }   
+        }
+    }, 250);
+    
 }]);
