@@ -330,7 +330,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
 
     // Note when there are new unsaved changes
     self.newUnsavedChange = function() {
-        console.log(self.hasUnsavedChanges);
         self.hasUnsavedChanges.status = true;
     }
 
@@ -371,7 +370,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
                 if (requiredInputs[i].value === '') {
                     // increase the count
                     requiredUnfilledCount++;
-                    console.log(requiredUnfilledCount)
                 }
             }
             
