@@ -8,6 +8,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
 
     self.moduleLibrary = {list:[{}]};
     self.hasUnsavedChanges = { status: false };
+    self.hasUnsavableChanges = { status: false };
 
 
     /******************************************/
@@ -165,6 +166,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
                 //     timer: 1200,
                 //     buttons: false
                 // });
+
+                // update saved changes status
                 self.hasUnsavedChanges.status = false;
             })
             .catch(error => {
@@ -256,6 +259,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
 
                 // UPDATE THE MODULE
                 self.updateModule();
+                
 
             })
             .catch(error => {
@@ -349,27 +353,15 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
           });
       };
   
-    // var requiredElements = document.getElementById("form").querySelectorAll(".requiredForAutosave"),
-    // c = document.getElementById("check"),
-    // o = document.getElementById("output");
-    
-    // c.addEventListener("click", function() {
-    //   var s = "";
-    //   for (var i = 0; i < requiredElements.length; i++) {
-    //     var e = requiredElements[i];
-    //     s += e.id + ": " + (e.value.length ? "Filled" : "Not Filled") + "<br>";
-    //   }
-    //   o.innerHTML = s;
-    // });
-
 
     // Auto-save: check four times a second for changes, and auto-save them.
     $interval(function() {
-        let requiredUnfilledCount = 0;
 
-        console.log(self.hasUnsavedChanges);
         if (self.hasUnsavedChanges.status) {
-            console.log('inside');
+            
+            // track the number of required forms that are invalid
+            let requiredUnfilledCount = 0;
+
             // get all the inputs that are required (they have class 'requiredForSubmission')
             let requiredInputs = document.querySelectorAll('.requiredForSubmission');
 
@@ -379,14 +371,17 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
                 if (requiredInputs[i].value === '') {
                     // increase the count
                     requiredUnfilledCount++;
+                    console.log(requiredUnfilledCount)
                 }
             }
             
             // if they're all valid, save it and reset the unsaved marker
-            if (requiredUnfilledCount === 0) {
-                self.hasUnsavedChanges = false;
+            if (requiredUnfilledCount > 0) {
+                self.hasUnsavableChanges.status = true;
+            } else {
+                self.hasUnsavableChanges.status = false;
                 self.saveModule();
-            }   
+            }
         }
     }, 250);
     

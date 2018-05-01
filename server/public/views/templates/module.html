@@ -26,9 +26,14 @@
     </md-input-container>
 
     <!--<input type="submit" class="button" value="Save Module" />-->
-    <div ng-if="!vm.hasUnsavedChanges.status">All changes up to date</div>
-    <div ng-if="vm.hasUnsavedChanges.status">Unsaved changes</div>
-    here:{{vm.hasUnsavedChanges}}
+    <div ng-if="vm.hasUnsavedChanges.status">
+        <div ng-if="vm.hasUnsavableChanges.status" style="color: #f00">
+            Please fill out all required fields to auto-save.
+        </div>
+        <div ng-if="!vm.hasUnsavableChanges.status">
+            Saving...
+        </div>
+    </div>
 
     <ul class="col col-5 quick-report-list">
         <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentSum | currency}}</p></li>

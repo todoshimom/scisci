@@ -7,6 +7,7 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
     // for unsaved changes
     self.newUnsavedChange = ModuleService.newUnsavedChange;
     self.hasUnsavedChanges = ModuleService.hasUnsavedChanges;
+    self.hasUnsavableChanges = ModuleService.hasUnsavableChanges;
 
     self.module = ModuleService.module;
     self.components = ModuleService.components;
