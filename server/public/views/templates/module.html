@@ -55,7 +55,7 @@
     <h3 class="md-subtitle">Version</h3>
     <md-input-container>
         <label>Version Number</label>
-        <input ng-change="vm.newUnsavedChange()" type="number" min="0" ng-model="vm.module.data.version_number" required class="requiredForSubmission" />
+        <input ng-change="vm.newUnsavedChange()" type="text" min="0" ng-model="vm.module.data.version_number" required class="requiredForSubmission" />
     </md-input-container>
 
     <md-input-container>
@@ -152,7 +152,7 @@
           <div class="mock-table-body" role="rowgroup">
               <div class="mock-table-row col col-4" row="row" ng-repeat="component in vm.componentLibrary.list | filter:filterString ">
                 <p role="cell" ng-if="!vm.edit[component.id]">
-                    <md-button class="button button-naked" ng-click="vm.addModuleComponentToDraft(component.id, 1, component)">
+                    <md-button class="button button-naked" ng-click="vm.addModuleComponentToDraft(component.id, 1, component); vm.newUnsavedChange()">
                         <i class="fas fa-plus-circle"></i>
                     </md-button>
                 </p>
