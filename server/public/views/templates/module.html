@@ -23,9 +23,9 @@
     <md-input-container class="module-title-input">
         <label>Name</label>
         <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.name" required class="requiredForSubmission" />
+    
     </md-input-container>
 
-    <!--<input type="submit" class="button" value="Save Module" />-->
     <div ng-if="vm.hasUnsavedChanges.status">
         <div ng-if="vm.hasUnsavableChanges.status" style="color: #f00">
             Please fill out all required fields to auto-save.
@@ -34,6 +34,11 @@
             Saving...
         </div>
     </div>
+    <div ng-if="!vm.hasUnsavedChanges.status">
+        Everything up to date.
+    </div>
+
+    <!--<input type="submit" class="button" value="Save Module" />-->
 
     <ul class="col col-5 quick-report-list">
         <li class="quick-report-list-item"><p class="quick-report-title">Material Cost:</p> <p class="quick-report-value">{{vm.calculations.data.currentSum | currency}}</p></li>

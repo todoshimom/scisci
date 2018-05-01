@@ -160,12 +160,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
         $http.put('/api/module', self.module.data)
             .then(response => {
                 // no action on response
-                swal({
-                    title: `Module has been saved!`,
-                    icon: "success",
-                    timer: 1200,
-                    buttons: false
-                });
+                // swal({
+                //     title: `Module has been saved!`,
+                //     icon: "success",
+                //     timer: 1200,
+                //     buttons: false
+                // });
 
                 // update saved changes status
                 self.hasUnsavedChanges.status = false;
