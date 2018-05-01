@@ -46,7 +46,6 @@
                     <i class="fas fa-caret-square-down"></i>
                 </span>
             </h3>
-            <h3 class="columnheader">Version Notes</h3>
             <h3 class="columnheader">Assembly Time (hrs)
                 <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">
                     <i class="fas fa-caret-square-up"></i>
@@ -69,7 +68,6 @@
             <p role="cell">{{module.code}}</p>
             <p role="cell">{{module.version_number}}</p>
             <p role="cell">{{module.version_date | date: "MMM. d, yyyy"}}</p>
-            <p role="cell">{{module.version_notes}}</p>
             <p role="cell">{{module.estimated_assembly_time}}</p>
             <p role="cell">
                 <button class="button-naked" ng-click="vm.deleteModule(module.id)">
