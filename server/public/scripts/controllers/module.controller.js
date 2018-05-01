@@ -13,6 +13,7 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
     self.components = ModuleService.components;
     self.componentsSaved = ModuleService.componentsSaved;
 
+    $scope.Math = window.Math;
 
     self.yesNo = {
         yes: 'yes',

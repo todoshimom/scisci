@@ -43,7 +43,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 self.components.data = response.data;
-
+                console.log(self.components.data);
                 self.getCostRates();
             })
             .catch(error => {
