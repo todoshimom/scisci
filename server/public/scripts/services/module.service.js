@@ -1,4 +1,4 @@
-myApp.service('ModuleService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
+myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval', function ($http, $location, $routeParams, $interval) {
     let self = this;
 
     self.module = {};
@@ -7,6 +7,9 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.calculations = { data: {}};
 
     self.moduleLibrary = {list:[{}]};
+    self.hasUnsavedChanges = { status: false };
+    self.hasUnsavableChanges = { status: false };
+
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -162,7 +165,10 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                     icon: "success",
                     timer: 1200,
                     buttons: false
-                })
+                });
+
+                // update saved changes status
+                self.hasUnsavedChanges.status = false;
             })
             .catch(error => {
                 console.log('error in put', error);
@@ -253,6 +259,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
                 // UPDATE THE MODULE
                 self.updateModule();
+                
 
             })
             .catch(error => {
@@ -321,6 +328,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         }
     }
 
+    // Note when there are new unsaved changes
+    self.newUnsavedChange = function() {
+        self.hasUnsavedChanges.status = true;
+    }
+
     // Save Module
     self.saveModule = function() {
         if ($routeParams.id) {
@@ -340,4 +352,35 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
           });
       };
   
+
+    // Auto-save: check four times a second for changes, and auto-save them.
+    $interval(function() {
+
+        if (self.hasUnsavedChanges.status) {
+            
+            // track the number of required forms that are invalid
+            let requiredUnfilledCount = 0;
+
+            // get all the inputs that are required (they have class 'requiredForSubmission')
+            let requiredInputs = document.querySelectorAll('.requiredForSubmission');
+
+            // check to see if any of them is empty
+            for (let i = 0; i < requiredInputs.length; i++) {
+                // if one is empty
+                if (requiredInputs[i].value === '') {
+                    // increase the count
+                    requiredUnfilledCount++;
+                }
+            }
+            
+            // if they're all valid, save it and reset the unsaved marker
+            if (requiredUnfilledCount > 0) {
+                self.hasUnsavableChanges.status = true;
+            } else {
+                self.hasUnsavableChanges.status = false;
+                self.saveModule();
+            }
+        }
+    }, 250);
+    
 }]);

@@ -1,12 +1,18 @@
-myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$http', '$routeParams', function (ModuleService, ComponentService, $http, $routeParams) {
+myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$http', '$routeParams', '$scope', '$rootScope', '$timeout', function (ModuleService, ComponentService, $http, $routeParams, $scope, $rootScope, $timeout) {
     console.log('ModuleController created');
     let self = this;
 
     self.calculations = ModuleService.calculations;
 
+    // for unsaved changes
+    self.newUnsavedChange = ModuleService.newUnsavedChange;
+    self.hasUnsavedChanges = ModuleService.hasUnsavedChanges;
+    self.hasUnsavableChanges = ModuleService.hasUnsavableChanges;
+
     self.module = ModuleService.module;
     self.components = ModuleService.components;
     self.componentsSaved = ModuleService.componentsSaved;
+
 
     self.yesNo = {
         yes: 'yes',
