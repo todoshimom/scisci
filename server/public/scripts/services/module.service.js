@@ -1,4 +1,4 @@
-myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval', function ($http, $location, $routeParams, $interval) {
+myApp.service('ModuleService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
     let self = this;
 
     self.module = {};
@@ -43,7 +43,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 self.components.data = response.data;
-
+                console.log(self.components.data);
                 self.getCostRates();
             })
             .catch(error => {
@@ -353,34 +353,5 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$interval
       };
   
 
-    // Auto-save: check four times a second for changes, and auto-save them.
-    $interval(function() {
-
-        if (self.hasUnsavedChanges.status) {
-            
-            // track the number of required forms that are invalid
-            let requiredUnfilledCount = 0;
-
-            // get all the inputs that are required (they have class 'requiredForSubmission')
-            let requiredInputs = document.querySelectorAll('.requiredForSubmission');
-
-            // check to see if any of them is empty
-            for (let i = 0; i < requiredInputs.length; i++) {
-                // if one is empty
-                if (requiredInputs[i].value === '') {
-                    // increase the count
-                    requiredUnfilledCount++;
-                }
-            }
-            
-            // if they're all valid, save it and reset the unsaved marker
-            if (requiredUnfilledCount > 0) {
-                self.hasUnsavableChanges.status = true;
-            } else {
-                self.hasUnsavableChanges.status = false;
-                self.saveModule();
-            }
-        }
-    }, 250);
     
 }]);

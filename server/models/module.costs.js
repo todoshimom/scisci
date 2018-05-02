@@ -30,6 +30,8 @@ let getCosts = function (moduleId) {
         .then((results) => {
             let data = results.rows
 
+            console.log(data);
+            
             let moduleArray = [];
             let currentSum = 0;
             let currentKitSum = 0;
