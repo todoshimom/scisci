@@ -204,7 +204,7 @@
                     <input min="1" type="number" ng-model="row.pieces_per_kit" ng-change="vm.newUnsavedChange()" required class="requiredForSubmission" />
                 </md-input-container>
             </p>
-            <p role="cell">{{row.name}} {{row.price_per_unit/row.pieces_per_unit}}</p>
+            <p role="cell">{{row.name}}</p>
             <p role="cell">{{row.type}}</p>
             <p role="cell">{{row.description}}</p>
             <p role="cell">{{Math.ceil( (row.pieces_per_kit || 0)/row.pieces_per_unit )}}</p>
