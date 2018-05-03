@@ -72,6 +72,21 @@
 						</div><!-- /.mock-table-row -->
 					</div><!-- /.mock-table-body -->
 				</div>
+				<div class="mock-table" role="table" aria-label="Components">
+					<div class="mock-table-header" role="rowgroup">
+						<div class="mock-table-row mock-table-row-header col" row="row">
+							<h3 class="columnheader">Comments</h3>
+						</div><!-- /.mock-table-row-header -->
+					</div><!-- /.mock-table-header -->
+					<div class="mock-table-body" role="rowgroup">
+						<div class="mock-table-row col" row="row">
+							<div>
+								<textarea ng-model="component.comments" name="name" rows="8" cols="100"></textarea>
+								<button class="button"ng-click="vm.saveComments(component)">Save Comments</button>
+							</div>
+						</div><!-- /.mock-table-row -->
+					</div><!-- /.mock-table-body -->
+				</div>
 			</div>
 		</div><!-- /.mock-table-row -->
 	</div><!-- /.mock-table-body -->
