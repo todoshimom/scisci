@@ -177,6 +177,9 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 //     buttons: false
                 // });
 
+                // we want to see the new cost when the cost is improved
+                self.getCostRates();
+
                 // update saved changes status
                 self.hasUnsavedChanges.status = false;
             })
