@@ -55,7 +55,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     //Start of function to save shopping lists with modules
     self.saveShoppingList = function name(arrayOfModules) {
         let newShoppingListId = self.currentShoppingListId.shopId.id
-        
+
         $http.post(`/api/shopping/shoppinglist/${newShoppingListId}`, arrayOfModules)
             .then(response => {
                 self.getComponents(newShoppingListId)
@@ -66,8 +66,8 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
             });
     }; //End of function to save shopping lists with modules
 
-    self.addOrderedInHouseToComponent = function(component) {
-      $http.post('/api/shopping/addOrderedInHouse/', component)
+    self.addOrderedInHouseCommentsComponent = function(component) {
+      $http.post('/api/shopping/addOrderedInHouseComments/', component)
         .then( function(response) {
           self.getComponents(component.shopping_id);
         })
@@ -80,8 +80,8 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     /*              PUT REQUESTS              */
     /******************************************/
 
-    self.updateOrderedInHouseComponent = function(component) {
-      $http.put('/api/shopping/updateOrderedInHouse', component)
+    self.updateOrderedInHouseCommentsComponent = function(component) {
+      $http.put('/api/shopping/updateOrderedInHouseComments', component)
       .then( function(response) {
         self.getComponents(component.shopping_id);
       })
