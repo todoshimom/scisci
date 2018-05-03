@@ -67,7 +67,17 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 self.calculations.data = response.data;
             })
             .catch(error => {
-                console.log('error in get single module cost rates', error);
+
+                // usually an error comes because there are no calculations to run.
+                // in this case, we'll provide an object with 0 for all of the calculations.
+                // otherwise, after creating a new module, you see the calculations from the last module visited.
+                self.calculations.data = {
+                    currentSum: 0,
+                    currentKitSum: 0,
+                    laborCost: 0,
+                    current_and_labor_sum: 0,
+                    kit_and_labor_sum: 0,
+                };
             });
     };
 
