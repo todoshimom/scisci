@@ -79,12 +79,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.post('/api/module', self.module.data)
             .then(response => {
                 $location.path('/module/' + response.data[0].id);
-                swal({
-                    title: `Module ${self.module.data.name} has been created!`,
-                    icon: "success",
-                    timer: 1200,
-                    buttons: false
-                })
+                // swal({
+                //     title: `Module ${self.module.data.name} has been created!`,
+                //     icon: "success",
+                //     timer: 1200,
+                //     buttons: false
+                // })
             })
             .catch(error => {
                 console.log('error in post', error);
