@@ -68,25 +68,22 @@ router.get('/cost/rates/:id', authenticated, isEditor, (req, res) => {
             results[0].current_and_labor_sum = results[0].currentSum + results[0].laborCost
             console.log('find this', results[0])
             // To add material costs, kit costs, labor costs, etc into the database. 
-
+            let sendResults = results[0];
             const queryText = `INSERT INTO modules (
                 material_cost,
                 material_in_kit_cost,
                 estimated_labor_cost,
                 materials_ordered_and_labor,
                 materials_in_kit_and_labor
-            ) VALUES ($1, $2, $3, $4, $5)`;
-            pool.query(queryText, [
-                results
-            ])
+            ) VALUES (${results[0].currentSum}, ${results[0].currentKitSum}, ${results[0].laborCost}, ${results[0].current_and_labor_sum}, ${results[0].kit_and_labor_sum})`;
+            pool.query(queryText)
                 .then(result => {
-                    res.send(result.rows);
+                    console.log('stored into modules database', result)
+                    res.send(sendResults)
                 }).catch(err => {
                     console.log('err', err);
                     res.sendStatus(500);
                 });
-
-            res.send(results[0])
         })
         .catch((error) => {
             console.log('Error on retrieving module costs function', error);
