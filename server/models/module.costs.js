@@ -52,7 +52,7 @@ let getCosts = function (moduleId) {
                 }
                 else {// If the pieces to order is less than what is required in the kit.
                     let divide = data[i].pieces_per_kit / data[i].pieces_per_unit;
-                    if (divide%1 >= 0.01) { //so that anything less is not rounded up in orders
+                    if (divide%1 >= 0.001) { //so that anything less is not rounded up in orders
                         data[i].material_cost = Math.ceil(divide) * data[i].price_per_unit;
                     }
                     else {
