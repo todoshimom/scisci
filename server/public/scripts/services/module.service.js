@@ -65,6 +65,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.get('/api/module/cost/rates/' + $routeParams.id)
             .then(response => {
                 self.calculations.data = response.data;
+                console.log(response.data, 'hi')
             })
             .catch(error => {
 
@@ -257,7 +258,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
     self.updateModuleEverything = function() {
         // self.getModuleComponentsPreSave();
-
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 self.componentsSaved.data = response.data;
@@ -325,6 +325,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     /******************************************/
 
     // CALCULATIONS
+    // Whats this for? is this even being used?
     self.calculations = {};
     self.calculations.material_cost = 0;
     self.calculations.material_in_kit_cost = 0;
