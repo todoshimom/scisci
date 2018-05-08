@@ -40,7 +40,7 @@ router.get('/components/:id', authenticated, (req, res) => {
 
   let queryText = `
   SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity, shoppinglist.name AS shoppinglist_name,
-  shopping_components.ordered, shopping_components.in_house, components.*, shopping_components.id AS ordered_inHouse_id
+  shopping_components.ordered, shopping_components.in_house, shopping_components.comments, components.*, shopping_components.id AS ordered_inHouse_id
   FROM components_modules
   JOIN modules_shopping ON modules_shopping.module_id = components_modules.module_id
   JOIN shoppinglist ON shoppinglist.id = modules_shopping.shopping_id
@@ -112,14 +112,14 @@ router.post('/shoppinglist/:id', authenticated, (req, res) => {
 
 });  //End of add shoppinglist junction function
 
-router.post('/addOrderedInHouse', authenticated, (req, res) => {
+router.post('/addOrderedInHouseComments', authenticated, (req, res) => {
   let item = req.body;
 
   let queryText = `
-  INSERT INTO shopping_components ("shopping_id", "component_id", "ordered", "in_house")
-  VALUES ($1, $2, $3, $4)`;
+  INSERT INTO shopping_components ("shopping_id", "component_id", "ordered", "in_house", "comments")
+  VALUES ($1, $2, $3, $4, $5)`;
 
-  pool.query(queryText, [item.shopping_id, item.id, item.ordered, item.in_house])
+  pool.query(queryText, [item.shopping_id, item.id, item.ordered, item.in_house, item.comments])
     .then((results) => {
       res.sendStatus(201);
     })
@@ -127,18 +127,17 @@ router.post('/addOrderedInHouse', authenticated, (req, res) => {
       console.log('Error adding component to shopping_components', error);
       res.sendStatus(500);
     });
-
 });
 
 /******************************************/
 /*              PUT REQUESTS              */
 /******************************************/
 
-router.put('/updateOrderedInHouse', authenticated, (req, res) => {
+router.put('/updateOrderedInHouseComments', authenticated, (req, res) => {
   let item = req.body;
-  let queryText = `UPDATE shopping_components SET ordered = $1, in_house = $2 WHERE id = $3`;
+  let queryText = `UPDATE shopping_components SET ordered = $1, in_house = $2, comments = $3 WHERE id = $4`;
 
-  pool.query(queryText, [item.ordered, item.in_house, item.ordered_inhouse_id])
+  pool.query(queryText, [item.ordered, item.in_house, item.comments, item.ordered_inhouse_id])
     .then((results) => {
       res.sendStatus(201);
     })
@@ -146,7 +145,6 @@ router.put('/updateOrderedInHouse', authenticated, (req, res) => {
       console.log('Error updating component in shopping_components', error);
       res.sendStatus(500);
     });
-
 });
 
 

@@ -12,7 +12,7 @@
 
 <div class="mock-table" role="table" aria-label="Components">
     <div class="mock-table-header" role="rowgroup">
-        <div class="mock-table-row mock-table-row-header col col-8" row="row">
+        <div class="mock-table-row mock-table-row-header col col-10" row="row">
             <h3 class="columnheader">Name
                 <span class="sort-button" ng-click="vm.sortColumns('nameAsc')">
                     <i class="fas fa-caret-square-up"></i>
@@ -30,7 +30,7 @@
                 </span>
             </h3>
             
-            <h3 class="columnheader">Version Number
+            <h3 class="columnheader">Version
                 <span class="sort-button" ng-click="vm.sortColumns('versionNumAsc')">
                     <i class="fas fa-caret-square-up"></i>
                 </span>
@@ -38,7 +38,7 @@
                     <i class="fas fa-caret-square-down"></i>
                 </span>
             </h3>
-            <h3 class="columnheader">Version Date
+            <h3 class="columnheader">Ver Date
                 <span class="sort-button" ng-click="vm.sortColumns('versionDateAsc')">
                     <i class="fas fa-caret-square-up"></i>
                 </span>
@@ -46,12 +46,35 @@
                     <i class="fas fa-caret-square-down"></i>
                 </span>
             </h3>
-            <h3 class="columnheader">Version Notes</h3>
             <h3 class="columnheader">Assembly Time (hrs)
                 <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeAsc')">
                     <i class="fas fa-caret-square-up"></i>
                 </span>
                 <span class="sort-button" ng-click="vm.sortColumns('estimatedAssemblyTimeDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Material in Kit Cost
+                <span class="sort-button" ng-click="vm.sortColumns('matInKitAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('matInKitDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">Est. Labor Cost
+                <span class="sort-button" ng-click="vm.sortColumns('estLaborCostAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('estLaborCostDesc')">
+                    <i class="fas fa-caret-square-down"></i>
+                </span>
+            </h3>
+            <h3 class="columnheader">MiK+L Cost
+                <span class="sort-button" ng-click="vm.sortColumns('MiKLCostAsc')">
+                    <i class="fas fa-caret-square-up"></i>
+                </span>
+                <span class="sort-button" ng-click="vm.sortColumns('MiKLCostDesc')">
                     <i class="fas fa-caret-square-down"></i>
                 </span>
             </h3>
@@ -62,15 +85,17 @@
     </div>
     <!-- /.mock-table-header -->
     <div class="mock-table-body" role="rowgroup">
-        <div class="mock-table-row col col-8" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
+        <div class="mock-table-row col col-10" row="row" ng-repeat="module in vm.moduleLibrary.list | filter: moduleFilter">
             <p role="cell">
                 <a ng-href="#!module/{{module.id}}">{{module.name}}</a>
             </p>
             <p role="cell">{{module.code}}</p>
             <p role="cell">{{module.version_number}}</p>
             <p role="cell">{{module.version_date | date: "MMM. d, yyyy"}}</p>
-            <p role="cell">{{module.version_notes}}</p>
             <p role="cell">{{module.estimated_assembly_time}}</p>
+            <p role="cell">{{module.material_in_kit_cost | currency}}</p>
+            <p role="cell">{{module.estimated_labor_cost | currency}}</p>
+            <p role="cell">{{module.materials_in_kit_and_labor | currency}}</p>
             <p role="cell">
                 <button class="button-naked" ng-click="vm.deleteModule(module.id)">
                     <i class="fas fa-trash-alt"></i>

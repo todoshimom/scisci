@@ -86,6 +86,24 @@ const sortModules = function (sortMethod) {
     case 'estimatedAssemblyTimeDesc':
       queryText = `SELECT * FROM modules ORDER BY "estimated_assembly_time" DESC`;
       break;
+    case 'matInKitAsc':
+      queryText = `SELECT * FROM modules ORDER BY "material_in_kit_cost"`;
+      break;
+    case 'matInKitDesc':
+      queryText = `SELECT * FROM modules ORDER BY "material_in_kit_cost" DESC`;
+      break;
+    case 'estLaborCostAsc':
+      queryText = `SELECT * FROM modules ORDER BY "estimated_labor_cost"`;
+      break;
+    case 'estLaborCostDesc':
+      queryText = `SELECT * FROM modules ORDER BY "estimated_labor_cost" DESC`;
+      break;
+    case 'MiKLCostAsc':
+      queryText = `SELECT * FROM modules ORDER BY "materials_in_kit_and_labor"`;
+      break;
+    case 'MiKLCostDesc':
+      queryText = `SELECT * FROM modules ORDER BY "materials_in_kit_and_labor" DESC`;
+      break;
   }
 
   return queryText;

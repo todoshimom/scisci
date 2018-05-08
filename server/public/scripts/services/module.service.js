@@ -7,6 +7,9 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.calculations = { data: {}};
 
     self.moduleLibrary = {list:[{}]};
+    self.hasUnsavedChanges = { status: false };
+    self.hasUnsavableChanges = { status: false };
+
 
     /******************************************/
     /*              GET REQUESTS              */
@@ -40,7 +43,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 self.components.data = response.data;
-
+                // console.log(self.components.data);
                 self.getCostRates();
             })
             .catch(error => {
@@ -62,9 +65,20 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.get('/api/module/cost/rates/' + $routeParams.id)
             .then(response => {
                 self.calculations.data = response.data;
+                console.log(response.data, 'hi')
             })
             .catch(error => {
-                console.log('error in get single module cost rates', error);
+
+                // usually an error comes because there are no calculations to run.
+                // in this case, we'll provide an object with 0 for all of the calculations.
+                // otherwise, after creating a new module, you see the calculations from the last module visited.
+                self.calculations.data = {
+                    currentSum: 0,
+                    currentKitSum: 0,
+                    laborCost: 0,
+                    current_and_labor_sum: 0,
+                    kit_and_labor_sum: 0,
+                };
             });
     };
 
@@ -76,12 +90,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.post('/api/module', self.module.data)
             .then(response => {
                 $location.path('/module/' + response.data[0].id);
-                swal({
-                    title: `Module ${self.module.data.name} has been created!`,
-                    icon: "success",
-                    timer: 1200,
-                    buttons: false
-                })
+                // swal({
+                //     title: `Module ${self.module.data.name} has been created!`,
+                //     icon: "success",
+                //     timer: 1200,
+                //     buttons: false
+                // })
             })
             .catch(error => {
                 console.log('error in post', error);
@@ -157,12 +171,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.put('/api/module', self.module.data)
             .then(response => {
                 // no action on response
-                swal({
-                    title: `Module has been saved!`,
-                    icon: "success",
-                    timer: 1200,
-                    buttons: false
-                })
+                // swal({
+                //     title: `Module has been saved!`,
+                //     icon: "success",
+                //     timer: 1200,
+                //     buttons: false
+                // });
+
+                // we want to see the new cost when the cost is improved
+                self.getCostRates();
+
+                // update saved changes status
+                self.hasUnsavedChanges.status = false;
             })
             .catch(error => {
                 console.log('error in put', error);
@@ -238,7 +258,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
     self.updateModuleEverything = function() {
         // self.getModuleComponentsPreSave();
-
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 self.componentsSaved.data = response.data;
@@ -253,6 +272,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
                 // UPDATE THE MODULE
                 self.updateModule();
+                
 
             })
             .catch(error => {
@@ -305,6 +325,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     /******************************************/
 
     // CALCULATIONS
+    // Whats this for? is this even being used?
     self.calculations = {};
     self.calculations.material_cost = 0;
     self.calculations.material_in_kit_cost = 0;
@@ -319,6 +340,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         } else {
             self.module.data = {};
         }
+    }
+
+    // Note when there are new unsaved changes
+    self.newUnsavedChange = function() {
+        self.hasUnsavedChanges.status = true;
     }
 
     // Save Module
@@ -340,4 +366,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
           });
       };
   
+
+    
 }]);

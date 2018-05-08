@@ -33,7 +33,13 @@ function calculateQuantities(originalArray, noDuplicates) {
 
   for (var i = 0; i < noDuplicates.length; i++) {
     arrayCopy.push(Object.assign({}, noDuplicates[i]));
-    let newQuantitiy = originalArray[i].reduce((x,y) => ({pieces_per_kit: x.pieces_per_kit + y.pieces_per_kit }));
+    let newQuantitiy = originalArray[i].reduce((x,y) => ({
+      oldPiecesPerKit: x.pieces_per_kit,
+      pieces_per_kit: x.pieces_per_kit + y.pieces_per_kit,
+      quantity: x.quantity + y.quantity,
+    }));
+
+    // how many of an item do we need to order?
     arrayCopy[i].orderQty = newQuantitiy.pieces_per_kit;
   }
   return arrayCopy;
