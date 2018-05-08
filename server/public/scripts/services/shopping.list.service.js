@@ -29,9 +29,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
             console.log('error on getting components', error);
           });
     };
-    if($routeParams.id) {
-      self.getComponents($routeParams.id);
-    }
 
     /******************************************/
     /*             POST REQUESTS              */
