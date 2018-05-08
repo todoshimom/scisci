@@ -39,11 +39,8 @@ function calculateQuantities(originalArray, noDuplicates) {
       quantity: x.quantity + y.quantity,
     }));
 
-    // how many things in a module are we buying for (# of individual sheet protectors per module)?
+    // how many of an item do we need to order?
     arrayCopy[i].orderQty = newQuantitiy.pieces_per_kit;
-
-    // total quantity of one thing to buy for (i.e., # of individual sheet protectors needed)
-    arrayCopy[i].quantityOfModules = newQuantitiy.quantity;
   }
   return arrayCopy;
 } // end calculateQuantities()
