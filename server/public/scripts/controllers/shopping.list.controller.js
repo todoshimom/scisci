@@ -5,7 +5,9 @@ myApp.controller('ShoppingListController', ['ShoppingListService', '$routeParams
 
     self.shoppingLists = ShoppingListService.shoppingLists;
     self.components = ShoppingListService.components;
-    
+
+    self.totalCosts = ShoppingListService.totalCosts;
+
     self.componentComments = "";
 
     self.sortColumnsClientSide = ShoppingListService.sortColumnsClientSide;

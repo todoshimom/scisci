@@ -8,8 +8,8 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       no: 'no'
     };
 
-    self.currentSortMethod = ComponentService.currentSortMethod;
-
+    self.currentSortMethod = ComponentService.currentSortMethod
+    
     self.sortColumnsClientSide = ComponentService.sortColumnsClientSide;
 
     self.componentName = null;

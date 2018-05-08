@@ -7,6 +7,12 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
 
     self.currentSortMethod = 'vendorPrimaryAsc';
 
+    self.totalCosts = {
+      totalCost: 0,
+      totalCostUnordered: 0,
+      totalCostNotInHouse: 0,
+    };
+
 	/******************************************/
 	/*              GET REQUESTS              */
 	/******************************************/
@@ -26,6 +32,8 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
           .then( function(result) {
             self.components.list = result.data;
             self.sortColumnsClientSide(self.currentSortMethod);
+            self.calculateCosts();
+
             $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
@@ -58,7 +66,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
 
         $http.post(`/api/shopping/shoppinglist/${newShoppingListId}`, arrayOfModules)
             .then(response => {
-                self.getComponents(newShoppingListId)
+                self.getComponents(newShoppingListId);
                 $location.path('/shopping-list');
             })
             .catch(error => {
@@ -145,6 +153,35 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         }
         
       });
+    };
+
+    // calculate prices
+    self.calculateCosts = function() {
+      let newTotalCost = 0;
+      let newTotalCostUnordered = 0;
+      let newTotalCostNotInHouse = 0;
+      for (let i = 0; i < self.components.list.length; i++) {
+        let pricePerUnit = Number(self.components.list[i].price_per_unit);
+
+        // convert the price of one component to a number to two decimal places to avoid floating-point error
+        let componentPrice = Math.floor(pricePerUnit * self.components.list[i].price_per_unit * 100) / 100;
+
+        // calculate cost for everything in the list
+        newTotalCost += componentPrice;
+
+        // calculate cost for everything not ordered in the list
+        if (!self.components.list[i].ordered) {
+          newTotalCostUnordered += componentPrice;
+        }
+
+        // calculate cost for everything not in house
+        if (!self.components.list[i].in_house) {
+          newTotalCostNotInHouse += componentPrice;
+        }
+      }
+      self.totalCosts.totalCost = newTotalCost;
+      self.totalCosts.totalCostUnordered = newTotalCostUnordered;
+      self.totalCosts.totalCostNotInHouse = newTotalCostNotInHouse;
     };
 
 }]);
