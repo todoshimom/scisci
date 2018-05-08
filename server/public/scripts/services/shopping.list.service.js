@@ -5,6 +5,14 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     self.components = {list: []};
     self.currentShoppingListId = { shopId: 0 };
 
+    self.currentSortMethod = 'vendorPrimaryAsc';
+
+    self.totalCosts = {
+      totalCost: 0,
+      totalCostUnordered: 0,
+      totalCostNotInHouse: 0,
+    };
+
 	/******************************************/
 	/*              GET REQUESTS              */
 	/******************************************/
@@ -23,6 +31,9 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
+            self.sortColumnsClientSide(self.currentSortMethod);
+            self.calculateCosts();
+
             $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
@@ -55,7 +66,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
 
         $http.post(`/api/shopping/shoppinglist/${newShoppingListId}`, arrayOfModules)
             .then(response => {
-                self.getComponents(newShoppingListId)
+                self.getComponents(newShoppingListId);
                 $location.path('/shopping-list');
             })
             .catch(error => {
@@ -85,6 +96,92 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
       .catch( function(error) {
         console.log('error updating component status: ', error);
       });
+    };
+
+
+    /******************************************/
+    /*              OTHER FUNCTIONS           */
+    /******************************************/
+
+    // for sorting modules used in on the client-side
+    self.sortColumnsClientSide = function(filter) {
+      // capture the selected sort method
+      self.currentSortMethod = filter;
+
+      self.components.list.sort(function(a, b) {
+        // sort by ordered status (Boolean)
+        if (filter === 'orderedAsc') {
+          return (a.ordered === b.ordered)? 0 : a.ordered? -1 : 1;
+        } else if (filter === 'orderedDesc') {
+          return (b.ordered === a.ordered)? 0 : b.ordered? -1 : 1;
+
+        // sort by in-house status (boolean)
+        } else if (filter === 'inHouseAsc') {
+          return (a.in_house === b.in_house)? 0 : a.in_house? -1 : 1;
+        } else if (filter === 'inHouseDesc') {
+          return (b.in_house === a.in_house)? 0 : b.in_house? -1 : 1;
+
+        // sort by in-house status (boolean)
+        } else if (filter === 'orderQuantityAsc') {
+          return a.orderQuantity > b.orderQuantity;
+        } else if (filter === 'orderQuantityDesc') {
+          return b.orderQuantity > a.orderQuantity;
+
+        // sort by name (string)
+        } else if (filter === 'nameAsc') {
+          return a.name > b.name;
+        } else if (filter === 'nameDesc') {
+          return b.name > a.name;
+
+        // sort by type (string)
+        } else if (filter === 'typeAsc') {
+          return a.type > b.type;
+        } else if (filter === 'typeDesc') {
+          return b.type > a.type;
+
+        // sort by description (string)
+        } else if (filter === 'descriptionAsc') {
+          return a.description > b.description;
+        } else if (filter === 'descriptionDesc') {
+          return b.description > a.description;
+          
+        // sort by primary vendor (string)
+        } else if (filter === 'vendorPrimaryAsc') {
+          return a.vendorPrimary > b.vendorPrimary;
+        } else if (filter === 'vendorPrimaryDesc') {
+          return b.vendorPrimary > a.vendorPrimary;
+        }
+        
+      });
+    };
+
+    // calculate prices
+    self.calculateCosts = function() {
+      let newTotalCost = 0;
+      let newTotalCostUnordered = 0;
+      let newTotalCostNotInHouse = 0;
+      for (let i = 0; i < self.components.list.length; i++) {
+        let pricePerUnit = Number(self.components.list[i].price_per_unit);
+
+        // convert the price of one component to a number to two decimal places to avoid floating-point error
+        let componentPrice = Math.floor(pricePerUnit * self.components.list[i].price_per_unit * 100) / 100;
+
+        // calculate cost for everything in the list
+        newTotalCost += componentPrice;
+
+        // calculate cost for everything not ordered in the list
+        if (!self.components.list[i].ordered) {
+          newTotalCostUnordered += componentPrice;
+        }
+
+        // calculate cost for everything not in house
+        if (!self.components.list[i].in_house) {
+          newTotalCostNotInHouse += componentPrice;
+        }
+      }
+      self.totalCosts.totalCost = newTotalCost;
+      self.totalCosts.totalCostUnordered = newTotalCostUnordered;
+      self.totalCosts.totalCostNotInHouse = newTotalCostNotInHouse;
     };
 
 }]);

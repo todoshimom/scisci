@@ -52,7 +52,6 @@ router.get('/components/:id', authenticated, (req, res) => {
 
   pool.query(queryText, [req.params.id])
     .then((results) => {
-        // res.send(results.rows);
         res.send(calculations.addComponents(results.rows));
     })
     .catch(err => {

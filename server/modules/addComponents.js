@@ -39,8 +39,11 @@ function calculateQuantities(originalArray, noDuplicates) {
       quantity: x.quantity + y.quantity,
     }));
 
-    // how many of an item do we need to order?
-    arrayCopy[i].orderQty = newQuantitiy.pieces_per_kit;
+    // how many of an item do we need to order? (how many individual sheet protectors)
+    arrayCopy[i].piecesPerKitSummed = newQuantitiy.pieces_per_kit;
+
+    // how many units do we need to order? (how many packages of sheet protectors)
+    arrayCopy[i].orderQuantity = Math.ceil(arrayCopy[i].piecesPerKitSummed/arrayCopy[i].pieces_per_unit);
   }
   return arrayCopy;
 } // end calculateQuantities()
