@@ -65,7 +65,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.get('/api/module/cost/rates/' + $routeParams.id)
             .then(response => {
                 self.calculations.data = response.data;
-                console.log(response.data, 'hi')
             })
             .catch(error => {
 
