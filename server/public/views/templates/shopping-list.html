@@ -41,7 +41,7 @@
 			</p>
 			<p role="cell">{{component.name}}</p>
 			<p role="cell">
-				{{vm.Math.ceil(component.quantityPerModule/component.pieces_per_unit)}} <!-- calculated -->
+				{{vm.Math.ceil(component.orderQty/component.pieces_per_unit)}}
 			</p>
 			<p role="cell">{{component.type}}</p>
 			<p role="cell">{{component.description}}</p>
@@ -54,11 +54,10 @@
 			<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
 				<div class="mock-table" role="table" aria-label="Components">
 					<div class="mock-table-header" role="rowgroup">
-						<div class="mock-table-row mock-table-row-header col col-8" row="row">
+						<div class="mock-table-row mock-table-row-header col col-7" row="row">
 							<h3 class="columnheader">Price Per Unit</h3>
-							<h3 class="columnheader">Pieces Per Module</h3>
-							<h3 class="columnheader"># of Modules</h3>
-							<h3 class="columnheader">Pieces to Order</h3>
+							<h3 class="columnheader">Pieces Per Kit Summed</h3>
+							<h3 class="columnheader">Pieces Per Unit</h3>
 							<h3 class="columnheader">General Stock</h3>
 							<h3 class="columnheader">Consumable</h3>
 							<h3 class="columnheader">Vendor 2</h3>
@@ -66,11 +65,10 @@
 						</div><!-- /.mock-table-row-header -->
 					</div><!-- /.mock-table-header -->
 					<div class="mock-table-body" role="rowgroup">
-						<div class="mock-table-row col col-8" row="row">
+						<div class="mock-table-row col col-7" row="row">
 							<p role="cell">{{component.price_per_unit | currency}}</p>
-							<p role="cell">{{component.quantityOfModules}}<!--{{component.pieces_per_unit}}--></p>
-							<p role="cell">{{component.orderQty}}</p>
-							<p role="cell">{{component.quantityPerModule}}</p>
+							<p role="cell">{{component.orderQty}} <!--{{component.pieces_per_unit}}--></p>
+							<p role="cell">{{component.pieces_per_unit}}</p>
 							<p role="cell">{{component.general_stock_item}}</p>
 							<p role="cell">{{component.consumable}}</p>
 							<p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
