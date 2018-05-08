@@ -86,4 +86,5 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         console.log('error updating component status: ', error);
       });
     };
+
 }]);
