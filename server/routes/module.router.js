@@ -23,7 +23,7 @@ router.get('/all', authenticated, (req, res) => {
 
 });
 
-router.get('/module_library.csv', authenticated, (req, res) => {
+router.get('/csv/module_library.csv', authenticated, (req, res) => {
 
     const queryText = 'SELECT * FROM modules ORDER BY "name"';
     pool.query(queryText)

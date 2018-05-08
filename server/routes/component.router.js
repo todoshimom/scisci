@@ -22,7 +22,7 @@ router.get('/', authenticated, isEditor, (req, res) => {
     });
 });
 
-router.get('/component_library.csv', authenticated, isEditor, (req, res) => {
+router.get('/csv/component_library.csv', authenticated, isEditor, (req, res) => {
 
   let queryText = `SELECT * FROM components ORDER BY "name"`;
   pool.query(queryText)
