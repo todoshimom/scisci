@@ -21,7 +21,14 @@
 <div class="mock-table" role="table" aria-label="Components" ng-if="vm.components.list[0]">
 	<div class="mock-table-header" role="rowgroup">
 		<div class="mock-table-row mock-table-row-header col col-8" row="row">
-			<h3 class="columnheader">Ordered</h3>
+			<h3 class="columnheader">Ordered
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('orderedAsc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('orderedDesc')">
+					<i class="fas fa-caret-square-down"></i>
+					</span>
+			</h3>
 			<h3 class="columnheader">In-House</h3>
 			<h3 class="columnheader">Name</h3>
 			<h3 class="columnheader">Order Quantity</h3>

@@ -87,4 +87,22 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
       });
     };
 
+
+    /******************************************/
+    /*              OTHER FUNCTIONS           */
+    /******************************************/
+
+    // for sorting modules used in on the client-side
+    self.sortColumnsClientSide = function(filter) {
+      self.components.list.sort(function(a, b) {
+        if (filter === 'orderedAsc') {
+          // return a.ordered - b.ordered;
+          return (a.ordered === b.ordered)? 0 : a.ordered? -1 : 1;
+        } else if (filter === 'orderedDesc') {
+          // return b.ordered - a.ordered;
+          return (b.ordered === a.ordered)? 0 : b.ordered? -1 : 1;
+        }
+      });
+    };
+
 }]);
