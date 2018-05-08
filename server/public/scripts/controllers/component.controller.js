@@ -8,6 +8,8 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
       no: 'no'
     };
 
+    self.sortColumnsClientSide = ComponentService.sortColumnsClientSide;
+
     self.componentName = null;
 
     self.moduleViewer = false;
@@ -48,6 +50,7 @@ myApp.controller('ComponentController', ['ComponentService', function (Component
     self.sortColumns = function(sortMethod) {
       ComponentService.sortAllComponents(sortMethod);
     };
+
 
     self.getModules = function(component) {
       if (component.modules_used_in > 0) {
