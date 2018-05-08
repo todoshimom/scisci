@@ -113,6 +113,12 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         } else if (filter === 'inHouseDesc') {
           return (b.in_house === a.in_house)? 0 : b.in_house? -1 : 1;
 
+        // sort by in-house status (boolean)
+        } else if (filter === 'orderQuantityAsc') {
+          return a.orderQuantity > b.orderQuantity;
+        } else if (filter === 'orderQuantityDesc') {
+          return b.orderQuantity > a.orderQuantity;
+
         // sort by name (string)
         } else if (filter === 'nameAsc') {
           return a.name > b.name;

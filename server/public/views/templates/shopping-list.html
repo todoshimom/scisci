@@ -90,7 +90,7 @@
 			</p>
 			<p role="cell">{{component.name}}</p>
 			<p role="cell">
-				{{vm.Math.ceil(component.orderQty/component.pieces_per_unit)}}
+				{{component.orderQuantity}}
 			</p>
 			<p role="cell">{{component.type}}</p>
 			<p role="cell">{{component.description}}</p>
@@ -116,7 +116,7 @@
 					<div class="mock-table-body" role="rowgroup">
 						<div class="mock-table-row col col-7" row="row">
 							<p role="cell">{{component.price_per_unit | currency}}</p>
-							<p role="cell">{{component.orderQty}} <!--{{component.pieces_per_unit}}--></p>
+							<p role="cell">{{component.piecesPerKitSummed}} <!--{{component.pieces_per_unit}}--></p>
 							<p role="cell">{{component.pieces_per_unit}}</p>
 							<p role="cell">{{component.general_stock_item}}</p>
 							<p role="cell">{{component.consumable}}</p>
