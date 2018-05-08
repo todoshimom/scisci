@@ -19,11 +19,7 @@
 	<li class="quick-report-list-item"><p class="quick-report-title">Total List Cost:</p> <p class="quick-report-value">{{vm.totalCosts.totalCost | currency}}</p></li>
 	<li class="quick-report-list-item"><p class="quick-report-title">Cost Not Ordered:</p> <p class="quick-report-value">{{vm.totalCosts.totalCostUnordered | currency}}</p></li>
 	<li class="quick-report-list-item"><p class="quick-report-title">Cost Not In House:</p> <p class="quick-report-value">{{vm.totalCosts.totalCostNotInHouse | currency}}</p></li>
-	<!--<li class="quick-report-list-item"><p class="quick-report-title">Materials Ordered + Labor:</p> <p class="quick-report-value">{{vm.calculations.data.materials_ordered_and_labor | currency}}</p></li>
-	<li class="quick-report-list-item"><p class="quick-report-title">Materials in Kit + Labor:</p> <p class="quick-report-value">{{vm.calculations.data.materials_in_kit_and_labor | currency}}</p></li>-->
 </ul>
-
-<h2 ng-if="vm.components.list[0].shoppinglist_name">Price</h2>
 
 <h2 ng-if="!vm.components.list[0].shoppinglist_name" class="md-title">Created Shopping Lists</h2>
 
