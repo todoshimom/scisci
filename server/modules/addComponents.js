@@ -33,8 +33,20 @@ function calculateQuantities(originalArray, noDuplicates) {
 
   for (var i = 0; i < noDuplicates.length; i++) {
     arrayCopy.push(Object.assign({}, noDuplicates[i]));
-    let newQuantitiy = originalArray[i].reduce((x,y) => ({pieces_per_kit: x.pieces_per_kit + y.pieces_per_kit }));
+    let newQuantitiy = originalArray[i].reduce((x,y) => ({
+      oldPiecesPerKit: x.pieces_per_kit,
+      pieces_per_kit: x.pieces_per_kit + y.pieces_per_kit,
+      quantity: x.quantity + y.quantity,
+    }));
+
+    // how many things in a module are we buying for (# of individual sheet protectors per module)?
     arrayCopy[i].orderQty = newQuantitiy.pieces_per_kit;
+
+    // how many of a certain module do we need to buy for?
+    arrayCopy[i].quantityOfModules = newQuantitiy.quantity;
+
+    // the total number of items to shop for (# of individual sheet protectors needed)
+    arrayCopy[i].quantityPerModule = arrayCopy[i].quantityOfModules * arrayCopy[i].orderQty;
   }
   return arrayCopy;
 } // end calculateQuantities()
