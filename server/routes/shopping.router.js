@@ -3,7 +3,7 @@ const pool = require('../modules/pool.js');
 const calculations = require('../modules/addComponents.js');
 const router = express.Router();
 const authenticated = require('../models/authenticated')
-
+const convertToCsv = require('../modules/convertToCsv.js');
 
 /******************************************/
 /*              GET REQUESTS              */
@@ -35,6 +35,33 @@ router.get('/list/:id', authenticated, (req, res) => {
         });
 })//end get
 
+router.get('/csv/:id', authenticated, (req, res) => {
+    // remove the '.csv' from the file name
+    let id = req.params.id.substr(0, req.params.id.length - 4);
+    id = id.substr(14, req.params.id.length);
+
+    let queryText = `
+    SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity, shoppinglist.name AS shoppinglist_name,
+    shopping_components.ordered, shopping_components.in_house, shopping_components.comments, components.*, shopping_components.id AS ordered_inHouse_id
+    FROM components_modules
+    JOIN modules_shopping ON modules_shopping.module_id = components_modules.module_id
+    JOIN shoppinglist ON shoppinglist.id = modules_shopping.shopping_id
+    JOIN components ON components_modules.component_id = components.id
+    LEFT OUTER JOIN shopping_components ON shopping_components.component_id = components.id
+    AND shopping_components.shopping_id = modules_shopping.shopping_id
+    WHERE modules_shopping.shopping_id = $1;
+    `;
+  
+    pool.query(queryText, [id])
+      .then((results) => {
+        let data = calculations.addComponents(results.rows);
+        res.send(convertToCsv(data));
+      })
+      .catch(err => {
+          console.log('Error getting shopping list components', err);
+          res.sendStatus(500);
+      });
+});
 
 router.get('/components/:id', authenticated, (req, res) => {
 
@@ -52,7 +79,6 @@ router.get('/components/:id', authenticated, (req, res) => {
 
   pool.query(queryText, [req.params.id])
     .then((results) => {
-        // res.send(results.rows);
         res.send(calculations.addComponents(results.rows));
     })
     .catch(err => {

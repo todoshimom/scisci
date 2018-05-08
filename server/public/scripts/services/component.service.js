@@ -163,6 +163,16 @@ myApp.service('ComponentService', ['$http', '$location', function ($http, $locat
     /*            OTHER FUNCTIONS             */
     /******************************************/
 
+    // for sorting modules used in on the client-side
+    self.sortColumnsClientSide = function(filter) {
+      self.componentLibrary.list.sort(function(a, b) {
+        if (filter === 'modulesUsedInAsc') {
+          return a.modules_used_in - b.modules_used_in;
+        } else {
+          return b.modules_used_in - a.modules_used_in;
+        }
+      });
+    };
 
 
 }]);

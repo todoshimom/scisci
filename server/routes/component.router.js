@@ -4,7 +4,7 @@ const sorting = require('../modules/sorting.js');
 const router = express.Router();
 const authenticated = require('../models/authenticated');
 const isEditor = require('../models/editor');
-
+const convertToCsv = require('../modules/convertToCsv');
 
 /******************************************/
 /*              GET REQUESTS              */
@@ -15,6 +15,19 @@ router.get('/', authenticated, isEditor, (req, res) => {
   pool.query(queryText)
       .then((results) => {
         res.send(results.rows);
+      })
+      .catch((error) => {
+        console.log('Error on GET components request', error);
+        res.sendStatus(500);
+    });
+});
+
+router.get('/csv/component_library.csv', authenticated, isEditor, (req, res) => {
+
+  let queryText = `SELECT * FROM components ORDER BY "name"`;
+  pool.query(queryText)
+      .then((results) => {
+        res.send(convertToCsv(results.rows));
       })
       .catch((error) => {
         console.log('Error on GET components request', error);

@@ -1,12 +1,18 @@
-myApp.controller('ShoppingListController', ['ShoppingListService', function (ShoppingListService) {
+myApp.controller('ShoppingListController', ['ShoppingListService', '$routeParams', function (ShoppingListService, $routeParams) {
     let self = this;
 
     self.Math = Math;
 
     self.shoppingLists = ShoppingListService.shoppingLists;
     self.components = ShoppingListService.components;
-    // self.showHideTableData = false;
+
+    self.totalCosts = ShoppingListService.totalCosts;
+
+    self.currentId = $routeParams.id;
+
     self.componentComments = "";
+
+    self.sortColumnsClientSide = ShoppingListService.sortColumnsClientSide;
 
     self.addShoppingList = function(list) {
         ShoppingListService.addShoppingList(list);
@@ -61,4 +67,11 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     self.printPage = function() {
         window.print();
     };
+
+    // if on a solo page, get the components, otherwise, hide the components
+    if($routeParams.id) {
+      ShoppingListService.getComponents($routeParams.id);
+    } else {
+      ShoppingListService.components.list = [];
+    }
 }]);
