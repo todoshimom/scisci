@@ -29,12 +29,54 @@
 					<i class="fas fa-caret-square-down"></i>
 					</span>
 			</h3>
-			<h3 class="columnheader">In-House</h3>
-			<h3 class="columnheader">Name</h3>
-			<h3 class="columnheader">Order Quantity</h3>
-			<h3 class="columnheader">Type</h3>
-			<h3 class="columnheader">Description</h3>
-			<h3 class="columnheader">Vendor 1</h3>
+			<h3 class="columnheader">In-House
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('inHouseAsc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('inHouseDesc')">
+					<i class="fas fa-caret-square-down"></i>
+				</span>
+			</h3>
+			<h3 class="columnheader">Name
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('nameAsc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('nameDesc')">
+					<i class="fas fa-caret-square-down"></i>
+				</span>
+			</h3>
+			<h3 class="columnheader">Order Quantity
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('orderQuantityAsc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('orderQuantityDesc')">
+					<i class="fas fa-caret-square-down"></i>
+				</span>
+			</h3>
+			<h3 class="columnheader">Type
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('typeAsc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('typeDesc')">
+					<i class="fas fa-caret-square-down"></i>
+				</span>
+			</h3>
+			<h3 class="columnheader">Description
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('descriptionAsc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('descriptionDesc')">
+					<i class="fas fa-caret-square-down"></i>
+				</span>
+			</h3>
+			<h3 class="columnheader">Vendor 1
+				<span class="sort-button" ng-click="vm.sortColumnsClientSide('vendor1Asc')">
+					<i class="fas fa-caret-square-up"></i>
+					</span>
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('vendor1Desc')">
+					<i class="fas fa-caret-square-down"></i>
+				</span>
+			</h3>
 			<h3 class="columnheader">More Info</h3>
 		</div><!-- /.mock-table-row-header -->
 	</div><!-- /.mock-table-header -->

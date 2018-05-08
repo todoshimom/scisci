@@ -5,6 +5,8 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     self.components = {list: []};
     self.currentShoppingListId = { shopId: 0 };
 
+    self.currentSortMethod = 'vendorPrimaryAsc';
+
 	/******************************************/
 	/*              GET REQUESTS              */
 	/******************************************/
@@ -23,6 +25,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
+            self.sortColumnsClientSide(self.currentSortMethod);
             $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
@@ -94,14 +97,47 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
 
     // for sorting modules used in on the client-side
     self.sortColumnsClientSide = function(filter) {
+      // capture the selected sort method
+      self.currentSortMethod = filter;
+
       self.components.list.sort(function(a, b) {
+        // sort by ordered status (Boolean)
         if (filter === 'orderedAsc') {
-          // return a.ordered - b.ordered;
           return (a.ordered === b.ordered)? 0 : a.ordered? -1 : 1;
         } else if (filter === 'orderedDesc') {
-          // return b.ordered - a.ordered;
           return (b.ordered === a.ordered)? 0 : b.ordered? -1 : 1;
+
+        // sort by in-house status (boolean)
+        } else if (filter === 'inHouseAsc') {
+          return (a.in_house === b.in_house)? 0 : a.in_house? -1 : 1;
+        } else if (filter === 'inHouseDesc') {
+          return (b.in_house === a.in_house)? 0 : b.in_house? -1 : 1;
+
+        // sort by name (string)
+        } else if (filter === 'nameAsc') {
+          return a.name > b.name;
+        } else if (filter === 'nameDesc') {
+          return b.name > a.name;
+
+        // sort by type (string)
+        } else if (filter === 'typeAsc') {
+          return a.type > b.type;
+        } else if (filter === 'typeDesc') {
+          return b.type > a.type;
+
+        // sort by description (string)
+        } else if (filter === 'descriptionAsc') {
+          return a.description > b.description;
+        } else if (filter === 'descriptionDesc') {
+          return b.description > a.description;
+          
+        // sort by primary vendor (string)
+        } else if (filter === 'vendorPrimaryAsc') {
+          return a.vendorPrimary > b.vendorPrimary;
+        } else if (filter === 'vendorPrimaryDesc') {
+          return b.vendorPrimary > a.vendorPrimary;
         }
+        
       });
     };
 
