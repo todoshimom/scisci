@@ -1,6 +1,8 @@
 myApp.controller('ShoppingListController', ['ShoppingListService', function (ShoppingListService) {
     let self = this;
 
+    self.Math = Math;
+
     self.shoppingLists = ShoppingListService.shoppingLists;
     self.components = ShoppingListService.components;
     // self.showHideTableData = false;
@@ -28,10 +30,10 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     self.updateOrdered = function(component) {
       if (component.ordered_inhouse_id === null) {
         component.ordered = true;
-        ShoppingListService.addOrderedInHouseToComponent(component);
+        ShoppingListService.addOrderedInHouseCommentsComponent(component);
       } else {
         component.ordered = !component.ordered;
-        ShoppingListService.updateOrderedInHouseComponent(component);
+        ShoppingListService.updateOrderedInHouseCommentsComponent(component);
       }
         // ShoppingListService.updateOrdered(orderStatus);
     };//end function to call service
@@ -40,10 +42,10 @@ myApp.controller('ShoppingListController', ['ShoppingListService', function (Sho
     self.updateInHouse = function(component) {
       if (component.ordered_inhouse_id === null) {
         component.in_house = true;
-        ShoppingListService.addOrderedInHouseToComponent(component);
+        ShoppingListService.addOrderedInHouseCommentsComponent(component);
       } else {
         component.in_house = !component.in_house;
-        ShoppingListService.updateOrderedInHouseComponent(component);
+        ShoppingListService.updateOrderedInHouseCommentsComponent(component);
       }
     };//end function to call service
 
