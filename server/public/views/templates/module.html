@@ -68,7 +68,7 @@
         <textarea ng-change="vm.newUnsavedChange()" ng-model="vm.module.data.version_notes" auto-grow></textarea>
     </md-input-container>
 
-    <md-datepicker ng-model="vm.module.data.version_date"></md-datepicker>
+    <md-datepicker ng-change="vm.newUnsavedChange()" ng-model="vm.module.data.version_date"></md-datepicker>
 
     <h2 class="md-title md-title-left">Resources</h2>
     <div class="resource-list col col-5">
