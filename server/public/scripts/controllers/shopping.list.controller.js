@@ -8,6 +8,8 @@ myApp.controller('ShoppingListController', ['ShoppingListService', '$routeParams
 
     self.totalCosts = ShoppingListService.totalCosts;
 
+    self.currentId = $routeParams.id;
+
     self.componentComments = "";
 
     self.sortColumnsClientSide = ShoppingListService.sortColumnsClientSide;

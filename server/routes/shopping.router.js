@@ -3,7 +3,7 @@ const pool = require('../modules/pool.js');
 const calculations = require('../modules/addComponents.js');
 const router = express.Router();
 const authenticated = require('../models/authenticated')
-
+const convertToCsv = require('../modules/convertToCsv.js');
 
 /******************************************/
 /*              GET REQUESTS              */
@@ -38,6 +38,7 @@ router.get('/list/:id', authenticated, (req, res) => {
 router.get('/csv/:id', authenticated, (req, res) => {
     // remove the '.csv' from the file name
     let id = req.params.id.substr(0, req.params.id.length - 4);
+    id = id.substr(14, req.params.id.length);
 
     let queryText = `
     SELECT modules_shopping.shopping_id, components_modules.pieces_per_kit, modules_shopping.quantity, shoppinglist.name AS shoppinglist_name,
@@ -53,32 +54,8 @@ router.get('/csv/:id', authenticated, (req, res) => {
   
     pool.query(queryText, [id])
       .then((results) => {
-
         let data = calculations.addComponents(results.rows);
-
-        let csv = '';
-
-
-        let objectKeys = Object.keys(data[0]);
-        for (let i = 0; i < data.length; i++) {
-            if (i === 0) {
-                for (let j = 0; j < objectKeys.length; j++) {
-                    csv += '"' + objectKeys[j] + '",';
-                }
-            }
-            csv += '\n';
-            for (let j = 0; j < objectKeys.length; j++) {
-                if (typeof data[0][objectKeys[j]] === 'string') {
-                    // replace all " with \"
-                    data[0][objectKeys[j]].replace(/"/g, '\"');
-                    // enclose the string in "
-                    csv += '"' + data[0][objectKeys[j]] + '",';
-                } else {
-                    csv += data[0][objectKeys[j]] + ',';
-                }
-            }
-        }
-        res.send(csv);
+        res.send(convertToCsv(data));
       })
       .catch(err => {
           console.log('Error getting shopping list components', err);

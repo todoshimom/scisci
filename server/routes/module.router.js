@@ -5,6 +5,7 @@ const router = express.Router();
 const authenticated = require('../models/authenticated')
 const isEditor = require('../models/editor')
 const moduleCost = require('../models/module.costs')
+const convertToCsv = require('../modules/convertToCsv');
 
 /******************************************/
 /*              GET REQUESTS              */
@@ -14,6 +15,20 @@ router.get('/all', authenticated, (req, res) => {
     pool.query(queryText)
         .then((results) => {
             res.send(results.rows);
+        })
+        .catch((error) => {
+            console.log('Error on GET modules request', error);
+            res.sendStatus(500);
+        });
+
+});
+
+router.get('/csv/module_library.csv', authenticated, (req, res) => {
+
+    const queryText = 'SELECT * FROM modules ORDER BY "name"';
+    pool.query(queryText)
+        .then((results) => {
+            res.send(convertToCsv(results.rows));
         })
         .catch((error) => {
             console.log('Error on GET modules request', error);
