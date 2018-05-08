@@ -23,7 +23,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
-            console.log(self.components.list);
             $location.path(`/shopping-list/${listId}`);
           })
           .catch( function(error) {
