@@ -8,7 +8,7 @@ myApp.controller('ShoppingListController', ['ShoppingListService', '$routeParams
 
     self.totalCosts = ShoppingListService.totalCosts;
 
-    self.currentId = $routeParams.id;
+    self.currentId = null;
 
     self.componentComments = "";
 
@@ -71,7 +71,9 @@ myApp.controller('ShoppingListController', ['ShoppingListService', '$routeParams
     // if on a solo page, get the components, otherwise, hide the components
     if($routeParams.id) {
       ShoppingListService.getComponents($routeParams.id);
+      self.currentId = $routeParams.id;
     } else {
       ShoppingListService.components.list = [];
+      self.currentId = null;
     }
 }]);
