@@ -10,13 +10,13 @@ function convertToCsv(data) {
         }
         csv += '\n';
         for (let j = 0; j < objectKeys.length; j++) {
-            if (typeof data[0][objectKeys[j]] === 'string') {
+            if (typeof data[i][objectKeys[j]] === 'string') {
                 // replace all " with \"
-                data[0][objectKeys[j]].replace(/"/g, '\"');
+                data[i][objectKeys[j]].replace(/"/g, '\"');
                 // enclose the string in "
-                csv += '"' + data[0][objectKeys[j]] + '",';
+                csv += '"' + data[i][objectKeys[j]] + '",';
             } else {
-                csv += data[0][objectKeys[j]] + ',';
+                csv += data[i][objectKeys[j]] + ',';
             }
         }
     }
