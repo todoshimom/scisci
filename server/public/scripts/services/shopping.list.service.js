@@ -107,7 +107,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
     self.sortColumnsClientSide = function(filter) {
       // capture the selected sort method
       self.currentSortMethod = filter;
-
+      
       self.components.list.sort(function(a, b) {
         // sort by ordered status (Boolean)
         if (filter === 'orderedAsc') {
@@ -147,9 +147,10 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
           
         // sort by primary vendor (string)
         } else if (filter === 'vendorPrimaryAsc') {
-          return a.vendorPrimary > b.vendorPrimary;
+          console.log(a);
+          return a.vendor_name_primary > b.vendor_name_primary;
         } else if (filter === 'vendorPrimaryDesc') {
-          return b.vendorPrimary > a.vendorPrimary;
+          return b.vendor_name_primary > a.vendor_name_primary;
         }
         
       });
