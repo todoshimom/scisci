@@ -73,8 +73,9 @@ router.get('/components/:id', authenticated, isEditor, (req, res) => {
             // add in a few calculated values
             for (let i = 0; i < result.rows.length; i++) {
                 result.rows[i].unitsToOrder = Math.ceil( (result.rows[i].pieces_per_kit || 0)/result.rows[i].pieces_per_unit )
+                result.rows[i].price = result.rows[i].unitsToOrder * result.rows[i].price_per_unit;
             }
-            
+
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);
