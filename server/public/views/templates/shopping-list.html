@@ -67,14 +67,22 @@
 						<i class="fas fa-caret-square-down"></i>
 					</span>
 				</h3>
-				<h3 class="columnheader">Type
+				<h3 class="columnheader">Price
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('priceAsc')">
+						<i class="fas fa-caret-square-up"></i>
+						</span>
+						<span class="sort-button" ng-click="vm.sortColumnsClientSide('priceDesc')">
+						<i class="fas fa-caret-square-down"></i>
+					</span>
+				</h3>
+				<!--<h3 class="columnheader">Type
 					<span class="sort-button" ng-click="vm.sortColumnsClientSide('typeAsc')">
 						<i class="fas fa-caret-square-up"></i>
 						</span>
 						<span class="sort-button" ng-click="vm.sortColumnsClientSide('typeDesc')">
 						<i class="fas fa-caret-square-down"></i>
 					</span>
-				</h3>
+				</h3>-->
 				<h3 class="columnheader">Description
 					<span class="sort-button" ng-click="vm.sortColumnsClientSide('descriptionAsc')">
 						<i class="fas fa-caret-square-up"></i>
@@ -106,7 +114,10 @@
 				<p role="cell">
 					{{component.orderQuantity}}
 				</p>
-				<p role="cell">{{component.type}}</p>
+				<p role="cell">
+					{{component.price | currency}}
+				</p>
+
 				<p role="cell">{{component.description}}</p>
 				<p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
 				<p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">
@@ -117,23 +128,25 @@
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
-							<div class="mock-table-row mock-table-row-header col col-7" row="row">
+							<div class="mock-table-row mock-table-row-header col col-8" row="row">
 								<h3 class="columnheader">Price Per Unit</h3>
 								<h3 class="columnheader">Pieces Per Kit Summed</h3>
 								<h3 class="columnheader">Pieces Per Unit</h3>
 								<h3 class="columnheader">General Stock</h3>
 								<h3 class="columnheader">Consumable</h3>
+								<h3 class="columnheader">Type</h3>
 								<h3 class="columnheader">Vendor 2</h3>
 								<h3 class="columnheader">Notes</h3>
 							</div><!-- /.mock-table-row-header -->
 						</div><!-- /.mock-table-header -->
 						<div class="mock-table-body" role="rowgroup">
-							<div class="mock-table-row col col-7" row="row">
+							<div class="mock-table-row col col-8" row="row">
 								<p role="cell">{{component.price_per_unit | currency}}</p>
 								<p role="cell">{{component.piecesPerKitSummed}} <!--{{component.pieces_per_unit}}--></p>
 								<p role="cell">{{component.pieces_per_unit}}</p>
 								<p role="cell">{{component.general_stock_item}}</p>
 								<p role="cell">{{component.consumable}}</p>
+								<p role="cell">{{component.type}}</p>
 								<p role="cell"><a href="http://{{component.vendor_url_secondary}}" target="_blank">{{component.vendor_name_secondary}}</a></p>
 								<p role="cell">{{component.notes}}</p>
 							</div><!-- /.mock-table-row -->

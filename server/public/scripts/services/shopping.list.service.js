@@ -31,6 +31,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
+
             self.sortColumnsClientSide(self.currentSortMethod);
             self.calculateCosts();
 
@@ -139,6 +140,12 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         } else if (filter === 'typeDesc') {
           return b.type > a.type;
 
+        // sort by price (number)
+        } else if (filter === 'priceAsc') {
+          return a.price > b.price;
+        } else if (filter === 'priceDesc') {
+          return b.price > a.price;
+
         // sort by description (string)
         } else if (filter === 'descriptionAsc') {
           return a.description > b.description;
@@ -147,7 +154,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
           
         // sort by primary vendor (string)
         } else if (filter === 'vendorPrimaryAsc') {
-          console.log(a);
           return a.vendor_name_primary > b.vendor_name_primary;
         } else if (filter === 'vendorPrimaryDesc') {
           return b.vendor_name_primary > a.vendor_name_primary;

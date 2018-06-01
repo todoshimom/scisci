@@ -54,8 +54,12 @@ router.get('/csv/:id', authenticated, (req, res) => {
   
     pool.query(queryText, [id])
       .then((results) => {
-        let data = calculations.addComponents(results.rows);
-        res.send(convertToCsv(data));
+        let dataToSend = calculations.addComponents(results.rows);
+        // calculates total price for an item (order quantity * price per unit)
+        for (let i = 0; i < dataToSend.length; i++) {
+            dataToSend[i].price = dataToSend[i].orderQuantity * Number(dataToSend[i].price_per_unit);
+        }
+        res.send(convertToCsv(dataToSend));
       })
       .catch(err => {
           console.log('Error getting shopping list components', err);
@@ -79,7 +83,12 @@ router.get('/components/:id', authenticated, (req, res) => {
 
   pool.query(queryText, [req.params.id])
     .then((results) => {
-        res.send(calculations.addComponents(results.rows));
+        let dataToSend = calculations.addComponents(results.rows);
+        // calculates total price for an item (order quantity * price per unit)
+        for (let i = 0; i < dataToSend.length; i++) {
+            dataToSend[i].price = dataToSend[i].orderQuantity * Number(dataToSend[i].price_per_unit);
+        }
+        res.send(dataToSend);
     })
     .catch(err => {
         console.log('Error getting shopping list components', err);
