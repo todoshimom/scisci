@@ -69,6 +69,12 @@ router.get('/components/:id', authenticated, isEditor, (req, res) => {
         WHERE components_modules.module_id = $1`;
     pool.query(queryText, [req.params.id])
         .then(result => {
+
+            // add in a few calculated values
+            for (let i = 0; i < result.rows.length; i++) {
+                result.rows[i].unitsToOrder = Math.ceil( (result.rows[i].pieces_per_kit || 0)/result.rows[i].pieces_per_unit )
+            }
+            
             res.send(result.rows);
         }).catch(err => {
             console.log('err', err);

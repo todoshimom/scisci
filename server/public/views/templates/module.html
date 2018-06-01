@@ -186,9 +186,9 @@
         <div class="mock-table-row mock-table-row-header col col-8" row="row">
             <h3 class="columnheader">Pieces Per Kit</h3>
             <h3 class="columnheader">Name</h3>
-            <h3 class="columnheader">Type</h3>
             <h3 class="columnheader">Units to Order</h3>
             <h3 class="columnheader">Price Per Unit</h3>
+            <h3 class="columnheader">Price</h3>
             <h3 class="columnheader">Pieces Per Unit</h3>
             <h3 class="columnheader">Delete</h3>
 			<h3 class="columnheader">More Info</h3>
@@ -204,9 +204,9 @@
                 </md-input-container>
             </p>
             <p role="cell">{{row.name}}</p>
-            <p role="cell">{{row.type}}</p>
-            <p role="cell">{{Math.ceil( (row.pieces_per_kit || 0)/row.pieces_per_unit )}}</p>
+            <p role="cell">{{row.unitsToOrder}}</p>
             <p role="cell">{{row.price_per_unit | currency}}</p>
+            <p role="cell">{{row.price_per_unit * Math.ceil( (row.pieces_per_kit || 0)/row.pieces_per_unit ) | currency}}</p>
             <p role="cell">{{row.pieces_per_unit}}</p>
             <p role="cell">
                 <a class="button button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id); vm.newUnsavedChange()">
@@ -222,9 +222,10 @@
 				<div class="collapsed-table-data" ng-if="vm.showHideTableData[$index].show">
 					<div class="mock-table" role="table" aria-label="Components">
 						<div class="mock-table-header" role="rowgroup">
-							<div class="mock-table-row mock-table-row-header col col-6" row="row">
+							<div class="mock-table-row mock-table-row-header col col-7" row="row">
                                 <h3 class="columnheader">General Stock</h3>
                                 <h3 class="columnheader">Consumable</h3>
+                                <h3 class="columnheader">Type</h3>
                                 <h3 class="columnheader">Vendor 1</h3>
                                 <h3 class="columnheader">Vendor 2</h3>
                                 <h3 class="columnheader">Description</h3>
@@ -234,9 +235,10 @@
 
 
 						<div class="mock-table-body" role="rowgroup">
-                            <div class="mock-table-row col col-6" row="row">                                
+                            <div class="mock-table-row col col-7" row="row">                                
                                 <p role="cell">{{row.general_stock_item}}</p>
                                 <p role="cell">{{row.consumable}}</p>
+                                <p role="cell">{{row.type}}</p>
                                 <p role="cell">
                                     <a ng-href="{{row.vendor_url_primary}}">
                                         {{row.vendor_name_primary}}

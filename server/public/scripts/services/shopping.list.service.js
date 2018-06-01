@@ -154,7 +154,6 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
           
         // sort by primary vendor (string)
         } else if (filter === 'vendorPrimaryAsc') {
-          console.log(a);
           return a.vendor_name_primary > b.vendor_name_primary;
         } else if (filter === 'vendorPrimaryDesc') {
           return b.vendor_name_primary > a.vendor_name_primary;
