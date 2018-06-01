@@ -5,6 +5,7 @@ const router = express.Router();
 const authenticated = require('../models/authenticated');
 const isEditor = require('../models/editor');
 const convertToCsv = require('../modules/convertToCsv');
+const axios = require('axios');
 
 /******************************************/
 /*              GET REQUESTS              */
