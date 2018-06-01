@@ -67,14 +67,22 @@
 						<i class="fas fa-caret-square-down"></i>
 					</span>
 				</h3>
-				<h3 class="columnheader">Type
+				<h3 class="columnheader">Price
+					<span class="sort-button" ng-click="vm.sortColumnsClientSide('priceAsc')"><!--TODO-->
+						<i class="fas fa-caret-square-up"></i>
+						</span>
+						<span class="sort-button" ng-click="vm.sortColumnsClientSide('priceDesc')"><!--TODO-->
+						<i class="fas fa-caret-square-down"></i>
+					</span>
+				</h3>
+				<!--<h3 class="columnheader">Type
 					<span class="sort-button" ng-click="vm.sortColumnsClientSide('typeAsc')">
 						<i class="fas fa-caret-square-up"></i>
 						</span>
 						<span class="sort-button" ng-click="vm.sortColumnsClientSide('typeDesc')">
 						<i class="fas fa-caret-square-down"></i>
 					</span>
-				</h3>
+				</h3>-->
 				<h3 class="columnheader">Description
 					<span class="sort-button" ng-click="vm.sortColumnsClientSide('descriptionAsc')">
 						<i class="fas fa-caret-square-up"></i>
@@ -106,7 +114,12 @@
 				<p role="cell">
 					{{component.orderQuantity}}
 				</p>
-				<p role="cell">{{component.type}}</p>
+				<!--<p role="cell">{{component.type}}</p>-->
+
+				<p role="cell">
+					{{component.price | currency}}
+				</p>
+
 				<p role="cell">{{component.description}}</p>
 				<p role="cell"><a href="http://{{component.vendor_url_primary}}" target="_blank">{{component.vendor_name_primary}}</a></p>
 				<p role="cell" ng-click="vm.showHideTableData[$index].show = !vm.showHideTableData[$index].show">

@@ -31,6 +31,12 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         $http.get(`/api/shopping/components/${listId}`)
           .then( function(result) {
             self.components.list = result.data;
+
+            // calculates total price for an item (order quantity * price per unit)
+            for (let i = 0; i < self.components.list.length; i++) {
+              self.components.list[i].price = self.components.list[i].orderQuantity * Number(self.components.list[i].price_per_unit);
+            }
+
             self.sortColumnsClientSide(self.currentSortMethod);
             self.calculateCosts();
 
