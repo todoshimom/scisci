@@ -140,6 +140,12 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         } else if (filter === 'typeDesc') {
           return b.type > a.type;
 
+        // sort by price (number)
+        } else if (filter === 'priceAsc') {
+          return a.price > b.price;
+        } else if (filter === 'priceDesc') {
+          return b.price > a.price;
+
         // sort by description (string)
         } else if (filter === 'descriptionAsc') {
           return a.description > b.description;
