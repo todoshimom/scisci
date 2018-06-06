@@ -135,7 +135,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         // if it isn't already here, then add it.
         if (!componentIsInModule) {
             // unshift that component to the list
-            // TODO: remove dummy data with live data from suggest box
             self.components.data.unshift(
                 {
                     // module_id: 34, // not needed?
@@ -272,6 +271,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 // UPDATE THE MODULE
                 self.updateModule();
                 
+                self.getModuleComponents();
 
             })
             .catch(error => {

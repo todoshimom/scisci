@@ -7,6 +7,9 @@ const isEditor = require('../models/editor');
 const convertToCsv = require('../modules/convertToCsv');
 const axios = require('axios');
 
+const os = require('os');
+const hostname = os.hostname();
+
 /******************************************/
 /*              GET REQUESTS              */
 /******************************************/
@@ -15,7 +18,21 @@ router.get('/', authenticated, isEditor, (req, res) => {
   let queryText = `SELECT * FROM components ORDER BY "name"`;
   pool.query(queryText)
       .then((results) => {
-        res.send(results.rows);
+
+        let urlsArray = [];
+        for (let i = 0; i < results.rows.length; i++) {
+          urlsArray.push('http://localhost:5000' + '/api/component/modulesCount/' + results.rows[i].id);
+          console.log('http://localhost:5000' + '/api/component/modulesCount/' + results.rows[i].id);
+        }
+        let promiseArray = urlsArray.map(url => axios.get(url)); // or whatever
+        axios.all(promiseArray)
+          .then(function(results) {
+            res.send(results);
+        })
+        .catch(function(err) {
+          console.log('error', err)
+        });
+
       })
       .catch((error) => {
         console.log('Error on GET components request', error);
@@ -49,7 +66,8 @@ router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
   });
 });
 
-router.get('/modulesCount/:id', authenticated, isEditor, (req, res) => {
+router.get('/modulesCount/:id', (req, res) => {
+  console.log('hit');
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
   pool.query(queryText, [req.params.id])
     .then((results) => {

@@ -67,6 +67,7 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
                     self.hasUnsavableChanges.status = true;
                 } else {
                     self.hasUnsavableChanges.status = false;
+                    
                     self.saveModule();
                 }
             }
