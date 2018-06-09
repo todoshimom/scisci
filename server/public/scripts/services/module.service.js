@@ -271,7 +271,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 // UPDATE THE MODULE
                 self.updateModule();
                 
-                self.getModuleComponents();
+                // self.getModuleComponents();
 
             })
             .catch(error => {
