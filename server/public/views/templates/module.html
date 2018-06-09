@@ -204,9 +204,9 @@
                 </md-input-container>
             </p>
             <p role="cell">{{row.name}}</p>
-            <p role="cell">{{row.unitsToOrder}}</p>
+            <p role="cell"><!--{{row.unitsToOrder}}-->{{Math.ceil(row.pieces_per_kit/row.pieces_per_unit)}}</p>
             <p role="cell">{{row.price_per_unit | currency}}</p>
-            <p role="cell">{{row.price | currency}}</p>
+            <p role="cell"><!--{{row.price | currency}}-->{{Math.ceil(row.pieces_per_kit/row.pieces_per_unit)*row.price_per_unit | currency}}</p>
             <p role="cell">{{row.pieces_per_unit}}</p>
             <p role="cell">
                 <a class="button button-naked" ng-click="vm.deleteModuleComponentInDraft(row.module_id, row.component_id); vm.newUnsavedChange()">
