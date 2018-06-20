@@ -265,7 +265,7 @@
 
     <md-input-container>
         <label>Assembly Notes</label>
-        <textarea ng-model="vm.module.data.assembly_notes" auto-grow></textarea>
+        <textarea ng-model="vm.module.data.assembly_notes" ng-change="vm.newUnsavedChange()" auto-grow></textarea>
     </md-input-container>
 
     </form>
