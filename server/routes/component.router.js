@@ -19,19 +19,21 @@ router.get('/', authenticated, isEditor, (req, res) => {
   pool.query(queryText)
       .then((results) => {
 
-        let urlsArray = [];
-        for (let i = 0; i < results.rows.length; i++) {
-          urlsArray.push('http://localhost:5000' + '/api/component/modulesCount/' + results.rows[i].id);
-          console.log('http://localhost:5000' + '/api/component/modulesCount/' + results.rows[i].id);
-        }
-        let promiseArray = urlsArray.map(url => axios.get(url)); // or whatever
-        axios.all(promiseArray)
-          .then(function(results) {
-            res.send(results);
-        })
-        .catch(function(err) {
-          console.log('error', err)
-        });
+        // let urlsArray = [];
+        // for (let i = 0; i < results.rows.length; i++) {
+        //   urlsArray.push('http://localhost:5000' + '/api/component/modulesCount/' + results.rows[i].id);
+        //   console.log('http://localhost:5000' + '/api/component/modulesCount/' + results.rows[i].id);
+        // }
+        // let promiseArray = urlsArray.map(url => axios.get(url)); // or whatever
+        // axios.all(promiseArray)
+        //   .then(function(results) {
+        //     res.send(results);
+        // })
+        // .catch(function(err) {
+        //   console.log('error', err)
+        // });
+
+        res.send(results);
 
       })
       .catch((error) => {
@@ -67,7 +69,6 @@ router.get('/sorting/:method', authenticated, isEditor, (req, res) => {
 });
 
 router.get('/modulesCount/:id', (req, res) => {
-  console.log('hit');
   let queryText = `SELECT COUNT ("component_id") FROM components_modules WHERE "component_id" = $1`;
   pool.query(queryText, [req.params.id])
     .then((results) => {
