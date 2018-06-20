@@ -110,7 +110,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
 
         $http.post('/api/module/components', dataToSend)
         .then(response => {
-            self.getModule();
+            // TODO: Fix #1: don't update component list on edits, only on refresh
+            // self.getModule();
         })
         .catch(error => {
             console.log('error in add module component', error);
@@ -123,6 +124,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         if(!piecesPerKit) {
             piecesPerKit = 0;
         }
+        // TODO: Check duplicate adding here
 
         // check if it's already in the module
         let componentIsInModule = false;
@@ -302,7 +304,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.deleteModuleComponent = function(moduleId, componentId) {        
         $http.delete('/api/module/components/' + moduleId + '/' + componentId)
             .then(response => {
-                self.getModuleComponents();
+                // TODO: Fix #1: don't update component list on edits, only on refresh
+                // self.getModuleComponents();
             })
             .catch(error => {
                 console.log('error in delete', error);
