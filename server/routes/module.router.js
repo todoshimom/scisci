@@ -87,9 +87,12 @@ router.get('/components/:id', authenticated, isEditor, (req, res) => {
 router.get('/cost/rates/:id', authenticated, isEditor, (req, res) => {
     moduleCost(req.params.id) // Getting single module results.
         .then((results) => {
-            results[0].kit_and_labor_sum = results[0].currentKitSum + results[0].laborCost
-            results[0].current_and_labor_sum = results[0].currentSum + results[0].laborCost
-            console.log('find this', results[0])
+            if (results[0]) {
+
+            }
+            results[0].kit_and_labor_sum = results[0].currentKitSum + results[0].laborCost;
+            results[0].current_and_labor_sum = results[0].currentSum + results[0].laborCost;
+            console.log('find this', results[0]);
             // To add material costs, kit costs, labor costs, etc into the database. 
             let sendResults = {id: results[0].module_id,
             material_cost: results[0].currentSum,
