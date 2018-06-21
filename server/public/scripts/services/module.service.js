@@ -42,8 +42,11 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.getModuleComponents = function() {
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
+
+                // sort alphabetically
+                response.data.sort(function(a,b) { return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ); 
                 self.components.data = response.data;
-                console.log(self.components.data);
+                
                 self.getCostRates();
             })
             .catch(error => {
