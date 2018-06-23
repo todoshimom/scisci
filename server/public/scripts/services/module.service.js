@@ -46,6 +46,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 // sort alphabetically
                 response.data.sort(function(a,b) { return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);} ); 
                 self.components.data = response.data;
+                console.log(self.components.data);
                 
                 self.getCostRates();
             })
@@ -112,13 +113,13 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         };
 
         $http.post('/api/module/components', dataToSend)
-        .then(response => {
-            // TODO: Remove after QC. Fix #1: don't update component list on edits, only on refresh
-            // self.getModule();
-        })
-        .catch(error => {
-            console.log('error in add module component', error);
-        });
+            .then(response => {
+                // TODO: Remove after QC. Fix #1: don't update component list on edits, only on refresh
+                // self.getModule();
+            })
+            .catch(error => {
+                console.log('error in add module component', error);
+            });
 
     }
 
@@ -229,6 +230,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 }
             }
         }
+
+        // BEGIN DUPLICATES FIX: Remove all duplicates before posting
+        for (let i = 0; i < componentsToPost.length; i++) {
+            for (let j = i + 1; j < componentsToPost.length; j++) {
+                if (componentsToPost[i].component_id === componentsToPost[j].component_id) {
+                    componentsToPost.splice(j, 1);
+                    j--;
+                }
+            }
+        }
+        // END DUPLICATES FIX
+
         for (let i = 0; i < componentsToPost.length; i++) {
             self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
         }
@@ -264,6 +277,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
         $http.get('/api/module/components/' + $routeParams.id)
             .then(response => {
                 self.componentsSaved.data = response.data;
+
 
                 self.updateModuleEverythingComponentsPost()
                 self.updateModuleEverythingComponentsDelete();
@@ -330,7 +344,6 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     /******************************************/
 
     // CALCULATIONS
-    // Whats this for? is this even being used?
     self.calculations = {};
     self.calculations.material_cost = 0;
     self.calculations.material_in_kit_cost = 0;
