@@ -287,18 +287,18 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$q', func
                     // self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
                 }
 
-                // // Update quantities of existing components
-                // for (let i = 0; i < self.components.data.length; i++) {
+                // Update quantities of existing components
+                for (let i = 0; i < self.components.data.length; i++) {
 
-                //     let moduleComponentToSave = {
-                //         module_id: $routeParams.id,
-                //         component_id: self.components.data[i].component_id,
-                //         pieces_per_kit: self.components.data[i].pieces_per_kit
-                //     };
+                    // let moduleComponentToSave = {
+                    //     module_id: $routeParams.id,
+                    //     component_id: self.components.data[i].component_id,
+                    //     pieces_per_kit: self.components.data[i].pieces_per_kit
+                    // };
 
-                //     allRequests.push($http.put('/api/module/components', moduleComponentToSave));
-                //     // self.updateModuleComponent(self.components.data[i]);
-                // }
+                    // allRequests.push($http.put('/api/module/components', moduleComponentToSave));
+                    self.updateModuleComponent(self.components.data[i]);
+                }
 
                 $q.all(allRequests)
                     .then(response => {
