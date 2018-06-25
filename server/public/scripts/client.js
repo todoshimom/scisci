@@ -54,8 +54,8 @@ myApp.config(['$routeProvider', '$locationProvider', '$mdThemingProvider', funct
             }
         })
         .when('/module', {
-            templateUrl: '/views/templates/module.html',
-            controller: 'ModuleController as vm',
+            templateUrl: '/views/templates/module-new.html',
+            controller: 'ModuleNewController as vm',
             resolve: {
                 getuser: function (UserService) {
                     return UserService.getuser(true, 3);
