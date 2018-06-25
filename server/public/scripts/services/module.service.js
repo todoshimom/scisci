@@ -254,9 +254,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 }
             }
         }
-        for (let i = 0; i < componentsToDelete.length; i++) {
-            self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
-        }
+        return componentsToDelete;
     };
 
     self.updateModuleEverything = function() {
@@ -272,9 +270,13 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                     self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
                 }
 
-                self.updateModuleEverythingComponentsDelete();
+                // Delete components
+                let componentsToDelete = self.updateModuleEverythingComponentsDelete();
+                for (let i = 0; i < componentsToDelete.length; i++) {
+                    self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
+                }
 
-                // UPDATE QUANTITIES
+                // Update quantities of existing components
                 for (let i = 0; i < self.components.data.length; i++) {
                     self.updateModuleComponent(self.components.data[i]);
                 }
