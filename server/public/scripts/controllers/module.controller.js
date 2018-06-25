@@ -7,6 +7,7 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
     // for unsaved changes
     self.newUnsavedChange = ModuleService.newUnsavedChange;
     self.hasUnsavedChanges = ModuleService.hasUnsavedChanges;
+    self.isSaving = ModuleService.isSaving;
     self.hasUnsavableChanges = ModuleService.hasUnsavableChanges;
 
     self.module = ModuleService.module;
@@ -45,7 +46,8 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
         // Auto-save: check four times a second for changes, and auto-save them.
         $interval(function() {
 
-            if (self.hasUnsavedChanges.status) {
+            if (self.hasUnsavedChanges.status && !self.isSaving.status) {
+                self.isSaving.status = true;
                 
                 // track the number of required forms that are invalid
                 let requiredUnfilledCount = 0;
