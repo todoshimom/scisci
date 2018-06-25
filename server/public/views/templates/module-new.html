@@ -1,0 +1,17 @@
+<div ng-include="'views/partials/nav.html'"></div>
+<div ng-include="'views/partials/subnav-module.html'"></div>
+
+<div class="module">
+    <h2 class="md-title" ng-if="!vm.isSavedModule.value">Module Creator</h2>
+
+    <form ng-submit="vm.saveModule()" class="creation-header">
+        <md-input-container class="module-title-input">
+            <label>Module Name</label>
+            <input type="text" ng-model="vm.module.data.name" required />
+        </md-input-container>
+        
+        <div class="button-wrapper">
+            <input type="submit" class="button" ng-if="!vm.isSavedModule.value" value="Create Module" />
+        </div>
+    </form>
+</div>
