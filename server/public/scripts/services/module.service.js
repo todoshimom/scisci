@@ -230,21 +230,8 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 }
             }
         }
+        return componentsToPost;
 
-        // BEGIN DUPLICATES FIX: Remove all duplicates before posting
-        for (let i = 0; i < componentsToPost.length; i++) {
-            for (let j = i + 1; j < componentsToPost.length; j++) {
-                if (componentsToPost[i].component_id === componentsToPost[j].component_id) {
-                    componentsToPost.splice(j, 1);
-                    j--;
-                }
-            }
-        }
-        // END DUPLICATES FIX
-
-        for (let i = 0; i < componentsToPost.length; i++) {
-            self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
-        }
     };
 
     // Delete Module Components
@@ -279,7 +266,12 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
                 self.componentsSaved.data = response.data;
 
 
-                self.updateModuleEverythingComponentsPost()
+                // Post new components
+                let componentsToPost = self.updateModuleEverythingComponentsPost();
+                for (let i = 0; i < componentsToPost.length; i++) {
+                    self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
+                }
+
                 self.updateModuleEverythingComponentsDelete();
 
                 // UPDATE QUANTITIES
