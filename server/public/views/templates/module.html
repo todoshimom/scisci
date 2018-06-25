@@ -4,7 +4,7 @@
 <div class="module">
     <h2 class="md-title md-title-left" ng-if="vm.isSavedModule.value">Module Editor</h2>
     
-    <form ng-submit="vm.saveModule()" name="moduleForm">
+    <form name="moduleForm"><!-- REMOVED: ng-submit="vm.saveModule()" -->
     <md-input-container class="module-title-input">
         <label>Name</label>
         <input ng-change="vm.newUnsavedChange()" type="text" ng-model="vm.module.data.name" required class="requiredForSubmission" />
