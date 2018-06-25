@@ -1,4 +1,4 @@
-myApp.service('ModuleService', ['$http', '$location', '$routeParams', function ($http, $location, $routeParams) {
+myApp.service('ModuleService', ['$http', '$location', '$routeParams', '$q', function ($http, $location, $routeParams, $q) {
     let self = this;
 
     self.module = {};
@@ -7,6 +7,7 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
     self.calculations = { data: {}};
 
     self.moduleLibrary = {list:[{}]};
+    self.isSaving = { status: false };
     self.hasUnsavedChanges = { status: false };
     self.hasUnsavableChanges = { status: false };
 
@@ -263,23 +264,50 @@ myApp.service('ModuleService', ['$http', '$location', '$routeParams', function (
             .then(response => {
                 self.componentsSaved.data = response.data;
 
+                let allRequests = [];
 
                 // Post new components
                 let componentsToPost = self.updateModuleEverythingComponentsPost();
                 for (let i = 0; i < componentsToPost.length; i++) {
-                    self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
+
+                    const dataToSend = {
+                        module_id: $routeParams.id,
+                        component_id: componentsToPost[i].component_id,
+                        pieces_per_kit: componentsToPost[i].pieces_per_kit
+                    };
+                    allRequests.push($http.post('/api/module/components', dataToSend));
+
+                    // self.addModuleComponent(componentsToPost[i].component_id, componentsToPost[i].pieces_per_kit);
                 }
 
                 // Delete components
                 let componentsToDelete = self.updateModuleEverythingComponentsDelete();
                 for (let i = 0; i < componentsToDelete.length; i++) {
-                    self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
+                    allRequests.push($http.delete('/api/module/components/' + self.module.data.id + '/' + componentsToDelete[i].component_id));
+                    // self.deleteModuleComponent(self.module.data.id, componentsToDelete[i].component_id);
                 }
 
-                // Update quantities of existing components
-                for (let i = 0; i < self.components.data.length; i++) {
-                    self.updateModuleComponent(self.components.data[i]);
-                }
+                // // Update quantities of existing components
+                // for (let i = 0; i < self.components.data.length; i++) {
+
+                //     let moduleComponentToSave = {
+                //         module_id: $routeParams.id,
+                //         component_id: self.components.data[i].component_id,
+                //         pieces_per_kit: self.components.data[i].pieces_per_kit
+                //     };
+
+                //     allRequests.push($http.put('/api/module/components', moduleComponentToSave));
+                //     // self.updateModuleComponent(self.components.data[i]);
+                // }
+
+                $q.all(allRequests)
+                    .then(response => {
+                        self.isSaving.status = false;
+                        console.log('SUCCESS', response)
+                    })
+                    .catch(error => {
+                        console.log('error', error);
+                    });
 
                 // UPDATE THE MODULE
                 self.updateModule();
