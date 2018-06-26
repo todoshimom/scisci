@@ -67,6 +67,7 @@ myApp.controller('ModuleController', ['ModuleService', 'ComponentService', '$htt
                 // if they're all valid, save it and reset the unsaved marker
                 if (requiredUnfilledCount > 0) {
                     self.hasUnsavableChanges.status = true;
+                    self.isSaving.status = false;
                 } else {
                     self.hasUnsavableChanges.status = false;
                     
