@@ -171,7 +171,7 @@ myApp.service('ShoppingListService', ['$http', '$location', '$routeParams', func
         let pricePerUnit = Number(self.components.list[i].price_per_unit);
 
         // convert the price of one component to a number to two decimal places to avoid floating-point error
-        let componentPrice = Math.floor(pricePerUnit * self.components.list[i].price_per_unit * 100) / 100;
+        let componentPrice = Math.floor(pricePerUnit * self.components.list[i].orderQuantity * 100) / 100;
 
         // calculate cost for everything in the list
         newTotalCost += componentPrice;

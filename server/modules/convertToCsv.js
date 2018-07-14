@@ -15,8 +15,10 @@ function convertToCsv(data) {
                 data[i][objectKeys[j]].replace(/"/g, '\"');
                 // enclose the string in "
                 csv += '"' + data[i][objectKeys[j]] + '",';
-            } else {
+            } else if (typeof data[i][objectKeys[j]] === 'number') {
                 csv += data[i][objectKeys[j]] + ',';
+            } else {
+                csv += '"",';
             }
         }
     }
