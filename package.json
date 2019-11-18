@@ -18,7 +18,7 @@
     "angular-material": "^1.1.7",
     "angular-messages": "^1.6.9",
     "angular-route": "^1.6.9",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
