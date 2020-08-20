@@ -19,7 +19,7 @@
     "angular-messages": "^1.6.9",
     "angular-route": "^1.6.9",
     "axios": "^0.18.0",
-    "bcrypt": "^1.0.3",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.7.2",
